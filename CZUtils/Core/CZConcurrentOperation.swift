@@ -47,7 +47,7 @@ import UIKit
     // MARK: - Public Methods
 
     /// Subclasses must implement `execute` and must not call super
-    public func execute() {
+    open func execute() {
         fatalError("Subclasses must implement `\(#function)`.")
     }
 

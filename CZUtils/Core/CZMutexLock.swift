@@ -33,7 +33,7 @@ public class CZMutexLock<Item>: NSObject {
 
     fileprivate var item: Item
 
-    init(_ item: Item) {
+    public init(_ item: Item) {
         self.item = item
     }
 
