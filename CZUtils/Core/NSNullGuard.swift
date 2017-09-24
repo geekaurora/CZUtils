@@ -1,6 +1,5 @@
 //
 //  NSNullGuard.swift
-//  CZNetworking
 //
 //  Created by Cheng Zhang on 9/8/17.
 //  Copyright © 2017 Cheng Zhang. All rights reserved.

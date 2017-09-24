@@ -1,6 +1,5 @@
 //
 //  CZConcurrentOperation.swift
-//  FlickrDemo
 //
 //  Created by Cheng Zhang on 8/10/17.
 //  Copyright © 2017 Cheng Zhang. All rights reserved.
@@ -16,7 +15,7 @@ import UIKit
 ///
 /// https://gist.github.com/calebd
 /// https://gist.github.com/alexaubry/1ee81a952b11a2ddc6a43480cc59032c
-@objc class CZConcurrentOperation: Operation {
+@objc open class CZConcurrentOperation: Operation {
     /// Concurrent DispatchQueue acting as mutex read/write lock of rawState
     private let stateQueue = DispatchQueue(label: "com.tony.operation.state", attributes: [.concurrent])
     fileprivate var rawState: OperationState = .ready
@@ -32,34 +31,34 @@ import UIKit
             didChangeValue(forKey: #keyPath(state))
         }
     }
-    final override var isReady: Bool {
+    public final override var isReady: Bool {
         return state == .ready && super.isReady
     }
-    final override var isExecuting: Bool {
+    public final override var isExecuting: Bool {
         return state == .executing
     }
-    final override var isFinished: Bool {
+    public final override var isFinished: Bool {
         return state == .finished
     }
-    final override var isConcurrent: Bool {
+    public final override var isConcurrent: Bool {
         return true
     }
 
     // MARK: - Public Methods
 
     /// Subclasses must implement `execute` and must not call super
-    func execute() {
+    public func execute() {
         fatalError("Subclasses must implement `\(#function)`.")
     }
 
     /// Call this function after any work is done or after a call to `cancel()`
     /// to move the operation into a completed state.
-    final func finish() {
+    public final func finish() {
         state = .finished
     }
 
     // MARK: - Override methods
-    final override func start() {
+    public final override func start() {
         if isCancelled {
             finish()
             return

@@ -1,6 +1,5 @@
 //
 //  UIImage+Extensino.swift
-//  CZInstagram
 //
 //  Created by Administrator on 15/09/2017.
 //  Copyright © 2017 Cheng Zhang. All rights reserved.
@@ -9,17 +8,17 @@
 import UIKit
 import ImageIO
 
-extension UIImage {
+public extension UIImage {
 
     @objc(cropToRect:)
-    func crop(toRect rect: CGRect) -> UIImage {
+    public func crop(toRect rect: CGRect) -> UIImage {
         let croppedCGImage = self.cgImage!.cropping(to: rect)!
         let res = UIImage(cgImage: croppedCGImage)
         return res
     }
     
     @objc(cropToSize:)
-    func crop(toSize size: CGSize) -> UIImage {
+    public func crop(toSize size: CGSize) -> UIImage {
         var size = size
         let ratio = size.height / size.width
         if  size.width <  size.height {
@@ -37,7 +36,7 @@ extension UIImage {
 
     // height / width
     @objc(cropToRatio:)
-    func crop(toRatio ratio: CGFloat) -> UIImage {
+    public func crop(toRatio ratio: CGFloat) -> UIImage {
         var size: CGSize = self.size
         if  ratio < 1 {
             size.width = self.size.width * self.scale

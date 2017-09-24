@@ -1,6 +1,5 @@
 //
 //  UIViewController+Addtion.swift
-//  CZFacebook
 //
 //  Created by Cheng Zhang on 12/3/16.
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
@@ -8,9 +7,9 @@
 
 import UIKit
 
-extension UIViewController {
+public extension UIViewController {
     /// Stick the intput view's edges to topLayoutGuide, bottomLayoutGuide, leading, trailing
-    func overlapSubViewOnSelf(_ subview: UIView) {
+    public func overlapSubViewOnSelf(_ subview: UIView) {
         subview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             subview.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
@@ -28,17 +27,18 @@ extension UIViewController {
         return currVC
     }
     
-    func showTitleOnNavBar() {
-        #if true
-            let titleView = UIImageView(image: UIImage(named: "InstagramTitle"))
-        #else
+    public func showTitleOnNavBar() {
+        let internalTitleView: UIView
+        if let image = UIImage(named: "InstagramTitle") {
+            internalTitleView = UIImageView(image: image)
+        } else {
             let titleView = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
             titleView.textAlignment = .center
             titleView.text = "Instagram"
             titleView.font = UIFont(name: "Baskerville-SemiBoldItalic", size: 25)
             titleView.textColor = UIColor(white: 0.22, alpha: 1)
-        #endif
-        
-        navigationItem.titleView = titleView
+            internalTitleView = titleView
+        }
+        navigationItem.titleView = internalTitleView
     }
 }

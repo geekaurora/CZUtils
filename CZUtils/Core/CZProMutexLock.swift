@@ -1,6 +1,5 @@
 //
 //  CZProMutexLock.swift
-//  CZInstagram
 //
 //  Created by Cheng Zhang on 9/19/17.
 //  Copyright © 2017 Cheng Zhang. All rights reserved.

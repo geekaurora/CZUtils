@@ -8,7 +8,7 @@
 import UIKit
 
 /// A view that has an accompanying xib file by the same name and make use of `loadFromNib`
-protocol CZNibLoadable: class {
+public protocol CZNibLoadable: class {
     /// xib filename: same as View className by default. If you need to customize xibName, just override `var xibName: String` in your class
     var xibName: String? {get}
     /// Content view loaded from nib file
@@ -27,8 +27,8 @@ protocol CZNibLoadable: class {
 ///   1. nibContentView, the first top level view in nib file, is added and overlapped on SubViewClass with zero inset
 ///   2. override setupViews() for customized initialization if needed, required to invoke super.setupViews()
 @objc open class CZNibLoadableView: UIView, CZNibLoadable {
-    var xibName: String? { return nil }
-    var nibContentView: UIView!
+    open var xibName: String? { return nil }
+    open var nibContentView: UIView!
     
     // MARK: - Lifecycle
     override public init(frame: CGRect) {
@@ -48,8 +48,8 @@ protocol CZNibLoadable: class {
 
 // MARK: - CZNibLoadableTableViewCell
 @objc open class CZNibLoadableTableViewCell: UITableViewCell, CZNibLoadable {
-    var xibName: String? { return nil }
-    var nibContentView: UIView!
+    open var xibName: String? { return nil }
+    open var nibContentView: UIView!
     fileprivate var nibIsLoaded: Bool = false
     
     // MARK: - Lifecycle
@@ -75,12 +75,12 @@ protocol CZNibLoadable: class {
 
 // MARK: - CZNibLoadableCollectionViewCells
 @objc open class CZNibLoadableCollectionViewCell: UICollectionViewCell, CZNibLoadable {
-    var nibContentView: UIView!
-    var xibName: String? { return nil }
+    open var nibContentView: UIView!
+    open var xibName: String? { return nil }
     fileprivate var nibIsLoaded: Bool = false
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }

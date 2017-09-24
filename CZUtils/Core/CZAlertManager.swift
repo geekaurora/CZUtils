@@ -1,6 +1,5 @@
 //
 //  CZAlertManager.swift
-//  CZInstagram
 //
 //  Created by Administrator on 16/09/2017.
 //  Copyright © 2017 Cheng Zhang. All rights reserved.
@@ -8,8 +7,8 @@
 
 import UIKit
 
-class CZAlertManager: NSObject {
-    class func showAlert(title: String? = nil,
+open class CZAlertManager: NSObject {
+    open class func showAlert(title: String? = nil,
                          message: String,
                          actionText1: String = "Ok",
                          actionHandler1: ((UIAlertAction) -> Void)? = nil,
