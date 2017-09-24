@@ -104,9 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				C399831F1F773E2D00775B6C /* Core */,
-				C39983221F773E5500775B6C /* Utils */,
 				C39983201F773E3000775B6C /* UI */,
 				C39983211F773E3400775B6C /* Extensions */,
+				C39983221F773E5500775B6C /* Error */,
 				C39982CD1F7739EA00775B6C /* CZUtils.h */,
 				C39982CE1F7739EA00775B6C /* Info.plist */,
 			);
@@ -158,12 +158,12 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		C39983221F773E5500775B6C /* Utils */ = {
+		C39983221F773E5500775B6C /* Error */ = {
 			isa = PBXGroup;
 			children = (
 				C39983091F773E1600775B6C /* CZError.swift */,
 			);
-			name = Utils;
+			name = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
