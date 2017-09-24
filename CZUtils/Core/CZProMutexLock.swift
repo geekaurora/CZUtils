@@ -7,10 +7,10 @@
 
 import UIKit
 
-class CZProMutexLock: NSObject {
+open class CZProMutexLock: NSObject {
     fileprivate var mutex = pthread_mutex_t()
     
-    override init() {
+    public override init() {
         var attr = pthread_mutexattr_t()
         guard pthread_mutexattr_init(&attr) == 0 else {
             preconditionFailure()
@@ -25,7 +25,7 @@ class CZProMutexLock: NSObject {
         pthread_mutex_destroy(&mutex)
     }
     
-    func withLock<T>(_ closure: () -> T) -> T {
+    public func withLock<T>(_ closure: () -> T) -> T {
         defer {
             pthread_mutex_unlock(&mutex)
         }
