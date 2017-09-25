@@ -19,4 +19,8 @@ open class CZFileHelper: NSObject {
         }
         return nil
     }
+    
+    public static var documentDirectory: String {
+        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/"
+    }
 }

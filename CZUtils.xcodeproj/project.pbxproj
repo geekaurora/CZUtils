@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AA73FEC1F78B86900B28112 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA73FEB1F78B86900B28112 /* Date+Extension.swift */; };
 		C39982D41F7739EA00775B6C /* CZUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39982CA1F7739EA00775B6C /* CZUtils.framework */; };
 		C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39982D81F7739EA00775B6C /* CZUtilsTests.swift */; };
 		C39982DB1F7739EA00775B6C /* CZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C39982CD1F7739EA00775B6C /* CZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,7 +24,7 @@
 		C399831D1F773E1600775B6C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39983111F773E1600775B6C /* UIImage+Extension.swift */; };
 		C399831E1F773E1600775B6C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39983121F773E1600775B6C /* UIView+Extension.swift */; };
 		C399832C1F773FDD00775B6C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39983291F773FDD00775B6C /* UIViewController+Extension.swift */; };
-		C399832D1F773FDD00775B6C /* NSString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C399832A1F773FDD00775B6C /* NSString+Extension.swift */; };
+		C399832D1F773FDD00775B6C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C399832A1F773FDD00775B6C /* String+Extension.swift */; };
 		C399832E1F773FDD00775B6C /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C399832B1F773FDD00775B6C /* UIScreen+Extension.swift */; };
 		C39983321F77406400775B6C /* CZTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39983311F77406400775B6C /* CZTheme.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2AA73FEB1F78B86900B28112 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Extension.swift"; path = "Core/Date+Extension.swift"; sourceTree = "<group>"; };
 		C39982CA1F7739EA00775B6C /* CZUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CZUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39982CD1F7739EA00775B6C /* CZUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUtils.h; sourceTree = "<group>"; };
 		C39982CE1F7739EA00775B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,7 +60,7 @@
 		C39983111F773E1600775B6C /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Extension.swift"; path = "Core/UIImage+Extension.swift"; sourceTree = "<group>"; };
 		C39983121F773E1600775B6C /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Extension.swift"; path = "Core/UIView+Extension.swift"; sourceTree = "<group>"; };
 		C39983291F773FDD00775B6C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Extension.swift"; path = "Core/UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		C399832A1F773FDD00775B6C /* NSString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+Extension.swift"; path = "Core/NSString+Extension.swift"; sourceTree = "<group>"; };
+		C399832A1F773FDD00775B6C /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Extension.swift"; path = "Core/String+Extension.swift"; sourceTree = "<group>"; };
 		C399832B1F773FDD00775B6C /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScreen+Extension.swift"; path = "Core/UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		C39983311F77406400775B6C /* CZTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CZTheme.swift; path = Core/CZTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,7 +154,8 @@
 				C399832B1F773FDD00775B6C /* UIScreen+Extension.swift */,
 				C39983111F773E1600775B6C /* UIImage+Extension.swift */,
 				C39983121F773E1600775B6C /* UIView+Extension.swift */,
-				C399832A1F773FDD00775B6C /* NSString+Extension.swift */,
+				C399832A1F773FDD00775B6C /* String+Extension.swift */,
+				2AA73FEB1F78B86900B28112 /* Date+Extension.swift */,
 				C39983291F773FDD00775B6C /* UIViewController+Extension.swift */,
 			);
 			name = Extensions;
@@ -284,10 +287,11 @@
 				C399831A1F773E1600775B6C /* CZProMutexLock.swift in Sources */,
 				C39983191F773E1600775B6C /* CZNibLoadable.swift in Sources */,
 				C39983141F773E1600775B6C /* CZConcurrentOperation.swift in Sources */,
-				C399832D1F773FDD00775B6C /* NSString+Extension.swift in Sources */,
+				C399832D1F773FDD00775B6C /* String+Extension.swift in Sources */,
 				C39983161F773E1600775B6C /* CZFileHelper.swift in Sources */,
 				C39983181F773E1600775B6C /* CZMutexLock.swift in Sources */,
 				C39983321F77406400775B6C /* CZTheme.swift in Sources */,
+				2AA73FEC1F78B86900B28112 /* Date+Extension.swift in Sources */,
 				C399831E1F773E1600775B6C /* UIView+Extension.swift in Sources */,
 				C399831B1F773E1600775B6C /* NSNullGuard.swift in Sources */,
 				C399831C1F773E1600775B6C /* Swizzling.swift in Sources */,
