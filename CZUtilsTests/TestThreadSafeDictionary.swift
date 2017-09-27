@@ -43,22 +43,22 @@ class TestThreadSafeDictionary: XCTestCase {
                                   attributes: .concurrent)
         
         // Group asynchonous write operations by DispatchGroup
-        let dispathGroup = DispatchGroup()
+        let dispatchGroup = DispatchGroup()
         for (key, value) in originalDict {
-            dispathGroup.enter()
+            dispatchGroup.enter()
             queue.async {
                 // Sleep to simulate operation delay in multiple thread mode
                 let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
                 Thread.sleep(forTimeInterval: sleepInternal)
-                threadSafeDict[key] = value                
+                threadSafeDict[key] = value
 //                let actualValue = threadSafeDict[key]
 //                XCTAssert(actualValue == value, "actualValue \(actualValue) should equal to originalValue \(value)")
-                dispathGroup.leave()
+                dispatchGroup.leave()
             }
         }
 
         // DispatchGroup: Asynchronously wait for completion signal of all operations
-        dispathGroup.notify(queue: .main) {
+        dispatchGroup.notify(queue: .main) {
             XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
         }
     }
