@@ -12,7 +12,9 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
     public typealias DictionaryType = Dictionary<Key, Value>
     fileprivate var protectedCache: CZMutexLock<DictionaryType>
     fileprivate let emptyDictionary = DictionaryType()
-        
+    fileprivate var underlyingDictionary: DictionaryType {
+        return protectedCache.readLock{ $0 }!
+    }
     public override init() {
         protectedCache = CZMutexLock([:])
         super.init()
@@ -24,6 +26,7 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
     }
     
     // MAKR: - ExpressibleByDictionaryLiteral
+    
     /// Creates an instance initialized with the given key-value pairs.
     public required init(dictionaryLiteral elements: (Key, Value)...) {
         var dictionary = DictionaryType()
@@ -35,6 +38,7 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
     }
     
     // MARK: - Public variables
+    
     public var isEmpty: Bool {
         return protectedCache.readLock { $0.isEmpty } ?? true
     }
@@ -51,7 +55,8 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
         return protectedCache.readLock { $0.values } ?? emptyDictionary.values
     }
     
-    // MARK: Public methods
+    // MARK: - Public methods
+    
     public func updateValue(_ value: Value, forKey key: Key) -> Value? {
         return protectedCache.writeLock { $0.updateValue(value, forKey: key) }
     }
@@ -74,13 +79,20 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
     // MARK: - Subscripts
     
     public subscript (key: Key) -> Value? {
-        return protectedCache.readLock { $0[key] }
+        get {
+            return protectedCache.readLock { $0[key] }
+        }
+        set {
+             protectedCache.writeLock { (cache) -> Value? in
+                cache[key] = newValue
+                return newValue
+            }
+        }
     }
     
     public subscript(position: DictionaryIndex<Key, Value>) -> (key: Key, value: Value) {
         return protectedCache.readLock { return $0[position] }  ?? emptyDictionary[position]
     }
-
     
     // MARK: - Collection protocol
     
@@ -109,4 +121,35 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
         }
     }
 
+    // MARK: - CustomStringConvertable
+    
+    open override var description: String {
+        return protectedCache.readLock {
+            var description = "[\n"
+            var index = 0
+            for (key, value) in $0 {
+                let comma = (index == $0.count - 1) ? "" : ","
+                description += "\(key): \(value)\(comma)\n"
+                index += 1
+            }
+            description += "]"
+            return description
+        } ?? ""
+    }
 }
+
+public extension ThreadSafeDictionary where Key : Hashable, Value : Equatable {
+    public static func ==(lhs: ThreadSafeDictionary, rhs: ThreadSafeDictionary) -> Bool {
+        return lhs.underlyingDictionary == rhs.underlyingDictionary
+    }
+    
+    public func isEqual(toDictionary dictionary: DictionaryType) -> Bool {
+        return underlyingDictionary == dictionary
+    }
+}
+
+fileprivate extension ThreadSafeDictionary {
+    
+}
+
+

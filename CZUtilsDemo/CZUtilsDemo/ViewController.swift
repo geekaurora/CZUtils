@@ -7,19 +7,46 @@
 //
 
 import UIKit
+import CZUtils
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        testThreadSafeDictionaryWithGCD()
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+fileprivate extension ViewController {
+    func testThreadSafeDictionaryWithGCD() {
+        var originalDict = [Int: Int]()
+        for (i, value) in (0..<10).enumerated() {
+            originalDict[i] = value
+        }
+        
+        let threadSafeDict = ThreadSafeDictionary<Int, Int>()
+        for (key, value) in originalDict {
+            threadSafeDict[key] = value
+        }
+        print(threadSafeDict)
+        
+        assert(threadSafeDict.isEqual(toDictionary: originalDict))
+        
     }
-
-
+    
+    func testThreadSafeDictionary() {
+        var originalDict = [Int: Int]()
+        for (i, value) in (0..<10).enumerated() {
+            originalDict[i] = value
+        }
+        
+        let threadSafeDict = ThreadSafeDictionary<Int, Int>()
+        for (key, value) in originalDict {
+            threadSafeDict[key] = value
+        }
+        print(threadSafeDict)
+        
+        assert(threadSafeDict.isEqual(toDictionary: originalDict))
+        
+    }
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2AA73FEC1F78B86900B28112 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA73FEB1F78B86900B28112 /* Date+Extension.swift */; };
 		2AEC18931F7C19EF007A5DF1 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */; };
+		2AEC18991F7C2791007A5DF1 /* TestThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */; };
 		C39982D41F7739EA00775B6C /* CZUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39982CA1F7739EA00775B6C /* CZUtils.framework */; };
 		C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39982D81F7739EA00775B6C /* CZUtilsTests.swift */; };
 		C39982DB1F7739EA00775B6C /* CZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C39982CD1F7739EA00775B6C /* CZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		2AA73FEB1F78B86900B28112 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Extension.swift"; path = "Core/Date+Extension.swift"; sourceTree = "<group>"; };
 		2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadSafeDictionary.swift; path = Core/ThreadSafeDictionary.swift; sourceTree = "<group>"; };
+		2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		C39982CA1F7739EA00775B6C /* CZUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CZUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39982CD1F7739EA00775B6C /* CZUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUtils.h; sourceTree = "<group>"; };
 		C39982CE1F7739EA00775B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				C39982D81F7739EA00775B6C /* CZUtilsTests.swift */,
+				2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */,
 				C39982DA1F7739EA00775B6C /* Info.plist */,
 			);
 			path = CZUtilsTests;
@@ -310,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AEC18991F7C2791007A5DF1 /* TestThreadSafeDictionary.swift in Sources */,
 				C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
