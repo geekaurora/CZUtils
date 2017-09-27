@@ -8,20 +8,22 @@
 
 import UIKit
 
-class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, ExpressibleByDictionaryLiteral
-    //, Collection
-{
-    typealias DictionaryType = Dictionary<Key, Value>
+open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection, ExpressibleByDictionaryLiteral {
+    public typealias DictionaryType = Dictionary<Key, Value>
     fileprivate var protectedCache: CZMutexLock<DictionaryType>
-    fileprivate var emptyDictionary = DictionaryType()
+    fileprivate let emptyDictionary = DictionaryType()
         
-    override init() {
+    public override init() {
         protectedCache = CZMutexLock([:])
         super.init()
     }
     
-    // MAKR: - ExpressibleByDictionaryLiteral
+    public init(dictionary: DictionaryType) {
+        protectedCache = CZMutexLock(dictionary)
+        super.init()
+    }
     
+    // MAKR: - ExpressibleByDictionaryLiteral
     /// Creates an instance initialized with the given key-value pairs.
     public required init(dictionaryLiteral elements: (Key, Value)...) {
         var dictionary = DictionaryType()
@@ -58,10 +60,17 @@ class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, ExpressibleByDi
         return protectedCache.writeLock { $0.removeValue(forKey: key) }
     }
     
-    public func removeAll(keepingCapacity keepCapacity: Bool = true) {
+    public func removeAll(keepingCapacity keepCapacity: Bool = false) {
          protectedCache.writeLock { $0.removeAll(keepingCapacity: keepCapacity) }
     }
 
+    public func values(for keys: [Key]) -> [Value] {
+        return protectedCache.readLock{ cache in
+            return keys.flatMap{ (key) -> Value? in
+                return cache[key]
+            } } ?? []
+    }
+    
     // MARK: - Subscripts
     
     public subscript (key: Key) -> Value? {
@@ -90,4 +99,14 @@ class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, ExpressibleByDi
     public func index(after i: DictionaryIndex<Key, Value>) -> DictionaryIndex<Key, Value> {
         return protectedCache.readLock { $0.index(after: i) }  ?? emptyDictionary.index(after: i)
     }
+    
+    public func removeAtIndex(_ index: DictionaryIndex<Key, Value>) -> (Key, Value) {
+        if let result = protectedCache.writeLock({ $0.remove(at: index) }) {
+            return result
+        } else {
+            var temp = emptyDictionary
+            return temp.remove(at: index)
+        }
+    }
+
 }
