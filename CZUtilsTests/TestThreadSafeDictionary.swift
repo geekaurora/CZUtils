@@ -14,7 +14,7 @@ class TestThreadSafeDictionary: XCTestCase {
     
     fileprivate var originalDict: [Int: Int] = {
         var originalDict = [Int: Int]()
-        for (i, value) in (0 ..< 100000).enumerated() {
+        for (i, value) in (0 ..< 10).enumerated() {// 100000
             originalDict[i] = value
         }
         return originalDict
@@ -45,12 +45,13 @@ class TestThreadSafeDictionary: XCTestCase {
         
         // 2. WHEN(Execution) - some action is carried out: Apply some business logic on the given context
         // Group asynchonous write operations by DispatchGroup
-        let dispatchGroup = DispatchGroup()
+        let dispatchGroup = CZDispatchGroup()
         for (key, value) in originalDict {
             dispatchGroup.enter()
             queue.async {
                 // Sleep to simulate operation delay in multiple thread mode
-                let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
+                //let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
+                let sleepInternal = TimeInterval((arc4random() % 3)) * 0.1
                 Thread.sleep(forTimeInterval: sleepInternal)
                 threadSafeDict[key] = value
                 dispatchGroup.leave()
@@ -59,8 +60,14 @@ class TestThreadSafeDictionary: XCTestCase {
 
         // 3. THEN(Assertion) - a particular set of observable consequences should be obtained
         // DispatchGroup: Asynchronously wait for completion signal of all operations
-        dispatchGroup.notify(queue: .main) {
+        #if true
+            dispatchGroup.wait()
+            print(threadSafeDict)
             XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
-        }
+        #else
+            dispatchGroup.notify(queue: .main) {
+                XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
+            }
+        #endif
     }
 }
