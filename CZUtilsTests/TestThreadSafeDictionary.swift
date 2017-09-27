@@ -14,7 +14,7 @@ class TestThreadSafeDictionary: XCTestCase {
     
     fileprivate var originalDict: [Int: Int] = {
         var originalDict = [Int: Int]()
-        for (i, value) in (0 ..< 100000).enumerated() {// 100000
+        for (i, value) in (0 ..< 100000).enumerated() {
             originalDict[i] = value
         }
         return originalDict
@@ -42,20 +42,20 @@ class TestThreadSafeDictionary: XCTestCase {
                                   qos: .userInitiated,
                                   attributes: .concurrent)
         
-        // Asynchonous write operations by concurrent DispatchQueue
+        // Group asynchonous write operations by DispatchGroup
         let dispathGroup = DispatchGroup()
         for (key, value) in originalDict {
             dispathGroup.enter()
             queue.async {
-                // Sleep to simulate operation delay in multiple thread
-//                let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
-//                Thread.sleep(forTimeInterval: sleepInternal)
+                // Sleep to simulate operation delay in multiple thread mode
+                let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
+                Thread.sleep(forTimeInterval: sleepInternal)
                 threadSafeDict[key] = value
                 dispathGroup.leave()
             }
         }
 
-        // DispatchGroup to wait for completion of all asynchronous operations
+        // DispatchGroup: Asynchronously wait for completion signal of all operations
         dispathGroup.notify(queue: .main) {
             XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
         }
