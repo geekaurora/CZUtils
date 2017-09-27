@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2AA73FEC1F78B86900B28112 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA73FEB1F78B86900B28112 /* Date+Extension.swift */; };
+		2AEC18931F7C19EF007A5DF1 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */; };
 		C39982D41F7739EA00775B6C /* CZUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39982CA1F7739EA00775B6C /* CZUtils.framework */; };
 		C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39982D81F7739EA00775B6C /* CZUtilsTests.swift */; };
 		C39982DB1F7739EA00775B6C /* CZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C39982CD1F7739EA00775B6C /* CZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		2AA73FEB1F78B86900B28112 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Extension.swift"; path = "Core/Date+Extension.swift"; sourceTree = "<group>"; };
+		2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadSafeDictionary.swift; path = Core/ThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		C39982CA1F7739EA00775B6C /* CZUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CZUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39982CD1F7739EA00775B6C /* CZUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUtils.h; sourceTree = "<group>"; };
 		C39982CE1F7739EA00775B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				C399830C1F773E1600775B6C /* CZMutexLock.swift */,
+				2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */,
 				C399830E1F773E1600775B6C /* CZProMutexLock.swift */,
 				C399830B1F773E1600775B6C /* CZMainQueueScheduler.swift */,
 				C39983081F773E1600775B6C /* CZConcurrentOperation.swift */,
@@ -286,6 +289,7 @@
 				C399832C1F773FDD00775B6C /* UIViewController+Extension.swift in Sources */,
 				C399831A1F773E1600775B6C /* CZProMutexLock.swift in Sources */,
 				C39983191F773E1600775B6C /* CZNibLoadable.swift in Sources */,
+				2AEC18931F7C19EF007A5DF1 /* ThreadSafeDictionary.swift in Sources */,
 				C39983141F773E1600775B6C /* CZConcurrentOperation.swift in Sources */,
 				C399832D1F773FDD00775B6C /* String+Extension.swift in Sources */,
 				C39983161F773E1600775B6C /* CZFileHelper.swift in Sources */,

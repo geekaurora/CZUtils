@@ -13,19 +13,14 @@ import UIKit
  *
  *  - Usage :
         - ReadLock
-        ```
              cachedItemsInfo.readLock { (cachedItemsInfo: CachedItemsInfo) -> String? in
                 return ""
              }
-        ```
  
         - Write (SHOULD specify `inout` modifier for closure input param)
-        ```
             cachedItemsInfo.wirteLock { (cachedItemsInfo: inout CachedItemsInfo) -> String? in
                 return ""
             }
-        ```
- *
  */
 public class CZMutexLock<Item>: NSObject {
     fileprivate lazy var lock = CZDispatchReadWriteLock()
@@ -86,26 +81,26 @@ public class CZDispatchReadWriteLock {
     }
 }
 
-public class CZSemaphoreReadWriteLock {
-    var semahore: DispatchSemaphore
-    public init () { semahore = DispatchSemaphore(value: 0) }
-    @discardableResult
-    public func readLock<T>(_ block: @escaping () -> T?) -> T?  {
-        var t: T?
-        semahore.wait()
-        t = block()
-        semahore.signal()
-        return t
-    }
-    @discardableResult
-    public func writeLock<T>(_ block: @escaping () -> T?) -> T? {
-        var retVal: T?
-        semahore.wait()
-        retVal = block()
-        semahore.signal()
-        return retVal
-    }
-}
+//public class CZSemaphoreReadWriteLock {
+//    var semahore: DispatchSemaphore
+//    public init () { semahore = DispatchSemaphore(value: 0) }
+//    @discardableResult
+//    public func readLock<T>(_ block: @escaping () -> T?) -> T?  {
+//        var t: T?
+//        semahore.wait()
+//        t = block()
+//        semahore.signal()
+//        return t
+//    }
+//    @discardableResult
+//    public func writeLock<T>(_ block: @escaping () -> T?) -> T? {
+//        var retVal: T?
+//        semahore.wait()
+//        retVal = block()
+//        semahore.signal()
+//        return retVal
+//    }
+//}
 
 // MARK: - Bridging class for Objective-C
 @objc public class CZMutexLockOC: NSObject {
