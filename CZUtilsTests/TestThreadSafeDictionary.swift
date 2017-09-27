@@ -33,7 +33,7 @@ class TestThreadSafeDictionary: XCTestCase {
         XCTAssert(threadSafeDict.isEqual(toDictionary: originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
     }
     
-    func testWithGCD() {
+    func testSetValueWithGCD() {
         // Initialize ThreadSafeDictionary
         let threadSafeDict = ThreadSafeDictionary<Int, Int>()
         
@@ -50,7 +50,9 @@ class TestThreadSafeDictionary: XCTestCase {
                 // Sleep to simulate operation delay in multiple thread mode
                 let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
                 Thread.sleep(forTimeInterval: sleepInternal)
-                threadSafeDict[key] = value
+                threadSafeDict[key] = value                
+//                let actualValue = threadSafeDict[key]
+//                XCTAssert(actualValue == value, "actualValue \(actualValue) should equal to originalValue \(value)")
                 dispathGroup.leave()
             }
         }
