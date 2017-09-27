@@ -10,20 +10,54 @@ import XCTest
 @testable import CZUtils
 
 class TestThreadSafeDictionary: XCTestCase {
+    fileprivate static let queueLabel = "com.tony.test,threadSafeDictionary"
     
-    var originalDict: [Int: Int] = {
+    fileprivate var originalDict: [Int: Int] = {
         var originalDict = [Int: Int]()
-        for (i, value) in (0 ..< 10).enumerated() {
+        for (i, value) in (0 ..< 100000).enumerated() {
             originalDict[i] = value
         }
         return originalDict
     }()
     
-    func testWithoutGCD() {
+    func testInitializerithoutGCD() {
+        let threadSafeDict = ThreadSafeDictionary<Int, Int>(dictionary: originalDict)
+        XCTAssert(threadSafeDict.isEqual(toDictionary: originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
+    }
+    
+    func testSetValueWithoutGCD() {
         let threadSafeDict = ThreadSafeDictionary<Int, Int>()
         for (key, value) in originalDict {
             threadSafeDict[key] = value
         }
         XCTAssert(threadSafeDict.isEqual(toDictionary: originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
+    }
+    
+    func testSetValueWithGCD() {
+        // Initialize ThreadSafeDictionary
+        let threadSafeDict = ThreadSafeDictionary<Int, Int>()
+        
+        // Concurrent DispatchQueue to simulate multiple-thread read/write executions
+        let queue = DispatchQueue(label: TestThreadSafeDictionary.queueLabel,
+                                  qos: .userInitiated,
+                                  attributes: .concurrent)
+        
+        // Asynchonous write operations by concurrent DispatchQueue
+        let dispathGroup = DispatchGroup()
+        for (key, value) in originalDict {
+            dispathGroup.enter()
+            queue.async {
+                // Sleep to simulate operation delay in multiple thread
+                let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
+                Thread.sleep(forTimeInterval: sleepInternal)
+                threadSafeDict[key] = value
+                dispathGroup.leave()
+            }
+        }
+
+        // DispatchGroup to wait for completion of all asynchronous operations
+        dispathGroup.notify(queue: .main) {
+            XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
+        }
     }
 }
