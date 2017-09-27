@@ -34,6 +34,7 @@ class TestThreadSafeDictionary: XCTestCase {
     }
     
     func testSetValueWithGCD() {
+        // 1. GIVEN(Condition) - some context: Describes the system's tate before any processing
         // Initialize ThreadSafeDictionary
         let threadSafeDict = ThreadSafeDictionary<Int, Int>()
         
@@ -42,6 +43,7 @@ class TestThreadSafeDictionary: XCTestCase {
                                   qos: .userInitiated,
                                   attributes: .concurrent)
         
+        // 2. WHEN(Execution) - some action is carried out: Apply some business logic on the given context
         // Group asynchonous write operations by DispatchGroup
         let dispatchGroup = DispatchGroup()
         for (key, value) in originalDict {
@@ -51,12 +53,11 @@ class TestThreadSafeDictionary: XCTestCase {
                 let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
                 Thread.sleep(forTimeInterval: sleepInternal)
                 threadSafeDict[key] = value
-//                let actualValue = threadSafeDict[key]
-//                XCTAssert(actualValue == value, "actualValue \(actualValue) should equal to originalValue \(value)")
                 dispatchGroup.leave()
             }
         }
 
+        // 3. THEN(Assertion) - a particular set of observable consequences should be obtained
         // DispatchGroup: Asynchronously wait for completion signal of all operations
         dispatchGroup.notify(queue: .main) {
             XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")

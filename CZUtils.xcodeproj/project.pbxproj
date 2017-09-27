@@ -10,6 +10,8 @@
 		2AA73FEC1F78B86900B28112 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA73FEB1F78B86900B28112 /* Date+Extension.swift */; };
 		2AEC18931F7C19EF007A5DF1 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */; };
 		2AEC18991F7C2791007A5DF1 /* TestThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */; };
+		2AEC189B1F7C5C53007A5DF1 /* CZDispatchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC189A1F7C5C53007A5DF1 /* CZDispatchGroup.swift */; };
+		2AEC189E1F7C60DA007A5DF1 /* CriticalSectionLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC189D1F7C60DA007A5DF1 /* CriticalSectionLock.swift */; };
 		C39982D41F7739EA00775B6C /* CZUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39982CA1F7739EA00775B6C /* CZUtils.framework */; };
 		C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39982D81F7739EA00775B6C /* CZUtilsTests.swift */; };
 		C39982DB1F7739EA00775B6C /* CZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C39982CD1F7739EA00775B6C /* CZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,6 +47,8 @@
 		2AA73FEB1F78B86900B28112 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Extension.swift"; path = "Core/Date+Extension.swift"; sourceTree = "<group>"; };
 		2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadSafeDictionary.swift; path = Core/ThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestThreadSafeDictionary.swift; sourceTree = "<group>"; };
+		2AEC189A1F7C5C53007A5DF1 /* CZDispatchGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CZDispatchGroup.swift; path = Core/CZDispatchGroup.swift; sourceTree = "<group>"; };
+		2AEC189D1F7C60DA007A5DF1 /* CriticalSectionLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CriticalSectionLock.swift; path = Core/CriticalSectionLock.swift; sourceTree = "<group>"; };
 		C39982CA1F7739EA00775B6C /* CZUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CZUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39982CD1F7739EA00775B6C /* CZUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUtils.h; sourceTree = "<group>"; };
 		C39982CE1F7739EA00775B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2AEC189C1F7C5CA5007A5DF1 /* Investigation */ = {
+			isa = PBXGroup;
+			children = (
+				2AEC189A1F7C5C53007A5DF1 /* CZDispatchGroup.swift */,
+				2AEC189D1F7C60DA007A5DF1 /* CriticalSectionLock.swift */,
+			);
+			name = Investigation;
+			sourceTree = "<group>";
+		};
 		C39982C01F7739EA00775B6C = {
 			isa = PBXGroup;
 			children = (
@@ -133,13 +146,14 @@
 			isa = PBXGroup;
 			children = (
 				C399830C1F773E1600775B6C /* CZMutexLock.swift */,
-				2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */,
 				C399830E1F773E1600775B6C /* CZProMutexLock.swift */,
 				C399830B1F773E1600775B6C /* CZMainQueueScheduler.swift */,
 				C39983081F773E1600775B6C /* CZConcurrentOperation.swift */,
 				C39983101F773E1600775B6C /* Swizzling.swift */,
 				C399830F1F773E1600775B6C /* NSNullGuard.swift */,
 				C399830A1F773E1600775B6C /* CZFileHelper.swift */,
+				2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */,
+				2AEC189C1F7C5CA5007A5DF1 /* Investigation */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -297,9 +311,11 @@
 				C399832D1F773FDD00775B6C /* String+Extension.swift in Sources */,
 				C39983161F773E1600775B6C /* CZFileHelper.swift in Sources */,
 				C39983181F773E1600775B6C /* CZMutexLock.swift in Sources */,
+				2AEC189E1F7C60DA007A5DF1 /* CriticalSectionLock.swift in Sources */,
 				C39983321F77406400775B6C /* CZTheme.swift in Sources */,
 				2AA73FEC1F78B86900B28112 /* Date+Extension.swift in Sources */,
 				C399831E1F773E1600775B6C /* UIView+Extension.swift in Sources */,
+				2AEC189B1F7C5C53007A5DF1 /* CZDispatchGroup.swift in Sources */,
 				C399831B1F773E1600775B6C /* NSNullGuard.swift in Sources */,
 				C399831C1F773E1600775B6C /* Swizzling.swift in Sources */,
 				C399832E1F773FDD00775B6C /* UIScreen+Extension.swift in Sources */,
