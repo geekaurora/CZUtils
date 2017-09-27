@@ -14,7 +14,7 @@ class TestThreadSafeDictionary: XCTestCase {
     
     fileprivate var originalDict: [Int: Int] = {
         var originalDict = [Int: Int]()
-        for (i, value) in (0 ..< 100000).enumerated() {
+        for (i, value) in (0 ..< 100000).enumerated() {// 100000
             originalDict[i] = value
         }
         return originalDict
@@ -33,7 +33,7 @@ class TestThreadSafeDictionary: XCTestCase {
         XCTAssert(threadSafeDict.isEqual(toDictionary: originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
     }
     
-    func testSetValueWithGCD() {
+    func testWithGCD() {
         // Initialize ThreadSafeDictionary
         let threadSafeDict = ThreadSafeDictionary<Int, Int>()
         
@@ -48,8 +48,8 @@ class TestThreadSafeDictionary: XCTestCase {
             dispathGroup.enter()
             queue.async {
                 // Sleep to simulate operation delay in multiple thread
-                let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
-                Thread.sleep(forTimeInterval: sleepInternal)
+//                let sleepInternal = TimeInterval((arc4random() % 10)) * 0.000001
+//                Thread.sleep(forTimeInterval: sleepInternal)
                 threadSafeDict[key] = value
                 dispathGroup.leave()
             }
