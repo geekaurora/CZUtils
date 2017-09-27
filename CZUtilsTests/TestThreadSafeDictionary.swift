@@ -59,15 +59,9 @@ class TestThreadSafeDictionary: XCTestCase {
         }
 
         // 3. THEN(Assertion) - a particular set of observable consequences should be obtained
-        // DispatchGroup: Asynchronously wait for completion signal of all operations
-        #if true
-            dispatchGroup.wait()
-            print(threadSafeDict)
-            XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
-        #else
-            dispatchGroup.notify(queue: .main) {
-                XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
-            }
-        #endif
+        // DispatchGroup: Wait for completion signal of all operations
+        dispatchGroup.wait()
+        print(threadSafeDict)
+        XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
     }
 }
