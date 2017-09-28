@@ -1,7 +1,7 @@
 //
 //  CZAlertManager.swift
 //
-//  Created by Administrator on 16/09/2017.
+//  Created by Cheng Zhang on 16/09/2017.
 //  Copyright © 2017 Cheng Zhang. All rights reserved.
 //
 

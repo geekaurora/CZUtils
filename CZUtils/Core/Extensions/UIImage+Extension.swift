@@ -1,7 +1,7 @@
 //
-//  UIImage+Extensino.swift
+//  UIImage+Extension.swift
 //
-//  Created by Administrator on 15/09/2017.
+//  Created by Cheng Zhang on 15/09/2017.
 //  Copyright © 2017 Cheng Zhang. All rights reserved.
 //
 
@@ -9,7 +9,6 @@ import UIKit
 import ImageIO
 
 public extension UIImage {
-
     @objc(cropToRect:)
     public func crop(toRect rect: CGRect) -> UIImage {
         let croppedCGImage = self.cgImage!.cropping(to: rect)!
@@ -33,7 +32,7 @@ public extension UIImage {
                           size: size)
         return crop(toRect: rect)
     }
-
+    
     // height / width
     @objc(cropToRatio:)
     public func crop(toRatio ratio: CGFloat) -> UIImage {
@@ -50,20 +49,4 @@ public extension UIImage {
                           size: size)
         return crop(toRect: rect)
     }
-
-    /*
-    - (UIImage *)cropToRect:(CGRect)rect {
-    CGImageRef subImageRef = CGImageCreateWithImageInRect(self.target.CGImage, rect);
-    CGRect subBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
-    
-    UIGraphicsBeginImageContext(subBounds.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextDrawImage(context, subBounds, subImageRef);
-    
-    UIImage *subImage = [UIImage imageWithCGImage:subImageRef];
-    CGImageRelease(subImageRef);
-    UIGraphicsEndImageContext();
-    return subImage;
-    }
-*/
 }
