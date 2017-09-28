@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Mutex lock on top of `pthread_mutex_lock`/`pthread_mutex_unlock`
 open class CZProMutexLock: NSObject {
     fileprivate var mutex = pthread_mutex_t()
     

@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Helper class for file related methods 
 open class CZFileHelper: NSObject {
    public static func getFileSize(_ filePath: String?) -> Int? {
         guard let filePath = filePath else {return nil}

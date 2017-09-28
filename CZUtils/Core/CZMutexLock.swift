@@ -6,22 +6,10 @@
 
 import UIKit
 
-/**
- *  Multiple thread protector for specified object `item` on top of serial queue sync/barrier methods, `item` can only be read/written inside the protector
- *
- *  - NOTE  : Ensure no nested lock operations, which can lead to deadlock crash. e.g. read lock is invoked in write lock
- *
- *  - Usage :
-        - ReadLock
-             cachedItemsInfo.readLock { (cachedItemsInfo: CachedItemsInfo) -> String? in
-                return ""
-             }
- 
-        - Write (SHOULD specify `inout` modifier for closure input param)
-            cachedItemsInfo.wirteLock { (cachedItemsInfo: inout CachedItemsInfo) -> String? in
-                return ""
-            }
- */
+/// Multiple thread protector for specified object `item` on top of serial queue sync/barrier methods, `item` can only be read/written inside the protector
+///
+/// - NOTE  : Ensure no nested lock operations, which can lead to deadlock crash. e.g. read lock is invoked in write lock
+///
 public class CZMutexLock<Item>: NSObject {
     fileprivate lazy var lock = CZDispatchReadWriteLock()
     //fileprivate lazy var lock = CZSemaphoreReadWriteLock()

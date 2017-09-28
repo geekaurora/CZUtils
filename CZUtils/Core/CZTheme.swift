@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Common theme settings for projects
 public struct CZTheme {
     public static let greyDividerColor: CGFloat = 217.0 / 255.0
 }

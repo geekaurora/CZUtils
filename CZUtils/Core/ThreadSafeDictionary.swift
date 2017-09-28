@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Thread-safe dictionary class
 open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection, ExpressibleByDictionaryLiteral {
     public typealias DictionaryType = Dictionary<Key, Value>
     fileprivate var protectedCache: CZMutexLock<DictionaryType>

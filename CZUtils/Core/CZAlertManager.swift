@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Convenient helper class for AlertViewController displaying 
 open class CZAlertManager: NSObject {
     open class func showAlert(title: String? = nil,
                          message: String,
