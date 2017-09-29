@@ -1,7 +1,7 @@
 //
 //  NSString+Additions
 //
-//  Created by Cheng Zhang on 12/22/16.
+//  Created by Cheng Zhang on 1/5/16.
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 

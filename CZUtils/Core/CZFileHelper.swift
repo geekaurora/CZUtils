@@ -1,8 +1,8 @@
 //
 //  CZFileHelper.swift
 //
-//  Created by Cheng Zhang on 9/23/17.
-//  Copyright © 2017 Cheng Zhang. All rights reserved.
+//  Created by Cheng Zhang on 1/13/16.
+//  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
 import UIKit

@@ -1,8 +1,8 @@
 //
 //  UIImage+Extension.swift
 //
-//  Created by Cheng Zhang on 15/09/2017.
-//  Copyright © 2017 Cheng Zhang. All rights reserved.
+//  Created by Cheng Zhang on 1/12/16.
+//  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
 import UIKit

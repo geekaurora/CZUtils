@@ -2,8 +2,8 @@
 //  CriticalSectionLock.swift
 //  CZUtils
 //
-//  Created by Cheng Zhang on 9/27/17.
-//  Copyright © 2017 Cheng Zhang. All rights reserved.
+//  Created by Cheng Zhang on 11/3/15.
+//  Copyright © 2015 Cheng Zhang. All rights reserved.
 //
 
 import UIKit

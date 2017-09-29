@@ -1,8 +1,8 @@
 //
 //  UIScreen+Extension.swift
 //
-//  Created by Cheng Zhang on 7/22/17.
-//  Copyright © 2017 Groupon Inc. All rights reserved.
+//  Created by Cheng Zhang on 1/8/16.
+//  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
 import UIKit
