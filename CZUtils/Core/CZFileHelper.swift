@@ -8,7 +8,7 @@
 import UIKit
 
 /// Helper class for file related methods 
-open class CZFileHelper: NSObject {
+@objc open class CZFileHelper: NSObject {
    public static func getFileSize(_ filePath: String?) -> Int? {
         guard let filePath = filePath else {return nil}
         do {
@@ -21,7 +21,7 @@ open class CZFileHelper: NSObject {
         return nil
     }
     
-    public static var documentDirectory: String {
+    @objc public static var documentDirectory: String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/"
     }
 }

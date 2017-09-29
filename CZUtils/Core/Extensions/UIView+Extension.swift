@@ -7,6 +7,14 @@
 
 import UIKit
 
+/// Constants for UIView extensions
+public enum UIViewConstants {
+    static let fadeInDuration: TimeInterval = 0.4
+    static let fadeInAnimationName = "com.tony.animation.fadein"
+}
+
+// MARK: - Corner/Border
+
 public extension UIView {
     public func roundToCircleWithFrame() {
         roundToCircle()
@@ -34,3 +42,17 @@ public extension UIView {
         layer.borderColor = UIColor(white: white, alpha: 1).cgColor
     }
 }
+
+// MARK: - Animations
+
+public extension UIView {
+    public func fadeIn(animationName: String = UIViewConstants.fadeInAnimationName,
+                       duration: TimeInterval = UIViewConstants.fadeInDuration) {
+        let transition = CATransition()
+        transition.duration = duration
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionFade
+        layer.add(transition, forKey: animationName)
+    }
+}
+
