@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Convenience mutex lock on top of NSLock
 open class CriticalSectionLock: NSLock {
     public func execute<T>(_ execution: () -> T)  -> T {
         lock()

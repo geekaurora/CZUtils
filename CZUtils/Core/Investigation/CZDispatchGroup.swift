@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Manage grouped concurrent executions completion, with same functionality as `DispatchGroup` class
 public final class CZDispatchGroup: NSObject {
     fileprivate static let underlyingQueueLabel = "com.tony.dispatchGroup"
     fileprivate var underlyingQueue: DispatchQueue

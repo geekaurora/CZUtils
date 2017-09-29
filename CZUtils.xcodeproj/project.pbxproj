@@ -14,10 +14,10 @@
 		2A1607631F7DBE0800FC3E9B /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A16075C1F7DBE0800FC3E9B /* UIScreen+Extension.swift */; };
 		2A1607641F7DBE0800FC3E9B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A16075D1F7DBE0800FC3E9B /* UIView+Extension.swift */; };
 		2A1607651F7DBE0800FC3E9B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A16075E1F7DBE0800FC3E9B /* UIViewController+Extension.swift */; };
+		2AB505E61F7E1E480035B59B /* CriticalSectionLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB505E41F7E1E480035B59B /* CriticalSectionLock.swift */; };
+		2AB505E71F7E1E480035B59B /* CZDispatchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB505E51F7E1E480035B59B /* CZDispatchGroup.swift */; };
 		2AEC18931F7C19EF007A5DF1 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */; };
 		2AEC18991F7C2791007A5DF1 /* TestThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */; };
-		2AEC189B1F7C5C53007A5DF1 /* CZDispatchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC189A1F7C5C53007A5DF1 /* CZDispatchGroup.swift */; };
-		2AEC189E1F7C60DA007A5DF1 /* CriticalSectionLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC189D1F7C60DA007A5DF1 /* CriticalSectionLock.swift */; };
 		C39982D41F7739EA00775B6C /* CZUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39982CA1F7739EA00775B6C /* CZUtils.framework */; };
 		C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39982D81F7739EA00775B6C /* CZUtilsTests.swift */; };
 		C39982DB1F7739EA00775B6C /* CZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C39982CD1F7739EA00775B6C /* CZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,10 +52,10 @@
 		2A16075C1F7DBE0800FC3E9B /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScreen+Extension.swift"; path = "Core/Extensions/UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		2A16075D1F7DBE0800FC3E9B /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Extension.swift"; path = "Core/Extensions/UIView+Extension.swift"; sourceTree = "<group>"; };
 		2A16075E1F7DBE0800FC3E9B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Extension.swift"; path = "Core/Extensions/UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		2AB505E41F7E1E480035B59B /* CriticalSectionLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CriticalSectionLock.swift; path = Core/Investigation/CriticalSectionLock.swift; sourceTree = "<group>"; };
+		2AB505E51F7E1E480035B59B /* CZDispatchGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CZDispatchGroup.swift; path = Core/Investigation/CZDispatchGroup.swift; sourceTree = "<group>"; };
 		2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadSafeDictionary.swift; path = Core/ThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestThreadSafeDictionary.swift; sourceTree = "<group>"; };
-		2AEC189A1F7C5C53007A5DF1 /* CZDispatchGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CZDispatchGroup.swift; path = Core/CZDispatchGroup.swift; sourceTree = "<group>"; };
-		2AEC189D1F7C60DA007A5DF1 /* CriticalSectionLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CriticalSectionLock.swift; path = Core/CriticalSectionLock.swift; sourceTree = "<group>"; };
 		C39982CA1F7739EA00775B6C /* CZUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CZUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39982CD1F7739EA00775B6C /* CZUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUtils.h; sourceTree = "<group>"; };
 		C39982CE1F7739EA00775B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,8 +97,8 @@
 		2AEC189C1F7C5CA5007A5DF1 /* Investigation */ = {
 			isa = PBXGroup;
 			children = (
-				2AEC189A1F7C5C53007A5DF1 /* CZDispatchGroup.swift */,
-				2AEC189D1F7C60DA007A5DF1 /* CriticalSectionLock.swift */,
+				2AB505E51F7E1E480035B59B /* CZDispatchGroup.swift */,
+				2AB505E41F7E1E480035B59B /* CriticalSectionLock.swift */,
 			);
 			name = Investigation;
 			sourceTree = "<group>";
@@ -305,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AB505E71F7E1E480035B59B /* CZDispatchGroup.swift in Sources */,
 				2A1607601F7DBE0800FC3E9B /* String+Extension.swift in Sources */,
 				C39983131F773E1600775B6C /* CZAlertManager.swift in Sources */,
 				C399831A1F773E1600775B6C /* CZProMutexLock.swift in Sources */,
@@ -316,9 +317,7 @@
 				2A16075F1F7DBE0800FC3E9B /* Date+Extension.swift in Sources */,
 				C39983161F773E1600775B6C /* CZFileHelper.swift in Sources */,
 				C39983181F773E1600775B6C /* CZMutexLock.swift in Sources */,
-				2AEC189E1F7C60DA007A5DF1 /* CriticalSectionLock.swift in Sources */,
 				C39983321F77406400775B6C /* CZTheme.swift in Sources */,
-				2AEC189B1F7C5C53007A5DF1 /* CZDispatchGroup.swift in Sources */,
 				C399831B1F773E1600775B6C /* NSNullGuard.swift in Sources */,
 				C399831C1F773E1600775B6C /* Swizzling.swift in Sources */,
 				2A1607631F7DBE0800FC3E9B /* UIScreen+Extension.swift in Sources */,
@@ -326,6 +325,7 @@
 				2A1607651F7DBE0800FC3E9B /* UIViewController+Extension.swift in Sources */,
 				2A1607641F7DBE0800FC3E9B /* UIView+Extension.swift in Sources */,
 				C39983171F773E1600775B6C /* CZMainQueueScheduler.swift in Sources */,
+				2AB505E61F7E1E480035B59B /* CriticalSectionLock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
