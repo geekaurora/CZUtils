@@ -16,6 +16,7 @@
 		2A1607651F7DBE0800FC3E9B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A16075E1F7DBE0800FC3E9B /* UIViewController+Extension.swift */; };
 		2AB505E61F7E1E480035B59B /* CriticalSectionLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB505E41F7E1E480035B59B /* CriticalSectionLock.swift */; };
 		2AB505E71F7E1E480035B59B /* CZDispatchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB505E51F7E1E480035B59B /* CZDispatchGroup.swift */; };
+		2AC42A241F7E3544005D553B /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC42A231F7E3544005D553B /* Dictionary+Extension.swift */; };
 		2AEC18931F7C19EF007A5DF1 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */; };
 		2AEC18991F7C2791007A5DF1 /* TestThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */; };
 		C39982D41F7739EA00775B6C /* CZUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39982CA1F7739EA00775B6C /* CZUtils.framework */; };
@@ -54,6 +55,7 @@
 		2A16075E1F7DBE0800FC3E9B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Extension.swift"; path = "Core/Extensions/UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		2AB505E41F7E1E480035B59B /* CriticalSectionLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CriticalSectionLock.swift; path = Core/Investigation/CriticalSectionLock.swift; sourceTree = "<group>"; };
 		2AB505E51F7E1E480035B59B /* CZDispatchGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CZDispatchGroup.swift; path = Core/Investigation/CZDispatchGroup.swift; sourceTree = "<group>"; };
+		2AC42A231F7E3544005D553B /* Dictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Extension.swift"; path = "Core/Extensions/Dictionary+Extension.swift"; sourceTree = "<group>"; };
 		2AEC18921F7C19EF007A5DF1 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadSafeDictionary.swift; path = Core/ThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		C39982CA1F7739EA00775B6C /* CZUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CZUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,8 +128,8 @@
 			children = (
 				C399831F1F773E2D00775B6C /* Core */,
 				C39983201F773E3000775B6C /* UI */,
-				C39983211F773E3400775B6C /* Extensions */,
 				C39983221F773E5500775B6C /* Error */,
+				C39983211F773E3400775B6C /* Extensions */,
 				C39982CD1F7739EA00775B6C /* CZUtils.h */,
 				C39982CE1F7739EA00775B6C /* Info.plist */,
 			);
@@ -177,6 +179,7 @@
 				2A16075D1F7DBE0800FC3E9B /* UIView+Extension.swift */,
 				2A16075A1F7DBE0800FC3E9B /* UIButton+Extension.swift */,
 				2A1607591F7DBE0800FC3E9B /* String+Extension.swift */,
+				2AC42A231F7E3544005D553B /* Dictionary+Extension.swift */,
 				2A1607581F7DBE0800FC3E9B /* Date+Extension.swift */,
 				2A16075C1F7DBE0800FC3E9B /* UIScreen+Extension.swift */,
 				2A16075E1F7DBE0800FC3E9B /* UIViewController+Extension.swift */,
@@ -310,6 +313,7 @@
 				C39983131F773E1600775B6C /* CZAlertManager.swift in Sources */,
 				C399831A1F773E1600775B6C /* CZProMutexLock.swift in Sources */,
 				2A1607621F7DBE0800FC3E9B /* UIImage+Extension.swift in Sources */,
+				2AC42A241F7E3544005D553B /* Dictionary+Extension.swift in Sources */,
 				2A1607611F7DBE0800FC3E9B /* UIButton+Extension.swift in Sources */,
 				C39983191F773E1600775B6C /* CZNibLoadable.swift in Sources */,
 				2AEC18931F7C19EF007A5DF1 /* ThreadSafeDictionary.swift in Sources */,
