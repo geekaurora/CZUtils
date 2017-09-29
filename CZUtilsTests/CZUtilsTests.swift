@@ -2,8 +2,8 @@
 //  CZUtilsTests.swift
 //  CZUtilsTests
 //
-//  Created by Cheng Zhang on 23/09/2017.
-//  Copyright © 2017 Cheng Zhang. All rights reserved.
+//  Created by Cheng Zhang on 11/19/15.
+//  Copyright © 2015 Cheng Zhang. All rights reserved.
 //
 
 import XCTest
