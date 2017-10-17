@@ -155,7 +155,7 @@ extension UIView {
         return views
     }
     
-    /// Overlap on `superviewIn`, added to `superviewIn` if invoker has no superView
+    /// Overlap on `superviewIn`, added to `superviewIn` if invoker has no superview
     public func overlayOnSuperview(_ superviewIn: UIView? = nil, inset: UIEdgeInsets = .zero) {
         if superview == nil {
             superviewIn?.addSubview(self)
