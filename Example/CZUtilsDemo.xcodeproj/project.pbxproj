@@ -7,36 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00F1B03060484380CBFB4118 /* Pods_CZUtilsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D522F7D5D970C566830700F /* Pods_CZUtilsDemo.framework */; };
 		2A83FA841F7C198000546BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83FA831F7C198000546BCB /* AppDelegate.swift */; };
 		2A83FA861F7C198000546BCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83FA851F7C198000546BCB /* ViewController.swift */; };
 		2A83FA891F7C198000546BCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A83FA871F7C198000546BCB /* Main.storyboard */; };
 		2A83FA8B1F7C198000546BCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A83FA8A1F7C198000546BCB /* Assets.xcassets */; };
 		2A83FA8E1F7C198000546BCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A83FA8C1F7C198000546BCB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		2A83FA9A1F7C19A400546BCB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A83FA951F7C19A400546BCB /* CZUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C39982CA1F7739EA00775B6C;
-			remoteInfo = CZUtils;
-		};
-		2A83FA9C1F7C19A400546BCB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A83FA951F7C19A400546BCB /* CZUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C39982D31F7739EA00775B6C;
-			remoteInfo = CZUtilsTests;
-		};
-		2AEC18941F7C1A83007A5DF1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A83FA951F7C19A400546BCB /* CZUtils.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C39982C91F7739EA00775B6C;
-			remoteInfo = CZUtils;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2A83FA801F7C198000546BCB /* CZUtilsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZUtilsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,7 +23,9 @@
 		2A83FA8A1F7C198000546BCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A83FA8D1F7C198000546BCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A83FA8F1F7C198000546BCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A83FA951F7C19A400546BCB /* CZUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CZUtils.xcodeproj; path = ../CZUtils.xcodeproj; sourceTree = "<group>"; };
+		42050221BE9015ABB26D9550 /* Pods-CZUtilsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZUtilsDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZUtilsDemo/Pods-CZUtilsDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		576634BC20F3128CD46748EE /* Pods-CZUtilsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZUtilsDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZUtilsDemo/Pods-CZUtilsDemo.release.xcconfig"; sourceTree = "<group>"; };
+		5D522F7D5D970C566830700F /* Pods_CZUtilsDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZUtilsDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,18 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F1B03060484380CBFB4118 /* Pods_CZUtilsDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DAAE246D2D836E21D17F315 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D522F7D5D970C566830700F /* Pods_CZUtilsDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2A83FA771F7C198000546BCB = {
 			isa = PBXGroup;
 			children = (
-				2A83FA951F7C19A400546BCB /* CZUtils.xcodeproj */,
 				2A83FA821F7C198000546BCB /* CZUtilsDemo */,
 				2A83FA811F7C198000546BCB /* Products */,
+				89291337D1D3E6161A93E31A /* Pods */,
+				0DAAE246D2D836E21D17F315 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,13 +79,13 @@
 			path = CZUtilsDemo;
 			sourceTree = "<group>";
 		};
-		2A83FA961F7C19A400546BCB /* Products */ = {
+		89291337D1D3E6161A93E31A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2A83FA9B1F7C19A400546BCB /* CZUtils.framework */,
-				2A83FA9D1F7C19A400546BCB /* CZUtilsTests.xctest */,
+				42050221BE9015ABB26D9550 /* Pods-CZUtilsDemo.debug.xcconfig */,
+				576634BC20F3128CD46748EE /* Pods-CZUtilsDemo.release.xcconfig */,
 			);
-			name = Products;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,14 +95,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A83FA921F7C198000546BCB /* Build configuration list for PBXNativeTarget "CZUtilsDemo" */;
 			buildPhases = (
+				B3D1A0FA7DBE2E1EC44CDC5E /* [CP] Check Pods Manifest.lock */,
 				2A83FA7C1F7C198000546BCB /* Sources */,
 				2A83FA7D1F7C198000546BCB /* Frameworks */,
 				2A83FA7E1F7C198000546BCB /* Resources */,
+				786836687B94BE3E6BF26E78 /* [CP] Embed Pods Frameworks */,
+				AC86EAF80ACA07774842EAC1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2AEC18951F7C1A83007A5DF1 /* PBXTargetDependency */,
 			);
 			name = CZUtilsDemo;
 			productName = CZUtilsDemo;
@@ -148,35 +139,12 @@
 			mainGroup = 2A83FA771F7C198000546BCB;
 			productRefGroup = 2A83FA811F7C198000546BCB /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 2A83FA961F7C19A400546BCB /* Products */;
-					ProjectRef = 2A83FA951F7C19A400546BCB /* CZUtils.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				2A83FA7F1F7C198000546BCB /* CZUtilsDemo */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		2A83FA9B1F7C19A400546BCB /* CZUtils.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CZUtils.framework;
-			remoteRef = 2A83FA9A1F7C19A400546BCB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2A83FA9D1F7C19A400546BCB /* CZUtilsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CZUtilsTests.xctest;
-			remoteRef = 2A83FA9C1F7C19A400546BCB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2A83FA7E1F7C198000546BCB /* Resources */ = {
@@ -191,6 +159,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		786836687B94BE3E6BF26E78 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CZUtilsDemo/Pods-CZUtilsDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CZUtils/CZUtils.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CZUtils.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CZUtilsDemo/Pods-CZUtilsDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC86EAF80ACA07774842EAC1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CZUtilsDemo/Pods-CZUtilsDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3D1A0FA7DBE2E1EC44CDC5E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CZUtilsDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2A83FA7C1F7C198000546BCB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -202,14 +224,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2AEC18951F7C1A83007A5DF1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CZUtils;
-			targetProxy = 2AEC18941F7C1A83007A5DF1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2A83FA871F7C198000546BCB /* Main.storyboard */ = {
@@ -328,6 +342,7 @@
 		};
 		2A83FA931F7C198000546BCB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42050221BE9015ABB26D9550 /* Pods-CZUtilsDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 55RDUQ8X48;
@@ -341,6 +356,7 @@
 		};
 		2A83FA941F7C198000546BCB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 576634BC20F3128CD46748EE /* Pods-CZUtilsDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 55RDUQ8X48;
