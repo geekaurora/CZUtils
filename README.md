@@ -6,12 +6,12 @@
 
 ### Powerful toolset for Utils layer
 
- * **CZMutexLock** on top of GCD
- * **NSNullGuard**
- * **MainQueueScheduler**
- * **SwizzlingHelper**
- * **ThreadSafeDictionary**
- * **NibLoadable** for UIView/Cell
+ * CZMutexLock on top of GCD
+ * NSNullGuard
+ * MainQueueScheduler
+ * SwizzlingHelper
+ * ThreadSafeDictionary
+ * NibLoadable for UIView/Cell
 
 
 ## Installation
@@ -23,4 +23,4 @@ it, simply add the following line to your Podfile:
 pod 'CZUtils'
 ```
 
-And then run `pod install` in your work folder.
+And run `pod install` in your work folder.
