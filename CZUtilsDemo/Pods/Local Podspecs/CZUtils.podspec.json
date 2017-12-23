@@ -21,5 +21,10 @@
   "source_files": "CZUtils/**/*",
   "pod_target_xcconfig": {
     "SWIFT_VERSION": "3"
+  },
+  "dependencies": {
+    "SDWebImage": [
+
+    ]
   }
 }

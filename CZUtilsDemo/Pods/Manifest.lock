@@ -1,5 +1,9 @@
 PODS:
-  - CZUtils (1.1.0)
+  - CZUtils (1.1.0):
+    - SDWebImage
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
 
 DEPENDENCIES:
   - CZUtils (from `../`)
@@ -9,7 +13,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  CZUtils: 3c74acdc96b13105fe4dd100b217893447a9e25b
+  CZUtils: 0405c6604e5fe535a3d5b1006e42a6a5663b8642
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
 
 PODFILE CHECKSUM: 72a9f72ad64fb7ea20fdab8ea257f3cedac0126e
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00F1B03060484380CBFB4118 /* Pods_CZUtilsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D522F7D5D970C566830700F /* Pods_CZUtilsDemo.framework */; };
+		2A4D962A1FEEF93C00B46E8E /* CZUtils.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2A4D96291FEEF93C00B46E8E /* CZUtils.podspec */; };
 		2A83FA841F7C198000546BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83FA831F7C198000546BCB /* AppDelegate.swift */; };
 		2A83FA861F7C198000546BCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83FA851F7C198000546BCB /* ViewController.swift */; };
 		2A83FA891F7C198000546BCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A83FA871F7C198000546BCB /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A4D96291FEEF93C00B46E8E /* CZUtils.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CZUtils.podspec; path = ../CZUtils.podspec; sourceTree = "<group>"; };
 		2A83FA801F7C198000546BCB /* CZUtilsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZUtilsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A83FA831F7C198000546BCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A83FA851F7C198000546BCB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		89291337D1D3E6161A93E31A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				2A4D96291FEEF93C00B46E8E /* CZUtils.podspec */,
 				42050221BE9015ABB26D9550 /* Pods-CZUtilsDemo.debug.xcconfig */,
 				576634BC20F3128CD46748EE /* Pods-CZUtilsDemo.release.xcconfig */,
 			);
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A83FA8E1F7C198000546BCB /* LaunchScreen.storyboard in Resources */,
+				2A4D962A1FEEF93C00B46E8E /* CZUtils.podspec in Resources */,
 				2A83FA8B1F7C198000546BCB /* Assets.xcassets in Resources */,
 				2A83FA891F7C198000546BCB /* Main.storyboard in Resources */,
 			);
@@ -168,10 +172,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CZUtilsDemo/Pods-CZUtilsDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CZUtils/CZUtils.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CZUtils.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
