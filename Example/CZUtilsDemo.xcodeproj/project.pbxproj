@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00F1B03060484380CBFB4118 /* Pods_CZUtilsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D522F7D5D970C566830700F /* Pods_CZUtilsDemo.framework */; };
-		2A4D962A1FEEF93C00B46E8E /* CZUtils.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2A4D96291FEEF93C00B46E8E /* CZUtils.podspec */; };
 		2A83FA841F7C198000546BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83FA831F7C198000546BCB /* AppDelegate.swift */; };
 		2A83FA861F7C198000546BCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83FA851F7C198000546BCB /* ViewController.swift */; };
 		2A83FA891F7C198000546BCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A83FA871F7C198000546BCB /* Main.storyboard */; };
@@ -16,8 +15,32 @@
 		2A83FA8E1F7C198000546BCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A83FA8C1F7C198000546BCB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2A00D6411FF0450000DCFEA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C39982CA1F7739EA00775B6C;
+			remoteInfo = CZUtils;
+		};
+		2A00D6431FF0450000DCFEA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C39982D31F7739EA00775B6C;
+			remoteInfo = CZUtilsTests;
+		};
+		2A73DC101FF04518006D82CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C39982C91F7739EA00775B6C;
+			remoteInfo = CZUtils;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		2A4D96291FEEF93C00B46E8E /* CZUtils.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CZUtils.podspec; path = ../CZUtils.podspec; sourceTree = "<group>"; };
+		2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CZUtils.xcodeproj; path = ../CZUtils/CZUtils.xcodeproj; sourceTree = "<group>"; };
 		2A83FA801F7C198000546BCB /* CZUtilsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZUtilsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A83FA831F7C198000546BCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A83FA851F7C198000546BCB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,9 +73,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2A00D63D1FF0450000DCFEA7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A00D6421FF0450000DCFEA7 /* CZUtils.framework */,
+				2A00D6441FF0450000DCFEA7 /* CZUtilsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2A83FA771F7C198000546BCB = {
 			isa = PBXGroup;
 			children = (
+				2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */,
 				2A83FA821F7C198000546BCB /* CZUtilsDemo */,
 				2A83FA811F7C198000546BCB /* Products */,
 				89291337D1D3E6161A93E31A /* Pods */,
@@ -84,7 +117,6 @@
 		89291337D1D3E6161A93E31A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2A4D96291FEEF93C00B46E8E /* CZUtils.podspec */,
 				42050221BE9015ABB26D9550 /* Pods-CZUtilsDemo.debug.xcconfig */,
 				576634BC20F3128CD46748EE /* Pods-CZUtilsDemo.release.xcconfig */,
 			);
@@ -108,6 +140,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2A73DC111FF04518006D82CA /* PBXTargetDependency */,
 			);
 			name = CZUtilsDemo;
 			productName = CZUtilsDemo;
@@ -142,6 +175,12 @@
 			mainGroup = 2A83FA771F7C198000546BCB;
 			productRefGroup = 2A83FA811F7C198000546BCB /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2A00D63D1FF0450000DCFEA7 /* Products */;
+					ProjectRef = 2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2A83FA7F1F7C198000546BCB /* CZUtilsDemo */,
@@ -149,13 +188,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		2A00D6421FF0450000DCFEA7 /* CZUtils.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CZUtils.framework;
+			remoteRef = 2A00D6411FF0450000DCFEA7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A00D6441FF0450000DCFEA7 /* CZUtilsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CZUtilsTests.xctest;
+			remoteRef = 2A00D6431FF0450000DCFEA7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		2A83FA7E1F7C198000546BCB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2A83FA8E1F7C198000546BCB /* LaunchScreen.storyboard in Resources */,
-				2A4D962A1FEEF93C00B46E8E /* CZUtils.podspec in Resources */,
 				2A83FA8B1F7C198000546BCB /* Assets.xcassets in Resources */,
 				2A83FA891F7C198000546BCB /* Main.storyboard in Resources */,
 			);
@@ -228,6 +283,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2A73DC111FF04518006D82CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CZUtils;
+			targetProxy = 2A73DC101FF04518006D82CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2A83FA871F7C198000546BCB /* Main.storyboard */ = {

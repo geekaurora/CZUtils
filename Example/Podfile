@@ -6,6 +6,7 @@ target 'CZUtilsDemo' do
   use_frameworks!
 
   # Pods for CZUtilsDemo
-  pod 'CZUtils', :path => '../CZUtils'
+  # pod 'CZUtils', :path => '../CZUtils'
+  # pod 'CZUtils'
   
 end
