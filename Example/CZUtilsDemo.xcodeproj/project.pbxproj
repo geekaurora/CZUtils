@@ -16,23 +16,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2A00D6411FF0450000DCFEA7 /* PBXContainerItemProxy */ = {
+		2A86C2AB1FF0D59100D61B47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */;
+			containerPortal = 2A86C2A61FF0D59100D61B47 /* CZUtils.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C39982CA1F7739EA00775B6C;
 			remoteInfo = CZUtils;
 		};
-		2A00D6431FF0450000DCFEA7 /* PBXContainerItemProxy */ = {
+		2A86C2AD1FF0D59100D61B47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */;
+			containerPortal = 2A86C2A61FF0D59100D61B47 /* CZUtils.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C39982D31F7739EA00775B6C;
 			remoteInfo = CZUtilsTests;
 		};
-		2A73DC101FF04518006D82CA /* PBXContainerItemProxy */ = {
+		2A86C2AF1FF0D59900D61B47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */;
+			containerPortal = 2A86C2A61FF0D59100D61B47 /* CZUtils.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = C39982C91F7739EA00775B6C;
 			remoteInfo = CZUtils;
@@ -40,7 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CZUtils.xcodeproj; path = ../CZUtils/CZUtils.xcodeproj; sourceTree = "<group>"; };
 		2A83FA801F7C198000546BCB /* CZUtilsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZUtilsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A83FA831F7C198000546BCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A83FA851F7C198000546BCB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +47,7 @@
 		2A83FA8A1F7C198000546BCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A83FA8D1F7C198000546BCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A83FA8F1F7C198000546BCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A86C2A61FF0D59100D61B47 /* CZUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CZUtils.xcodeproj; path = ../../CZUtils.xcodeproj; sourceTree = "<group>"; };
 		42050221BE9015ABB26D9550 /* Pods-CZUtilsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZUtilsDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZUtilsDemo/Pods-CZUtilsDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		576634BC20F3128CD46748EE /* Pods-CZUtilsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZUtilsDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZUtilsDemo/Pods-CZUtilsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		5D522F7D5D970C566830700F /* Pods_CZUtilsDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZUtilsDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,19 +73,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2A00D63D1FF0450000DCFEA7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2A00D6421FF0450000DCFEA7 /* CZUtils.framework */,
-				2A00D6441FF0450000DCFEA7 /* CZUtilsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		2A83FA771F7C198000546BCB = {
 			isa = PBXGroup;
 			children = (
-				2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */,
 				2A83FA821F7C198000546BCB /* CZUtilsDemo */,
 				2A83FA811F7C198000546BCB /* Products */,
 				89291337D1D3E6161A93E31A /* Pods */,
@@ -110,8 +100,18 @@
 				2A83FA8A1F7C198000546BCB /* Assets.xcassets */,
 				2A83FA8C1F7C198000546BCB /* LaunchScreen.storyboard */,
 				2A83FA8F1F7C198000546BCB /* Info.plist */,
+				2A86C2A61FF0D59100D61B47 /* CZUtils.xcodeproj */,
 			);
 			path = CZUtilsDemo;
+			sourceTree = "<group>";
+		};
+		2A86C2A71FF0D59100D61B47 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A86C2AC1FF0D59100D61B47 /* CZUtils.framework */,
+				2A86C2AE1FF0D59100D61B47 /* CZUtilsTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		89291337D1D3E6161A93E31A /* Pods */ = {
@@ -140,7 +140,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				2A73DC111FF04518006D82CA /* PBXTargetDependency */,
+				2A86C2B01FF0D59900D61B47 /* PBXTargetDependency */,
 			);
 			name = CZUtilsDemo;
 			productName = CZUtilsDemo;
@@ -177,8 +177,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2A00D63D1FF0450000DCFEA7 /* Products */;
-					ProjectRef = 2A00D63C1FF0450000DCFEA7 /* CZUtils.xcodeproj */;
+					ProductGroup = 2A86C2A71FF0D59100D61B47 /* Products */;
+					ProjectRef = 2A86C2A61FF0D59100D61B47 /* CZUtils.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -189,18 +189,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2A00D6421FF0450000DCFEA7 /* CZUtils.framework */ = {
+		2A86C2AC1FF0D59100D61B47 /* CZUtils.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CZUtils.framework;
-			remoteRef = 2A00D6411FF0450000DCFEA7 /* PBXContainerItemProxy */;
+			remoteRef = 2A86C2AB1FF0D59100D61B47 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2A00D6441FF0450000DCFEA7 /* CZUtilsTests.xctest */ = {
+		2A86C2AE1FF0D59100D61B47 /* CZUtilsTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = CZUtilsTests.xctest;
-			remoteRef = 2A00D6431FF0450000DCFEA7 /* PBXContainerItemProxy */;
+			remoteRef = 2A86C2AD1FF0D59100D61B47 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -285,10 +285,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2A73DC111FF04518006D82CA /* PBXTargetDependency */ = {
+		2A86C2B01FF0D59900D61B47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CZUtils;
-			targetProxy = 2A73DC101FF04518006D82CA /* PBXContainerItemProxy */;
+			targetProxy = 2A86C2AF1FF0D59900D61B47 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
