@@ -14,12 +14,12 @@ public extension Dictionary {
         return value(forSegmentedKey: dotedKey)
     }
 
-    /// Retrieve value from `segmentsKey`, compatible with multi-segments separated by `splitter`. e.g. "user.profile.fullName", "user/profile/fullName"
-    func value(forSegmentedKey segmentsKey: String, splitter: String = ".") -> Value? {
+    /// Retrieve value from `segmentedKey`, compatible with multi-segments separated by `splitter`. e.g. "user.profile.fullName", "user/profile/fullName"
+    func value(forSegmentedKey segmentedKey: String, splitter: String = ".") -> Value? {
         var value: Any? = nil
         var dict: Dictionary? = self
 
-        for subkey in segmentsKey.components(separatedBy: splitter) {
+        for subkey in segmentedKey.components(separatedBy: splitter) {
             guard dict != nil, let subkey = subkey as? Key else {
                 return nil
             }
