@@ -11,11 +11,11 @@ import UIKit
 public extension Dictionary {
     /// Retrieve value from `dotedKey`, compatible with multi-dot in keyPath. e.g. "user.profile.fullName"
     func value(forDotedKey dotedKey: String) -> Value? {
-        return value(forSegmentsKey: dotedKey)
+        return value(forSegmentedKey: dotedKey)
     }
 
     /// Retrieve value from `segmentsKey`, compatible with multi-segments separated by `splitter`. e.g. "user.profile.fullName", "user/profile/fullName"
-    func value(forSegmentsKey segmentsKey: String, splitter: String = ".") -> Value? {
+    func value(forSegmentedKey segmentsKey: String, splitter: String = ".") -> Value? {
         var value: Any? = nil
         var dict: Dictionary? = self
 
