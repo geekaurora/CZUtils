@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A3EA2CE203BA72500A6D561 /* CZUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3EA2CD203BA72400A6D561 /* CZUtils.swift */; };
 		2A901E3A1F7EC016004DAAC5 /* CZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A901E381F7EC016004DAAC5 /* CZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A901E3B1F7EC016004DAAC5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A901E391F7EC016004DAAC5 /* Info.plist */; };
 		2A901E441F7EC10B004DAAC5 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A901E3C1F7EC10B004DAAC5 /* Date+Extension.swift */; };
@@ -36,6 +37,8 @@
 		2AEC18991F7C2791007A5DF1 /* TestThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */; };
 		C39982D41F7739EA00775B6C /* CZUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39982CA1F7739EA00775B6C /* CZUtils.framework */; };
 		C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39982D81F7739EA00775B6C /* CZUtilsTests.swift */; };
+		DF10CDE72157003900DAFDAB /* Optional+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10CDE62157003900DAFDAB /* Optional+.swift */; };
+		DFDB5E51210A94B40067FEB5 /* TestArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDB5E50210A94B40067FEB5 /* TestArray.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A3EA2CD203BA72400A6D561 /* CZUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZUtils.swift; sourceTree = "<group>"; };
 		2A901E381F7EC016004DAAC5 /* CZUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZUtils.h; path = "Supported Files/CZUtils.h"; sourceTree = "<group>"; };
 		2A901E391F7EC016004DAAC5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supported Files/Info.plist"; sourceTree = "<group>"; };
 		2A901E3C1F7EC10B004DAAC5 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Extension.swift"; path = "Extensions/Date+Extension.swift"; sourceTree = "<group>"; };
@@ -80,6 +84,8 @@
 		C39982D31F7739EA00775B6C /* CZUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CZUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39982D81F7739EA00775B6C /* CZUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZUtilsTests.swift; sourceTree = "<group>"; };
 		C39982DA1F7739EA00775B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF10CDE62157003900DAFDAB /* Optional+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Optional+.swift"; path = "Extensions/Optional+.swift"; sourceTree = "<group>"; };
+		DFDB5E50210A94B40067FEB5 /* TestArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestArray.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +151,9 @@
 		C39982D71F7739EA00775B6C /* CZUtilsTests */ = {
 			isa = PBXGroup;
 			children = (
-				C39982D81F7739EA00775B6C /* CZUtilsTests.swift */,
 				2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */,
+				DFDB5E50210A94B40067FEB5 /* TestArray.swift */,
+				C39982D81F7739EA00775B6C /* CZUtilsTests.swift */,
 				C39982DA1F7739EA00775B6C /* Info.plist */,
 			);
 			path = CZUtilsTests;
@@ -163,6 +170,7 @@
 				2A901E591F7EC169004DAAC5 /* CZFileHelper.swift */,
 				2A901E5D1F7EC169004DAAC5 /* NSNullGuard.swift */,
 				2A901E581F7EC169004DAAC5 /* CZConcurrentOperation.swift */,
+				2A3EA2CD203BA72400A6D561 /* CZUtils.swift */,
 				2AEC189C1F7C5CA5007A5DF1 /* Investigation */,
 			);
 			name = Core;
@@ -181,6 +189,7 @@
 		C39983211F773E3400775B6C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DF10CDE62157003900DAFDAB /* Optional+.swift */,
 				2A901E3C1F7EC10B004DAAC5 /* Date+Extension.swift */,
 				2A901E3D1F7EC10B004DAAC5 /* Dictionary+Extension.swift */,
 				2AE4888C1F806C580052B05F /* Array+Extensoin.swift */,
@@ -332,6 +341,7 @@
 				2A901E441F7EC10B004DAAC5 /* Date+Extension.swift in Sources */,
 				2A901E611F7EC169004DAAC5 /* CZFileHelper.swift in Sources */,
 				2A901E461F7EC10B004DAAC5 /* String+Extension.swift in Sources */,
+				DF10CDE72157003900DAFDAB /* Optional+.swift in Sources */,
 				2A901E651F7EC169004DAAC5 /* NSNullGuard.swift in Sources */,
 				2A901E4B1F7EC10B004DAAC5 /* UIViewController+Extension.swift in Sources */,
 				2A901E561F7EC136004DAAC5 /* CriticalSectionLock.swift in Sources */,
@@ -339,6 +349,7 @@
 				2A901E621F7EC169004DAAC5 /* CZMainQueueScheduler.swift in Sources */,
 				2A901E571F7EC136004DAAC5 /* CZDispatchGroup.swift in Sources */,
 				2A901E481F7EC10B004DAAC5 /* UIImage+Extension.swift in Sources */,
+				2A3EA2CE203BA72500A6D561 /* CZUtils.swift in Sources */,
 				2A901E531F7EC12D004DAAC5 /* CZTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AEC18991F7C2791007A5DF1 /* TestThreadSafeDictionary.swift in Sources */,
+				DFDB5E51210A94B40067FEB5 /* TestArray.swift in Sources */,
 				C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

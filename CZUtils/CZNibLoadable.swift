@@ -132,7 +132,7 @@ extension UIView {
     
     /// Unarchive and own properties of nibFile
     ///
-    /// - Parameters:
+    /// - Params:
     ///   - xibName : xib filename. `nil` by default
     ///   - bundle  : bundle to load nib file.
     /// - Returns   : views array unarchived from nib file

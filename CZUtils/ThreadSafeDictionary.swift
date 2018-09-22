@@ -72,7 +72,7 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
     
     public func values(for keys: [Key]) -> [Value] {
         return protectedCache.readLock{ cache in
-            return keys.flatMap{ (key) -> Value? in
+            return keys.compactMap{ (key) -> Value? in
                 return cache[key]
             } } ?? []
     }

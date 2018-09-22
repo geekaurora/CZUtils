@@ -10,12 +10,12 @@ import UIKit
 
 public extension Dictionary {
     /// Retrieve value from `dotedKey`, compatible with multi-dot in keyPath. e.g. "user.profile.fullName"
-    func value(forDotedKey dotedKey: String) -> Value? {
+    public func value(forDotedKey dotedKey: String) -> Value? {
         return value(forSegmentedKey: dotedKey)
     }
 
     /// Retrieve value from `segmentedKey`, compatible with multi-segments separated by `splitter`. e.g. "user.profile.fullName", "user/profile/fullName"
-    func value(forSegmentedKey segmentedKey: String, splitter: String = ".") -> Value? {
+    public func value(forSegmentedKey segmentedKey: String, splitter: String = ".") -> Value? {
         var value: Any? = nil
         var dict: Dictionary? = self
 
