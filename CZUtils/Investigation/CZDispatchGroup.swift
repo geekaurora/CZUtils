@@ -6,7 +6,7 @@
 //  Copyright © 2017 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 /// Manage grouped concurrent executions completion, with same functionality as `DispatchGroup` class
 public final class CZDispatchGroup: NSObject {

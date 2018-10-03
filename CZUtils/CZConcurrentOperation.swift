@@ -5,7 +5,7 @@
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 /// An abstract class that makes subclassing ConcurrentOperation easy to udpate KVO props `isReady`/`isExecuting`/`isFinished` automatically
 ///

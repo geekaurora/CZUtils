@@ -5,7 +5,7 @@
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 /// Helper class for file related methods 
 @objc open class CZFileHelper: NSObject {

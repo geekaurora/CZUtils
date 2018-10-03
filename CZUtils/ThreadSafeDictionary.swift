@@ -6,9 +6,9 @@
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-/// Elegant thread-safe Dictionary on top of CZMutexLock
+/// Elegant thread safe Dictionary on top of CZMutexLock
 open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection, ExpressibleByDictionaryLiteral {
     public typealias DictionaryType = Dictionary<Key, Value>
     fileprivate var protectedCache: CZMutexLock<DictionaryType>
@@ -72,7 +72,7 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
     
     public func values(for keys: [Key]) -> [Value] {
         return protectedCache.readLock{ cache in
-            return keys.compactMap{ (key) -> Value? in
+            return keys.flatMap{ (key) -> Value? in
                 return cache[key]
             } } ?? []
     }

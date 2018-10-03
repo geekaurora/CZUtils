@@ -5,10 +5,10 @@
 //  Copyright © 2015 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-/// Generic swizzling function - workable for subclasses of `NSObject`
-/// `NSObject` subclass maintains a dispatchTable which maps between method selector and actural IMP
+/// Generic swizzling function - workable for subclasses of NSObject
+/// NSObject subclass maintains a DispatchTable which maps between method selector and actural IMP
 public func swizzling(_ aClass: AnyClass, originalSelector: Selector, swizzledSelector: Selector) {
     let originalMethod = class_getInstanceMethod(aClass, originalSelector)
     let swizzledMethod = class_getInstanceMethod(aClass, swizzledSelector)

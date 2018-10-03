@@ -6,7 +6,7 @@
 //  Copyright © 2017 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 extension Array {
     /**
@@ -19,6 +19,6 @@ extension Array {
 
 extension Array where Element: NSCopying {
     public func copy(with zone: NSZone? = nil) -> Any {
-        return compactMap{ $0.copy() }
+        return flatMap{ $0.copy() }
     }
 }

@@ -5,7 +5,7 @@
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 /// Mutex lock on top of `pthread_mutex_lock`/`pthread_mutex_unlock`
 open class CZProMutexLock: NSObject {

@@ -5,7 +5,7 @@
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 // MARK: - Swizzling - Remove NSNulls from Sequence object in `write(to:)`
 

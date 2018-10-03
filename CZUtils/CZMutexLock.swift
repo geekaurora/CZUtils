@@ -5,7 +5,7 @@
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 /// Generic multi-thread mutex lock on top of DispatchQueue sync/barrier
 public class CZMutexLock<Item>: NSObject {
