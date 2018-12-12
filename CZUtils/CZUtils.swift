@@ -15,3 +15,7 @@ public class CZUtils {
         #endif
     }
 }
+
+public func dbgPrint(_ item: CustomStringConvertible) {
+    CZUtils.dbgPrint(item)
+}
