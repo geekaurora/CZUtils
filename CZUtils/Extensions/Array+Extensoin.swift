@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Array {
+public extension Array {
     /**
      Returns element at specified `safe` index if exists, otherwise nil
      */
@@ -17,7 +17,7 @@ extension Array {
     }
 }
 
-extension Array where Element: NSCopying {
+public extension Array where Element: NSCopying {
     public func copy(with zone: NSZone? = nil) -> Any {
         return flatMap{ $0.copy() }
     }

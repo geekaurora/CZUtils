@@ -34,6 +34,7 @@
 		2AB659E81FF02C95001A8835 /* CZUtils.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2AB659E71FF02C95001A8835 /* CZUtils.podspec */; };
 		2AE4888D1F806C580052B05F /* Array+Extensoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4888C1F806C580052B05F /* Array+Extensoin.swift */; };
 		2AEC18991F7C2791007A5DF1 /* TestThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */; };
+		2AFC641721C198B9000F36EF /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC641621C198B9000F36EF /* NSObject+.swift */; };
 		C39982D41F7739EA00775B6C /* CZUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39982CA1F7739EA00775B6C /* CZUtils.framework */; };
 		C39982D91F7739EA00775B6C /* CZUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39982D81F7739EA00775B6C /* CZUtilsTests.swift */; };
 		DF10CDE72157003900DAFDAB /* Optional+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10CDE62157003900DAFDAB /* Optional+.swift */; };
@@ -79,6 +80,7 @@
 		2AB659E71FF02C95001A8835 /* CZUtils.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CZUtils.podspec; sourceTree = SOURCE_ROOT; };
 		2AE4888C1F806C580052B05F /* Array+Extensoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+Extensoin.swift"; path = "Extensions/Array+Extensoin.swift"; sourceTree = "<group>"; };
 		2AEC18981F7C2791007A5DF1 /* TestThreadSafeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestThreadSafeDictionary.swift; sourceTree = "<group>"; };
+		2AFC641621C198B9000F36EF /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSObject+.swift"; path = "Extensions/NSObject+.swift"; sourceTree = "<group>"; };
 		C39982CA1F7739EA00775B6C /* CZUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CZUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39982D31F7739EA00775B6C /* CZUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CZUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39982D81F7739EA00775B6C /* CZUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZUtilsTests.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				2A901E411F7EC10B004DAAC5 /* UIScreen+Extension.swift */,
 				2A901E421F7EC10B004DAAC5 /* UIView+Extension.swift */,
 				2A901E431F7EC10B004DAAC5 /* UIViewController+Extension.swift */,
+				2AFC641621C198B9000F36EF /* NSObject+.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				2A901E621F7EC169004DAAC5 /* CZMainQueueScheduler.swift in Sources */,
 				2A901E571F7EC136004DAAC5 /* CZDispatchGroup.swift in Sources */,
 				2A901E481F7EC10B004DAAC5 /* UIImage+Extension.swift in Sources */,
+				2AFC641721C198B9000F36EF /* NSObject+.swift in Sources */,
 				2A3EA2CE203BA72500A6D561 /* CZUtils.swift in Sources */,
 				2A901E531F7EC12D004DAAC5 /* CZTheme.swift in Sources */,
 			);
