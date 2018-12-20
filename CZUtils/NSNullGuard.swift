@@ -7,7 +7,16 @@
 
 import Foundation
 
+/**
+ Swift4:
+ initialize() is no longer exposed: Method 'initialize()' defines Objective-C class method 'initialize', which is not permitted by Swift
+ so the way to do it now is to run your swizzle code via a public static method
+ https://stackoverflow.com/questions/46361065/method-swizzling-in-swift-4
+ */
+
 // MARK: - Swizzling - Remove NSNulls from Sequence object in `write(to:)`
+
+#if false
 
 public extension NSDictionary {
     static var hasSwizzled: Bool? = false
@@ -106,6 +115,6 @@ extension NSArray: NSNullRemovable {
     }
 }
 
-
+#endif
 
 

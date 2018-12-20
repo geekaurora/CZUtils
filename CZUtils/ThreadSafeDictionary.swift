@@ -48,11 +48,11 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
         return protectedCache.readLock { $0.count } ?? 0
     }
     
-    public var keys: LazyMapCollection<[Key : Value], Key> {
+    public var keys: Dictionary<Key, Value>.Keys {
         return protectedCache.readLock { $0.keys } ?? emptyDictionary.keys
     }
     
-    public var values: LazyMapCollection<[Key : Value], Value> {
+    public var values: Dictionary<Key, Value>.Values {
         return protectedCache.readLock { $0.values } ?? emptyDictionary.values
     }
     

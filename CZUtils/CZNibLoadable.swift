@@ -56,7 +56,7 @@ public protocol CZNibLoadable: class {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
     }
-    override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
