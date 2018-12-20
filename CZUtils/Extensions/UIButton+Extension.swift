@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate var controlHandlerKey: Int8 = 0
+private var controlHandlerKey: Int8 = 0
 public extension UIButton {
     /**
       Add self-contained action handler for button

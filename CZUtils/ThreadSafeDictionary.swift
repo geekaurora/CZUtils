@@ -11,9 +11,9 @@ import Foundation
 /// Elegant thread safe Dictionary on top of CZMutexLock
 open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection, ExpressibleByDictionaryLiteral {
     public typealias DictionaryType = Dictionary<Key, Value>
-    fileprivate var protectedCache: CZMutexLock<DictionaryType>
-    fileprivate let emptyDictionary = DictionaryType()
-    fileprivate var underlyingDictionary: DictionaryType {
+    private var protectedCache: CZMutexLock<DictionaryType>
+    private let emptyDictionary = DictionaryType()
+    private var underlyingDictionary: DictionaryType {
         return protectedCache.readLock{ $0 }!
     }
     public override init() {
@@ -72,7 +72,7 @@ open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection
     
     public func values(for keys: [Key]) -> [Value] {
         return protectedCache.readLock{ cache in
-            return keys.flatMap{ (key) -> Value? in
+            return keys.compactMap{ (key) -> Value? in
                 return cache[key]
             } } ?? []
     }

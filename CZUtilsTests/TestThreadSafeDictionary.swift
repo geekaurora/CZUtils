@@ -10,9 +10,9 @@ import XCTest
 @testable import CZUtils
 
 class TestThreadSafeDictionary: XCTestCase {
-    fileprivate static let queueLabel = "com.tony.test.threadSafeDictionary"
+    private static let queueLabel = "com.tony.test.threadSafeDictionary"
     
-    fileprivate var originalDict: [Int: Int] = {
+    private var originalDict: [Int: Int] = {
         var originalDict = [Int: Int]()
         for (i, value) in (0 ..< 10).enumerated() {
             originalDict[i] = value

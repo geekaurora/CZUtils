@@ -18,7 +18,7 @@ public extension Date {
     }
 }
 
-fileprivate extension Date {
+private extension Date {
     func string(withFormatterStr formatterStr: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = formatterStr

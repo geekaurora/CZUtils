@@ -50,7 +50,7 @@ public protocol CZNibLoadable: class {
 @objc open class CZNibLoadableTableViewCell: UITableViewCell, CZNibLoadable {
     open var xibName: String? { return nil }
     open var nibContentView: UIView!
-    fileprivate var nibIsLoaded: Bool = false
+    private var nibIsLoaded: Bool = false
     
     // MARK: - Lifecycle
     required public init?(coder aDecoder: NSCoder) {
@@ -77,7 +77,7 @@ public protocol CZNibLoadable: class {
 @objc open class CZNibLoadableCollectionViewCell: UICollectionViewCell, CZNibLoadable {
     open var nibContentView: UIView!
     open var xibName: String? { return nil }
-    fileprivate var nibIsLoaded: Bool = false
+    private var nibIsLoaded: Bool = false
     
     // MARK: - Lifecycle
     public override init(frame: CGRect) {
@@ -104,7 +104,7 @@ public protocol CZNibLoadable: class {
 // MARK: - Private Methods
 
 /// extension of UIView conforms to CZNibLoadable
-fileprivate extension CZNibLoadable where Self: UIView {
+private extension CZNibLoadable where Self: UIView {
     /// Load form nib file and overlay the contentView on superView
     func _loadAndOverlay(on superView: UIView) {
         nibContentView = loadAndOverlay(on: superView, xibName: xibName)

@@ -19,6 +19,6 @@ public extension Array {
 
 public extension Array where Element: NSCopying {
     public func copy(with zone: NSZone? = nil) -> Any {
-        return flatMap{ $0.copy() }
+        return compactMap{ $0.copy() }
     }
 }

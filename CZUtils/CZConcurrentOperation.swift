@@ -18,7 +18,7 @@ import Foundation
 @objc open class CZConcurrentOperation: Operation {
     /// Concurrent DispatchQueue acting as mutex read/write lock of rawState
     private let stateQueue = DispatchQueue(label: "com.tony.operation.state", attributes: [.concurrent])
-    fileprivate var rawState: OperationState = .ready
+    private var rawState: OperationState = .ready
     @objc private dynamic var state: OperationState {
         get {
             return stateQueue.sync{ rawState}

@@ -20,7 +20,7 @@ public extension String {
         URLUserAllowedCharacterSet      "#%/:<>?@[\]^`
      */
     public func urlEncoded()-> String {
-        guard characters.index(of: "%") == nil else { return self }
+        guard index(of: "%") == nil else { return self }
         let mutableString = NSMutableString(string: self)
         let urlEncoded = mutableString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         return urlEncoded ?? ""
