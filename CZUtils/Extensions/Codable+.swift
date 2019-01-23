@@ -39,6 +39,21 @@ public class CodableHelper {
             return nil
         }
     }
+    
+    /// Encode input model into data
+    ///
+    /// - Parameter model: model to be encoded
+    /// - Returns: encoded data
+    public static func encode<T: Encodable>(_ model: T?) -> Data? {
+        guard let model = model else { return nil }
+        do {
+            let data = try JSONEncoder().encode(model)
+            return data
+        } catch {
+            dbgPrint("Failed to encode model. Error - \(error.localizedDescription)")
+            return nil
+        }
+    }
 }
 
 public extension Encodable {
