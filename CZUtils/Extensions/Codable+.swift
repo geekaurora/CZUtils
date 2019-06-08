@@ -20,7 +20,7 @@ public class CodableHelper {
             let model = try JSONDecoder().decode(T.self, from: jsonData)
             return model
         } catch {
-            dbgPrint("Failed to decode JSON file \(pathUrl) of \(T.self). Error - \(error.localizedDescription)")
+            assertionFailure("Failed to decode JSON file \(pathUrl) of \(T.self). Error - \(error.localizedDescription)")
             return nil
         }
     }
