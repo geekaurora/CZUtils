@@ -37,12 +37,13 @@ public extension Dictionary {
     }
 
     /// Pretty formatted description string
-    public var prettyDescription: String? {
+    public var prettyDescription: String {
         do {
             let data: Data = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
-            return String(data: data, encoding: .utf8)
+            return String(data: data, encoding: .utf8).assertIfNil ?? ""
         } catch {
-            return nil
+            assertionFailure("Failed to retrieve Dictionary pretty printed description. error - \(error.localizedDescription)")
+            return ""
         }
     }
 

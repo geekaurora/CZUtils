@@ -89,7 +89,7 @@ public extension Encodable {
     }
 
     public var prettyDescription: String {
-        return dictionaryVersion.prettyDescription.assertIfNil ?? ""
+        return dictionaryVersion.prettyDescription
     }
 }
 
