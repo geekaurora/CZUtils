@@ -6,8 +6,7 @@
 //  Copyright © 2016 Cheng Zhang. All rights reserved.
 //
 
-import UIKit
-import CZUtils
+import Foundation
 
 /// Convenience class to accomplish JSON serializing/deserializing
 open class CZHTTPJsonSerializer {

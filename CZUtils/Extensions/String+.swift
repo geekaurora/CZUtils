@@ -9,24 +9,6 @@ import Foundation
 
 public extension String {
     /**
-     http://stackoverflow.com/questions/24551816/swift-encode-url
-     http://stackoverflow.com/questions/37376196/encode-url-with-http
-
-     URLHostAllowedCharacterSet      "#%/<>?@\^`{|}
-     URLQueryAllowedCharacterSet     "#%<>[\]^`{|}
-     URLFragmentAllowedCharacterSet  "#%<>[\]^`{|}
-     URLPasswordAllowedCharacterSet  "#%/:<>?@[\]^`{|}
-     URLPathAllowedCharacterSet      "#%;<>?[\]^`{|}
-     URLUserAllowedCharacterSet      "#%/:<>?@[\]^`
-     */
-    public func urlEncoded()-> String {
-        guard index(of: "%") == nil else { return self }
-        let mutableString = NSMutableString(string: self)
-        let urlEncoded = mutableString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-        return urlEncoded ?? ""
-    }
-
-    /**
      Search substrings that matches regex pattern
 
      - parameter regex: the regex pattern
@@ -47,5 +29,33 @@ public extension String {
             let i = excludeRegEx ? (result.numberOfRanges - 1) : 0
             return result.range(at: i).location != NSNotFound ? string.substring(with: result.range(at: i)) : nil
         }
+    }
+
+    /**
+     URLHostAllowedCharacterSet      "#%/<>?@\^`{|}
+     URLQueryAllowedCharacterSet     "#%<>[\]^`{|}
+     URLFragmentAllowedCharacterSet  "#%<>[\]^`{|}
+     URLPasswordAllowedCharacterSet  "#%/:<>?@[\]^`{|}
+     URLPathAllowedCharacterSet      "#%;<>?[\]^`{|}
+     URLUserAllowedCharacterSet      "#%/:<>?@[\]^`
+
+     http://stackoverflow.com/questions/24551816/swift-encode-url
+     */
+    public func urlEncoded()-> String {
+        guard index(of: "%") == nil else { return self }
+        let mutableString = NSMutableString(string: self)
+        let urlEncoded = mutableString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        return urlEncoded ?? ""
+    }
+
+    public var intValue: Int? {
+        return Int(self)
+    }
+
+    public var cgFloatValue: CGFloat? {
+        if let intValue = intValue {
+            return CGFloat(intValue)
+        }
+        return nil
     }
 }
