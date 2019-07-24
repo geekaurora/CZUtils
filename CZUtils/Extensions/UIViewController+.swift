@@ -41,4 +41,12 @@ public extension UIViewController {
         }
         navigationItem.titleView = internalTitleView
     }
+    
+    public func setTabTitle(_ title: String, at index: Int) {
+        guard let tabBarItems = tabBarController?.tabBar.items,
+            0..<tabBarItems.count ~= index else { return }
+        tabBarItems[index].title = NSLocalizedString(title, comment: "")
+    }
 }
+
+
