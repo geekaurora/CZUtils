@@ -14,7 +14,6 @@ public class Pretty {
      Return Pretty formatted description for valid JSON object
     */
     static func describing(_ object: Any) -> String {
-        assert(JSONSerialization.isValidJSONObject(object), "Invalid JSON object.")
         do {
             let data: Data = try JSONSerialization.data(withJSONObject: object, options: .prettyPrinted)
             return String(data: data, encoding: .utf8).assertIfNil ?? ""
