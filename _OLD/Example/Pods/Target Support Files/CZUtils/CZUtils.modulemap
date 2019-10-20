@@ -1,6 +1,0 @@
-framework module CZUtils {
-  umbrella header "CZUtils-umbrella.h"
-
-  export *
-  module * { export * }
-}
