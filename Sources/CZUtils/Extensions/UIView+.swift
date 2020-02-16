@@ -17,13 +17,13 @@ public enum UIViewConstants {
 
 public extension UIView {
         
-    public func roundToCircle() {
+  func roundToCircle() {
         let width = self.bounds.size.width
         layer.cornerRadius = width / 2
         layer.masksToBounds = true
     }
 
-    public func roundCorner(_ cornerRadius: CGFloat = 2,
+  func roundCorner(_ cornerRadius: CGFloat = 2,
                             boarderWidth: CGFloat = 0,
                             boarderColor: UIColor = .clear,
                             shadowColor: UIColor = .clear,
@@ -45,7 +45,7 @@ public extension UIView {
 // MARK: - Animations
 
 public extension UIView {
-    public func fadeIn(animationName: String = UIViewConstants.fadeInAnimationName,
+  func fadeIn(animationName: String = UIViewConstants.fadeInAnimationName,
                        duration: TimeInterval = UIViewConstants.fadeInDuration) {
         let transition = CATransition()
         transition.duration = duration

@@ -58,7 +58,7 @@ public class CodableHelper {
 
 public extension Encodable {
     /// Transform current obj to dictionary
-    public var dictionaryVersion: [AnyHashable : Any] {
+  var dictionaryVersion: [AnyHashable : Any] {
         do {
             let jsonData = try JSONEncoder().encode(self)
             let dictionaryVersion = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [AnyHashable : Any]
@@ -73,7 +73,7 @@ public extension Encodable {
     ///
     /// - Parameter other: the other obj to compare
     /// - Returns: true if equals, false otherwise
-    public func isEqual(toCodable other: Any) -> Bool {
+  func isEqual(toCodable other: Any) -> Bool {
         guard let other = other as? Encodable,
             let selfClass = type(of: self) as? AnyClass,
             let otherClass = type(of: other) as? AnyClass,
@@ -84,11 +84,11 @@ public extension Encodable {
     }
 
     /// Description of model, needs to mark `CustomStringConvertible` conformance explicitly
-    public var description: String {
+  var description: String {
         return prettyDescription
     }
 
-    public var prettyDescription: String {
+  var prettyDescription: String {
         return dictionaryVersion.prettyDescription
     }
 }
@@ -96,7 +96,7 @@ public extension Encodable {
 // MARK: - NSCopying
 
 public extension Encodable where Self: Decodable {
-    public func codableCopy(with zone: NSZone? = nil) -> Any {
+  func codableCopy(with zone: NSZone? = nil) -> Any {
         do {
             let encodedData = try JSONEncoder().encode(self)
             let copy = try JSONDecoder().decode(type(of: self), from: encodedData)

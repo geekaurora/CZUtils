@@ -16,7 +16,7 @@ public extension String {
 
      - returns: all matched substrings
      */
-    public func search(regex: String, excludeRegEx: Bool = true) -> [String] {
+  func search(regex: String, excludeRegEx: Bool = true) -> [String] {
         guard let regex = try? NSRegularExpression(pattern: regex, options: []) else {
             return []
         }
@@ -41,14 +41,14 @@ public extension String {
 
      http://stackoverflow.com/questions/24551816/swift-encode-url
      */
-    public func urlEncoded()-> String {
-        guard index(of: "%") == nil else { return self }
+  func urlEncoded()-> String {
+      guard firstIndex(of: "%") == nil else { return self }
         let mutableString = NSMutableString(string: self)
         let urlEncoded = mutableString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         return urlEncoded ?? ""
     }
 
-    public var intValue: Int? {
+  var intValue: Int? {
         return Int(self)
     }
 

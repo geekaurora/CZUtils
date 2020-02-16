@@ -10,7 +10,7 @@ import Foundation
 
 public extension Set {
 
-    public func compactMap<ElementOfResult>(_ transform: (Element) -> ElementOfResult?)  -> [ElementOfResult] {
+  func compactMap<ElementOfResult>(_ transform: (Element) -> ElementOfResult?)  -> [ElementOfResult] {
         return Array(self).compactMap(transform)
     }
 
