@@ -54,11 +54,11 @@ open class CZHTTPJsonSerializer {
     ///   - jsonData        : Input JSON data
     ///   - removeNull      : Remove any NSNull if exists
     /// - Returns           : Nested composition of NSDictionary, NSArray, NSSet, NSString, NSNumber
-    public static func deserializedObject(with jsonData: Data?, removeNull: Bool = true) -> Any? {
+    public static func deserializedObject<T>(with jsonData: Data?, removeNull: Bool = true) -> T? {
         guard let jsonData = jsonData else { return nil }
         do {
             let deserializedData = try JSONSerialization.jsonObject(with: jsonData, options:[])
-            return deserializedData
+            return deserializedData as? T
         } catch let error as NSError {
             dbgPrint("Parsing error: \(error.localizedDescription)")
         }
