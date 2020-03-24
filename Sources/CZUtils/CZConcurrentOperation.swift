@@ -19,7 +19,7 @@ import Foundation
     /// Concurrent DispatchQueue acting as mutex read/write lock of rawState
     private let stateQueue = DispatchQueue(label: "com.tony.operation.state", attributes: [.concurrent])
     private var rawState: OperationState = .ready
-    @objc private dynamic var state: OperationState {
+    @objc dynamic var state: OperationState {
         get {
             return stateQueue.sync{ rawState}
         }
@@ -47,13 +47,13 @@ import Foundation
     // MARK: - Public Methods
     
     /// Subclasses must implement `execute` and must not call super
-    open func execute() {
+    open dynamic func execute() {
         fatalError("Subclasses must implement `\(#function)`.")
     }
     
     /// Call this function after any work is done or after a call to `cancel()`
     /// to move the operation into a completed state.
-    public final func finish() {
+    public final dynamic func finish() {
         /**
          Cancelled operations can still be in Queue, should verify not `.finished` before cancel again
          ref: https://stackoverflow.com/questions/9409994/cancelling-nsoperation-from-nsoperationqueue-cause-crash
@@ -81,7 +81,7 @@ import Foundation
         execute()
     }
     
-    open override func cancel() {
+    open override dynamic func cancel() {
         super.cancel()
         /**
          Invoke finish() only if it's `.excuting`, otherwise it will crash.
@@ -107,6 +107,6 @@ import Foundation
     }
 }
 
-@objc private enum OperationState: Int {
+@objc enum OperationState: Int {
     case ready = 0, executing, finished
 }
