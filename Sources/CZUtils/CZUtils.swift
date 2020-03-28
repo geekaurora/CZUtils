@@ -17,5 +17,24 @@ public class CZUtils {
 }
 
 public func dbgPrint(_ item: CustomStringConvertible) {
-    CZUtils.dbgPrint(item)
+    dbgPrint(.`default`, item)
+}
+
+public func dbgPrint(_ type: DbgPrintType,
+                     _ item: CustomStringConvertible) {
+  CZUtils.dbgPrint(type.prefix + item.description)
+}
+
+public enum DbgPrintType {
+  case `default`
+  case warning
+  case error
+  
+  var prefix: String {
+    switch self {
+    case .`default`: return ""
+    case .warning: return "[Warning] "
+    case .error: return "[Error] "
+    }
+  }
 }
