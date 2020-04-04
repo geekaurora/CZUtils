@@ -58,8 +58,22 @@ public extension String {
     return res
   }
 
+  /// Returns Int value.
   var intValue: Int? {
     return Int(self)
+  }
+
+  /**
+   Returns splitted Strings with input `separator`, `maxSplits`, `omittingEmptySubsequences`.
+   */
+  func splitToStrings(separator: Character,
+                      maxSplits: Int = Int.max,
+                      omittingEmptySubsequences: Bool = true) -> [String] {
+    return split(
+      separator: separator,
+      maxSplits: maxSplits,
+      omittingEmptySubsequences: omittingEmptySubsequences)
+      .map { String($0) }
   }
 
 }
