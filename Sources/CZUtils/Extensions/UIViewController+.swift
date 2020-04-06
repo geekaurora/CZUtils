@@ -12,7 +12,7 @@ public extension UIViewController {
   func overlapSubViewOnSelf(_ subview: UIView) {
         subview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            subview.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
+            subview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             subview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             subview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             subview.bottomAnchor.constraint(equalTo: view.bottomAnchor)

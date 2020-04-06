@@ -183,7 +183,7 @@ extension UIView {
         NSLayoutConstraint.activate([
             leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: insets.left),
             trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -insets.right),
-            topAnchor.constraint(equalTo: controller.topLayoutGuide.bottomAnchor, constant: insets.top),
+            topAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.topAnchor, constant: insets.top),
             bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -insets.bottom)
             ]
         )
