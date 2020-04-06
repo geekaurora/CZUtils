@@ -22,4 +22,23 @@ public class RegExHelper {
     }
     return String(string[matchedRange])
   }
+  
+  /// Extract  variables with RegEx group match name. e.g.  "<h1>(?<var>.*)</h1>" pattern.
+  /// - Note: Group name in `pattern` should be 'var'.
+  public static func extractVariables(_ string: String,
+                                     pattern: String,
+                                     options: NSRegularExpression.Options = .caseInsensitive,
+                                     groupName: String = "var") -> [String] {
+    guard let regex = (try? NSRegularExpression(pattern: pattern, options: options)).assertIfNil else {
+        return []
+    }
+    let matches = regex.matches(in: string, options: [], range: NSRange(location: 0, length: string.utf16.count))
+    let variables: [String] = matches.compactMap { match in
+      guard let range = Range(match.range(withName: groupName), in: string) else {
+        return nil
+      }
+      return String(string[range])
+    }
+    return variables
+  }
 }

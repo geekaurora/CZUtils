@@ -55,7 +55,7 @@
 		OBJ_85 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* UIView+.swift */; };
 		OBJ_86 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* UIViewController+.swift */; };
 		OBJ_87 /* CZDispatchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* CZDispatchGroup.swift */; };
-		OBJ_88 /* CriticalSectionLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* CriticalSectionLock.swift */; };
+		OBJ_88 /* SimpleThreadLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* SimpleThreadLock.swift */; };
 		OBJ_89 /* NSNullGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* NSNullGuard.swift */; };
 		OBJ_90 /* Swizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Swizzling.swift */; };
 		OBJ_91 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* ThreadSafeDictionary.swift */; };
@@ -112,7 +112,7 @@
 		OBJ_35 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		OBJ_36 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		OBJ_38 /* CZDispatchGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZDispatchGroup.swift; sourceTree = "<group>"; };
-		OBJ_39 /* CriticalSectionLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticalSectionLock.swift; sourceTree = "<group>"; };
+		OBJ_39 /* SimpleThreadLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleThreadLock.swift; sourceTree = "<group>"; };
 		OBJ_40 /* NSNullGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNullGuard.swift; sourceTree = "<group>"; };
 		OBJ_41 /* Swizzling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swizzling.swift; sourceTree = "<group>"; };
 		OBJ_42 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
@@ -169,8 +169,8 @@
 		OBJ_37 /* Investigation */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_18 /* CZProMutexLock.swift */,
 				OBJ_38 /* CZDispatchGroup.swift */,
-				OBJ_39 /* CriticalSectionLock.swift */,
 			);
 			path = Investigation;
 			sourceTree = "<group>";
@@ -243,8 +243,8 @@
 				OBJ_14 /* CZHTTPJsonSerializer.swift */,
 				OBJ_15 /* CZMainQueueScheduler.swift */,
 				OBJ_16 /* CZMutexLock.swift */,
+				OBJ_39 /* SimpleThreadLock.swift */,
 				OBJ_17 /* CZNibLoadable.swift */,
-				OBJ_18 /* CZProMutexLock.swift */,
 				OBJ_19 /* CZTheme.swift */,
 				OBJ_20 /* CZUtils.swift */,
 				OBJ_21 /* Error+.swift */,
@@ -389,7 +389,7 @@
 				OBJ_86 /* UIViewController+.swift in Sources */,
 				C3C4FA8324014A90009C49A0 /* RegExHelper.swift in Sources */,
 				OBJ_87 /* CZDispatchGroup.swift in Sources */,
-				OBJ_88 /* CriticalSectionLock.swift in Sources */,
+				OBJ_88 /* SimpleThreadLock.swift in Sources */,
 				OBJ_89 /* NSNullGuard.swift in Sources */,
 				OBJ_90 /* Swizzling.swift in Sources */,
 				OBJ_91 /* ThreadSafeDictionary.swift in Sources */,

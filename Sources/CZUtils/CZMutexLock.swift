@@ -9,7 +9,7 @@ import Foundation
 
 /// Generic multi-thread mutex lock on top of DispatchQueue sync/barrier
 public class CZMutexLock<Item>: NSObject {
-    private lazy var lock = CZDispatchReadWriteLock()
+    private lazy var lock = DispatchReadWriteLock()
     private var item: Item
     
     public init(_ item: Item) {
@@ -19,7 +19,7 @@ public class CZMutexLock<Item>: NSObject {
     /// Execute `block` with read lock that protects `item`
     @discardableResult
     public func readLock<Result>(_ block: @escaping (_ item: Item) -> Result?) -> Result? {
-        return lock.readLock { [weak self] in
+        return lock.read { [weak self] in
             guard let `self` = self else {
                 assertionFailure("self was deallocated!")
                 return nil
@@ -31,7 +31,7 @@ public class CZMutexLock<Item>: NSObject {
     /// Execute `block` with write lock that protects `item`
     @discardableResult
     public func writeLock<Result>(_ block: @escaping (_ item: inout Item) -> Result?) -> Result? {
-        return lock.writeLock { [weak self] in
+        return lock.write { [weak self] in
             guard let `self` = self else {
                 assertionFailure("self was deallocated!")
                 return nil
@@ -41,19 +41,19 @@ public class CZMutexLock<Item>: NSObject {
     }
 }
 
-public class CZDispatchReadWriteLock {
-    private let syncQueue = DispatchQueue(label: "com.tony.mutexLock", attributes: .concurrent)
+public class DispatchReadWriteLock {
+    private let syncQueue = DispatchQueue(label: "com.thread.mutexLock", attributes: .concurrent)
     public init () {}
     
     @discardableResult
-    public func readLock<T>(_ block: @escaping () -> T?) -> T?  {
+    public func read<T>(_ block: @escaping () -> T?) -> T?  {
         return syncQueue.sync { () -> T? in
             return block()
         }
     }
     
     @discardableResult
-    public func writeLock<T>(isAsync: Bool = false, block: @escaping () -> T?) -> T? {
+    public func write<T>(isAsync: Bool = false, block: @escaping () -> T?) -> T? {
         if isAsync {
             syncQueue.async(flags: .barrier) { _ = block() }
             return nil

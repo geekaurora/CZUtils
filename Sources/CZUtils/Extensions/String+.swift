@@ -63,3 +63,13 @@ public extension String {
   }
 
 }
+
+public extension NSAttributedString {
+  static func string(withHtml html: String) -> NSAttributedString? {
+    let attributedString = try? NSAttributedString(
+      data: html.data(using: .utf8)!,
+      options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue],
+      documentAttributes: nil)
+    return attributedString
+  }
+}
