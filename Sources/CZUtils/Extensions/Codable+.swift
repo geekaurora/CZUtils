@@ -100,10 +100,6 @@ public extension Encodable where Self: Decodable {
     return codableCopy(with: zone)
   }
   
-  func deepCopy(with zone: NSZone? = nil) -> Self {
-    return copy(with: zone) as! Self
-  }
-  
   func codableCopy(with zone: NSZone? = nil) -> Self {
     do {
       let encodedData = try JSONEncoder().encode(self)
