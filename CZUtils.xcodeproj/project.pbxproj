@@ -33,7 +33,7 @@
 		OBJ_63 /* CZError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* CZError.swift */; };
 		OBJ_64 /* CZFileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* CZFileHelper.swift */; };
 		OBJ_65 /* CZHTTPJsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* CZHTTPJsonSerializer.swift */; };
-		OBJ_66 /* CZMainQueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* CZMainQueueScheduler.swift */; };
+		OBJ_66 /* MainQueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* MainQueueScheduler.swift */; };
 		OBJ_67 /* CZMutexLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* CZMutexLock.swift */; };
 		OBJ_68 /* CZNibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* CZNibLoadable.swift */; };
 		OBJ_69 /* CZProMutexLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* CZProMutexLock.swift */; };
@@ -90,7 +90,7 @@
 		OBJ_12 /* CZError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZError.swift; sourceTree = "<group>"; };
 		OBJ_13 /* CZFileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZFileHelper.swift; sourceTree = "<group>"; };
 		OBJ_14 /* CZHTTPJsonSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZHTTPJsonSerializer.swift; sourceTree = "<group>"; };
-		OBJ_15 /* CZMainQueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZMainQueueScheduler.swift; sourceTree = "<group>"; };
+		OBJ_15 /* MainQueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueScheduler.swift; sourceTree = "<group>"; };
 		OBJ_16 /* CZMutexLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZMutexLock.swift; sourceTree = "<group>"; };
 		OBJ_17 /* CZNibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZNibLoadable.swift; sourceTree = "<group>"; };
 		OBJ_18 /* CZProMutexLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZProMutexLock.swift; sourceTree = "<group>"; };
@@ -241,12 +241,12 @@
 				OBJ_12 /* CZError.swift */,
 				OBJ_13 /* CZFileHelper.swift */,
 				OBJ_14 /* CZHTTPJsonSerializer.swift */,
-				OBJ_15 /* CZMainQueueScheduler.swift */,
 				OBJ_16 /* CZMutexLock.swift */,
 				OBJ_39 /* SimpleThreadLock.swift */,
 				OBJ_17 /* CZNibLoadable.swift */,
 				OBJ_19 /* CZTheme.swift */,
 				OBJ_20 /* CZUtils.swift */,
+				OBJ_15 /* MainQueueScheduler.swift */,
 				OBJ_21 /* Error+.swift */,
 				C3C4FA8224014A8F009C49A0 /* RegExHelper.swift */,
 				OBJ_22 /* Extensions */,
@@ -366,7 +366,7 @@
 				OBJ_63 /* CZError.swift in Sources */,
 				OBJ_64 /* CZFileHelper.swift in Sources */,
 				OBJ_65 /* CZHTTPJsonSerializer.swift in Sources */,
-				OBJ_66 /* CZMainQueueScheduler.swift in Sources */,
+				OBJ_66 /* MainQueueScheduler.swift in Sources */,
 				OBJ_67 /* CZMutexLock.swift in Sources */,
 				OBJ_68 /* CZNibLoadable.swift in Sources */,
 				OBJ_69 /* CZProMutexLock.swift in Sources */,
