@@ -1,11 +1,3 @@
-//
-//  TestThreadSafeDictionary.swift
-//  CZUtils
-//
-//  Created by Cheng Zhang on 2/10/16.
-//  Copyright © 2016 Cheng Zhang. All rights reserved.
-//
-
 import XCTest
 @testable import CZUtils
 
