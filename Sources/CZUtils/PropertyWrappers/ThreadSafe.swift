@@ -9,7 +9,7 @@ import Foundation
  sleep(10)
  array.append(1)
  
- In the above code, if array gets mutated by other thread, `array.append(1)` result will be wrong.
+ In the above code, if array gets mutated by other thread during `sleep(10)`, `array.append(1)` result will be wrong.
  
  TODO: figure out how to ensure thread safety after read and before write, given `@propertyWrapper`
  currently only supports custom get/set.
