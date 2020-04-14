@@ -15,15 +15,18 @@ import Foundation
  currently only supports custom get/set.
  */
 @propertyWrapper
-public struct ThreadSafe<T> {
-  private var value: T
+public struct ThreadSafe {
+  private var value: Int
   private let lock = SimpleThreadLock()
   
-  public init(wrappedValue: T) {
+  public typealias ExecutionBlock = () -> Void
+  // private var executionBlock: ExecutionBlock!
+  
+  public init(wrappedValue: Int) {
     value = wrappedValue
   }
   
-  public var wrappedValue: T {
+  public var wrappedValue: Int {
     get {
       return lock.execute {
         value
@@ -36,13 +39,16 @@ public struct ThreadSafe<T> {
     }
   }
   
-  public var projectedValue: T {
-    get {
-      return value
+  public var projectedValue: ExecutionBlock {
+    mutating get {
+      //let executionBlock = ExecutionBlock()
+      return @escaping {
+        self.value += 1
+      }
     }
-    set {
-      value = newValue
-    }
+//    set {
+//      value = newValue
+//    }
   }
   
   /**
@@ -50,7 +56,7 @@ public struct ThreadSafe<T> {
    In ThreadSafe(wrappedValue: count).execute {},
    `ThreadSafe(wrappedValue: count)` returns immutable value, so need to figure out how to mutate.
    */
-  public func execute(_ execution: (T) -> Void) {
+  public func execute(_ execution: (Int) -> Void) {
     lock.execute {
       execution(value)
     }
