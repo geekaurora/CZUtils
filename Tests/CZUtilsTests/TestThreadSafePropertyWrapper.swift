@@ -5,7 +5,8 @@ class TestThreadSafePropertyWrapper: XCTestCase {
   static let total = 30000
   static let queueLable = "com.czutils.tests"
   
-  @ThreadSafe var count: Int = 0
+  @ThreadSafe
+  var count: Int = 0  
   let lock = SimpleThreadLock()
   
   func testMultiThread() {
@@ -28,8 +29,8 @@ class TestThreadSafePropertyWrapper: XCTestCase {
   
   private func increaseCount() {
     sleep(UInt32.random(in: 0..<50) * UInt32(0.001))
-    // Executes with `mutexLock` function
-    _count.mutexLock { count in
+    // Executes with `mutexLock` function.
+    _count.threadLock { count in
       count += 1
     }
   }

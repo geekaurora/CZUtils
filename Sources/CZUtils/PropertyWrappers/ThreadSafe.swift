@@ -63,7 +63,7 @@ public struct ThreadSafe<T> {
   ///  }
   ///
   /// - Parameter execution: The closure to execute, with mutable wrappedValue.
-  public mutating func mutexLock(_ execution: (inout T) -> Void) {
+  public mutating func threadLock(_ execution: (inout T) -> Void) {
     lock.execute {
       execution(&value)
     }
