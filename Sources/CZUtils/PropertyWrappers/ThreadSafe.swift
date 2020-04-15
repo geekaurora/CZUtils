@@ -3,19 +3,22 @@ import Foundation
 /**
  Property wrapper that ensures variable thread safe.
  
- - Note: thread safety requires mutex lock through all operations, not just read/write.
- e.g.
- let array = someArray
- sleep(10)
- array.append(1)
+ ### Usage
+ - Definition with @ThreadSafe annotation
+  @ThreadSafe var count: Int = 0
+  
+ - Read with mutexLock: (simply refer to `count`)
+    let a = count
  
- In the above code, if array gets mutated by other thread during `sleep(10)`, `array.append(1)` result will be wrong.
- 
- TODO: figure out how to ensure thread safety after read and before write, given `@propertyWrapper`
- currently only supports custom get/set.
+ - Write with mutexLock: (execute with `mutexLock` closure, prefix _ to access wrapper)
+   _count.mutexLock { count in
+     count += 1
+ }
  */
 @propertyWrapper
 public struct ThreadSafe<T> {
+  
+  public typealias Block = (T) -> Void
   private var value: T
   private let lock = SimpleThreadLock()
   
@@ -45,17 +48,24 @@ public struct ThreadSafe<T> {
     }
   }
   
-  /**
-   TODO:
-   In ThreadSafe(wrappedValue: count).execute {},
-   `ThreadSafe(wrappedValue: count)` returns immutable value, so need to figure out how to mutate.
-   */
-  public func execute(_ execution: (T) -> Void) {
+  /// MutexLock function  with thread safe to execute `execution` closure.
+  ///
+  ///  e.g.
+  ///  - Definition with @ThreadSafe annotation
+  ///   @ThreadSafe var count: Int = 0
+  ///
+  ///  - Read with mutexLock: (simply refer to `count`)
+  ///     let a = count
+  ///
+  ///  - Write with mutexLock: (execute with `mutexLock` closure)
+  ///    _count.mutexLock { count in
+  ///      count += 1
+  ///  }
+  ///
+  /// - Parameter execution: The closure to execute, with mutable wrappedValue.
+  public mutating func mutexLock(_ execution: (inout T) -> Void) {
     lock.execute {
-      execution(value)
+      execution(&value)
     }
   }
-  
-  public func test() {}
-  
 }

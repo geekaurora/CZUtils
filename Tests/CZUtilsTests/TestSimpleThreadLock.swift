@@ -8,7 +8,7 @@ class TestSimpleThreadLock: XCTestCase {
   var count: Int = 0
   let lock = SimpleThreadLock()
   
-  func testMultiThread() {
+  func testMultiThread() {    
     let dispatchGroup = DispatchGroup()
     
     // Test increment `count` on multiple threads.

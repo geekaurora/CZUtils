@@ -28,10 +28,9 @@ class TestThreadSafePropertyWrapper: XCTestCase {
   
   private func increaseCount() {
     sleep(UInt32.random(in: 0..<50) * UInt32(0.001))
-    // Note: ThreadSafe(wrappedValue: count) is immuable.
-    // ThreadSafe(wrappedValue: count).execute { (count) in
-    // count += 1
-    // }
-    count += 1
+    // Executes with `mutexLock` function
+    _count.mutexLock { count in
+      count += 1
+    }
   }
 }
