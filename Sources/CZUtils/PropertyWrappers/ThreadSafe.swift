@@ -5,19 +5,18 @@ import Foundation
  
  ### Usage
  - Definition with @ThreadSafe annotation
-  @ThreadSafe var count: Int = 0
-  
+ @ThreadSafe var count: Int = 0
+ 
  - Read with mutexLock: (simply refer to `count`)
-    let a = count
+ let a = count
  
  - Write with mutexLock: (execute with `mutexLock` closure, prefix _ to access wrapper)
-   _count.mutexLock { count in
-     count += 1
+ _count.mutexLock { count in
+ count += 1
  }
  */
 @propertyWrapper
 public struct ThreadSafe<T> {
-  
   public typealias Block = (T) -> Void
   private var value: T
   private let lock = SimpleThreadLock()
@@ -28,24 +27,16 @@ public struct ThreadSafe<T> {
   
   public var wrappedValue: T {
     get {
-      return lock.execute {
-        value
-      }
+      return lock.execute { value }
     }
     set {
-      lock.execute {
-        value = newValue
-      }
+      lock.execute { value = newValue }
     }
   }
   
   public var projectedValue: T {
-    get {
-      return value
-    }
-    set {
-      value = newValue
-    }
+    get { return value }
+    set { value = newValue }
   }
   
   /// MutexLock function  with thread safe to execute `execution` closure.
@@ -63,8 +54,8 @@ public struct ThreadSafe<T> {
   ///  }
   ///
   /// - Parameter execution: The closure to execute, with mutable wrappedValue.
-  public mutating func threadLock(_ execution: (inout T) -> Void) {
-    lock.execute {
+  public mutating func threadLock<U>(_ execution: (inout T) -> U) -> U {
+    return lock.execute {
       execution(&value)
     }
   }

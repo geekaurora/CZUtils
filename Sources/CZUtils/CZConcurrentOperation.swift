@@ -7,14 +7,11 @@
 
 import Foundation
 
-/// An abstract class that makes subclassing ConcurrentOperation easy to udpate KVO props `isReady`/`isExecuting`/`isFinished` automatically
+/// An abstract class that makes subclassing ConcurrentOperation easy to update KVO props `isReady`/`isExecuting`/`isFinished` automatically
 ///
 /// Usage:
 /// - Subclass must implement `execute()` when execute task
 /// - Subclass must invoke `finish()` any work is done or after a call to `cancel()` to move the operation into a completed state.
-///
-/// https://gist.github.com/calebd
-/// https://gist.github.com/alexaubry/1ee81a952b11a2ddc6a43480cc59032c
 @objc open class CZConcurrentOperation: Operation {
     /// Concurrent DispatchQueue acting as mutex read/write lock of rawState
     private let stateQueue = DispatchQueue(label: "com.tony.operation.state", attributes: [.concurrent])
