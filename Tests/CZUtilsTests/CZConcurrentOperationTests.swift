@@ -1,110 +1,77 @@
 import XCTest
 @testable import CZUtils
 
+fileprivate var executionIds: [Int] = []
+fileprivate let threadLock = SimpleThreadLock()
+fileprivate var concurrentOperationTest: CZConcurrentOperationTests?
+
 class CZConcurrentOperationTests: XCTestCase {
-  let methodExecutionManager = MethodExecutionManager.shared
-  var operation: CZConcurrentOperation!
-
+  static let total = 20
+  static let queueLable = "com.czutils.operationQueue"
+  let semaphore = DispatchSemaphore(value: 0)
+  
   override func setUp() {
-    operation = CZConcurrentOperation()
+    concurrentOperationTest = self
   }
-
-  override func tearDown() {
-    methodExecutionManager.reset()
+  
+  func testConcurrentOperationsInOperationQueue() {
+    // Initialize operationQueue.
+    let operationQueue = OperationQueue()
+    operationQueue.name = Self.queueLable
+    operationQueue.maxConcurrentOperationCount = 1
+    
+    // Add operations to operationQueue.
+    let operationIds = Array(0..<Self.total)
+    operationIds.forEach { id in
+      let operation = TestConcurrentOperation(id: id)
+      operationQueue.addOperation(operation)
+      // Add self as KVO observer to `isFinished` property of `operation`.
+      operation.addObserver(
+        self,
+        forKeyPath: #keyPath(CZConcurrentOperation.isFinished),
+        options: [.old, .new],
+        context: nil)
+    }
+    
+    // Wait till all operations finish.
+    semaphore.wait()
+    // Verify executionIds have same sequence as operationIds.
+    threadLock.execute {
+      XCTAssertEqual(executionIds, operationIds)
+    }
   }
-
-  // MARK: - State
-
-  func testIsExecuting() {
-    operation.state = .executing
-    XCTAssertEqual(operation.state, .executing)
-    XCTAssertTrue(operation.isExecuting)
+  
+  // TODO: test cancel() method.
+  
+  override func observeValue(forKeyPath keyPath: String?,
+                             of object: Any?,
+                             change: [NSKeyValueChangeKey : Any]?,
+                             context: UnsafeMutableRawPointer?) {
+    if keyPath == #keyPath(CZConcurrentOperation.isFinished),
+      let operation = object as? TestConcurrentOperation,
+      let isFinished = change?[.newKey] as? Bool {
+      if operation.id == Self.total - 1 && isFinished {
+        // After the last operation executed, signal to unblock test to the verify the result.
+        semaphore.signal()
+      }
+    }
   }
-
-  func testIsFinished() {
-    operation.state = .finished
-    XCTAssertEqual(operation.state, .finished)
-    XCTAssertTrue(operation.isFinished)
-  }
-
-  // MARK: - Methods
-
-  func testStartMethod() {
-    // Verify state
-    operation.state = .ready
-    XCTAssertEqual(operation.state, .ready)
-
-    // Call start() method
-    operation.start()
-    XCTAssertEqual(operation.state, .executing)
-
-    // Verify execute() is called
-    XCTAssertTrue(methodExecutionManager.isMethodExecuted("executeReplacement()"))
-  }
-
-  func testStartMethodIfCancelled() {
-    // Verify state
-    operation.state = .ready
-    XCTAssertEqual(operation.state, .ready)
-
-    // Call cancel() method
-    operation.cancel()
-
-    // Call start() method
-    operation.start()
-
-    // Verify finish() is called
-    XCTAssertTrue(methodExecutionManager.isMethodExecuted("finishReplacement()"))
-
-    // Verify execute() isn't called
-    XCTAssertFalse(methodExecutionManager.isMethodExecuted("executeReplacement()"))
-  }
-
-  func testCancelMethodIfIsExecuting() {
-    // Verify state
-    operation.state = .executing
-    XCTAssertEqual(operation.state, .executing)
-
-    // Call cancel() method
-    operation.cancel()
-
-    // Verify finish() is called
-    XCTAssertTrue(methodExecutionManager.isMethodExecuted("finishReplacement()"))
-  }
-
-  func testCancelMethodIfNotExecuting() {
-    // Verify state
-    operation.state = .finished
-    XCTAssertEqual(operation.state, .finished)
-
-    // Call cancel() method
-    operation.cancel()
-
-    // Verify finish() isn't called
-    XCTAssertFalse(methodExecutionManager.isMethodExecuted("finishReplacement()"))
-  }
-
-  func testFinishMethod() {
-    // Verify state
-    operation.state = .executing
-    XCTAssertEqual(operation.state, .executing)
-
-    // Call finish() method
-    operation.finish()
-    XCTAssertEqual(operation.state, .finished)
-  }
-
 }
 
-extension CZConcurrentOperation {
-  @_dynamicReplacement(for:execute())
-  func executeReplacement() {
-    MethodExecutionManager.shared.insertExecutedMethod(#function)
+@objc
+fileprivate class TestConcurrentOperation: CZConcurrentOperation {
+  let id: Int
+  init(id: Int = 0) { self.id = id }
+  deinit { removeObserver(concurrentOperationTest!, forKeyPath: #keyPath(isFinished)) }
+  
+  override func execute() {
+    sleep(UInt32.random(in: 0...10) * UInt32(0.001))
+    threadLock.execute {
+      executionIds.append(id)
+    }
+    finish()
   }
-
-  @_dynamicReplacement(for:finish())
-  func finishReplacement() {
-    MethodExecutionManager.shared.insertExecutedMethod(#function)
+  override func cancel() {
     finish()
   }
 }

@@ -1,7 +1,7 @@
 import XCTest
 @testable import CZUtils
 
-class TestThreadSafeWeakArray: XCTestCase {
+class ThreadSafeWeakArrayTests: XCTestCase {
   static let total = 30000
   static let queueLable = "com.czutils.tests"
   private var weakArray: ThreadSafeWeakArray<TestClass>!

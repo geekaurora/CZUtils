@@ -1,7 +1,7 @@
 import XCTest
 @testable import CZUtils
 
-class TestSimpleThreadLock: XCTestCase {
+class SimpleThreadLockTests: XCTestCase {
   static let total = 30000
   static let queueLable = "com.czutils.tests"
   

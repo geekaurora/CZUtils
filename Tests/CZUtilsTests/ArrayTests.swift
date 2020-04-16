@@ -9,7 +9,7 @@
 import XCTest
 @testable import CZUtils
 
-class TestArray: XCTestCase {
+class ArrayTests: XCTestCase {
     func testSafeSubscript() {
         let array = [Int](0..<10)
 

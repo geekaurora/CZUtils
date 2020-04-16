@@ -1,7 +1,7 @@
 import XCTest
 @testable import CZUtils
 
-class TestThreadSafeDictionary: XCTestCase {
+class ThreadSafeDictionaryTests: XCTestCase {
     private static let queueLabel = "com.tony.test.threadSafeDictionary"
     
     private var originalDict: [Int: Int] = {
@@ -31,7 +31,7 @@ class TestThreadSafeDictionary: XCTestCase {
         let threadSafeDict = ThreadSafeDictionary<Int, Int>()
         
         // Concurrent DispatchQueue to simulate multiple-thread read/write executions
-        let queue = DispatchQueue(label: TestThreadSafeDictionary.queueLabel,
+        let queue = DispatchQueue(label: Self.queueLabel,
                                   qos: .userInitiated,
                                   attributes: .concurrent)
         
