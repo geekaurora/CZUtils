@@ -28,7 +28,7 @@ open class CZHTTPJsonSerializer {
                 guard let value = params[key] else {
                     return "unsupported"
                 }
-                return String(describing: value).urlEncoded()
+                return String(describing: value).urlEncoded
             }()
             return"\(key)=\(value)"
         }.joined(separator: "&")

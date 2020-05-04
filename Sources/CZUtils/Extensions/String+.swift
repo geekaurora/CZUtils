@@ -32,7 +32,13 @@ public extension String {
     }
   }
 
+  func isEqualCaseInsensitively(to string: String) -> Bool {
+    return self.lowercased() == string.lowercased()
+  }
+  
   /**
+   Encodes String for URL by converting illegal characters.
+   
    URLHostAllowedCharacterSet      "#%/<>?@\^`{|}
    URLQueryAllowedCharacterSet     "#%<>[\]^`{|}
    URLFragmentAllowedCharacterSet  "#%<>[\]^`{|}
@@ -42,7 +48,7 @@ public extension String {
 
    http://stackoverflow.com/questions/24551816/swift-encode-url
    */
-  func urlEncoded()-> String {
+  var urlEncoded: String {
     guard firstIndex(of: "%") == nil else { return self }
     let mutableString = NSMutableString(string: self)
     let urlEncoded = mutableString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
