@@ -40,6 +40,23 @@ public class CodableHelper {
     }
   }
   
+  /// Decode model from input jsonObject
+  ///
+  /// - Parameter data: serialized data
+  /// - Returns: the decoded model
+  public static func decodeObject<T: Decodable>(_ jsonObject: Any?) -> T? {
+    guard let data = CZHTTPJsonSerializer.jsonData(with: jsonObject) else {
+      return nil      
+    }
+    do {
+      let model = try JSONDecoder().decode(T.self, from: data)
+      return model
+    } catch {
+      assertionFailure("Failed to decode data of \(T.self). Error - \(error.localizedDescription)")
+      return nil
+    }
+  }
+  
   /// Encode input model into data
   ///
   /// - Parameter model: model to be encoded
