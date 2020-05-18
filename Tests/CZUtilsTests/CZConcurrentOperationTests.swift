@@ -13,6 +13,8 @@ class CZConcurrentOperationTests: XCTestCase {
   @ThreadSafe var finishedOperationIds = Set<Int>()
   
   override func setUp() {
+    executionIds = []
+    finishedOperationIds.removeAll()
     concurrentOperationTest = self
   }
   
@@ -65,9 +67,7 @@ class CZConcurrentOperationTests: XCTestCase {
     }
     
     // 3. Cancel operations
-    var operationIdsToCancel = [Int]()
-    
-    operationIdsToCancel = Array(18..<Self.total)
+    let operationIdsToCancel = Array(15..<Self.total)
     operationIdsToCancel.forEach { id in
       _operationsMap.threadLock {
         let operation = $0[id]
@@ -82,7 +82,7 @@ class CZConcurrentOperationTests: XCTestCase {
     // 5. Verify executionIds have same sequence as operationIds.
     // TODO: Operation execution order after cancelling isn't as enqueued.
     threadLock.execute {
-      XCTAssertEqual(Set(executionIds), Set(expectedOperationIds))
+      XCTAssertEqual(executionIds.sorted(), expectedOperationIds.sorted())
     }
   }
   
@@ -99,16 +99,10 @@ class CZConcurrentOperationTests: XCTestCase {
           finishedOperationIds.insert(operation.id)
           // After the last operation executed, signal to unblock test to the verify the result.
           if (finishedOperationIds.count == Self.total) {
-            dbgPrint("\(#function)executionIds id = \(executionIds)")
             semaphore.signal()
           }
         }
       }
-      
-      //      if operation.id == Self.total - 1 && isFinished {
-      //        // After the last operation executed, signal to unblock test to the verify the result.
-      //        semaphore.signal()
-      //      }
     }
   }
 }
@@ -121,14 +115,11 @@ fileprivate class TestConcurrentOperation: CZConcurrentOperation {
   
   override func execute() {
     dbgPrint("\(#function) executing id = \(self.id)")
-    
-    //sleep(UInt32.random(in: 0...10) * UInt32(0.001))
     sleep(UInt32(0.1))
     threadLock.execute {
       dbgPrint("\(#function) executed id = \(self.id)")
       executionIds.append(id)
-      dbgPrint("\(#function)executionIds id = \(executionIds)")
-      
+      dbgPrint("\(#function) executionIds id = \(executionIds)")
     }
     finish()
   }
