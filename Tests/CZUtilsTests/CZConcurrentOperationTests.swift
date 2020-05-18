@@ -9,7 +9,7 @@ class CZConcurrentOperationTests: XCTestCase {
   static let total = 20
   static let queueLable = "com.czutils.operationQueue"
   let semaphore = DispatchSemaphore(value: 0)
-  @ThreadSafe var operationsMap = [Int: CZConcurrentOperation]()
+  var operationsMap = [Int: CZConcurrentOperation]()
   @ThreadSafe var finishedOperationIds = Set<Int>()
   
   override func setUp() {
@@ -55,7 +55,7 @@ class CZConcurrentOperationTests: XCTestCase {
     let operationIds = Array(0..<Self.total)
     operationIds.forEach { id in
       let operation = TestConcurrentOperation(id: id)
-      _operationsMap.threadLock { $0[id] = operation }
+      operationsMap[id] = operation
       
       operationQueue.addOperation(operation)
       // Add self as KVO observer to `isFinished` property of `operation`.
@@ -69,10 +69,8 @@ class CZConcurrentOperationTests: XCTestCase {
     // 3. Cancel operations
     let operationIdsToCancel = Array(15..<Self.total)
     operationIdsToCancel.forEach { id in
-      _operationsMap.threadLock {
-        let operation = $0[id]
-        operation?.cancel()
-      }
+      let operation = operationsMap[id]
+      operation?.cancel()
     }
     let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
     
@@ -115,7 +113,7 @@ fileprivate class TestConcurrentOperation: CZConcurrentOperation {
   
   override func execute() {
     dbgPrint("\(#function) executing id = \(self.id)")
-    sleep(UInt32(0.1))
+    sleep(UInt32(0.3))
     threadLock.execute {
       dbgPrint("\(#function) executed id = \(self.id)")
       executionIds.append(id)
