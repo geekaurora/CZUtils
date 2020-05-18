@@ -121,6 +121,7 @@ class CZConcurrentOperationTests: XCTestCase {
     let operationQueue = OperationQueue()
     operationQueue.name = Self.queueLable
     operationQueue.maxConcurrentOperationCount = 1
+    let operationIdsToCancel = Array(15..<Self.total).reversed()
     
     // 2. Add operations to operationQueue.
     let operationIds = Array(0..<Self.total)
@@ -130,30 +131,28 @@ class CZConcurrentOperationTests: XCTestCase {
         dbgPrint("Executing operation: id = \(id)")
         threadLock.execute {
           executionIds.append(id)
-          if (executionIds.count == Self.total) {
+          if (executionIds.count == Self.total - operationIdsToCancel.count) {
             self.semaphore.signal()
           }
         }
-        
       })
       
       operationQueue.addOperation(operationsMap[id]!)
     }
     
     // 3. Cancel Operations
-    //    let operationIdsToCancel = Array(15..<Self.total).reversed()
-    //       operationIdsToCancel.forEach { id in
-    //         let operation = operationsMap[id]
-    //         operation?.cancel()
-    //       }
-    //       let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
-    //
+    operationIdsToCancel.forEach { id in
+      let operation = operationsMap[id]
+      operation?.cancel()
+    }
+    let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
+    
     // 4. Wait till all operations finish.
     semaphore.wait()
     
     // 5. Verify executionIds have same sequence as operationIds.
     threadLock.execute {
-      XCTAssertEqual(executionIds.sorted(), operationIds)
+      XCTAssertEqual(executionIds, expectedOperationIds)
     }
   }
   
