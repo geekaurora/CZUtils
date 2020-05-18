@@ -14,13 +14,13 @@ class CZConcurrentOperationTests: XCTestCase {
     concurrentOperationTest = self
   }
   
-  func testConcurrentOperationsInOperationQueue() {
-    // Initialize operationQueue.
+  func testExecuteConcurrentOperationsInOperationQueue() {
+    // 1. Initialize operationQueue.
     let operationQueue = OperationQueue()
     operationQueue.name = Self.queueLable
     operationQueue.maxConcurrentOperationCount = 1
     
-    // Add operations to operationQueue.
+    // 2. Add operations to operationQueue.
     let operationIds = Array(0..<Self.total)
     operationIds.forEach { id in
       let operation = TestConcurrentOperation(id: id)
@@ -33,9 +33,36 @@ class CZConcurrentOperationTests: XCTestCase {
         context: nil)
     }
     
-    // Wait till all operations finish.
+    // 3. Wait till all operations finish.
     semaphore.wait()
-    // Verify executionIds have same sequence as operationIds.
+    // 4. Verify executionIds have same sequence as operationIds.
+    threadLock.execute {
+      XCTAssertEqual(executionIds, operationIds)
+    }
+  }
+  
+  func testCancelConcurrentOperationsInOperationQueue() {
+    // 1. Initialize operationQueue.
+    let operationQueue = OperationQueue()
+    operationQueue.name = Self.queueLable
+    operationQueue.maxConcurrentOperationCount = 1
+    
+    // 2. Add operations to operationQueue.
+    let operationIds = Array(0..<Self.total)
+    operationIds.forEach { id in
+      let operation = TestConcurrentOperation(id: id)
+      operationQueue.addOperation(operation)
+      // Add self as KVO observer to `isFinished` property of `operation`.
+      operation.addObserver(
+        self,
+        forKeyPath: #keyPath(CZConcurrentOperation.isFinished),
+        options: [.old, .new],
+        context: nil)
+    }
+    
+    // 3. Wait till all operations finish.
+    semaphore.wait()
+    // 4. Verify executionIds have same sequence as operationIds.
     threadLock.execute {
       XCTAssertEqual(executionIds, operationIds)
     }
