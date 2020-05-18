@@ -6,10 +6,11 @@ fileprivate let threadLock = SimpleThreadLock()
 fileprivate var concurrentOperationTest: CZConcurrentOperationTests?
 
 class CZConcurrentOperationTests: XCTestCase {
-  static let total = 20
+  static let total = 25
   static let queueLable = "com.czutils.operationQueue"
   let semaphore = DispatchSemaphore(value: 0)
   var operationQueue: OperationQueue!
+  
   var operationsMap = [Int: Operation]()
   @ThreadSafe var finishedOperationIds = Set<Int>()
   
@@ -68,7 +69,6 @@ class CZConcurrentOperationTests: XCTestCase {
     // 2. Cancel operations
     let operationIdsToCancel = Array(15..<Self.total)
     operationIdsToCancel.forEach { id in
-      dbgPrint("\(#function) Cancel operation: id = \(id), operation = \(operationsMap[id])")
       operationsMap[id]?.cancel()
     }
     let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
@@ -77,8 +77,15 @@ class CZConcurrentOperationTests: XCTestCase {
     semaphore.wait()
     
     // 4. Verify executionIds have same sequence as operationIds.
-    // TODO: Operation execution order after cancelling isn't as enqueued.
+    //
+    // - Note:
+    // Sometimes operations won't be cancelled because they already executed given
+    // operation executes more than one at a time after cancelling - usually five operations
+    // execute at the same time.
     threadLock.execute {
+      // TODO:
+      // 1). Operation executes more than one at a time after cancelling.
+      // 2). Operation execution order after cancelling isn't as enqueued.
       XCTAssertEqual(executionIds.sorted(), expectedOperationIds.sorted())
     }
   }
@@ -175,7 +182,7 @@ fileprivate class TestConcurrentOperation: CZConcurrentOperation {
   
   override func execute() {
     dbgPrint("\(#function) executing id = \(self.id)")
-    sleep(UInt32(0.001))
+    sleep(UInt32(0.1))
     threadLock.execute {
       dbgPrint("\(#function) executed id = \(self.id)")
       executionIds.append(id)
