@@ -9,7 +9,7 @@ class CZConcurrentOperationTests: XCTestCase {
   static let total = 20
   static let queueLable = "com.czutils.operationQueue"
   let semaphore = DispatchSemaphore(value: 0)
-  var operationsMap = [Int: CZConcurrentOperation]()
+  var operationsMap = [Int: Operation]()
   @ThreadSafe var finishedOperationIds = Set<Int>()
   
   override func setUp() {
@@ -84,7 +84,9 @@ class CZConcurrentOperationTests: XCTestCase {
     }
   }
   
-  func testNormalOperationQueueExecutionSequence() {
+  // MARK: - Test BlockOperation
+  
+  func testBlockOperationQueueExecutionSequence() {
     // 1. Initialize operationQueue.
     let operationQueue = OperationQueue()
     operationQueue.name = Self.queueLable
@@ -113,6 +115,48 @@ class CZConcurrentOperationTests: XCTestCase {
       XCTAssertEqual(executionIds.sorted(), operationIds)
     }
   }
+  
+  func testCancelBlockOperationQueueExecutionSequence() {
+    // 1. Initialize operationQueue.
+    let operationQueue = OperationQueue()
+    operationQueue.name = Self.queueLable
+    operationQueue.maxConcurrentOperationCount = 1
+    
+    // 2. Add operations to operationQueue.
+    let operationIds = Array(0..<Self.total)
+    operationIds.forEach { id in
+      operationsMap[id] = BlockOperation(block: {
+        sleep(UInt32(0.1))
+        dbgPrint("Executing operation: id = \(id)")
+        threadLock.execute {
+          executionIds.append(id)
+          if (executionIds.count == Self.total) {
+            self.semaphore.signal()
+          }
+        }
+        
+      })
+      
+      operationQueue.addOperation(operationsMap[id]!)
+    }
+    
+    // 3. Cancel Operations
+    //    let operationIdsToCancel = Array(15..<Self.total).reversed()
+    //       operationIdsToCancel.forEach { id in
+    //         let operation = operationsMap[id]
+    //         operation?.cancel()
+    //       }
+    //       let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
+    //
+    // 4. Wait till all operations finish.
+    semaphore.wait()
+    
+    // 5. Verify executionIds have same sequence as operationIds.
+    threadLock.execute {
+      XCTAssertEqual(executionIds.sorted(), operationIds)
+    }
+  }
+  
   
   override func observeValue(forKeyPath keyPath: String?,
                              of object: Any?,
