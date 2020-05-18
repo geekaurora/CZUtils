@@ -4,16 +4,23 @@ import Foundation
  Property wrapper that ensures variable thread safe.
  
  ### Usage
+ 
  - Definition with @ThreadSafe annotation
- @ThreadSafe var count: Int = 0
+ ```
+  @ThreadSafe var count: Int = 0
+ ```
  
  - Read with mutexLock: (simply refer to `count`)
- let a = count
+ ```
+  let a = count
+ ```
  
  - Write with mutexLock: (execute with `mutexLock` closure, prefix _ to access wrapper)
- _count.mutexLock { count in
- count += 1
- }
+ ```
+   _count.threadLock { count in
+    count += 1
+   }
+ ```
  */
 @propertyWrapper
 public struct ThreadSafe<T> {

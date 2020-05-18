@@ -1,26 +1,34 @@
 import XCTest
 @testable import CZUtils
 
-fileprivate var executionIds: [Int] = []
+fileprivate var executionIds = [Int]()
 fileprivate let threadLock = SimpleThreadLock()
 fileprivate var concurrentOperationTest: CZConcurrentOperationTests?
 
 class CZConcurrentOperationTests: XCTestCase {
-  static let total = 20
+  static let total = 25
   static let queueLable = "com.czutils.operationQueue"
   let semaphore = DispatchSemaphore(value: 0)
+  var operationQueue: OperationQueue!
+  
+  var operationsMap = [Int: Operation]()
+  @ThreadSafe var finishedOperationIds = Set<Int>()
   
   override func setUp() {
-    concurrentOperationTest = self
-  }
-  
-  func testConcurrentOperationsInOperationQueue() {
-    // Initialize operationQueue.
-    let operationQueue = OperationQueue()
+    operationQueue = OperationQueue()
     operationQueue.name = Self.queueLable
     operationQueue.maxConcurrentOperationCount = 1
     
-    // Add operations to operationQueue.
+    operationsMap.removeAll()
+    executionIds = []
+    finishedOperationIds.removeAll()
+    concurrentOperationTest = self
+  }
+  
+  // MARK: - Test CZConcurrentOperation
+  
+  func testExecuteConcurrentOperationsInOperationQueue() {
+    // 1. Add operations to operationQueue.
     let operationIds = Array(0..<Self.total)
     operationIds.forEach { id in
       let operation = TestConcurrentOperation(id: id)
@@ -33,15 +41,117 @@ class CZConcurrentOperationTests: XCTestCase {
         context: nil)
     }
     
-    // Wait till all operations finish.
+    // 2. Wait till all operations finish.
     semaphore.wait()
-    // Verify executionIds have same sequence as operationIds.
+    
+    // 3. Verify executionIds have same sequence as operationIds.
     threadLock.execute {
       XCTAssertEqual(executionIds, operationIds)
     }
   }
   
-  // TODO: test cancel() method.
+  func testCancelConcurrentOperationsInOperationQueue() {
+    // 1. Add operations to operationQueue.
+    let operationIds = Array(0..<Self.total)
+    operationIds.forEach { id in
+      let operation = TestConcurrentOperation(id: id)
+      operationsMap[id] = operation
+      
+      operationQueue.addOperation(operation)
+      // Add self as KVO observer to `isFinished` property of `operation`.
+      operation.addObserver(
+        self,
+        forKeyPath: #keyPath(CZConcurrentOperation.isFinished),
+        options: [.old, .new],
+        context: nil)
+    }
+    
+    // 2. Cancel operations
+    let operationIdsToCancel = Array(15..<Self.total)
+    operationIdsToCancel.forEach { id in
+      operationsMap[id]?.cancel()
+    }
+    let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
+    
+    // 3. Wait till all operations finish.
+    semaphore.wait()
+    
+    // 4. Verify executionIds have same sequence as operationIds.
+    //
+    // - Note:
+    // Sometimes operations won't be cancelled because they already executed given
+    // operation executes more than one at a time after cancelling - usually five operations
+    // execute at the same time.
+    threadLock.execute {
+      // TODO:
+      // 1). Operation executes more than one at a time after cancelling.
+      // 2). Operation execution order after cancelling isn't as enqueued.
+      XCTAssertEqual(executionIds.sorted(), expectedOperationIds.sorted())
+    }
+  }
+  
+  // MARK: - Test BlockOperation
+  
+  func testBlockOperationQueueExecutionSequence() {
+    // 1. Add operations to operationQueue.
+    let operationIds = Array(0..<Self.total)
+    operationIds.forEach { id in
+      operationQueue.addOperation {
+        sleep(UInt32(0.1))
+        dbgPrint("Executing operation: id = \(id)")
+        threadLock.execute {
+          executionIds.append(id)
+          if (executionIds.count == Self.total) {
+            self.semaphore.signal()
+          }
+        }
+      }
+    }
+    
+    // 2. Wait till all operations finish.
+    semaphore.wait()
+    
+    // 3. Verify executionIds have same sequence as operationIds.
+    threadLock.execute {
+      XCTAssertEqual(executionIds.sorted(), operationIds)
+    }
+  }
+  
+  func testCancelBlockOperationQueueExecutionSequence() {
+    let operationIdsToCancel = Array(15..<Self.total).reversed()
+    
+    // 1. Add operations to operationQueue.
+    let operationIds = Array(0..<Self.total)
+    operationIds.forEach { id in
+      operationsMap[id] = BlockOperation(block: {
+        sleep(UInt32(0.1))
+        dbgPrint("Executing operation: id = \(id)")
+        threadLock.execute {
+          executionIds.append(id)
+          if (executionIds.count == Self.total - operationIdsToCancel.count) {
+            self.semaphore.signal()
+          }
+        }
+      })
+      
+      operationQueue.addOperation(operationsMap[id]!)
+    }
+    
+    // 2. Cancel Operations
+    operationIdsToCancel.forEach { id in
+      let operation = operationsMap[id]
+      operation?.cancel()
+    }
+    let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
+    
+    // 3. Wait till all operations finish.
+    semaphore.wait()
+    
+    // 4. Verify executionIds have same sequence as operationIds.
+    threadLock.execute {
+      XCTAssertEqual(executionIds, expectedOperationIds)
+    }
+  }
   
   override func observeValue(forKeyPath keyPath: String?,
                              of object: Any?,
@@ -50,9 +160,15 @@ class CZConcurrentOperationTests: XCTestCase {
     if keyPath == #keyPath(CZConcurrentOperation.isFinished),
       let operation = object as? TestConcurrentOperation,
       let isFinished = change?[.newKey] as? Bool {
-      if operation.id == Self.total - 1 && isFinished {
-        // After the last operation executed, signal to unblock test to the verify the result.
-        semaphore.signal()
+      
+      _finishedOperationIds.threadLock{ finishedOperationIds in
+        if (isFinished) {
+          finishedOperationIds.insert(operation.id)
+          // After the last operation executed, signal to unblock test to the verify the result.
+          if (finishedOperationIds.count == Self.total) {
+            semaphore.signal()
+          }
+        }
       }
     }
   }
@@ -65,12 +181,16 @@ fileprivate class TestConcurrentOperation: CZConcurrentOperation {
   deinit { removeObserver(concurrentOperationTest!, forKeyPath: #keyPath(isFinished)) }
   
   override func execute() {
-    sleep(UInt32.random(in: 0...10) * UInt32(0.001))
+    dbgPrint("\(#function) executing id = \(self.id)")
+    sleep(UInt32(0.1))
     threadLock.execute {
+      dbgPrint("\(#function) executed id = \(self.id)")
       executionIds.append(id)
+      dbgPrint("\(#function) executionIds id = \(executionIds)")
     }
     finish()
   }
+  
   override func cancel() {
     finish()
   }
