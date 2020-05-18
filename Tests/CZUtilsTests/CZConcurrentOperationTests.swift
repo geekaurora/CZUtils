@@ -69,8 +69,7 @@ class CZConcurrentOperationTests: XCTestCase {
     // 3. Cancel operations
     let operationIdsToCancel = Array(15..<Self.total).reversed()
     operationIdsToCancel.forEach { id in
-      let operation = operationsMap[id]
-      operation?.cancel()
+      operationsMap[id]?.cancel()
     }
     let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
     
