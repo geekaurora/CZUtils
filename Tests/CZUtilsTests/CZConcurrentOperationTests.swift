@@ -84,6 +84,36 @@ class CZConcurrentOperationTests: XCTestCase {
     }
   }
   
+  func testNormalOperationQueueExecutionSequence() {
+    // 1. Initialize operationQueue.
+    let operationQueue = OperationQueue()
+    operationQueue.name = Self.queueLable
+    operationQueue.maxConcurrentOperationCount = 1
+    
+    // 2. Add operations to operationQueue.
+    let operationIds = Array(0..<Self.total)
+    operationIds.forEach { id in
+      operationQueue.addOperation {
+        sleep(UInt32(0.1))
+        dbgPrint("Executing operation: id = \(id)")
+        threadLock.execute {
+          executionIds.append(id)
+          if (executionIds.count == Self.total) {
+            self.semaphore.signal()
+          }
+        }
+      }
+    }
+    
+    // 4. Wait till all operations finish.
+    semaphore.wait()
+    
+    // 5. Verify executionIds have same sequence as operationIds.
+    threadLock.execute {
+      XCTAssertEqual(executionIds.sorted(), operationIds)
+    }
+  }
+  
   override func observeValue(forKeyPath keyPath: String?,
                              of object: Any?,
                              change: [NSKeyValueChangeKey : Any]?,
@@ -121,6 +151,7 @@ fileprivate class TestConcurrentOperation: CZConcurrentOperation {
     }
     finish()
   }
+  
   override func cancel() {
     finish()
   }
