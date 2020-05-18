@@ -67,7 +67,7 @@ class CZConcurrentOperationTests: XCTestCase {
     }
     
     // 3. Cancel operations
-    let operationIdsToCancel = Array(15..<Self.total)
+    let operationIdsToCancel = Array(15..<Self.total).reversed()
     operationIdsToCancel.forEach { id in
       let operation = operationsMap[id]
       operation?.cancel()
@@ -113,7 +113,7 @@ fileprivate class TestConcurrentOperation: CZConcurrentOperation {
   
   override func execute() {
     dbgPrint("\(#function) executing id = \(self.id)")
-    sleep(UInt32(0.3))
+    sleep(UInt32(1))
     threadLock.execute {
       dbgPrint("\(#function) executed id = \(self.id)")
       executionIds.append(id)
