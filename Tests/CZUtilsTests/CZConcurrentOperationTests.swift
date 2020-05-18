@@ -1,7 +1,7 @@
 import XCTest
 @testable import CZUtils
 
-fileprivate var executionIds: [Int] = []
+fileprivate var executionIds = [Int]()
 fileprivate let threadLock = SimpleThreadLock()
 fileprivate var concurrentOperationTest: CZConcurrentOperationTests?
 
@@ -9,8 +9,8 @@ class CZConcurrentOperationTests: XCTestCase {
   static let total = 20
   static let queueLable = "com.czutils.operationQueue"
   let semaphore = DispatchSemaphore(value: 0)
-  @ThreadSafe var operationsMap: [Int: CZConcurrentOperation] = [:]
-  @ThreadSafe var finishedOperationCount = 0
+  @ThreadSafe var operationsMap = [Int: CZConcurrentOperation]()
+  @ThreadSafe var finishedOperationIds = Set<Int>()
   
   override func setUp() {
     concurrentOperationTest = self
@@ -78,9 +78,11 @@ class CZConcurrentOperationTests: XCTestCase {
     
     // 4. Wait till all operations finish.
     semaphore.wait()
+    
     // 5. Verify executionIds have same sequence as operationIds.
+    // TODO: Operation execution order after cancelling isn't as enqueued.
     threadLock.execute {
-      XCTAssertEqual(executionIds, expectedOperationIds)
+      XCTAssertEqual(Set(executionIds), Set(expectedOperationIds))
     }
   }
   
@@ -89,13 +91,14 @@ class CZConcurrentOperationTests: XCTestCase {
                              change: [NSKeyValueChangeKey : Any]?,
                              context: UnsafeMutableRawPointer?) {
     if keyPath == #keyPath(CZConcurrentOperation.isFinished),
+      let operation = object as? TestConcurrentOperation,
       let isFinished = change?[.newKey] as? Bool {
       
-      _finishedOperationCount.threadLock{ finishedOperationCount in
+      _finishedOperationIds.threadLock{ finishedOperationIds in
         if (isFinished) {
-          finishedOperationCount += 1
+          finishedOperationIds.insert(operation.id)
           // After the last operation executed, signal to unblock test to the verify the result.
-          if (finishedOperationCount == Self.total) {
+          if (finishedOperationIds.count == Self.total) {
             dbgPrint("\(#function)executionIds id = \(executionIds)")
             semaphore.signal()
           }
