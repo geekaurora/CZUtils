@@ -3,14 +3,9 @@ import XCTest
 
 fileprivate var executionIds = [Int]()
 fileprivate let threadLock = SimpleThreadLock()
-fileprivate var concurrentOperationTest: CZConcurrentOperationTests?
+fileprivate var concurrentOperationTest: ConcurrentBlockOperationTests?
 
-/**
- - Note: Cancel operation test passes if set `usleep(UInt32(0.01 * 1000000))`.
- 
-  CZConcurrentOperation cancel() method works correctly.
- */
-class CZConcurrentOperationTests: XCTestCase {
+class ConcurrentBlockOperationTests: XCTestCase {
   static let total = 25
   static let queueLable = "com.czutils.operationQueue"
   let semaphore = DispatchSemaphore(value: 0)
@@ -30,7 +25,7 @@ class CZConcurrentOperationTests: XCTestCase {
     concurrentOperationTest = self
   }
   
-  // MARK: - Test CZConcurrentOperation
+  // MARK: - Test ConcurrentBlockOperation
   
   func testExecuteConcurrentOperationsInOperationQueue() {
     // 1. Add operations to operationQueue.
@@ -41,7 +36,7 @@ class CZConcurrentOperationTests: XCTestCase {
       // Add self as KVO observer to `isFinished` property of `operation`.
       operation.addObserver(
         self,
-        forKeyPath: #keyPath(CZConcurrentOperation.isFinished),
+        forKeyPath: #keyPath(ConcurrentBlockOperation.isFinished),
         options: [.old, .new],
         context: nil)
     }
@@ -66,7 +61,7 @@ class CZConcurrentOperationTests: XCTestCase {
       // Add self as KVO observer to `isFinished` property of `operation`.
       operation.addObserver(
         self,
-        forKeyPath: #keyPath(CZConcurrentOperation.isFinished),
+        forKeyPath: #keyPath(ConcurrentBlockOperation.isFinished),
         options: [.old, .new],
         context: nil)
     }
@@ -95,74 +90,13 @@ class CZConcurrentOperationTests: XCTestCase {
     }
   }
   
-  // MARK: - Test BlockOperation
-  
-  func testBlockOperationQueueExecutionSequence() {
-    // 1. Add operations to operationQueue.
-    let operationIds = Array(0..<Self.total)
-    operationIds.forEach { id in
-      operationQueue.addOperation {
-        sleep(UInt32(0.1))
-        dbgPrint("Executing operation: id = \(id)")
-        threadLock.execute {
-          executionIds.append(id)
-          if (executionIds.count == Self.total) {
-            self.semaphore.signal()
-          }
-        }
-      }
-    }
-    
-    // 2. Wait till all operations finish.
-    semaphore.wait()
-    
-    // 3. Verify executionIds have same sequence as operationIds.
-    threadLock.execute {
-      XCTAssertEqual(executionIds.sorted(), operationIds)
-    }
-  }
-  
-  func testCancelBlockOperationQueueExecutionSequence() {
-    let operationIdsToCancel = Array(15..<Self.total).reversed()
-    
-    // 1. Add operations to operationQueue.
-    let operationIds = Array(0..<Self.total)
-    operationIds.forEach { id in
-      operationsMap[id] = BlockOperation(block: {
-        sleep(UInt32(0.1))
-        dbgPrint("Executing operation: id = \(id)")
-        threadLock.execute {
-          executionIds.append(id)
-          if (executionIds.count == Self.total - operationIdsToCancel.count) {
-            self.semaphore.signal()
-          }
-        }
-      })
-      
-      operationQueue.addOperation(operationsMap[id]!)
-    }
-    
-    // 2. Cancel Operations
-    operationIdsToCancel.forEach { id in
-      let operation = operationsMap[id]
-      operation?.cancel()
-    }
-    let expectedOperationIds = operationIds.filter { !operationIdsToCancel.contains($0) }
-    
-    // 3. Wait till all operations finish.
-    semaphore.wait()
-    
-    // 4. Verify executionIds have same sequence as operationIds.
-    threadLock.execute {
-      XCTAssertEqual(executionIds, expectedOperationIds)
-    }
-  }
+  // MARK: - Private methods
   
   override func observeValue(forKeyPath keyPath: String?,
                              of object: Any?,
                              change: [NSKeyValueChangeKey : Any]?,
                              context: UnsafeMutableRawPointer?) {
-    if keyPath == #keyPath(CZConcurrentOperation.isFinished),
+    if keyPath == #keyPath(ConcurrentBlockOperation.isFinished),
       let operation = object as? TestConcurrentOperation,
       let isFinished = change?[.newKey] as? Bool {
       
@@ -180,9 +114,13 @@ class CZConcurrentOperationTests: XCTestCase {
 }
 
 @objc
-fileprivate class TestConcurrentOperation: CZConcurrentOperation {
+fileprivate class TestConcurrentOperation: ConcurrentBlockOperation {
   let id: Int
-  init(id: Int = 0) { self.id = id }
+  init(id: Int = 0) {
+    self.id = id
+    super.init()
+  }
+  
   deinit { removeObserver(concurrentOperationTest!, forKeyPath: #keyPath(isFinished)) }
   
   override func execute() {
@@ -193,10 +131,9 @@ fileprivate class TestConcurrentOperation: CZConcurrentOperation {
       executionIds.append(id)
       dbgPrint("\(#function) executionIds id = \(executionIds)")
     }
-    finish()
-  }
-  
-  override func cancel() {
-    finish()
+    
+    DispatchQueue.global().async {
+      self.finish()
+    }
   }
 }

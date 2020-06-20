@@ -9,6 +9,8 @@ import Foundation
   1. Subclass `ConcurrentBlockOperation`.
   2. Override `execute()` with custom execution.
   3. Invoke `finish()` when concurrent execution is done.
+ 
+ - Note: If customize `cancel()` in subclass, should call `super.cancel()` instead of `super.finish()`.
  */
 @objc open class ConcurrentBlockOperation: BlockOperation {
   private let semaphore = DispatchSemaphore(value: 0)
