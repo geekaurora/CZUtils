@@ -1,14 +1,12 @@
 import Foundation
 
 /**
- When cancel any custom ConcurrentOperation in OperationQueue which maintains its ready/finifhsed/cancelled state,
- queued operations will disordered.
- `ConcurrentBlockOperation` inherits BlockOperation to solve the problem.
+ An abstract class that makes subclassing ConcurrentOperation easier. Updates KVO props `isReady`/`isExecuting`/`isFinished` automatically.
  
  ### Usage
-  1. Subclass `ConcurrentBlockOperation`.
-  2. Override `execute()` with custom execution.
-  3. Invoke `finish()` when concurrent execution is done.
+ 1. Subclass `ConcurrentBlockOperation`.
+ 2. Override `execute()` with custom execution.
+ 3. Invoke `finish()` when concurrent execution completes.
  
  - Note: If customize `cancel()` in subclass, should call `super.cancel()` instead of `super.finish()`.
  */
@@ -16,11 +14,12 @@ import Foundation
   private let semaphore = DispatchSemaphore(value: 0)
   
   public init(block: @escaping () -> Void) {
-   fatalError("Must call designated intialize init().")
+    fatalError("Must call designated intialize init().")
   }
-
+  
   public override init() {
-    super.init()    
+    super.init()
+    
     let awaitBlock = {
       self.execute()
       self.semaphore.wait()

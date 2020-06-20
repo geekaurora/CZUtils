@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// - warning: `CZConcurrentOperation` is DEPRECATED! Use `ConcurrentBlockOperation` with simpler logic.
+///
 /// An abstract class that makes subclassing ConcurrentOperation easy to update KVO props `isReady`/`isExecuting`/`isFinished` automatically
 ///
 /// Usage:
