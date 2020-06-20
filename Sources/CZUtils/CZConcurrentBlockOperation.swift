@@ -3,14 +3,14 @@ import Foundation
 /**
  When cancel any custom ConcurrentOperation in OperationQueue which maintains its ready/finifhsed/cancelled state,
  queued operations will disordered.
- `CZConcurrentBlockOperation` inherits BlockOperation to solve the problem.
+ `ConcurrentBlockOperation` inherits BlockOperation to solve the problem.
  
  ### Usage
-  1. Subclass `CZConcurrentBlockOperation`.
+  1. Subclass `ConcurrentBlockOperation`.
   2. Override `executeBlock()` with custom execution.
   3. Invoke `finish()` when concurrent execution is done.
  */
-@objc open class CZConcurrentBlockOperation: BlockOperation {  
+@objc open class ConcurrentBlockOperation: BlockOperation {
   private let semaphore = DispatchSemaphore(value: 0)
   
   public init(block: @escaping () -> Void) {
