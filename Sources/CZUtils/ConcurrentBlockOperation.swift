@@ -16,13 +16,13 @@ import Foundation
   public init(block: @escaping () -> Void) {
    fatalError("Must call designated intialize init().")
   }
-    
+
   public override init() {
-    super.init()
-    
+    super.init()    
     let awaitBlock = {
       self.executeBlock()
       self.semaphore.wait()
+      dbgPrint("executeBlock finished.")
     }
     addExecutionBlock(awaitBlock)
   }
