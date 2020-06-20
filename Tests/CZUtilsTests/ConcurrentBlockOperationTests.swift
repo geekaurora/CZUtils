@@ -125,7 +125,6 @@ fileprivate class TestConcurrentOperation: ConcurrentBlockOperation {
   
   override func execute() {
     dbgPrint("\(#function) executing id = \(self.id)")
-    //sleep(UInt32(1))
     usleep(UInt32(0.01 * 1000000))
     threadLock.execute {
       dbgPrint("\(#function) executed id = \(self.id)")
@@ -137,8 +136,4 @@ fileprivate class TestConcurrentOperation: ConcurrentBlockOperation {
       self.finish()
     }
   }
-  
-//  override func cancel() {
-//    finish()
-//  }
 }

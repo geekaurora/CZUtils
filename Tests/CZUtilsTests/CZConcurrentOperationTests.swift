@@ -5,6 +5,11 @@ fileprivate var executionIds = [Int]()
 fileprivate let threadLock = SimpleThreadLock()
 fileprivate var concurrentOperationTest: CZConcurrentOperationTests?
 
+/**
+ - Note: Cancel operation test passes if set `usleep(UInt32(0.01 * 1000000))`.
+ 
+  CZConcurrentOperation cancel() method works correctly.
+ */
 class CZConcurrentOperationTests: XCTestCase {
   static let total = 25
   static let queueLable = "com.czutils.operationQueue"
@@ -182,7 +187,7 @@ fileprivate class TestConcurrentOperation: CZConcurrentOperation {
   
   override func execute() {
     dbgPrint("\(#function) executing id = \(self.id)")
-    sleep(UInt32(0.1))
+    usleep(UInt32(0.01 * 1000000))
     threadLock.execute {
       dbgPrint("\(#function) executed id = \(self.id)")
       executionIds.append(id)
