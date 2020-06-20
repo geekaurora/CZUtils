@@ -7,7 +7,7 @@ import Foundation
  
  ### Usage
   1. Subclass `ConcurrentBlockOperation`.
-  2. Override `executeBlock()` with custom execution.
+  2. Override `execute()` with custom execution.
   3. Invoke `finish()` when concurrent execution is done.
  */
 @objc open class ConcurrentBlockOperation: BlockOperation {
@@ -20,14 +20,14 @@ import Foundation
   public override init() {
     super.init()    
     let awaitBlock = {
-      self.executeBlock()
+      self.execute()
       self.semaphore.wait()
       dbgPrint("executeBlock finished.")
     }
     addExecutionBlock(awaitBlock)
   }
   
-  open func executeBlock() {
+  open func execute() {
     fatalError("\(#function) must be overriden in subclass.")
   }
   
