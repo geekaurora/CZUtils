@@ -77,27 +77,45 @@ class ConcurrentBlockOperationTests: XCTestCase {
     semaphore.wait()
     
     // 4. Verify executionIds have same sequence as operationIds.
-    //
-    // - Note:
-    // Sometimes operations won't be cancelled because they already executed given
-    // operation executes more than one at a time after cancelling - usually five operations
-    // execute at the same time.
     threadLock.execute {
-      // TODO:
-      // 1). Operation executes more than one at a time after cancelling.
-      // 2). Operation execution order after cancelling isn't as enqueued.
       XCTAssertEqual(executionIds.sorted(), expectedOperationIds.sorted())
     }
   }
   
-  // MARK: - Private methods
+  /**
+   Test synchronous operations - calling `finish()` within `execute()`.
+   */
+  func testExecuteSynchronousOperations() {
+    // 1. Add operations to operationQueue.
+    let operationIds = Array(0..<Self.total)
+    operationIds.forEach { id in
+      let operation = TestSynchronousOperation(id: id)
+      // Add self as KVO observer to `isFinished` property of `operation`.
+      operation.addObserver(
+        self,
+        forKeyPath: #keyPath(ConcurrentBlockOperation.isFinished),
+        options: [.old, .new],
+        context: nil)
+      operationQueue.addOperation(operation)
+    }
+    
+    // 2. Wait till all operations finish.
+    semaphore.wait()
+    
+    // 3. Verify executionIds have same sequence as operationIds.
+    threadLock.execute {
+      XCTAssertEqual(executionIds, operationIds)
+    }
+  }
+  
+  // MARK: - Private Methods
   
   override func observeValue(forKeyPath keyPath: String?,
                              of object: Any?,
                              change: [NSKeyValueChangeKey : Any]?,
                              context: UnsafeMutableRawPointer?) {
     if keyPath == #keyPath(ConcurrentBlockOperation.isFinished),
-      let operation = object as? TestConcurrentOperation,
+      let operation = object as? IdentifiableObject,
       let isFinished = change?[.newKey] as? Bool {
       
       _finishedOperationIds.threadLock{ finishedOperationIds in
@@ -113,8 +131,10 @@ class ConcurrentBlockOperationTests: XCTestCase {
   }
 }
 
+// MARK: - TestConcurrentOperation
+
 @objc
-fileprivate class TestConcurrentOperation: ConcurrentBlockOperation {
+fileprivate class TestConcurrentOperation: ConcurrentBlockOperation, IdentifiableObject {
   let id: Int
   init(id: Int = 0) {
     self.id = id
@@ -136,4 +156,32 @@ fileprivate class TestConcurrentOperation: ConcurrentBlockOperation {
       self.finish()
     }
   }
+}
+
+// MARK: - TestSynchronousOperation
+
+@objc
+fileprivate class TestSynchronousOperation: ConcurrentBlockOperation, IdentifiableObject {
+  let id: Int
+  init(id: Int = 0) {
+    self.id = id
+    super.init()
+  }
+  
+  deinit { removeObserver(concurrentOperationTest!, forKeyPath: #keyPath(isFinished)) }
+  
+  override func execute() {
+    dbgPrint("\(#function) executing id = \(self.id)")
+    //usleep(UInt32(0.01 * 1000000))
+    threadLock.execute {
+      dbgPrint("\(#function) executed id = \(self.id)")
+      executionIds.append(id)
+      dbgPrint("\(#function) executionIds id = \(executionIds)")
+    }
+    self.finish()
+  }
+}
+
+fileprivate protocol IdentifiableObject {
+  var id: Int { get }
 }

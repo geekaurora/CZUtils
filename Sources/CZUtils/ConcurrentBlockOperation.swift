@@ -12,6 +12,7 @@ import Foundation
  */
 @objc open class ConcurrentBlockOperation: BlockOperation {
   private let semaphore = DispatchSemaphore(value: 0)
+  private var _isBlockFinished = false
   
   public init(block: @escaping () -> Void) {
     fatalError("Must call designated intialize init().")
@@ -22,7 +23,10 @@ import Foundation
     
     let awaitBlock = {
       self.execute()
-      self.semaphore.wait()
+      
+      if (!self._isBlockFinished) {
+        self.semaphore.wait()
+      }
       dbgPrint("executeBlock finished.")
     }
     addExecutionBlock(awaitBlock)
@@ -33,6 +37,7 @@ import Foundation
   }
   
   open func finish() {
+    _isBlockFinished = true
     semaphore.signal()
-  }
+  }  
 }
