@@ -286,6 +286,9 @@ public extension UIView {
                    constant: CGFloat = 0.0,
                    relation: NSLayoutConstraint.Relation = .equal,
                    multiplier: CGFloat = 1.0) -> NSLayoutConstraint {
+    if translatesAutoresizingMaskIntoConstraints {
+      translatesAutoresizingMaskIntoConstraints = false
+    }
     let constraint = NSLayoutConstraint(
       item: self,
       attribute: attr1,
