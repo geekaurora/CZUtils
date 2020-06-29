@@ -30,7 +30,7 @@ open class CZAlertManager: NSObject {
       assertionFailure("Couldn't find valid presenting ViewController.")
       return
     }
-    presentingViewController.topMost.present(alertController, animated: true, completion: completion)
+    UIViewController.topMost()?.present(alertController, animated: true, completion: completion)
   }
   
 }
