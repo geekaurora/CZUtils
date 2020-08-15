@@ -15,7 +15,7 @@ public extension Array {
   subscript (safe index: Index) -> Element? {
     return indices.contains(index) ? self[index] : nil
   }
-
+  
   /**
    Pretty formatted description string
    */
@@ -33,6 +33,15 @@ public extension Array {
     return nil
   }
 
+  /**
+   Removes the specified `object` from array.
+   */
+  mutating func remove(_ object: Element) {
+    guard let index = firstIndex(where: { $0 as AnyObject === object as AnyObject }) else {
+      return
+    }
+    remove(at: index)
+  }
 }
 
 public extension Array where Element: NSCopying {

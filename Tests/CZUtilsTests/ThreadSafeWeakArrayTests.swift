@@ -25,7 +25,7 @@ class ThreadSafeWeakArrayTests: XCTestCase {
     XCTAssert(!weakArray.contains(object))
   }
   
-  func testWeakReference() {    
+  func testWeakReference() {
     // Append `object` to `weakArray`.
     var object: TestClass? = TestClass()
     weakArray.append(object!)
@@ -57,4 +57,3 @@ class ThreadSafeWeakArrayTests: XCTestCase {
 }
 
 private class TestClass {}
-
