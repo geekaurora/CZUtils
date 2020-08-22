@@ -23,7 +23,14 @@ open class CZHTTPJsonSerializer {
     /// Return serilized string from params
     public static func string(with params: [AnyHashable: Any]?) -> String? {
         guard let params = params as? [AnyHashable: CustomStringConvertible] else { return nil }
-        let res = params.keys.map{ key in
+        let sortedKeys: [AnyHashable] = {
+          if let keys = Array(params.keys) as? [String] {
+            return keys.sorted()
+          } else {
+            return Array(params.keys)
+          }
+        }()
+        let res = sortedKeys.map{ key in
             let value: String = {
                 guard let value = params[key] else {
                     return "unsupported"
