@@ -91,11 +91,11 @@ public extension Encodable {
   /// - Parameter other: the other obj to compare
   /// - Returns: true if equals, false otherwise
   func isEqual(toCodable other: Any) -> Bool {
-    guard let other = other as? Encodable,
-      let selfClass = type(of: self) as? AnyClass,
-      let otherClass = type(of: other) as? AnyClass,
-      NSStringFromClass(selfClass) == NSStringFromClass(otherClass) else {
-        return false
+    guard let other = other as? Encodable else {
+      // let selfClass = type(of: self) as? AnyClass,
+      // let otherClass = type(of: other) as? AnyClass,
+      // NSStringFromClass(selfClass) == NSStringFromClass(otherClass)
+      return false
     }
     return (dictionaryVersion as NSDictionary).isEqual(to: other.dictionaryVersion)
   }

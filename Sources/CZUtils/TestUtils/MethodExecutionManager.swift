@@ -23,5 +23,4 @@ public class MethodExecutionManager {
   public func reset() {
     executedMethods.removeAll()
   }
-
 }
