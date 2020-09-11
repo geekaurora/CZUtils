@@ -42,6 +42,25 @@ public extension Array {
     }
     remove(at: index)
   }
+  
+  /**
+   Returns whether `self` equals to `array`.
+   
+   - Note: It will compare each individual item object within two arrays, instead of values.
+   */
+  func isEqualTo(_ array: [Any]) -> Bool {
+    guard count == array.count else {
+      return false
+    }
+    for (i, item) in enumerated() {
+      let otherItem = array[i]
+      if type(of: item) != type(of: otherItem) ||
+        item as AnyObject !== otherItem as AnyObject {
+        return false
+      }
+    }
+    return true
+  }
 }
 
 public extension Array where Element: NSCopying {
