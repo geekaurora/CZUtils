@@ -29,7 +29,6 @@ open class ConcurrentBlockOperation: BlockOperation {
       if (!self._isBlockFinished) {
         self.semaphore.wait()
       }
-      dbgPrint("executeBlock finished. Class = \(type(of: self)); props = \(self.props)")
     }
     addExecutionBlock(awaitBlock)
   }
