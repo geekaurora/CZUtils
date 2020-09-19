@@ -6,8 +6,12 @@ import Foundation
 public class ThreadSafeArray<Element> {
   @ThreadSafe
   private var array = [Element]()
+  /// Indicates whether allow duplicate elements in the array.
+  private var allowDuplicateElements: Bool
   
-  public init() {}
+  public init(allowDuplicateElements: Bool = true) {
+    self.allowDuplicateElements = allowDuplicateElements
+  }
   
   public var allObjects: [Element] {
     return _array.threadLock { $0 }
@@ -23,6 +27,9 @@ public class ThreadSafeArray<Element> {
   
   public func append(_ element: Element) {
     _array.threadLock { value in
+      if !allowDuplicateElements && value.contains(where: { $0 as AnyObject === element as AnyObject }) {
+        return
+      }
       value.append(element)
     }
   }
