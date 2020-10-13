@@ -163,7 +163,7 @@ public extension UIView {
   // MARK: - Position / Advanced
   
   func align(to item: GMOAutoLayoutObject?,
-             insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+             insets: NSDirectionalEdgeInsets = .zero) -> [NSLayoutConstraint] {
     return [
       alignHorizontally(
         to: item,
@@ -175,19 +175,19 @@ public extension UIView {
   }
   
   func alignHorizontally(to item: GMOAutoLayoutObject?,
-                         insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+                         insets: NSDirectionalEdgeInsets = .zero) -> [NSLayoutConstraint] {
     return [
       alignLeading(
         to: item,
-        constant: insets.left),
+        constant: insets.leading),
       alignTrailing(
         to: item,
-        constant: -insets.right)
+        constant: -insets.trailing)
     ]
   }
   
   func alignVertically(to item: GMOAutoLayoutObject?,
-                       insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+                       insets: NSDirectionalEdgeInsets = .zero) -> [NSLayoutConstraint] {
     return [
       alignTop(
         to: item,
