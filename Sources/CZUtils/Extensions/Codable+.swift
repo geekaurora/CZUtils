@@ -35,7 +35,8 @@ public class CodableHelper {
       let model = try JSONDecoder().decode(T.self, from: data)
       return model
     } catch {
-      assertionFailure("Failed to decode data of \(T.self). Error - \(error.localizedDescription)")
+      let dataDescription = CZHTTPJsonSerializer.describing(jsonData: data)
+      assertionFailure("Failed to decode data of \(T.self). Error - \(error.localizedDescription). \njsonData = \(dataDescription)")
       return nil
     }
   }

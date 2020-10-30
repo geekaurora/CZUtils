@@ -41,9 +41,12 @@ public extension Dictionary {
     return Pretty.describing(self)
   }
   
+  var description: String {
+    return prettyDescription
+  }
+  
   /// Returns stringified version.
   var stringifyVersion: String? {
     return CZHTTPJsonSerializer.stringify(self)
   }
 }
-

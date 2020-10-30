@@ -20,7 +20,7 @@ open class CZHTTPJsonSerializer {
     return URL(string: urlString)!
   }
   
-  /// Return serilized string from params
+  /// Returns serilized string from params
   public static func string(with params: [AnyHashable: Any]?) -> String? {
     guard let params = params as? [AnyHashable: CustomStringConvertible] else { return nil }
     let sortedKeys: [AnyHashable] = {
@@ -42,7 +42,7 @@ open class CZHTTPJsonSerializer {
     return res
   }
   
-  /// Return JSONData with input Diciontary/Array
+  /// Returns JSONData with input Diciontary/Array
   public static func jsonData(with object: Any?) -> Data? {
     guard let object = object else { return nil }
     assert(JSONSerialization.isValidJSONObject(object), "Invalid JSON object.")
@@ -55,7 +55,7 @@ open class CZHTTPJsonSerializer {
     }
   }
   
-  /// Return nested deserialized object composed of various class types with input jsonData
+  /// Returns nested deserialized object composed of various class types with input jsonData
   ///
   /// - Params:
   ///   - jsonData        : Input JSON data
@@ -72,10 +72,26 @@ open class CZHTTPJsonSerializer {
     return nil
   }
   
-  /// Return string value with input Diciontary/Array.
+  /// Returns string value with input Diciontary/Array.
   public static func stringify(_ object: Any?, encoding: String.Encoding = .utf8) -> String? {
     guard let data = jsonData(with: object).assertIfNil else { return nil }
     return String(data: data, encoding: encoding)
+  }
+  
+  /// Returns string for pretty print with `jsonData` if it can be converted to `CZDictionary` or array of `CZDictionary`.
+  ///
+  /// - Params:
+  ///   - jsonData     : Input JSON data
+  /// - Returns           : String for pretty print.
+  public static func describing(jsonData: Data?) -> String {
+    guard let jsonData = jsonData else { return "" }
+    do {
+      let deserializedData = try JSONSerialization.jsonObject(with: jsonData, options:[])
+      return String(describing: deserializedData)
+    } catch let error as NSError {
+      dbgPrint("Parsing error: \(error.localizedDescription)")
+    }
+    return ""
   }
 }
 
