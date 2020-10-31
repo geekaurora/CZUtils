@@ -83,10 +83,10 @@ open class CZHTTPJsonSerializer {
   /// - Params:
   ///   - jsonData     : Input JSON data
   /// - Returns           : String for pretty print.
-  public static func describing(jsonData: Data?) -> String {
-    guard let jsonData = jsonData else { return "" }
+  public static func describing(data: Data?) -> String {
+    guard let data = data else { return "" }
     do {
-      let deserializedData = try JSONSerialization.jsonObject(with: jsonData, options:[])
+      let deserializedData = try JSONSerialization.jsonObject(with: data, options:[])
       return String(describing: deserializedData)
     } catch let error as NSError {
       dbgPrint("Parsing error: \(error.localizedDescription)")

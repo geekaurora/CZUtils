@@ -30,15 +30,38 @@ public class CodableHelper {
   /// - Parameter data: serialized data
   /// - Returns: the decoded model
   public static func decode<T: Decodable>(_ data: Data?) -> T? {
-    guard let data = data else { return nil}
+    guard let data = data else { return nil }
     do {
       let model = try JSONDecoder().decode(T.self, from: data)
       return model
     } catch {
-      let dataDescription = CZHTTPJsonSerializer.describing(jsonData: data)
+      let dataDescription = CZHTTPJsonSerializer.describing(data: data)
       assertionFailure("Failed to decode data of \(T.self). Error - \(error.localizedDescription). \njsonData = \(dataDescription)")
       return nil
     }
+  }
+  
+  /// Decode model array from input data
+  ///
+  /// - Note: `decodeArray` manually decodes data to Codable models for the ease of debugging.
+  ///
+  /// - Parameter data: serialized data
+  /// - Returns: the decoded model array
+  public static func decodeArray<T: Decodable>(_ data: Data?) -> [T]? {
+    guard let data = data,
+      let dicts: [CZDictionary] = CZHTTPJsonSerializer.deserializedObject(with: data).assertIfNil else {
+        return nil
+    }
+    
+    // Decode each individual model with its corresponding data.
+    let result: [T] = dicts.compactMap { dict in
+      guard let modelData = CZHTTPJsonSerializer.jsonData(with: dict).assertIfNil,
+        let model: T = Self.decode(modelData) else {
+          return nil
+      }
+      return model
+    }
+    return result
   }
   
   /// Decode model from input jsonObject
