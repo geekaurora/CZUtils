@@ -10,7 +10,7 @@ import Foundation
 
 public class CodableHelper {
   
-  /// Decode model from specified file
+  /// Decode model from specified file.
   ///
   /// - Parameter pathUrl: pathUrl of file
   /// - Returns: the decoded model
@@ -25,7 +25,7 @@ public class CodableHelper {
     }
   }
   
-  /// Decode model from input data
+  /// Decode model from input Data.
   ///
   /// - Parameter data: serialized data
   /// - Returns: the decoded model
@@ -36,23 +36,28 @@ public class CodableHelper {
       return model
     } catch {
       let dataDescription = CZHTTPJsonSerializer.describing(data: data)
-      assertionFailure("Failed to decode data of \(T.self). Error - \(error.localizedDescription). \njsonData = \(dataDescription)")
+      assertionFailure("Failed to decode data of `\(T.self)`. Error - \(error.localizedDescription). \njsonData = \(dataDescription)")
       return nil
     }
   }
   
-  /// Decode model array from input data
+  /// Decode model array from input data or JsonObject.
   ///
   /// - Note: `decodeArray` manually decodes data to Codable models for the ease of debugging.
   ///
   /// - Parameter data: serialized data
   /// - Returns: the decoded model array
-  public static func decodeArray<T: Decodable>(_ data: Data?) -> [T]? {
-    guard let data = data,
-      let dicts: [CZDictionary] = CZHTTPJsonSerializer.deserializedObject(with: data).assertIfNil else {
-        return nil
+  public static func decodeArray<T: Decodable>(_ input: Any?) -> [T]? {
+    var parsedDicts: [CZDictionary]?
+    if let data = input as? Data {
+      // Parse Data.
+      parsedDicts = CZHTTPJsonSerializer.deserializedObject(with: data).assertIfNil
+    } else {
+      // Parse JsonObject.
+      parsedDicts = (input as? [CZDictionary]).assertIfNil
     }
     
+    guard let dicts = parsedDicts.assertIfNil else { return nil }
     // Decode each individual model with its corresponding data.
     let result: [T] = dicts.compactMap { dict in
       guard let modelData = CZHTTPJsonSerializer.jsonData(with: dict).assertIfNil,
@@ -64,7 +69,7 @@ public class CodableHelper {
     return result
   }
   
-  /// Decode model from input jsonObject
+  /// Decode model from input JsonObject.
   ///
   /// - Parameter data: serialized data
   /// - Returns: the decoded model
@@ -76,12 +81,12 @@ public class CodableHelper {
       let model = try JSONDecoder().decode(T.self, from: data)
       return model
     } catch {
-      assertionFailure("Failed to decode data of \(T.self). Error - \(error.localizedDescription)")
+      assertionFailure("Failed to decode data of `\(T.self)`. Error - \(error.localizedDescription)")
       return nil
     }
   }
   
-  /// Encode input model into data
+  /// Encode input model into Data.
   ///
   /// - Parameter model: model to be encoded
   /// - Returns: encoded data
@@ -98,7 +103,7 @@ public class CodableHelper {
 }
 
 public extension Encodable {
-  /// Transform current obj to dictionary
+  /// Transform current obj to dictionary.
   var dictionaryVersion: [AnyHashable : Any] {
     do {
       let jsonData = try JSONEncoder().encode(self)
@@ -110,7 +115,7 @@ public extension Encodable {
     }
   }
   
-  /// Verify whether current obj equals to other obj
+  /// Verify whether current obj equals to other obj.
   ///
   /// - Parameter other: the other obj to compare
   /// - Returns: true if equals, false otherwise
@@ -124,7 +129,7 @@ public extension Encodable {
     return (dictionaryVersion as NSDictionary).isEqual(to: other.dictionaryVersion)
   }
   
-  /// Description of model, needs to mark `CustomStringConvertible` conformance explicitly
+  /// Description of model, needs to mark `CustomStringConvertible` conformance explicitly.
   var description: String {
     return prettyDescription
   }
