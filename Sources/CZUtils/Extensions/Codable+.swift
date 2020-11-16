@@ -102,6 +102,8 @@ public class CodableHelper {
   }
 }
 
+// MARK: - Encodable
+
 public extension Encodable {
   /// Transform current obj to dictionary.
   var dictionaryVersion: [AnyHashable : Any] {
@@ -137,9 +139,16 @@ public extension Encodable {
   var prettyDescription: String {
     return dictionaryVersion.prettyDescription
   }
+  
+  /// Retrieve value from `dotedKey`, compatible with multi-dot in keyPath. e.g. "user.profile.fullName"
+  func value<T>(forDotedKey dotedKey: String) -> T? {
+    return dictionaryVersion.value(forDotedKey: dotedKey) as? T
+  }
 }
 
-// MARK: - NSCopying
+// MARK: - Codable
+
+// MARK: NSCopying
 
 public extension Encodable where Self: Decodable {
   func copy(with zone: NSZone?) -> Any  {
