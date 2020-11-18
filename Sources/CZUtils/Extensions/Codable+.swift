@@ -140,6 +140,10 @@ public extension Encodable {
     return dictionaryVersion.prettyDescription
   }
   
+  var descriptionSortedByKey: String {
+    return dictionaryVersion.descriptionSortedByKey
+  }
+  
   /// Retrieve value from `dotedKey`, compatible with multi-dot in keyPath. e.g. "user.profile.fullName"
   func value<T>(forDotedKey dotedKey: String) -> T? {
     return dictionaryVersion.value(forDotedKey: dotedKey) as? T

@@ -36,6 +36,44 @@ public extension Dictionary {
     }
   }
   
+  /// Returns the description sorted by dictionary keys.
+  var descriptionSortedByKey: String {
+    return self.descriptionSortedByKey() ?? ""
+  }
+  
+  func descriptionSortedByKey(currLevel: Int = 0) -> String? {
+    guard let dictionary = self as? [AnyHashable: CustomStringConvertible] else {
+      return nil
+    }
+    let sortedKeys: [AnyHashable] = {
+      if let keys = Array(dictionary.keys) as? [String] {
+        return keys.sorted()
+      } else {
+        return Array(dictionary.keys)
+      }
+    }()
+    
+    let indent = Array(repeating: "  ", count: currLevel).joined(separator: "")
+    let body = sortedKeys.map { key in
+      let value: String = {
+        var value = dictionary[key]!
+        // If `value` is Dictionary, recursively sorted its keys and get description.
+        if let subDictionary = value as? [AnyHashable: Any] {
+          value = subDictionary.descriptionSortedByKey(currLevel: currLevel + 1)
+        }
+        return String(describing: value)
+      }()
+      return"\(indent)  \(key): \(value)"
+    }.joined(separator: ",\r\n")
+    
+    let res = """
+{
+\(body)
+\(indent)}
+"""
+    return res
+  }
+  
   /// Pretty formatted description string
   var prettyDescription: String {
     return Pretty.describing(self)
