@@ -41,9 +41,9 @@ public extension Dictionary {
     return self.descriptionSortedByKey() ?? ""
   }
   
-  func descriptionSortedByKey(currLevel: Int = 0) -> String? {
+  func descriptionSortedByKey(currLevel: Int = 0) -> String {
     guard let dictionary = self as? [AnyHashable: CustomStringConvertible] else {
-      return nil
+      return ""
     }
     let sortedKeys: [AnyHashable] = {
       if let keys = Array(dictionary.keys) as? [String] {
