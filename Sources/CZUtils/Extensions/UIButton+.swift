@@ -13,7 +13,7 @@ public extension UIButton {
   /**
    Add self-contained action handler for button
    */
-  func addHandler(for controlEvents: UIControl.Event, handler: @escaping (UIButton) -> ()) {
+  func addHandler(for controlEvents: UIControl.Event = .touchUpInside, handler: @escaping (UIButton) -> ()) {
     if let oldTarget = objc_getAssociatedObject(self, &controlHandlerKey) as? CocoaTarget<UIButton> {
       self.removeTarget(oldTarget, action: #selector(oldTarget.sendNext), for: controlEvents)
     }
