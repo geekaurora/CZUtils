@@ -8,8 +8,8 @@
 import UIKit
 
 public extension UIViewController {
-  /// Stick the intput view's edges to topLayoutGuide, bottomLayoutGuide, leading, trailing
-  func overlapSubViewOnSelf(_ subview: UIView) {
+  /// Stick the intput view's edges to topLayoutGuide, bottomLayoutGuide, leading, trailing.
+  func overlaySubViewOnSelf(_ subview: UIView) {
     subview.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       subview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -17,6 +17,12 @@ public extension UIViewController {
       subview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       subview.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
+  }
+  
+  /// Overlay self on super ViewController.
+  func overlayOnSuperViewController(_ controller: UIViewController, insets: UIEdgeInsets = .zero) {
+    view.overlayOnSuperViewController(controller)
+    controller.addChildAndSetDidMoveToParent(self)
   }
   
   /// Returns top most ViewController on the current keyWindow.
@@ -33,6 +39,19 @@ public extension UIViewController {
       return topMost(on: presented)
     }
     return controller
+  }
+  
+  /// Adds child ViewController and calls didMove(toParent: self) automatically.
+  /// - warning: Shouldn't call this method in case of transition animation.
+  func addChildAndSetDidMoveToParent(_ childController: UIViewController) {
+    if let parent = childController.parent {
+      if parent !== self {
+        assertionFailure("Unexpected parent of `childController` - \(parent)")
+      }
+      return
+    }
+    addChild(childController)
+    childController.didMove(toParent: self)
   }
   
   func showTitleOnNavBar() {
