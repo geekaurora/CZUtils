@@ -12,7 +12,8 @@ import Foundation
  Convenient methods of NSObject
  */
 public extension NSObject {
-    var className: String {
-        return NSStringFromClass(type(of: self))
-    }
+  /// Returns the class name of the object.
+  var className: String {
+    return NSStringFromClass(type(of: self))
+  }
 }

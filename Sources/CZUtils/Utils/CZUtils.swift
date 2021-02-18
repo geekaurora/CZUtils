@@ -9,15 +9,22 @@
 import Foundation
 
 public class CZUtils {
-    public static func dbgPrint(_ item: CustomStringConvertible) {
-        #if DEBUG
-            print(item)
-        #endif
-    }
+  public static func dbgPrint(_ item: CustomStringConvertible) {
+    #if DEBUG
+    print(item)
+    #endif
+  }
+  
+  /// Returns the raw memory pointer of the `object`.
+  ///
+  /// - Note: the returned value isn't type safe nor automatically managed with ARC.
+  public static func rawPointer(of object: AnyObject) -> UnsafeMutableRawPointer {
+    return Unmanaged.passUnretained(object).toOpaque()
+  }
 }
 
 public func dbgPrint(_ item: CustomStringConvertible) {
-    dbgPrint(.`default`, item)
+  dbgPrint(.`default`, item)
 }
 
 public func dbgPrint(_ type: DbgPrintType,
