@@ -42,7 +42,9 @@ public class ThreadSafeArray<Element> {
   
   public func contains(_ element: Element) -> Bool {
     return _array.threadLock { value in
-      value.contains{ $0 as AnyObject === element as AnyObject }
+      value.contains {
+        $0 as AnyObject === element as AnyObject
+      }
     }
   }
 }

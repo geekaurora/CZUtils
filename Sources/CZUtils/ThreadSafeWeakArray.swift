@@ -92,7 +92,9 @@ private class AnyThreadSafeWeakArray<Element: AnyObject> {
   
   public func contains(_ element: Element) -> Bool {
     return _weakElementWrappers.threadLock { value in
-      value.contains { $0.element === element }
+      value.contains {
+        $0.element === element
+      }
     }
   }
 }
