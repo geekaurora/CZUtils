@@ -25,7 +25,7 @@ class ThreadSafeWeakArrayTests: XCTestCase {
     XCTAssert(!weakArray.contains(object))
   }
     
-  func testAllowDuplicateElements() {
+  func testAllowDuplicates() {
     let array = ThreadSafeWeakArray<Int>()
     array.append(1)
     array.append(1)
@@ -34,8 +34,8 @@ class ThreadSafeWeakArrayTests: XCTestCase {
     XCTAssert(array.allObjects == [1, 1, 2, 2])
   }
   
-  func testNotAllowDuplicateElements() {
-    let array = ThreadSafeWeakArray<Int>(allowDuplicateElements: false)
+  func testNotAllowDuplicates() {
+    let array = ThreadSafeWeakArray<Int>(allowDuplicates: false)
     array.append(1)
     array.append(1)
     array.append(2)

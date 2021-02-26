@@ -8,10 +8,10 @@ public class ThreadSafeWeakArray<Element> {
   private var weakArray = AnyThreadSafeWeakArray<AnyObject>()
   
   /// Indicates whether allow duplicate elements in the array.
-  private var allowDuplicateElements: Bool
+  private var allowDuplicates: Bool
   
-  public init(allowDuplicateElements: Bool = true) {
-    self.allowDuplicateElements = allowDuplicateElements
+  public init(allowDuplicates: Bool = true) {
+    self.allowDuplicates = allowDuplicates
   }
   
   public var allObjects: [Element] {
@@ -32,7 +32,7 @@ public class ThreadSafeWeakArray<Element> {
   
   public func append(_ element: Element) {
     _weakArray.threadLock { value in
-      if !allowDuplicateElements && value.allObjects.contains(where: { $0 as AnyObject === element as AnyObject }) {
+      if !allowDuplicates && value.allObjects.contains(where: { $0 as AnyObject === element as AnyObject }) {
         return
       }
       value.append(element as AnyObject)
