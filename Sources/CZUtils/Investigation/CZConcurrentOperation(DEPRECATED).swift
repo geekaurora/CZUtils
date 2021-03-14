@@ -9,6 +9,12 @@ import Foundation
 
 /// - warning: `CZConcurrentOperation` is DEPRECATED! Use `ConcurrentBlockOperation` with simpler logic.
 ///
+/// - Note:
+/// In concurrent OperationQueue, normally we customize Operation by manually maintaining states correspondingly - ready, executing, finished.
+/// The issue found during development is: in concurrent OperationQueue with maxConcurrentOperationCount set to 1, if any Operation in the queue gets cancelled ,
+/// the order of remaining Operations will be random.
+/// The solution is to alter with `ConcurrentBlockOperation` that is much more stable.
+///
 /// An abstract class that makes subclassing ConcurrentOperation easy to update KVO props `isReady`/`isExecuting`/`isFinished` automatically
 ///
 /// Usage:

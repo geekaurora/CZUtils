@@ -11,6 +11,8 @@ import Foundation
 public extension Array {
   /**
    Returns element at specified `safe` index if exists, otherwise nil
+   
+   e.g. let val = array[safe: 2] ?? 0
    */
   subscript (safe index: Index) -> Element? {
     return indices.contains(index) ? self[index] : nil
