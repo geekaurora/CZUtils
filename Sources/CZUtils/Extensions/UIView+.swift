@@ -17,15 +17,15 @@ public enum UIViewConstants {
 
 @objc public extension UIView {
   /// Overlap on `superviewIn`, added to `superviewIn` if invoker has no superview.
-  func overlayOnSuperview(_ superviewIn: UIView? = nil, insets: UIEdgeInsets = .zero) {
+  func overlayOnSuperview(_ superviewIn: UIView? = nil, insets: NSDirectionalEdgeInsets = .zero) {
     if superview == nil {
       superviewIn?.addSubview(self)
     }
     guard let superview = self.superview else {return}
     translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left),
-      trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right),
+      leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.leading),
+      trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.trailing),
       topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top),
       bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom)
     ]
@@ -37,7 +37,7 @@ public enum UIViewConstants {
   }
   
   /// Overlap on super `controller` after being added to super `controller` view automatically.
-  func overlayOnSuperViewController(_ controller: UIViewController, insets: UIEdgeInsets = .zero) {
+  func overlayOnSuperViewController(_ controller: UIViewController, insets: NSDirectionalEdgeInsets = .zero) {
     guard let containerView = controller.view else {
       assertionFailure("\(#function): superview is nil.")
       return
@@ -47,8 +47,8 @@ public enum UIViewConstants {
     }
     translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: insets.left),
-      trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -insets.right),
+      leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: insets.leading),
+      trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -insets.trailing),
       topAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.topAnchor, constant: insets.top),
       bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -insets.bottom)
     ])
