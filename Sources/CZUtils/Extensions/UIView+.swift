@@ -16,22 +16,27 @@ public enum UIViewConstants {
 // MARK: - Auto Layout
 
 @objc public extension UIView {
-  /// Overlap on `superviewIn`, added to `superviewIn` if invoker has no superview
-  func overlayOnSuperview(_ superviewIn: UIView? = nil, inset: UIEdgeInsets = .zero) {
+  /// Overlap on `superviewIn`, added to `superviewIn` if invoker has no superview.
+  func overlayOnSuperview(_ superviewIn: UIView? = nil, insets: UIEdgeInsets = .zero) {
     if superview == nil {
       superviewIn?.addSubview(self)
     }
     guard let superview = self.superview else {return}
     translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: inset.left),
-      trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -inset.right),
-      topAnchor.constraint(equalTo: superview.topAnchor, constant: inset.top),
-      bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -inset.bottom)
+      leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left),
+      trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right),
+      topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top),
+      bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom)
     ]
     )
   }
   
+  func overlayOnSuperview(_ superviewIn: UIView?) {
+    overlayOnSuperview(superviewIn, insets: .zero)
+  }
+  
+  /// Overlap on super `controller` after being added to super `controller` view automatically.
   func overlayOnSuperViewController(_ controller: UIViewController, insets: UIEdgeInsets = .zero) {
     guard let containerView = controller.view else {
       assertionFailure("\(#function): superview is nil.")
@@ -46,8 +51,11 @@ public enum UIViewConstants {
       trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -insets.right),
       topAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.topAnchor, constant: insets.top),
       bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -insets.bottom)
-    ]
-    )
+    ])
+  }
+  
+  func overlayOnSuperViewController(_ controller: UIViewController) {
+    overlayOnSuperViewController(controller, insets: .zero)
   }
 }
 
