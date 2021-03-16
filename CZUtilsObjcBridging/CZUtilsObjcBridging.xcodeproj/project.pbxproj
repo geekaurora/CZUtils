@@ -71,6 +71,7 @@
 		C35DF5CC26005F790063A176 /* CZUtilsObjcBridging */ = {
 			isa = PBXGroup;
 			children = (
+				C35DF5E626005FD40063A176 /* Extensions */,
 				C35DF5CD26005F790063A176 /* CZUtilsObjcBridging.h */,
 				C35DF5CE26005F790063A176 /* Info.plist */,
 			);
@@ -84,6 +85,13 @@
 				C35DF5DA26005F790063A176 /* Info.plist */,
 			);
 			path = CZUtilsObjcBridgingTests;
+			sourceTree = "<group>";
+		};
+		C35DF5E626005FD40063A176 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
