@@ -15,7 +15,7 @@ public enum UIViewConstants {
 
 // MARK: - Auto Layout
 
-public extension UIView {
+@objc public extension UIView {
   /// Overlap on `superviewIn`, added to `superviewIn` if invoker has no superview
   func overlayOnSuperview(_ superviewIn: UIView? = nil, inset: UIEdgeInsets = .zero) {
     if superview == nil {
@@ -53,8 +53,7 @@ public extension UIView {
 
 
 // MARK: - Corner/Border
-
-public extension UIView {
+@objc public extension UIView {
   
   func roundToCircle() {
     let width = self.bounds.size.width
@@ -83,7 +82,7 @@ public extension UIView {
 
 // MARK: - Animations
 
-public extension UIView {
+@objc public extension UIView {
   func fadeIn(animationName: String = UIViewConstants.fadeInAnimationName,
               duration: TimeInterval = UIViewConstants.fadeInDuration) {
     let transition = CATransition()
@@ -96,7 +95,7 @@ public extension UIView {
 
 // MARK: - Load Nib
 
-public extension UIView {
+@objc public extension UIView {
   /// Load form nib file and overlay the contentView on superView
   @discardableResult
   func loadAndOverlay(on superView: UIView, xibName: String? = nil) -> UIView {

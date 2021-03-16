@@ -10,6 +10,7 @@
 		C35DF5D426005F790063A176 /* CZUtilsObjcBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35DF5CA26005F790063A176 /* CZUtilsObjcBridging.framework */; };
 		C35DF5D926005F790063A176 /* CZUtilsObjcBridgingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF5D826005F790063A176 /* CZUtilsObjcBridgingTests.swift */; };
 		C35DF5DB26005F790063A176 /* CZUtilsObjcBridging.h in Headers */ = {isa = PBXBuildFile; fileRef = C35DF5CD26005F790063A176 /* CZUtilsObjcBridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C35DF5E8260060F80063A176 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF5E7260060F80063A176 /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		C35DF5D326005F790063A176 /* CZUtilsObjcBridgingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CZUtilsObjcBridgingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35DF5D826005F790063A176 /* CZUtilsObjcBridgingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZUtilsObjcBridgingTests.swift; sourceTree = "<group>"; };
 		C35DF5DA26005F790063A176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C35DF5E7260060F80063A176 /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+.swift"; path = "../../../Sources/CZUtils/Extensions/UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		C35DF5E626005FD40063A176 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C35DF5E7260060F80063A176 /* UIView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				TargetAttributes = {
 					C35DF5C926005F790063A176 = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 					C35DF5D226005F790063A176 = {
 						CreatedOnToolsVersion = 12.3;
@@ -202,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C35DF5E8260060F80063A176 /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +354,7 @@
 		C35DF5DF26005F790063A176 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 55RDUQ8X48;
@@ -365,6 +371,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.CZUtilsObjcBridging";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -373,6 +380,7 @@
 		C35DF5E026005F790063A176 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 55RDUQ8X48;
@@ -397,6 +405,7 @@
 		C35DF5E226005F790063A176 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 55RDUQ8X48;
 				INFOPLIST_FILE = CZUtilsObjcBridgingTests/Info.plist;
@@ -415,6 +424,7 @@
 		C35DF5E326005F790063A176 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 55RDUQ8X48;
 				INFOPLIST_FILE = CZUtilsObjcBridgingTests/Info.plist;
