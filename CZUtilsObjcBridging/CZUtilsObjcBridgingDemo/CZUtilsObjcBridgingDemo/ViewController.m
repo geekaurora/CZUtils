@@ -15,7 +15,7 @@
 
 - (void)test {
   [self.view overlayOnSuperview:self.view];
-  [self.view overlayOnSuperview:self.view insets:UIEdgeInsetsZero];
+  [self.view overlayOnSuperview:self.view insets:NSDirectionalEdgeInsetsZero];
 }
 
 

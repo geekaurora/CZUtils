@@ -11,6 +11,7 @@
 		C35DF5D926005F790063A176 /* CZUtilsObjcBridgingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF5D826005F790063A176 /* CZUtilsObjcBridgingTests.swift */; };
 		C35DF5DB26005F790063A176 /* CZUtilsObjcBridging.h in Headers */ = {isa = PBXBuildFile; fileRef = C35DF5CD26005F790063A176 /* CZUtilsObjcBridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C35DF5E8260060F80063A176 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF5E7260060F80063A176 /* UIView+.swift */; };
+		C35DF66A260065E80063A176 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF669260065E80063A176 /* UIViewController+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		C35DF5D826005F790063A176 /* CZUtilsObjcBridgingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZUtilsObjcBridgingTests.swift; sourceTree = "<group>"; };
 		C35DF5DA26005F790063A176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C35DF5E7260060F80063A176 /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+.swift"; path = "../../../Sources/CZUtils/Extensions/UIView+.swift"; sourceTree = "<group>"; };
+		C35DF669260065E80063A176 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+.swift"; path = "../../../Sources/CZUtils/Extensions/UIViewController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				C35DF5E7260060F80063A176 /* UIView+.swift */,
+				C35DF669260065E80063A176 /* UIViewController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C35DF66A260065E80063A176 /* UIViewController+.swift in Sources */,
 				C35DF5E8260060F80063A176 /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
