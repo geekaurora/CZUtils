@@ -7,7 +7,7 @@
 
 import UIKit
 
-public extension UIViewController {
+@objc public extension UIViewController {
   /// Stick the intput view's edges to topLayoutGuide, bottomLayoutGuide, leading, trailing.
   func overlaySubViewOnSelf(_ subview: UIView) {
     subview.translatesAutoresizingMaskIntoConstraints = false
