@@ -47,10 +47,10 @@ public enum UIViewConstants {
     }
     translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: insets.leading),
-      trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -insets.trailing),
-      topAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.topAnchor, constant: insets.top),
-      bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -insets.bottom)
+      leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: insets.leading),
+      trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -insets.trailing),
+      topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: insets.top),
+      bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -insets.bottom)
     ])
   }
   

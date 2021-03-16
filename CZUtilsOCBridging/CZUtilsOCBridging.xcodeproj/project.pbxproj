@@ -96,9 +96,9 @@
 		C35DF695260067070063A176 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C35DF69A2600672F0063A176 /* CZUtilsOCBridgingTests-Bridging-Header.h */,
 				C35DF696260067160063A176 /* UIView+.swift */,
 				C35DF69D260067300063A176 /* UIViewController+.swift */,
+				C35DF69A2600672F0063A176 /* CZUtilsOCBridgingTests-Bridging-Header.h */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
