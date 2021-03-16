@@ -1,4 +1,4 @@
-#import <CZUtilsObjcBridging/CZUtilsObjcBridging.h>
+#import <CZUtilsOCBridging/CZUtilsOCBridging.h>
 
 #import "ViewController.h"
 
