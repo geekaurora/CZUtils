@@ -79,7 +79,6 @@
 			children = (
 				C35DF695260067070063A176 /* Extensions */,
 				C35DF67A260066870063A176 /* CZUtilsOCBridging.h */,
-				C35DF69A2600672F0063A176 /* CZUtilsOCBridgingTests-Bridging-Header.h */,
 				C35DF67B260066870063A176 /* Info.plist */,
 			);
 			path = CZUtilsOCBridging;
@@ -97,6 +96,7 @@
 		C35DF695260067070063A176 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C35DF69A2600672F0063A176 /* CZUtilsOCBridgingTests-Bridging-Header.h */,
 				C35DF696260067160063A176 /* UIView+.swift */,
 				C35DF69D260067300063A176 /* UIViewController+.swift */,
 			);
