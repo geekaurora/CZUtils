@@ -54,6 +54,15 @@ import UIKit
     childController.didMove(toParent: self)
   }
   
+  /// Remove self and its view from the parent ViewController if applicable.
+  func removeControllerAndViewFromParent() {
+    willMove(toParent: nil)
+    if isViewLoaded {
+      view.removeFromSuperview()
+    }
+    removeFromParent()
+  }
+  
   func showTitleOnNavBar() {
     let internalTitleView: UIView
     if let image = UIImage(named: "InstagramTitle") {
