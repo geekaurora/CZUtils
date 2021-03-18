@@ -1,16 +1,17 @@
 import Foundation
 
 /**
- Type safe pointer array that maintains weak reference to underlying elements.
+ Type safe pointer array that maintains weak reference of underlying elements.
  
  ### Usage
+ 
  ```
  let pointerArray = CZPointerArray<NSString>()
  
  let testObject = "testObject" as NSString
  pointerArray.addObject(testObject)
  pointerArray.removeObject(testObject)
- ```
+ ``` 
  */
 public class CZPointerArray<Element: NSObjectProtocol>: NSObject {
   private lazy var pointerArray = NSPointerArray.weakObjects()
