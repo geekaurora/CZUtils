@@ -28,6 +28,14 @@ public class CZPointerArray<Element: NSObjectProtocol>: NSObject {
       }
     }
   }
+  
+  public override var description: String {
+    var description = "Count = \(pointerArray.count), allObjects.count = \(pointerArray.allObjects.count)\n"
+    for pointer in pointerArray.allObjects {
+      description += "\(pointer)\n"
+    }
+    return description
+  }
 }
 
 // MARK: - Private method
