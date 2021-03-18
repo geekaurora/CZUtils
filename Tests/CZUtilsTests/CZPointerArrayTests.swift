@@ -9,18 +9,32 @@ class CZPointerArrayTests: XCTestCase {
   }
     
   func testAddObject() {
-    let testView = "test" as NSString
-    pointerArray.addObject(nil)
-    pointerArray.addObject(testView)
-    pointerArray.addObject(nil)
-    print("pointerArray: \(pointerArray)")
-    
-    pointerArray.removeObject(testView)
-    print("pointerArray: \(pointerArray)")
-    
+    let testObject = "testObject" as NSString
+    pointerArray.addObject(testObject)
+    let isContained = pointerArray.contains(testObject)
+    XCTAssertTrue(isContained, "Array should contain testObject.")
+  }
+  
+  func testRemoveObject() {
+    let testObject = "testObject" as NSString
+    pointerArray.addObject(testObject)
+    var isContained = pointerArray.contains(testObject)
+    XCTAssertTrue(isContained, "Array should contain testObject.")
+        
+    pointerArray.removeObject(testObject)
+    isContained = pointerArray.contains(testObject)
+    XCTAssertTrue(!isContained, "Array shouldn't contain testObject after removal.")
   }
   
   func testWeakReference() {
-    // async
+    var testObject: NSString? = "testObject" as NSString
+    pointerArray.addObject(testObject)
+    var isContained = pointerArray.contains(testObject)
+    XCTAssertTrue(isContained, "Array should contain testObject.")
+    
+    // Release `testObject` to verify `pointerArray` only holds weak reference to it.
+    testObject = nil
+    isContained = self.pointerArray.contains(testObject)
+    XCTAssertTrue(!isContained, "Array shouldn't contain testObject.")
   }
 }
