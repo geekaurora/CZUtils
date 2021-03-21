@@ -98,6 +98,21 @@ public extension String {
           $0 + String(format: "%02x", digest[$1])
       }
   }
+  
+  /**
+   Returns file type of the current string if applicable.
+   
+   e.g. return "mp3" for "file:///user/some/path/file.mp3"
+   */
+  func fileType(includingDot: Bool = false) -> String {
+    guard let res = split(separator: ".").last,
+          res.firstIndex(of: "/") == nil,
+          res.firstIndex(of: "\\") == nil else {
+      return ""
+    }
+    let dotString = includingDot ? "." : ""
+    return String(dotString + res)
+  }
 }
 
 public extension NSAttributedString {
