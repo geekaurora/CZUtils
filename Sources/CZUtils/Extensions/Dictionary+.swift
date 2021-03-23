@@ -88,3 +88,18 @@ public extension Dictionary {
     return CZHTTPJsonSerializer.stringify(self)
   }
 }
+
+// MARK: - NSCopying
+
+public extension Dictionary where Value: NSCopying {
+  /// Deep copy the dictionary if its Value conforms to `NSCopying` protocol.
+  ///
+  /// - Note: By default, when copy dictionary with class value, it will shallow copy the class objcect, event Class conforms to `NSCopying`.
+  func deepCopy(with zone: NSZone? = nil) -> Dictionary<Key, Value> {
+    var copy = Dictionary<Key, Value>()
+    for (key, value) in self {
+      copy[key] = (value.copy(with: zone) as? Value).assertIfNil
+    }
+    return copy
+  }
+}
