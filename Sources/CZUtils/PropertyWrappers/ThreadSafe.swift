@@ -21,6 +21,17 @@ import Foundation
     count += 1
    }
  ```
+ 
+Note: Directly assigning value to `count` doesn't guarantee thread safety. e.g.
+ ```
+ count = 1
+ var count2 = count
+ count2  += 10
+ 
+ // It's possible to miss value changing for `count` if the result is based on`count2`.
+ count += 1
+ count = count2 + 1
+ ```
  */
 @propertyWrapper
 public struct ThreadSafe<T> {
