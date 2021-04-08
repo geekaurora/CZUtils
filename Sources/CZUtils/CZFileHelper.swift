@@ -26,15 +26,26 @@ import Foundation
   }
   
   /**
+    Returns whether the file exists.
+   */
+  public static func fileExists(url: URL?) -> Bool {
+    guard let url = url else { return false }
+    return FileManager.default.fileExists(atPath: url.path)
+  }
+  
+  /**
     Remove local file at `url`.       
    */
   public static func removeFile(_ url: URL?) {
-    guard let url = url else { return }
+    guard let url = url,
+          fileExists(url:url) else {
+      return
+    }
+    
     do {
       try FileManager.default.removeItem(at: url)
     } catch let error as NSError {
       dbgPrint("Failed to remove file - \(url). Error - \(error.localizedDescription)")
     }
-    return
   }
 }
