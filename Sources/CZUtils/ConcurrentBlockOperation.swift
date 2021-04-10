@@ -13,9 +13,12 @@ import Foundation
 @objc
 open class ConcurrentBlockOperation: BlockOperation {
   private let semaphore = DispatchSemaphore(value: 0)
-  private var _isBlockFinished = false
   public var props = [String: Any]()
-  
+
+  private typealias ExecutionBlock = () -> Void
+  private var executionBlock: ExecutionBlock!
+  private var _isBlockFinished = false
+
   public init(block: @escaping () -> Void) {
     fatalError("Must call designated intialize init().")
   }
@@ -23,21 +26,45 @@ open class ConcurrentBlockOperation: BlockOperation {
   public override init() {
     super.init()
     
-    let awaitBlock = {
+    executionBlock = { [weak self] in
+      guard let `self` = self else { return }
       self.execute()
       
-      if (!self._isBlockFinished) {
+      // Wait for `semaphore` to finish the block execution - operation will be `isFinished`.
+      if !self._isBlockFinished {
         self.semaphore.wait()
       }
     }
-    addExecutionBlock(awaitBlock)
+    addExecutionBlock(executionBlock)
   }
   
-  open func execute() {
+  // MARK: - Override methods
+  
+  public final override func start() {
+    guard !_isBlockFinished else {
+      return
+    }
+    // Invoke super.start() to execute `self.executionBlock`.
+    super.start()
+  }
+  
+  private func execute() {
+    guard !isCancelled else {
+      dbgPrintWithFunc(self, "Skip execute() because the operation has been cancelled!")
+      return
+    }
+    _execute()
+  }
+  
+  open func _execute() {
     fatalError("\(#function) must be overriden in subclass.")
   }
   
   open func finish() {
+    guard !_isBlockFinished else {
+      assertionFailure("Shouldn't call finish() twice.")
+      return
+    }
     _isBlockFinished = true
     signalFinished()
   }

@@ -115,7 +115,7 @@ class ConcurrentBlockOperationTests: XCTestCase {
                              change: [NSKeyValueChangeKey : Any]?,
                              context: UnsafeMutableRawPointer?) {
     if keyPath == #keyPath(ConcurrentBlockOperation.isFinished),
-      let operation = object as? IdentifiableObject,
+      let operation = object as? (Operation & IdentifiableObject),
       let isFinished = change?[.newKey] as? Bool {
       
       _finishedOperationIds.threadLock{ finishedOperationIds in
@@ -143,7 +143,7 @@ fileprivate class TestConcurrentOperation: ConcurrentBlockOperation, Identifiabl
   
   deinit { removeObserver(concurrentOperationTest!, forKeyPath: #keyPath(isFinished)) }
   
-  override func execute() {
+  override func _execute() {
     dbgPrint("\(#function) executing id = \(self.id)")
     usleep(UInt32(0.01 * 1000000))
     threadLock.execute {
@@ -170,7 +170,7 @@ fileprivate class TestSynchronousOperation: ConcurrentBlockOperation, Identifiab
   
   deinit { removeObserver(concurrentOperationTest!, forKeyPath: #keyPath(isFinished)) }
   
-  override func execute() {
+  override func _execute() {
     dbgPrint("\(#function) executing id = \(self.id)")
     //usleep(UInt32(0.01 * 1000000))
     threadLock.execute {
