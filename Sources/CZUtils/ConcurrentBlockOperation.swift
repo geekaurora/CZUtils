@@ -72,7 +72,7 @@ open class ConcurrentBlockOperation: BlockOperation {
   open override func cancel() {
     super.cancel()
     signalFinished()
-    dbgPrint("executeBlock cancelled. Class = \(type(of: self)); props = \(props)")
+    dbgPrint("executeBlock cancelled. Class = \(type(of: self)); props = \(props); self = \(self)")
   }
   
   private func signalFinished() {
