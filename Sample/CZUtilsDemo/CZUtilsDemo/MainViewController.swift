@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
   }
   
   func initSubviews() {
+    // view.addSubview(fpsLabel)
     fpsLabel.overlayOnSuperViewController(self)
   }
 }
