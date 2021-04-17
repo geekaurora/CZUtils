@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3F00691262AF12500B072A0 /* FPSLabelDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F00690262AF12500B072A0 /* FPSLabelDemoController.swift */; };
 		DF6F864D24978986007260F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F864C24978986007260F6 /* AppDelegate.swift */; };
 		DF6F864F24978986007260F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F864E24978986007260F6 /* SceneDelegate.swift */; };
-		DF6F865124978986007260F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F865024978986007260F6 /* ViewController.swift */; };
+		DF6F865124978986007260F6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F865024978986007260F6 /* MainViewController.swift */; };
 		DF6F865424978986007260F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF6F865224978986007260F6 /* Main.storyboard */; };
 		DF6F865624978989007260F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F865524978989007260F6 /* Assets.xcassets */; };
 		DF6F865924978989007260F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF6F865724978989007260F6 /* LaunchScreen.storyboard */; };
@@ -51,10 +52,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C3F00690262AF12500B072A0 /* FPSLabelDemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSLabelDemoController.swift; sourceTree = "<group>"; };
 		DF6F864924978986007260F6 /* CZUtilsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZUtilsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6F864C24978986007260F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF6F864E24978986007260F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DF6F865024978986007260F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DF6F865024978986007260F6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DF6F865324978986007260F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DF6F865524978989007260F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF6F865824978989007260F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -119,11 +121,10 @@
 		DF6F864B24978986007260F6 /* CZUtilsDemo */ = {
 			isa = PBXGroup;
 			children = (
-				DF6F867C24978A51007260F6 /* Supported_Files */,
-				DF6F865024978986007260F6 /* ViewController.swift */,
-				DF6F865224978986007260F6 /* Main.storyboard */,
-				DF6F865524978989007260F6 /* Assets.xcassets */,
+				DF6F865024978986007260F6 /* MainViewController.swift */,
+				C3F00690262AF12500B072A0 /* FPSLabelDemoController.swift */,
 				DF6F865A24978989007260F6 /* Info.plist */,
+				DF6F867C24978A51007260F6 /* Supported_Files */,
 			);
 			path = CZUtilsDemo;
 			sourceTree = "<group>";
@@ -149,6 +150,8 @@
 		DF6F867C24978A51007260F6 /* Supported_Files */ = {
 			isa = PBXGroup;
 			children = (
+				DF6F865224978986007260F6 /* Main.storyboard */,
+				DF6F865524978989007260F6 /* Assets.xcassets */,
 				DF6F865724978989007260F6 /* LaunchScreen.storyboard */,
 				DF6F864E24978986007260F6 /* SceneDelegate.swift */,
 				DF6F864C24978986007260F6 /* AppDelegate.swift */,
@@ -299,7 +302,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF6F865124978986007260F6 /* ViewController.swift in Sources */,
+				DF6F865124978986007260F6 /* MainViewController.swift in Sources */,
+				C3F00691262AF12500B072A0 /* FPSLabelDemoController.swift in Sources */,
 				DF6F864D24978986007260F6 /* AppDelegate.swift in Sources */,
 				DF6F864F24978986007260F6 /* SceneDelegate.swift in Sources */,
 			);
