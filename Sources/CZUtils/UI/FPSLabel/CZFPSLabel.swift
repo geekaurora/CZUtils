@@ -30,6 +30,21 @@ public class CZFPSLabel: UILabel {
     link.invalidate()
   }
   
+  /// Displays self on`view` - align leading / bottom to `view`.
+  public func display(on view: UIView) {
+    if superview == nil {
+      view.addSubview(self)
+    }
+    translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+      self.alignLeading(to: view.safeAreaLayoutGuide, constant: 5),
+      self.alignBottom(to: view.safeAreaLayoutGuide, constant: 5)
+    ])
+  }
+  
+  // MARK: - CADisplayLink
+  
   @objc func tick(_ link: CADisplayLink) {
     guard lastTime != 0 else {
       lastTime = link.timestamp

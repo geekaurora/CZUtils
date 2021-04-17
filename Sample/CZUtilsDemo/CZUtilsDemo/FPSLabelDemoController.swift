@@ -17,11 +17,7 @@ class FPSLabelDemoController: UIViewController {
   }
   
   func initSubviews() {
-    view.addSubview(fpsLabel)
-    NSLayoutConstraint.activate([
-      fpsLabel.alignLeading(to: view.safeAreaLayoutGuide, constant: 5),
-      fpsLabel.alignBottom(to: view.safeAreaLayoutGuide, constant: 5)
-    ])
+    fpsLabel.display(on: view)    
   }
   
   func testMainThreadDelay() {
