@@ -36,7 +36,6 @@ public class CZFPSLabel: UILabel {
       lastTime = link.timestamp
       return
     }
-    
     count += 1
     let delta = link.timestamp - lastTime
     if delta < 1 {
@@ -45,9 +44,20 @@ public class CZFPSLabel: UILabel {
     lastTime = link.timestamp
     let fps = Double(count) / Double(delta)
     count = 0
-    
-    let progress = fps / 60.0
-    
+    updateText(fps: fps)
+  }
+  
+  public override func sizeThatFits(_ size: CGSize) -> CGSize {
+    return Constant.size
+  }
+  
+}
+
+// MARK: - Private methods
+
+private extension CZFPSLabel {
+  func updateText(fps: Double) {
+    // let progress = fps / 60.0    
     //    UIColor *color = [UIColor colorWithHue:0.27 * (progress - 0.2) saturation:1 brightness:0.9 alpha:1]
     //    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d FPS",(int)round(fps)]]
     //    [text yy_setColor:color range:NSMakeRange(0, text.length - 3)]
@@ -58,11 +68,6 @@ public class CZFPSLabel: UILabel {
     //    self.attributedText = text
     
     let fpsInt = Int(round(fps))
-    self.text = "\(fpsInt) FPS"
+    text = "\(fpsInt) FPS"
   }
-  
-  public override func sizeThatFits(_ size: CGSize) -> CGSize {
-    return Constant.size
-  }
-  
 }
