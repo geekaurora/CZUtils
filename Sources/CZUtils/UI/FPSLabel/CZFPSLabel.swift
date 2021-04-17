@@ -14,33 +14,16 @@ public class CZFPSLabel: UILabel {
       frame.size = Constant.size
     }
     super.init(frame: frame)
+    setupViews()
     
     self.link = CADisplayLink(target: self, selector: #selector(tick(_:)))
     link.add(to: .main, forMode: .common)
-    
-    font = UIFont(name: "Menlo", size: 14)
-    backgroundColor = UIColor(white: 0.9, alpha: 1)
-    textColor = .black
-    roundCorner(3)
   }
-  
+
   public required init?(coder: NSCoder) { fatalError() }
   
   deinit {
     link.invalidate()
-  }
-  
-  /// Displays self on`view` - align leading / bottom to `view`.
-  public func display(on view: UIView) {
-    if superview == nil {
-      view.addSubview(self)
-    }
-    translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate([
-      self.alignLeading(to: view.safeAreaLayoutGuide, constant: 5),
-      self.alignBottom(to: view.safeAreaLayoutGuide, constant: 5)
-    ])
   }
   
   // MARK: - CADisplayLink
@@ -63,14 +46,32 @@ public class CZFPSLabel: UILabel {
     updateText(fps: fps)
   }
   
-//  public override func sizeThatFits(_ size: CGSize) -> CGSize {
-//    return Constant.size
-//  }
+  // MARK: - Display
+  
+  /// Displays self on`view` - align leading / bottom to `view`.
+  public func display(on view: UIView) {
+    if superview == nil {
+      view.addSubview(self)
+    }
+    translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+      self.alignLeading(to: view.safeAreaLayoutGuide, constant: 5),
+      self.alignBottom(to: view.safeAreaLayoutGuide, constant: 5)
+    ])
+  }
 }
 
 // MARK: - Private methods
 
 private extension CZFPSLabel {
+  func setupViews() {
+    font = UIFont(name: "Menlo", size: 14)
+    backgroundColor = UIColor(white: 0.9, alpha: 1)
+    textColor = .black
+    roundCorner(3)
+  }
+  
   func updateText(fps: Double) {
     let fpsInt = Int(round(fps))
     text = "\(fpsInt) FPS"
