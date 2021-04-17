@@ -5,6 +5,12 @@ public class CZFPSLabel: UILabel {
     public static let size = CGSize(width: 55, height: 20)
     public static let backgroundColor = UIColor(white: 0.1, alpha: 1)
   }
+  
+  private lazy var displayLinkMonitor: CADisplayLinkMonitor = {
+    let displayLinkMonitor = CADisplayLinkMonitor()
+    displayLinkMonitor.delegate = self
+    return displayLinkMonitor
+  }()
   private var link: CADisplayLink!
   private var lastTime: TimeInterval = 0
   private var frames: Int = 0
@@ -17,8 +23,8 @@ public class CZFPSLabel: UILabel {
     super.init(frame: frame)
     setupViews()
     
-    self.link = CADisplayLink(target: self, selector: #selector(tick(_:)))
-    link.add(to: .main, forMode: .common)
+//    self.link = CADisplayLink(target: self, selector: #selector(tick(_:)))
+//    link.add(to: .main, forMode: .common)
   }
 
   public required init?(coder: NSCoder) { fatalError() }
@@ -64,6 +70,17 @@ public class CZFPSLabel: UILabel {
   
   public override func sizeThatFits(_ size: CGSize) -> CGSize {
     Constant.size
+  }
+}
+
+// MARK: - CADisplayLinkMonitorDelegate
+
+extension CZFPSLabel: CADisplayLinkMonitorDelegate {
+  public func displayFrameDidUpdate(link: CADisplayLink, fps: Double?) {
+    guard let fps = fps else {
+      return
+    }
+    updateText(fps: fps)
   }
 }
 
