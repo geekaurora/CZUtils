@@ -8,15 +8,20 @@ public class CZFPSLabel: UILabel {
   private var lastTime: TimeInterval = 0
   private var frames: Int = 0
   
-  public override init(frame: CGRect) {
+  public override init(frame theFrame: CGRect) {
+    var frame = theFrame
+    if theFrame.size == .zero {
+      frame.size = Constant.size
+    }
     super.init(frame: frame)
     
     self.link = CADisplayLink(target: self, selector: #selector(tick(_:)))
     link.add(to: .main, forMode: .common)
     
     font = UIFont(name: "Menlo", size: 14)
-    backgroundColor = .white
-    // self.text = "60 fps"
+    backgroundColor = UIColor(white: 0.9, alpha: 1)
+    textColor = .black
+    roundCorner(3)
   }
   
   public required init?(coder: NSCoder) { fatalError() }
@@ -43,9 +48,9 @@ public class CZFPSLabel: UILabel {
     updateText(fps: fps)
   }
   
-  public override func sizeThatFits(_ size: CGSize) -> CGSize {
-    return Constant.size
-  }
+//  public override func sizeThatFits(_ size: CGSize) -> CGSize {
+//    return Constant.size
+//  }
 }
 
 // MARK: - Private methods
