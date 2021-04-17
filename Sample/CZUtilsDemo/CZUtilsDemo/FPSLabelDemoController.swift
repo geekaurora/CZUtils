@@ -4,8 +4,7 @@ import CZUtils
 class FPSLabelDemoController: UIViewController {
 
   private lazy var fpsLabel: CZFPSLabel = {
-    // let fpsLabel = CZFPSLabel(frame: CGRect(x: 40, y: 40, width: 100, height: 100))
-    let fpsLabel = CZFPSLabel(frame: CGRect(x: 40, y: 40, width: 0, height: 0))
+    let fpsLabel = CZFPSLabel()
     return fpsLabel
   }()
   
@@ -19,7 +18,10 @@ class FPSLabelDemoController: UIViewController {
   
   func initSubviews() {
     view.addSubview(fpsLabel)
-    // fpsLabel.overlayOnSuperViewController(self)
+    NSLayoutConstraint.activate([
+      fpsLabel.alignLeading(to: view.safeAreaLayoutGuide, constant: 5),
+      fpsLabel.alignBottom(to: view.safeAreaLayoutGuide, constant: 5)
+    ])
   }
   
   func testMainThreadDelay() {
