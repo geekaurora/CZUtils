@@ -15,8 +15,8 @@ class FPSLabelDemoController: UIViewController {
   }
   
   func initSubviews() {
-    // view.addSubview(fpsLabel)
-    fpsLabel.overlayOnSuperViewController(self)
+    view.addSubview(fpsLabel)
+    // fpsLabel.overlayOnSuperViewController(self)
   }
   
   func testMainThreadDelay() {

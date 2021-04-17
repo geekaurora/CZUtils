@@ -4,12 +4,9 @@ public class CZFPSLabel: UILabel {
   private enum Constant {
     static let size = CGSize(width: 55, height: 20)
   }
-  
   private var link: CADisplayLink!
   private var lastTime: TimeInterval = 0
-  private var count: Int = 0
-//  private var _llll: TimeInterval = 0
-//  private var subFont: UIFont?
+  private var frames: Int = 0
   
   public override init(frame: CGRect) {
     super.init(frame: frame)
@@ -18,8 +15,8 @@ public class CZFPSLabel: UILabel {
     link.add(to: .main, forMode: .common)
     
     font = UIFont(name: "Menlo", size: 14)
-    backgroundColor = .red
-    self.text = "60 fps"
+    backgroundColor = .white
+    // self.text = "60 fps"
   }
   
   public required init?(coder: NSCoder) { fatalError() }
@@ -34,15 +31,15 @@ public class CZFPSLabel: UILabel {
       return
     }
     
-    count += 1
-    let delta = link.timestamp - lastTime
-    if delta < 1 {
+    frames += 1
+    let timeDelta = link.timestamp - lastTime
+    if timeDelta < 1 {
       return
     }
     
     lastTime = link.timestamp
-    let fps = Double(count) / Double(delta)
-    count = 0
+    let fps = Double(frames) / Double(timeDelta)
+    frames = 0
     updateText(fps: fps)
   }
   
