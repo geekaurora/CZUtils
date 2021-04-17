@@ -45,7 +45,7 @@ public class CZFPSLabel: UILabel {
 // MARK: - CADisplayLinkMonitorDelegate
 
 extension CZFPSLabel: CADisplayLinkMonitorDelegate {
-  public func displayFrameDidUpdate(link: CADisplayLink, fps: Double?) {
+  public func displayFrameDidUpdate(displayLink: CADisplayLink, fps: Double?) {
     guard let fps = fps else {
       return
     }

@@ -2,58 +2,59 @@ import UIKit
 
 /// Delegate that gets notified on display frame update of CADisplayLink.
 public protocol CADisplayLinkMonitorDelegate: class {
-  func displayFrameDidUpdate(link: CADisplayLink, fps: Double?)
+  func displayFrameDidUpdate(displayLink: CADisplayLink, fps: Double?)
 }
 
 /// Monitor that monitors each display frame update of CADisplayLink.
 @objc
 public class CADisplayLinkMonitor: NSObject {
+  /// Delegate that gets notified on display frame update of CADisplayLink.
   public weak var delegate: CADisplayLinkMonitorDelegate?
   
-  private var link: CADisplayLink!
-  private var lastTime: TimeInterval = 0
-  private var frames: Int = 0
+  private var displayLink: CADisplayLink!
+  private var lastUpdateTimestamp: TimeInterval = 0
+  private var updatedFrames: Int = 0
   private var shouldNotifyEachFrameUpdate: Bool
   
   /// Initialize CADisplayLinkMonitor.
   ///
-  /// - Parameter shouldNotifyEachFrameUpdate: Indicates whether notify delegate with each frame update, even with no fps data. Defaults to false.
+  /// - Parameter shouldNotifyEachFrameUpdate: Indicates whether notify delegate on each frame update, even with no fps data. Defaults to false.
   ///
   public init(shouldNotifyEachFrameUpdate: Bool = false) {
     self.shouldNotifyEachFrameUpdate = shouldNotifyEachFrameUpdate
     super.init()
     
-    self.link = CADisplayLink(target: self, selector: #selector(tick(_:)))
-    link.add(to: .main, forMode: .common)
+    self.displayLink = CADisplayLink(target: self, selector: #selector(tick(_:)))
+    displayLink.add(to: .main, forMode: .common)
   }
 
   deinit {
-    link.invalidate()
+    displayLink.invalidate()
   }
   
   // MARK: - CADisplayLink
   
-  @objc func tick(_ link: CADisplayLink) {
+  @objc func tick(_ displayLink: CADisplayLink) {
     var fps: Double?
     defer {
       if shouldNotifyEachFrameUpdate || fps != nil {
-        delegate?.displayFrameDidUpdate(link: link, fps: fps)
+        delegate?.displayFrameDidUpdate(displayLink: displayLink, fps: fps)
       }
     }
     
-    guard lastTime != 0 else {
-      lastTime = link.timestamp
+    guard lastUpdateTimestamp != 0 else {
+      lastUpdateTimestamp = displayLink.timestamp
       return
     }
     
-    frames += 1
-    let timeDelta = link.timestamp - lastTime
+    updatedFrames += 1
+    let timeDelta = displayLink.timestamp - lastUpdateTimestamp
     if timeDelta < 1 {
       return
     }
     
-    lastTime = link.timestamp
-    fps = Double(frames) / Double(timeDelta)
-    frames = 0
+    lastUpdateTimestamp = displayLink.timestamp
+    fps = Double(updatedFrames) / Double(timeDelta)
+    updatedFrames = 0
   }
 }
