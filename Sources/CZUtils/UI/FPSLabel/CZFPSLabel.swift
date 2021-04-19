@@ -5,7 +5,7 @@ public class CZFPSLabel: UILabel {
     public static let size = CGSize(width: 55, height: 20)
     public static let backgroundColor = UIColor(white: 0.1, alpha: 1)
   }
-  private var displayLinkMonitor: CADisplayLinkMonitor!
+  private var displayLinkObserver: CADisplayLinkObserver!
   
   public override init(frame theFrame: CGRect) {
     var frame = theFrame
@@ -15,9 +15,9 @@ public class CZFPSLabel: UILabel {
     super.init(frame: frame)
     setupViews()
     
-    // Initialize CADisplayLinkMonitor.
-    displayLinkMonitor = CADisplayLinkMonitor()
-    displayLinkMonitor.delegate = self
+    // Initialize CADisplayLinkObserver.
+    displayLinkObserver = CADisplayLinkObserver()
+    displayLinkObserver.delegate = self
   }
 
   public required init?(coder: NSCoder) { fatalError() }
@@ -42,9 +42,9 @@ public class CZFPSLabel: UILabel {
   }
 }
 
-// MARK: - CADisplayLinkMonitorDelegate
+// MARK: - CADisplayLinkObserverDelegate
 
-extension CZFPSLabel: CADisplayLinkMonitorDelegate {
+extension CZFPSLabel: CADisplayLinkObserverDelegate {
   public func displayFrameDidUpdate(displayLink: CADisplayLink, fps: Double?) {
     guard let fps = fps else {
       return
