@@ -38,6 +38,15 @@ public class ThreadSafeArray<Element> {
     _array.threadLock { value in
       value.remove(element)
     }
+  }  
+  
+  /// Removes all elements from the array.
+  ///
+  /// - Parameter keepCapacity: Indicates whether to keep the existing capacity of the array after removing its elements. Defaults to false.
+  public func removeAll(keepingCapacity keepCapacity: Bool = false) {
+    _array.threadLock { value in
+      value.removeAll(keepingCapacity: keepCapacity)
+    }
   }
   
   public func contains(_ element: Element) -> Bool {
