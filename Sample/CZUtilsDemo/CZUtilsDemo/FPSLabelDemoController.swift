@@ -13,7 +13,7 @@ class FPSLabelDemoController: UIViewController {
     view.backgroundColor = .white
     
     initSubviews()
-    testMainThreadDelay()
+    // testMainThreadDelay()
   }
   
   func initSubviews() {

@@ -1,22 +1,22 @@
 import UIKit
 
-/// Delegate that gets notified on display frame update of CADisplayLink.
-public protocol CADisplayLinkMonitorDelegate: class {
+/// Delegate that gets notified on rendering frame update of CADisplayLink.
+public protocol CADisplayLinkObserverDelegate: class {
   func displayFrameDidUpdate(displayLink: CADisplayLink, fps: Double?)
 }
 
-/// Monitor that monitors each display frame update of CADisplayLink.
+/// Observer that observes each rendering frame update of CADisplayLink.
 @objc
-public class CADisplayLinkMonitor: NSObject {
+public class CADisplayLinkObserver: NSObject {
   /// Delegate that gets notified on display frame update of CADisplayLink.
-  public weak var delegate: CADisplayLinkMonitorDelegate?
+  public weak var delegate: CADisplayLinkObserverDelegate?
   
   private var displayLink: CADisplayLink!
   private var lastUpdateTimestamp: TimeInterval = 0
   private var updatedFrames: Int = 0
   private var shouldNotifyEachFrameUpdate: Bool
   
-  /// Initialize CADisplayLinkMonitor.
+  /// Initialize CADisplayLinkObserver.
   ///
   /// - Parameter shouldNotifyEachFrameUpdate: Indicates whether notify delegate on each frame update, even with no fps data. Defaults to false.
   ///
