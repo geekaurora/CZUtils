@@ -11,6 +11,10 @@ public class RegExHelper {
   
   /// Extract  variable with RegEx group match name. e.g.  "<h1>(?<var>.*)</h1>" pattern.
   /// - Note: Group name in `pattern` should be 'var'.
+  ///
+  /// - Sample
+  ///  RegExHelper.extractVariable("<h1>some string</h1>", pattern: "<h1>(?<var>.*)</h1>")
+  ///  Output: "some string"
   public static func extractVariable(_ string: String,
                                      pattern: String,
                                      options: NSRegularExpression.Options = .caseInsensitive,

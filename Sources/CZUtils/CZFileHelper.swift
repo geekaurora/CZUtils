@@ -48,4 +48,30 @@ import Foundation
       dbgPrint("Failed to remove file - \(url). Error - \(error.localizedDescription)")
     }
   }
+  
+  /**
+    Append `string` to the file.
+   */
+  public static func appendStringToFile(url: URL?, string: String) {
+    guard let url = url else { return }
+    
+    // Read file.
+    var existingContent = ""
+    if fileExists(url:url) {
+      do {
+        existingContent = try String(contentsOf: url)
+      } catch {
+        dbgPrint("Failed to read file - \(url). Error - \(error.localizedDescription)")
+      }
+    }
+    
+    // Write file.
+    existingContent += "\n" + string
+    do {
+      try existingContent.write(to: url, atomically: true, encoding: .utf8)
+    } catch {
+      dbgPrint("Failed to write file - \(url). Error - \(error.localizedDescription)")
+    }
+  }
+  
 }
