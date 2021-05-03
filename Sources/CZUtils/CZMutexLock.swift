@@ -34,9 +34,16 @@ public class CZMutexLock<Item>: NSObject {
   }
   
   /// Execute `block` with write lock that protects `item`
+  ///
+  /// - Parameters:
+  ///   - isAsync   : Whether should exectute `block` with the write lock asynchronously. Defaults to false.
+  ///   - block       : the block to be executed.
+  /// - Returns       : The returned result from `block` if any.
   @discardableResult
-  public func writeLock<Result>(_ block: @escaping (_ item: inout Item) -> Result?) -> Result? {
-    return lock.write(isAsync: shouldWriteBeAsync) { [weak self] in
+  public func writeLock<Result>(isAsync: Bool = false,
+                                _ block: @escaping (_ item: inout Item) -> Result?) -> Result? {
+    let isAsync = isAsync || self.shouldWriteBeAsync
+    return lock.write(isAsync: isAsync) { [weak self] in
       guard let `self` = self else {
         assertionFailure("self was deallocated!")
         return nil
