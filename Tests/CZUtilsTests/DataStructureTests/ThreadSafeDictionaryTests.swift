@@ -25,7 +25,6 @@ class ThreadSafeDictionaryTests: XCTestCase {
     XCTAssert(threadSafeDict.isEqual(toDictionary: originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
   }
   
-  // TODO: Fix the test.
   func testMultiThreadSetValue() {
     // 1. Initialize ThreadSafeDictionary
     let threadSafeDict = ThreadSafeDictionary<Int, Int>()
