@@ -12,12 +12,11 @@ import Foundation
 open class ThreadSafeDictionary<Key: Hashable, Value: Any>: NSObject, Collection, ExpressibleByDictionaryLiteral {
   public typealias DictionaryType = Dictionary<Key, Value>
   
-  // private var protectedCache: CZMutexLock<DictionaryType>
+  /// The underlying dictionary with the thread safety.
+  /// Update(2021-05-08): Convert thread lock from `CZMutexLock` to @ThreadSafe - fix crash of ThreadSafeDictionaryTests.testMultiThreadSetValue().
   @ThreadSafe
   private var protectedCache: DictionaryType
-  private let emptyDictionary = DictionaryType()
   private var underlyingDictionary: DictionaryType {
-    //return protectedCache.readLock{ $0 }!
     return protectedCache
   }
   
