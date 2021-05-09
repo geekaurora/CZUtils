@@ -18,8 +18,13 @@ class NSDispatchQueueTests: XCTestCase {
   
   private var threadSafeDict: [Int: Int] = [:]
   
-  /*
+  /**
    Verify multiple tasks - workQueue.sync(.barrier) work correctly, after waiting for other .barrier tasks.
+   
+   ### Results
+   
+   - If there's .barrier task executing in DispatchQueue, other tasks will wait till the current .barrier task completes.
+   - Multiple tasks - workQueue.sync(.barrier) work correctly.
    */
   func testMultiThreadSetValue() {
     // 1. Initialize ThreadSafeDictionary
