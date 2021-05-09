@@ -9,10 +9,16 @@ import Foundation
 
 /// Generic multi-thread mutex lock on top of DispatchQueue sync/barrier
 public class CZMutexLock<Item>: NSObject {
-  private lazy var lock = DispatchReadWriteLock()
+  /// `lock` should be initialized immediately to avoid crash if `lazy` load.
+  ///
+  /// Ticket: https://github.com/geekaurora/CZUtils/issues/8
+  /// Note: The issue wasn't casued by DispatchQueue.async(flags: .barrier)
+  private let lock = DispatchReadWriteLock()
+  
+  /// The underlying data item.
   private var item: Item
-  /// Indicates whether write lock is asynchronous. If false, then write lock will be synchronous.
-  /// Defaults to false, should ensure state consistency across threads if set it to true.
+  
+  /// Indicates whether write lock is asynchronous. Defaults to false.
   private let shouldWriteBeAsync: Bool
   
   public init(_ item: Item,
