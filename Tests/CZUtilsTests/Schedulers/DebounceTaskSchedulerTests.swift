@@ -15,12 +15,54 @@ class DebounceTaskSchedulerTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    
     count = 0
-    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap)
   }
+
+  func testTasksInCombinedGapsOnBackgroundQueue() {
+    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap, onMainThread: false)
+        
+    count = 0
+    // Schedule task now
+    scheduleCounterTask(after: 0)
+    // Expected `count` = 1 now
+    assertCount(equalsTo: 1)
+    
+    // Schedule task now again. As actualGap between first/second tasks < `gap`(0.1 sec), second task will be scheduled to next gap cycle
+    gapTaskScheduler.schedule { [weak self] in
+      self?.incrementCount()
+    }
+    // Expected `count` = 1 now
+    assertCount(equalsTo: 1)
+    // Expected `count` = 2 after 0.1 sec
+    assertCount(equalsTo: 2, after: 0.10)
+    
+    // Tasks in `gap` [0, 0.1] sec should be delayed/merged and executed only once
+    scheduleCounterTask(after: 0.03)
+    scheduleCounterTask(after: 0.04)
+    scheduleCounterTask(after: 0.05)
+    // Expected `count` = 1 now
+    assertCount(equalsTo: 1)
+    // Expected `count` = 2 after 0.1 sec
+    assertCount(equalsTo: 2, after: 0.10)
+    
+    // Tasks in `gap` [0.1, 0.2] sec should be delayed/merged and executed only once
+    scheduleCounterTask(after: 0.13)
+    scheduleCounterTask(after: 0.14)
+    scheduleCounterTask(after: 0.15)
+    // Expected `count` = 3 after 0.2 sec
+    assertCount(equalsTo: 3, after: 0.20)
+    
+    // Schedule task at 0.32 sec, as last execution date is 0.20 sec, it should be executed immediately
+    scheduleCounterTask(after: 0.32)
+    // Expected `count` = 4 after 0.32 sec
+    assertCount(equalsTo: 4, after: 0.32)
+    // Expected `count` = 4 after 0.40 sec
+    assertCount(equalsTo: 4, after: 0.40)
+  }      
   
-  func testTasksInCombinedGaps() {
+  func testTasksInCombinedGapsOnMainThread() {
+    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap)
+
     count = 0
     // Schedule task now
     scheduleCounterTask(after: 0)
