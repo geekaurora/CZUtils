@@ -28,8 +28,8 @@ public class DebounceTaskScheduler {
   }
   
   func tick() {
+    // If task isn't nil, execute task() then set it to nil.    
     _task.threadLock { (_task) -> Void in
-      // If task isn't nil, execute task() then set it to nil.
       if _task != nil {
         _task?()
         _task = nil
