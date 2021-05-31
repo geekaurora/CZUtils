@@ -182,35 +182,6 @@ fileprivate extension DebounceTaskSchedulerTests {
     }
   }
   
-  func schedulePostExecutionCounterTask(after delayTime: TimeInterval = 0) {
-    let key = #file + #function
-    if delayTime == 0 {
-      gapTaskScheduler.schedulePostExecution(key: key) {
-        self.incrementPostExecutionCount()
-      }
-      return
-    }
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayTime) {
-      self.gapTaskScheduler.schedulePostExecution(key: key) {
-        self.incrementPostExecutionCount()
-      }
-    }
-  }
-  
-  func schedulePostExecutionCounterTask2(after delayTime: TimeInterval = 0) {
-    let key = #file + #function
-    if delayTime == 0 {
-      gapTaskScheduler.schedulePostExecution(key: key) {
-        self.incrementSecondPostExecutionCount()
-      }
-      return
-    }
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayTime) {
-      self.gapTaskScheduler.schedulePostExecution(key: key) {
-        self.incrementSecondPostExecutionCount()
-      }
-    }
-  }
 }
 
 // MARK: - Helper methods

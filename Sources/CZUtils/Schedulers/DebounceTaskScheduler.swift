@@ -17,9 +17,10 @@ public class DebounceTaskScheduler {
     self.gap = gap
     
     self.timer = CZDispatchSourceTimer(timeInterval: Int(gap))
-    self.timer.tickClosure = { [weak self] in
+    timer.tickClosure = { [weak self] in
       self?.tick()
     }
+    timer.resume()
   }
 
   public func schedule(task: @escaping Task) {
