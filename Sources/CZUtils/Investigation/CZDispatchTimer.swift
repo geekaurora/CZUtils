@@ -3,6 +3,15 @@ import Foundation
 /**
  Timer implemented with DispatchSourceTimer.
  
+ ### Usage
+ 
+ ```
+ let timer = CZDispatchTimer(timeInterval: 1) {
+   print("CZDispatchTimer - ticking .. Thread.current = \(Thread.current)")
+ }
+ 
+ timer.suspend()
+ ```
  https://gist.github.com/danielgalasko/1da90276f23ea24cb3467c33d2c05768
  https://www.semicolonworld.com/question/76828/dispatchsourcetimer-and-swift-3-0
  */
