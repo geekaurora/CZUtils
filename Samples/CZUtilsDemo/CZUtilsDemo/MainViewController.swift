@@ -3,8 +3,8 @@ import CZUtils
 
 class MainViewController: UIViewController {
   
-  let timer = CZDispatchTimer(timeInterval: 1) {
-    print("CZDispatchTimer - ticking .. Thread.current = \(Thread.current)")
+  let timer = CZDispatchSourceTimer(timeInterval: 1) {
+    print("CZDispatchSourceTimer - ticking .. Thread.current = \(Thread.current)")
   }
   
   override func viewDidLoad() {

@@ -6,8 +6,8 @@ import Foundation
  ### Usage
  
  ```
- let timer = CZDispatchTimer(timeInterval: 1) {
-   print("CZDispatchTimer - ticking .. Thread.current = \(Thread.current)")
+ let timer = CZDispatchSourceTimer(timeInterval: 1) {
+   print("CZDispatchSourceTimer - ticking .. Thread.current = \(Thread.current)")
  }
  
  timer.suspend()
@@ -15,7 +15,7 @@ import Foundation
  https://gist.github.com/danielgalasko/1da90276f23ea24cb3467c33d2c05768
  https://www.semicolonworld.com/question/76828/dispatchsourcetimer-and-swift-3-0
  */
-public class CZDispatchTimer: NSObject {
+public class CZDispatchSourceTimer: NSObject {
   public typealias Tick = () -> Void
   
   private enum State {
@@ -25,17 +25,17 @@ public class CZDispatchTimer: NSObject {
   let queue: DispatchQueue
   let timer: DispatchSourceTimer
   let timeInterval: Int
-  let tickClosure: DispatchSourceProtocol.DispatchSourceHandler
+  var tickClosure: DispatchSourceProtocol.DispatchSourceHandler?
 
   private var state: State = .suspended
   
   public init(timeInterval: Int,
-              tickClosure: @escaping DispatchSourceProtocol.DispatchSourceHandler) {
+              tickClosure: DispatchSourceProtocol.DispatchSourceHandler? = nil) {
     self.timeInterval = timeInterval
     self.tickClosure = tickClosure
     
     // Serial queue - no guarantee executes on the same thread.
-    queue = DispatchQueue(label: "com.CZDispatchTimer")
+    queue = DispatchQueue(label: "com.CZDispatchSourceTimer")
     
     timer = DispatchSource.makeTimerSource(
       flags: DispatchSource.TimerFlags(rawValue: UInt(0)),
@@ -54,6 +54,8 @@ public class CZDispatchTimer: NSObject {
   }
   
   public func start() {
+    assert(tickClosure != nil, "tickClosure shouldn't be nil.")
+    
     timer.schedule(deadline: DispatchTime.now(),
                    repeating: .seconds(timeInterval),
                    leeway: .seconds(timeInterval)
