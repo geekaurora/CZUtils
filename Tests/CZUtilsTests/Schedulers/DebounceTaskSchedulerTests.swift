@@ -21,14 +21,6 @@ class DebounceTaskSchedulerTests: XCTestCase {
   }
   
   func testTasksInCombinedGaps() {
-    _testTasksInCombinedGaps()
-  }  
-}
-
-// MARK: - Actual reusable tests
-
-fileprivate extension DebounceTaskSchedulerTests {
-  func _testTasksInCombinedGaps() {
     count = 0
     // Schedule task now
     scheduleCounterTask(after: 0)
