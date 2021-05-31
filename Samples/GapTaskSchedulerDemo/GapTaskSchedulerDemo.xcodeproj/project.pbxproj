@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3F79C4D2665073500B5CE3D /* CZUtils in Frameworks */ = {isa = PBXBuildFile; productRef = C3F79C4C2665073500B5CE3D /* CZUtils */; };
+		C3F79C4F2665073500B5CE3D /* CZUtils in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C3F79C4C2665073500B5CE3D /* CZUtils */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C3F79C57266507F100B5CE3D /* GapTaskSchedulerTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9A17E7200A9E570073737D /* GapTaskSchedulerTester.swift */; };
 		DF9A17B7200A9BFE0073737D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9A17B6200A9BFE0073737D /* AppDelegate.swift */; };
 		DF9A17B9200A9BFE0073737D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9A17B8200A9BFE0073737D /* ViewController.swift */; };
 		DF9A17BC200A9BFE0073737D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF9A17BA200A9BFE0073737D /* Main.storyboard */; };
@@ -16,27 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C37B6587241CBF6E00A6F449 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C37B6566241CBEF700A6F449;
-			remoteInfo = GapTaskScheduler;
-		};
-		C37B6589241CBF6E00A6F449 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C37B656F241CBEF700A6F449;
-			remoteInfo = GapTaskSchedulerTests;
-		};
-		C37B658B241CBF7500A6F449 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C37B6565241CBEF700A6F449;
-			remoteInfo = GapTaskScheduler;
-		};
 		DF9A17C8200A9BFF0073737D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DF9A17AB200A9BFE0073737D /* Project object */;
@@ -53,8 +35,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C3F79C4E2665073500B5CE3D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C3F79C4F2665073500B5CE3D /* CZUtils in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GapTaskScheduler.xcodeproj; path = ../GapTaskScheduler/GapTaskScheduler.xcodeproj; sourceTree = "<group>"; };
+		C3F79C422665071D00B5CE3D /* CZUtils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CZUtils; path = ../..; sourceTree = "<group>"; };
 		DF9A17B3200A9BFE0073737D /* GapTaskSchedulerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GapTaskSchedulerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF9A17B6200A9BFE0073737D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF9A17B8200A9BFE0073737D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3F79C4D2665073500B5CE3D /* CZUtils in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,23 +92,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C37B6583241CBF6D00A6F449 /* Products */ = {
+		C3F79C4B2665073500B5CE3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C37B6588241CBF6E00A6F449 /* GapTaskScheduler.framework */,
-				C37B658A241CBF6E00A6F449 /* GapTaskSchedulerTests.xctest */,
 			);
-			name = Products;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C3F79C522665074C00B5CE3D /* Supported_Files */ = {
+			isa = PBXGroup;
+			children = (
+				DF9A17B6200A9BFE0073737D /* AppDelegate.swift */,
+				DF9A17BA200A9BFE0073737D /* Main.storyboard */,
+				DF9A17BD200A9BFE0073737D /* Assets.xcassets */,
+				DF9A17BF200A9BFE0073737D /* LaunchScreen.storyboard */,
+			);
+			path = Supported_Files;
 			sourceTree = "<group>";
 		};
 		DF9A17AA200A9BFE0073737D = {
 			isa = PBXGroup;
 			children = (
-				C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */,
+				C3F79C422665071D00B5CE3D /* CZUtils */,
 				DF9A17B5200A9BFE0073737D /* GapTaskSchedulerDemo */,
 				DF9A17CA200A9BFF0073737D /* GapTaskSchedulerDemoTests */,
 				DF9A17D5200A9BFF0073737D /* GapTaskSchedulerDemoUITests */,
 				DF9A17B4200A9BFE0073737D /* Products */,
+				C3F79C4B2665073500B5CE3D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,12 +136,9 @@
 			isa = PBXGroup;
 			children = (
 				DF9A17E7200A9E570073737D /* GapTaskSchedulerTester.swift */,
-				DF9A17B6200A9BFE0073737D /* AppDelegate.swift */,
 				DF9A17B8200A9BFE0073737D /* ViewController.swift */,
-				DF9A17BA200A9BFE0073737D /* Main.storyboard */,
-				DF9A17BD200A9BFE0073737D /* Assets.xcassets */,
-				DF9A17BF200A9BFE0073737D /* LaunchScreen.storyboard */,
 				DF9A17C2200A9BFE0073737D /* Info.plist */,
+				C3F79C522665074C00B5CE3D /* Supported_Files */,
 			);
 			path = GapTaskSchedulerDemo;
 			sourceTree = "<group>";
@@ -166,13 +170,17 @@
 				DF9A17AF200A9BFE0073737D /* Sources */,
 				DF9A17B0200A9BFE0073737D /* Frameworks */,
 				DF9A17B1200A9BFE0073737D /* Resources */,
+				C3F79C4E2665073500B5CE3D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C37B658C241CBF7500A6F449 /* PBXTargetDependency */,
+				C3F79C4A2665073100B5CE3D /* PBXTargetDependency */,
 			);
 			name = GapTaskSchedulerDemo;
+			packageProductDependencies = (
+				C3F79C4C2665073500B5CE3D /* CZUtils */,
+			);
 			productName = GapTaskSchedulerDemo;
 			productReference = DF9A17B3200A9BFE0073737D /* GapTaskSchedulerDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -250,12 +258,6 @@
 			mainGroup = DF9A17AA200A9BFE0073737D;
 			productRefGroup = DF9A17B4200A9BFE0073737D /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = C37B6583241CBF6D00A6F449 /* Products */;
-					ProjectRef = C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				DF9A17B2200A9BFE0073737D /* GapTaskSchedulerDemo */,
@@ -264,23 +266,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		C37B6588241CBF6E00A6F449 /* GapTaskScheduler.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GapTaskScheduler.framework;
-			remoteRef = C37B6587241CBF6E00A6F449 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C37B658A241CBF6E00A6F449 /* GapTaskSchedulerTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = GapTaskSchedulerTests.xctest;
-			remoteRef = C37B6589241CBF6E00A6F449 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DF9A17B1200A9BFE0073737D /* Resources */ = {
@@ -316,6 +301,7 @@
 			files = (
 				DF9A17B9200A9BFE0073737D /* ViewController.swift in Sources */,
 				DF9A17B7200A9BFE0073737D /* AppDelegate.swift in Sources */,
+				C3F79C57266507F100B5CE3D /* GapTaskSchedulerTester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,10 +323,9 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C37B658C241CBF7500A6F449 /* PBXTargetDependency */ = {
+		C3F79C4A2665073100B5CE3D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = GapTaskScheduler;
-			targetProxy = C37B658B241CBF7500A6F449 /* PBXContainerItemProxy */;
+			productRef = C3F79C492665073100B5CE3D /* CZUtils */;
 		};
 		DF9A17C9200A9BFF0073737D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -476,7 +461,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -487,7 +473,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GapTaskSchedulerDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -501,7 +491,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GapTaskSchedulerDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -516,7 +510,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GapTaskSchedulerDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemoTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -532,7 +530,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GapTaskSchedulerDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemoTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -547,7 +549,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GapTaskSchedulerDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemoUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -562,7 +568,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GapTaskSchedulerDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemoUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -611,6 +621,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C3F79C492665073100B5CE3D /* CZUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CZUtils;
+		};
+		C3F79C4C2665073500B5CE3D /* CZUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CZUtils;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DF9A17AB200A9BFE0073737D /* Project object */;
 }
