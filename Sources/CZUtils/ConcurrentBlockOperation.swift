@@ -13,11 +13,14 @@ import Foundation
 @objc
 open class ConcurrentBlockOperation: BlockOperation {
   private let semaphore = DispatchSemaphore(value: 0)
+  @ThreadSafe
   public var props = [String: Any]()
 
   private typealias ExecutionBlock = () -> Void
   private var executionBlock: ExecutionBlock!
-  private var _isBlockFinished = false
+  
+  @ThreadSafe
+  private var isBlockFinished = false
 
   public init(block: @escaping () -> Void) {
     fatalError("Must call designated intialize init().")
@@ -31,7 +34,7 @@ open class ConcurrentBlockOperation: BlockOperation {
       self.execute()
       
       // Wait for `semaphore` to finish the block execution - operation will be `isFinished`.
-      if !self._isBlockFinished {
+      if !self.isBlockFinished {
         self.semaphore.wait()
       }
     }
@@ -41,7 +44,7 @@ open class ConcurrentBlockOperation: BlockOperation {
   // MARK: - Override methods
   
   public final override func start() {
-    guard !_isBlockFinished && !self.isExecuting else {
+    guard !isBlockFinished && !self.isExecuting else {
       return
     }
     // Invoke super.start() to execute `self.executionBlock`.
@@ -61,11 +64,11 @@ open class ConcurrentBlockOperation: BlockOperation {
   }
   
   open func finish() {
-    guard !_isBlockFinished else {
+    guard !isBlockFinished else {
       // assertionFailure("Shouldn't call finish() twice.")
       return
     }
-    _isBlockFinished = true
+    isBlockFinished = true
     signalFinished()
   }
   

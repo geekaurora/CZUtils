@@ -17,4 +17,14 @@ public class CZSystemInfo: NSObject {
     return 0
   }
   
+  public static func getURLSessionInfo() {
+    // The settings can be updated.    
+    // diskCapacity: Simulator = 10M, device = 10M (used = 12M)
+    
+    dbgPrint("URLCache.shared.currentDiskUsage = \(URLCache.shared.currentDiskUsage.sizeString), URLCache.shared.diskCapacity = \(URLCache.shared.diskCapacity.sizeString)")
+    
+    // memoryCapacity: 512K
+    // dbgPrint("URLCache.shared.currentMemoryUsage = \(URLCache.shared.currentMemoryUsage), URLCache.shared.memoryCapacity = \(URLCache.shared.memoryCapacity)")
+  }
+  
 }
