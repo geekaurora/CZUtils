@@ -23,7 +23,7 @@ class DebounceTaskSchedulerTests: XCTestCase {
   }
 
   func testOneTask() {
-    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap, onMainThread: false)
+    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap)
         
     count = 0
     // Schedule task now
@@ -33,7 +33,7 @@ class DebounceTaskSchedulerTests: XCTestCase {
   }
     
   func testMultiTasks() {
-    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap, onMainThread: false)
+    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap)
         
     count = 0
     // Schedule task now
@@ -48,7 +48,7 @@ class DebounceTaskSchedulerTests: XCTestCase {
   }
   
   func testMultiTasksWithOverlapping() {
-    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap, onMainThread: false)
+    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap)
         
     count = 0
     // Schedule task now

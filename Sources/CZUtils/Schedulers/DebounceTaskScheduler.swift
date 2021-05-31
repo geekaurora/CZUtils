@@ -2,6 +2,8 @@ import Foundation
 
 /**
  Scheduler that merges the same tasks and only executes the last task.
+ 
+ - Note: Task will execute on a background serial DispatchQueue.
  */
 public class DebounceTaskScheduler {
   public typealias Task = () -> Void
@@ -13,7 +15,7 @@ public class DebounceTaskScheduler {
   @ThreadSafe
   private var task: Task?
   
-  public init(gap: TimeInterval, onMainThread: Bool = true) {
+  public init(gap: TimeInterval) {
     self.gap = gap
     
     self.timer = CZDispatchSourceTimer(timeInterval: Int(gap))
