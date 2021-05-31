@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DF9A17B7200A9BFE0073737D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9A17B6200A9BFE0073737D /* AppDelegate.swift */; };
+		DF9A17B9200A9BFE0073737D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9A17B8200A9BFE0073737D /* ViewController.swift */; };
+		DF9A17BC200A9BFE0073737D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF9A17BA200A9BFE0073737D /* Main.storyboard */; };
+		DF9A17BE200A9BFE0073737D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF9A17BD200A9BFE0073737D /* Assets.xcassets */; };
+		DF9A17C1200A9BFE0073737D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF9A17BF200A9BFE0073737D /* LaunchScreen.storyboard */; };
+		DF9A17D7200A9BFF0073737D /* GapTaskSchedulerDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9A17D6200A9BFF0073737D /* GapTaskSchedulerDemoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C37B6587241CBF6E00A6F449 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C37B6566241CBEF700A6F449;
+			remoteInfo = GapTaskScheduler;
+		};
+		C37B6589241CBF6E00A6F449 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C37B656F241CBEF700A6F449;
+			remoteInfo = GapTaskSchedulerTests;
+		};
+		C37B658B241CBF7500A6F449 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C37B6565241CBEF700A6F449;
+			remoteInfo = GapTaskScheduler;
+		};
+		DF9A17C8200A9BFF0073737D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF9A17AB200A9BFE0073737D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF9A17B2200A9BFE0073737D;
+			remoteInfo = GapTaskSchedulerDemo;
+		};
+		DF9A17D3200A9BFF0073737D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF9A17AB200A9BFE0073737D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF9A17B2200A9BFE0073737D;
+			remoteInfo = GapTaskSchedulerDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GapTaskScheduler.xcodeproj; path = ../GapTaskScheduler/GapTaskScheduler.xcodeproj; sourceTree = "<group>"; };
+		DF9A17B3200A9BFE0073737D /* GapTaskSchedulerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GapTaskSchedulerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF9A17B6200A9BFE0073737D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DF9A17B8200A9BFE0073737D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DF9A17BB200A9BFE0073737D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DF9A17BD200A9BFE0073737D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DF9A17C0200A9BFE0073737D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DF9A17C2200A9BFE0073737D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF9A17C7200A9BFF0073737D /* GapTaskSchedulerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GapTaskSchedulerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF9A17CD200A9BFF0073737D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF9A17D2200A9BFF0073737D /* GapTaskSchedulerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GapTaskSchedulerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF9A17D6200A9BFF0073737D /* GapTaskSchedulerDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapTaskSchedulerDemoUITests.swift; sourceTree = "<group>"; };
+		DF9A17D8200A9BFF0073737D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF9A17E7200A9E570073737D /* GapTaskSchedulerTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapTaskSchedulerTester.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DF9A17B0200A9BFE0073737D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF9A17C4200A9BFF0073737D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF9A17CF200A9BFF0073737D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C37B6583241CBF6D00A6F449 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C37B6588241CBF6E00A6F449 /* GapTaskScheduler.framework */,
+				C37B658A241CBF6E00A6F449 /* GapTaskSchedulerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DF9A17AA200A9BFE0073737D = {
+			isa = PBXGroup;
+			children = (
+				C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */,
+				DF9A17B5200A9BFE0073737D /* GapTaskSchedulerDemo */,
+				DF9A17CA200A9BFF0073737D /* GapTaskSchedulerDemoTests */,
+				DF9A17D5200A9BFF0073737D /* GapTaskSchedulerDemoUITests */,
+				DF9A17B4200A9BFE0073737D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DF9A17B4200A9BFE0073737D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DF9A17B3200A9BFE0073737D /* GapTaskSchedulerDemo.app */,
+				DF9A17C7200A9BFF0073737D /* GapTaskSchedulerDemoTests.xctest */,
+				DF9A17D2200A9BFF0073737D /* GapTaskSchedulerDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DF9A17B5200A9BFE0073737D /* GapTaskSchedulerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DF9A17E7200A9E570073737D /* GapTaskSchedulerTester.swift */,
+				DF9A17B6200A9BFE0073737D /* AppDelegate.swift */,
+				DF9A17B8200A9BFE0073737D /* ViewController.swift */,
+				DF9A17BA200A9BFE0073737D /* Main.storyboard */,
+				DF9A17BD200A9BFE0073737D /* Assets.xcassets */,
+				DF9A17BF200A9BFE0073737D /* LaunchScreen.storyboard */,
+				DF9A17C2200A9BFE0073737D /* Info.plist */,
+			);
+			path = GapTaskSchedulerDemo;
+			sourceTree = "<group>";
+		};
+		DF9A17CA200A9BFF0073737D /* GapTaskSchedulerDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				DF9A17CD200A9BFF0073737D /* Info.plist */,
+			);
+			path = GapTaskSchedulerDemoTests;
+			sourceTree = "<group>";
+		};
+		DF9A17D5200A9BFF0073737D /* GapTaskSchedulerDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DF9A17D6200A9BFF0073737D /* GapTaskSchedulerDemoUITests.swift */,
+				DF9A17D8200A9BFF0073737D /* Info.plist */,
+			);
+			path = GapTaskSchedulerDemoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DF9A17B2200A9BFE0073737D /* GapTaskSchedulerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF9A17DB200A9BFF0073737D /* Build configuration list for PBXNativeTarget "GapTaskSchedulerDemo" */;
+			buildPhases = (
+				DF9A17AF200A9BFE0073737D /* Sources */,
+				DF9A17B0200A9BFE0073737D /* Frameworks */,
+				DF9A17B1200A9BFE0073737D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C37B658C241CBF7500A6F449 /* PBXTargetDependency */,
+			);
+			name = GapTaskSchedulerDemo;
+			productName = GapTaskSchedulerDemo;
+			productReference = DF9A17B3200A9BFE0073737D /* GapTaskSchedulerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DF9A17C6200A9BFF0073737D /* GapTaskSchedulerDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF9A17DE200A9BFF0073737D /* Build configuration list for PBXNativeTarget "GapTaskSchedulerDemoTests" */;
+			buildPhases = (
+				DF9A17C3200A9BFF0073737D /* Sources */,
+				DF9A17C4200A9BFF0073737D /* Frameworks */,
+				DF9A17C5200A9BFF0073737D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF9A17C9200A9BFF0073737D /* PBXTargetDependency */,
+			);
+			name = GapTaskSchedulerDemoTests;
+			productName = GapTaskSchedulerDemoTests;
+			productReference = DF9A17C7200A9BFF0073737D /* GapTaskSchedulerDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DF9A17D1200A9BFF0073737D /* GapTaskSchedulerDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF9A17E1200A9BFF0073737D /* Build configuration list for PBXNativeTarget "GapTaskSchedulerDemoUITests" */;
+			buildPhases = (
+				DF9A17CE200A9BFF0073737D /* Sources */,
+				DF9A17CF200A9BFF0073737D /* Frameworks */,
+				DF9A17D0200A9BFF0073737D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF9A17D4200A9BFF0073737D /* PBXTargetDependency */,
+			);
+			name = GapTaskSchedulerDemoUITests;
+			productName = GapTaskSchedulerDemoUITests;
+			productReference = DF9A17D2200A9BFF0073737D /* GapTaskSchedulerDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DF9A17AB200A9BFE0073737D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Cheng Zhang";
+				TargetAttributes = {
+					DF9A17B2200A9BFE0073737D = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					DF9A17C6200A9BFF0073737D = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DF9A17B2200A9BFE0073737D;
+					};
+					DF9A17D1200A9BFF0073737D = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DF9A17B2200A9BFE0073737D;
+					};
+				};
+			};
+			buildConfigurationList = DF9A17AE200A9BFE0073737D /* Build configuration list for PBXProject "GapTaskSchedulerDemo" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DF9A17AA200A9BFE0073737D;
+			productRefGroup = DF9A17B4200A9BFE0073737D /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C37B6583241CBF6D00A6F449 /* Products */;
+					ProjectRef = C37B6582241CBF6D00A6F449 /* GapTaskScheduler.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				DF9A17B2200A9BFE0073737D /* GapTaskSchedulerDemo */,
+				DF9A17C6200A9BFF0073737D /* GapTaskSchedulerDemoTests */,
+				DF9A17D1200A9BFF0073737D /* GapTaskSchedulerDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C37B6588241CBF6E00A6F449 /* GapTaskScheduler.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GapTaskScheduler.framework;
+			remoteRef = C37B6587241CBF6E00A6F449 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C37B658A241CBF6E00A6F449 /* GapTaskSchedulerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GapTaskSchedulerTests.xctest;
+			remoteRef = C37B6589241CBF6E00A6F449 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DF9A17B1200A9BFE0073737D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF9A17C1200A9BFE0073737D /* LaunchScreen.storyboard in Resources */,
+				DF9A17BE200A9BFE0073737D /* Assets.xcassets in Resources */,
+				DF9A17BC200A9BFE0073737D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF9A17C5200A9BFF0073737D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF9A17D0200A9BFF0073737D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DF9A17AF200A9BFE0073737D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF9A17B9200A9BFE0073737D /* ViewController.swift in Sources */,
+				DF9A17B7200A9BFE0073737D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF9A17C3200A9BFF0073737D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF9A17CE200A9BFF0073737D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF9A17D7200A9BFF0073737D /* GapTaskSchedulerDemoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C37B658C241CBF7500A6F449 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GapTaskScheduler;
+			targetProxy = C37B658B241CBF7500A6F449 /* PBXContainerItemProxy */;
+		};
+		DF9A17C9200A9BFF0073737D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF9A17B2200A9BFE0073737D /* GapTaskSchedulerDemo */;
+			targetProxy = DF9A17C8200A9BFF0073737D /* PBXContainerItemProxy */;
+		};
+		DF9A17D4200A9BFF0073737D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF9A17B2200A9BFE0073737D /* GapTaskSchedulerDemo */;
+			targetProxy = DF9A17D3200A9BFF0073737D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DF9A17BA200A9BFE0073737D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF9A17BB200A9BFE0073737D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DF9A17BF200A9BFE0073737D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF9A17C0200A9BFE0073737D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DF9A17D9200A9BFF0073737D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DF9A17DA200A9BFF0073737D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DF9A17DC200A9BFF0073737D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GapTaskSchedulerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DF9A17DD200A9BFF0073737D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GapTaskSchedulerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DF9A17DF200A9BFF0073737D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GapTaskSchedulerDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GapTaskSchedulerDemo.app/GapTaskSchedulerDemo";
+			};
+			name = Debug;
+		};
+		DF9A17E0200A9BFF0073737D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GapTaskSchedulerDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GapTaskSchedulerDemo.app/GapTaskSchedulerDemo";
+			};
+			name = Release;
+		};
+		DF9A17E2200A9BFF0073737D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GapTaskSchedulerDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GapTaskSchedulerDemo;
+			};
+			name = Debug;
+		};
+		DF9A17E3200A9BFF0073737D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GapTaskSchedulerDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Cheng-Zhang.GapTaskSchedulerDemoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GapTaskSchedulerDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DF9A17AE200A9BFE0073737D /* Build configuration list for PBXProject "GapTaskSchedulerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF9A17D9200A9BFF0073737D /* Debug */,
+				DF9A17DA200A9BFF0073737D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF9A17DB200A9BFF0073737D /* Build configuration list for PBXNativeTarget "GapTaskSchedulerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF9A17DC200A9BFF0073737D /* Debug */,
+				DF9A17DD200A9BFF0073737D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF9A17DE200A9BFF0073737D /* Build configuration list for PBXNativeTarget "GapTaskSchedulerDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF9A17DF200A9BFF0073737D /* Debug */,
+				DF9A17E0200A9BFF0073737D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF9A17E1200A9BFF0073737D /* Build configuration list for PBXNativeTarget "GapTaskSchedulerDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF9A17E2200A9BFF0073737D /* Debug */,
+				DF9A17E3200A9BFF0073737D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DF9A17AB200A9BFE0073737D /* Project object */;
+}
