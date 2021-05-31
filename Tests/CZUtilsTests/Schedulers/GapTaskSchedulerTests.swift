@@ -19,6 +19,11 @@ class GapTaskSchedulerTests: XCTestCase {
     count = 0
     gapTaskScheduler = GapTaskScheduler(gap: Constant.gap)
   }
+  
+  func testTasksInCombinedGaps() {
+    _testTasksInCombinedGaps()
+  }
+  
 }
 
 // MARK: - Actual reusable tests
