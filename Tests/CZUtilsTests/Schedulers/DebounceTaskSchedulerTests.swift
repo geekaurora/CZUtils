@@ -8,6 +8,11 @@ class DebounceTaskSchedulerTests: XCTestCase {
     static let timeOffset: TimeInterval = 0
   }
   
+  //private let testQueue = DispatchQueue.main
+  /// Background serial queue.
+  private let testQueue = DispatchQueue(
+    label: "com.testQueue")
+  
   @ThreadSafe
   fileprivate var count = 0
   fileprivate var gapTaskScheduler: DebounceTaskScheduler!
@@ -78,7 +83,7 @@ fileprivate extension DebounceTaskSchedulerTests {
     }
     // Async execution
     let delayTime = inputDelayTime + adjustTimeOffset
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayTime) { [weak self] in
+    testQueue.asyncAfter(deadline: DispatchTime.now() + delayTime) { [weak self] in
       guard let `self` = self else {
         return
       }
@@ -93,7 +98,7 @@ fileprivate extension DebounceTaskSchedulerTests {
       }
       return
     }
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayTime) {
+    testQueue.asyncAfter(deadline: DispatchTime.now() + delayTime) {
       self.gapTaskScheduler.schedule {
         self.incrementCount()
       }
@@ -111,7 +116,7 @@ fileprivate extension DebounceTaskSchedulerTests {
    */
   func waitForInterval(_ interval: TimeInterval) {
     let expectation = XCTestExpectation(description: "waitForInterval")
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + interval) {
+    testQueue.asyncAfter(deadline: DispatchTime.now() + interval) {
       expectation.fulfill()
     }
     wait(for: [expectation], timeout: interval + Constant.waitIntervalDelay)
@@ -121,6 +126,6 @@ fileprivate extension DebounceTaskSchedulerTests {
    Async task on mainQueue after desired time
    */
   func asyncOnMainQueue(after interval: TimeInterval, execute: @escaping () -> Void) {
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + interval, execute: execute)
+    testQueue.asyncAfter(deadline: DispatchTime.now() + interval, execute: execute)
   }
 }

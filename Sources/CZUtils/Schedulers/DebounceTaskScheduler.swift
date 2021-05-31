@@ -24,11 +24,13 @@ public class DebounceTaskScheduler {
   }
   
   public func schedule(task: @escaping Task) {
-    self.task = task
+    _task.threadLock { (_task) -> Void in
+      _task = task
+    }
   }
   
   func tick() {
-    // If task isn't nil, execute task() then set it to nil.    
+    // If task isn't nil, execute task() then set it to nil.
     _task.threadLock { (_task) -> Void in
       if _task != nil {
         _task?()
