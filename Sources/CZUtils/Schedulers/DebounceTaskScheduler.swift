@@ -106,27 +106,12 @@ public class DebounceTaskScheduler {
   }
   
   /**
-   Schedule postExecution task to the scheduler, task that only runs after `executionBlock`. If `executionBlock` is nil, run immediately
-   
-   - parameter key    : the key used to de-dupe same postExecution. e.g. let key = #file + #function + String(#line)
-   - parameter task  : the postExecution task
-   */
-  public func schedulePostExecution(key: String =  #file + #function + String(#line),
-                                    task: @escaping Task) {
-    if !hasScheduledExecution {
-      task()
-    } else {
-      postExecutionTaskMap[key] = DatedTask(date: Date(), task: task)
-    }
-  }
-  
-  /**
    Time ticker executes `executionBlock` if exists with `gap` interval
    
    - parameter timer: the timer instance
    */
   @objc public func executeBlock(_ timer: Timer) {
-    assert(workThread == Thread.current, "DebounceTaskScheduler should always work on the same thread.")
+    assert(workThread == Thread.current, "GapTaskScheduler should always work on the same thread.")
 
     //threadLock.write
     //{
@@ -140,8 +125,6 @@ public class DebounceTaskScheduler {
       }
       // Execute normal tasks
       self.executeExecutions()
-      // Execute post tasks after normal
-      self.executePostExecutions()
       
       self.lastExecutionDate = Date()
       self.emptyExecutionCounter = 0
@@ -149,10 +132,34 @@ public class DebounceTaskScheduler {
 
   }
   
-  public static func taskKey(
-    with key: String = "",
-    prefix: String =  #file + #function + String(#line)) -> String {
-    return prefix + key
+  func executeExecutions() {
+    executeTaskMap(executionTaskMap) { self.executionTaskMap = $0 }
+  }
+  
+  /**
+   `inout` isn't pass-by-reference, it's mutable shadow copy and will be written back immediately after execution.
+   By for asynchronous execution, no way to write back as expected, so need to copy input param and set it back
+   in `completion` block.
+   https://stackoverflow.com/questions/39569114/swift-3-0-error-escaping-closures-can-only-capture-inout-parameters-explicitly
+   */
+  private func executeTaskMap(_ taskMap: TaskMap,
+                              completion: @escaping (TaskMap) -> Void) {
+    // Add `taskMap` to capature list as a copy.
+    //threadLock.write { [taskMap] in
+      var taskMapCopy = taskMap
+      // Execute tasks in ascending order of schedule date
+      taskMapCopy.values.sorted(by: { (execution0, execution1) -> Bool in
+        return execution0.date < execution1.date
+      }).forEach { execution in
+        execution.task()
+      }
+      
+      // Reset `taskMap` after execution
+      taskMapCopy.removeAll()
+      
+      // Send the copy back to change the original instance.
+      completion(taskMapCopy)
+    //}
   }
 }
 
@@ -184,39 +191,5 @@ private extension DebounceTaskScheduler {
     // Scrolling changes Runloop mode from `Default` to `EventTracking`, which ignores timer events
     // So we need to mannually enable timer for scrolling by set corresponding Runloop mode for timer
     RunLoop.current.add(schedulerTimer, forMode: RunLoop.Mode.common)
-  }
-  
-  func executeExecutions() {
-    executeTaskMap(executionTaskMap) { self.executionTaskMap = $0 }
-  }
-  
-  func executePostExecutions() {
-    executeTaskMap(postExecutionTaskMap) { self.postExecutionTaskMap = $0 }
-  }
-  
-  /**
-   `inout` isn't pass-by-reference, it's mutable shadow copy and will be written back immediately after execution.
-   By for asynchronous execution, no way to write back as expected, so need to copy input param and set it back
-   in `completion` block.
-   https://stackoverflow.com/questions/39569114/swift-3-0-error-escaping-closures-can-only-capture-inout-parameters-explicitly
-   */
-  private func executeTaskMap(_ taskMap: TaskMap,
-                              completion: @escaping (TaskMap) -> Void) {
-    // Add `taskMap` to capature list as a copy.
-    //threadLock.write { [taskMap] in
-      var taskMapCopy = taskMap
-      // Execute tasks in ascending order of schedule date
-      taskMapCopy.values.sorted(by: { (execution0, execution1) -> Bool in
-        return execution0.date < execution1.date
-      }).forEach { execution in
-        execution.task()
-      }
-      
-      // Reset `taskMap` after execution
-      taskMapCopy.removeAll()
-      
-      // Send the copy back to change the original instance.
-      completion(taskMapCopy)
-    //}
   }
 }
