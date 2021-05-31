@@ -64,7 +64,7 @@ public class GapTaskScheduler {
    */
   public init(gap: TimeInterval, onMainThread: Bool = true) {
     self.gap = gap
-    self.onMainThread = true
+    self.onMainThread = onMainThread
     self.workThread = Thread.current
   }
   

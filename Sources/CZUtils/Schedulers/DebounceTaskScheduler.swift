@@ -17,29 +17,15 @@ public class DebounceTaskScheduler {
   
   public enum Constant {
     public static let maxEmptyExecutionCount = 5
+    public static let workQueueName = "com.DebounceTaskScheduler"
   }
   
   private let gap: TimeInterval
   private let onMainThread: Bool
-  private var workThread: Thread
+  private var workThread: Thread!
   // private let threadLock = DispatchReadWriteLock()
   
-  /**
-   Tasks that be scheduled immediately.
-   */
   private var executionTaskMap = TaskMap()
-  
-  /**
-   Tasks that only run after `executionTaskMap`. If `executionBlock` is empty, run immediately
-   Utilize HashMap to ensure same tasks only execute once within Gap, e.g. if there're multiple `performBatchUpdates` scheduled to postExecutionTaskMap,
-   only the last one will execute.
-   
-   ### Execution time complexity = O(nlgn)
-   
-   HashMap takes O(nlgn) to sort tasks based on its date when DebounceTaskScheduler executes tasks.
-   If use array, when add new task we possibly need to check array.contains(task) = O(n) time and delete previous duplicate task = O(n) time,
-   which takes overall O(2n^2) = O(n^2) time
-   */
   private var postExecutionTaskMap = TaskMap()
   
   private var lastExecutionDate: Date = Date.distantPast
@@ -49,6 +35,7 @@ public class DebounceTaskScheduler {
   private var hasScheduledExecution: Bool {
     return !executionTaskMap.isEmpty
   }
+  private var workQueue: DispatchQueue?
   
   /**
    Initializer of task scheduler
@@ -58,8 +45,21 @@ public class DebounceTaskScheduler {
    */
   public init(gap: TimeInterval, onMainThread: Bool = true) {
     self.gap = gap
-    self.onMainThread = true
-    self.workThread = Thread.current
+    self.onMainThread = onMainThread
+    
+    if onMainThread {
+      self.workThread = Thread.current
+    }
+    else {
+      // Initialize workQueue - serial DispatchQueue.
+      workQueue = DispatchQueue(
+        label: Constant.workQueueName,
+        qos: .default,
+        attributes: [])
+      workQueue?.sync {
+        self.workThread = Thread.current
+      }
+    }
   }
   
   /**
@@ -74,7 +74,9 @@ public class DebounceTaskScheduler {
         self._schedule(key: key, task: task)
       }
     } else {
-      _schedule(key: key, task: task)
+      workQueue?.async {
+        self._schedule(key: key, task: task)
+      }
     }
   }
   
