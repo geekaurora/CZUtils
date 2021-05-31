@@ -1,7 +1,7 @@
 import XCTest
 @testable import CZUtils
 
-class GapTaskSchedulerTests: XCTestCase {
+class DebounceTaskSchedulerTests: XCTestCase {
   fileprivate enum Constant {
     static let gap = 0.1
     static let waitIntervalDelay = 0.1
@@ -11,24 +11,19 @@ class GapTaskSchedulerTests: XCTestCase {
   fileprivate var count = 0
   fileprivate var postExecutionCount = 0
   fileprivate var secondPostExecutionCount = 0
-  fileprivate var gapTaskScheduler: GapTaskScheduler!
+  fileprivate var gapTaskScheduler: DebounceTaskScheduler!
   
   override func setUp() {
     super.setUp()
     
     count = 0
-    gapTaskScheduler = GapTaskScheduler(gap: Constant.gap)
+    gapTaskScheduler = DebounceTaskScheduler(gap: Constant.gap)
   }
-  
-  func testTasksInCombinedGaps() {
-    _testTasksInCombinedGaps()
-  }
-  
 }
 
 // MARK: - Actual reusable tests
 
-fileprivate extension GapTaskSchedulerTests {
+fileprivate extension DebounceTaskSchedulerTests {
   func _testTasksInCombinedGaps() {
     count = 0
     // Schedule task now
@@ -72,7 +67,7 @@ fileprivate extension GapTaskSchedulerTests {
 
 // MARK: - Private methods
 
-fileprivate extension GapTaskSchedulerTests {
+fileprivate extension DebounceTaskSchedulerTests {
   func incrementCount() {
     count += 1
   }
@@ -182,7 +177,7 @@ fileprivate extension GapTaskSchedulerTests {
 
 // MARK: - Helper methods
 
-fileprivate extension GapTaskSchedulerTests {
+fileprivate extension DebounceTaskSchedulerTests {
   /**
    Convenient func for aysnc unit tests
    */
