@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- Scheduler that merges the same tasks and only executes the last task.
+ Scheduler that merges the same tasks with `gap` and only executes the last task.
  
  - Note: Task will execute on a background serial DispatchQueue.
  */
@@ -18,7 +18,7 @@ public class DebounceTaskScheduler {
   public init(gap: TimeInterval) {
     self.gap = gap
     
-    self.timer = CZDispatchSourceTimer(timeInterval: Int(gap))
+    self.timer = CZDispatchSourceTimer(timeInterval: gap)
     self.timer.tickClosure = { [weak self] in
       self?.tick()
     }

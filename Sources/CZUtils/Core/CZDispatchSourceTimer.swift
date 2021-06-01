@@ -28,12 +28,12 @@ public class CZDispatchSourceTimer: NSObject {
   }
   let queue: DispatchQueue
   let timer: DispatchSourceTimer
-  let timeInterval: Int
+  let timeInterval: TimeInterval
   var tickClosure: DispatchSourceProtocol.DispatchSourceHandler?
 
   private var state: State = .initialized
   
-  public init(timeInterval: Int,
+  public init(timeInterval: TimeInterval,
               tickClosure: DispatchSourceProtocol.DispatchSourceHandler? = nil) {
     self.timeInterval = timeInterval
     self.tickClosure = tickClosure
@@ -60,9 +60,12 @@ public class CZDispatchSourceTimer: NSObject {
   private func start() {
     assert(tickClosure != nil, "tickClosure shouldn't be nil.")
     
-    timer.schedule(deadline: DispatchTime.now(),
-                   repeating: .seconds(timeInterval),
-                   leeway: .seconds(timeInterval)
+    let interval = Int(timeInterval * 1000000)
+    let leeway = Int(Double(interval) * 0.1)
+    timer.schedule(
+      deadline: DispatchTime.now(),
+      repeating: .microseconds(interval),
+      leeway: .microseconds(leeway)
     )
     timer.setEventHandler(handler: tickClosure)
     timer.resume()
