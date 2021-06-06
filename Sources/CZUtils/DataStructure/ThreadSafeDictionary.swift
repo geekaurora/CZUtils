@@ -157,5 +157,3 @@ public extension ThreadSafeDictionary where Key : Hashable, Value : Equatable {
     return underlyingDictionary == dictionary
   }
 }
-
-
