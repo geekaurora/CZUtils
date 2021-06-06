@@ -19,9 +19,7 @@ public class WeakDictionary<Key: Hashable, Value: AnyObject>: NSObject, Expressi
     self.underlyingDictionary = dictionary
     super.init()
   }
-  
-  // MARK: - ExpressibleByDictionaryLiteral
-  
+    
   public required init(dictionaryLiteral elements: (Key, Value)...) {
     var dictionary = DictionaryType()
     for (key, value) in elements {
@@ -32,11 +30,11 @@ public class WeakDictionary<Key: Hashable, Value: AnyObject>: NSObject, Expressi
   }
   
   public var isEmpty: Bool {
-    return underlyingDictionary.isEmpty
+    return count == 0
   }
   
   public var count: Int {
-    return underlyingDictionary.count
+    return values.count
   }
   
   public var keys: [Key] {
