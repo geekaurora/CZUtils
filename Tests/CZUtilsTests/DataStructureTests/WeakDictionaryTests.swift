@@ -22,7 +22,7 @@ class WeakDictionaryTests: XCTestCase {
     XCTAssertTrue(actual === object, "Value isn't corrent. expected = \(object), actual = \(actual)")
   }
   
-  func testWeakReference() {
+  func testWeakReference2() {
     // Append `object` to `weakArray`.
     var object: TestClass? = TestClass()
     weakDictionary[Constant.key] = object
@@ -64,4 +64,4 @@ class WeakDictionaryTests: XCTestCase {
   }
 }
 
-private class TestClass: NSObject {}
+private class TestClass {}
