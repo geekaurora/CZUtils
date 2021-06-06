@@ -22,13 +22,14 @@ class WeakDictionaryTests: XCTestCase {
     XCTAssertTrue(actual === object, "Value isn't corrent. expected = \(object), actual = \(actual)")
   }
   
-  func testWeakReference2() {
-    // Append `object` to `weakArray`.
+  func testWeakReference() {
     var object: TestClass? = TestClass()
     weakDictionary[Constant.key] = object
     
-    let actual = weakDictionary[Constant.key]
-    XCTAssertTrue(actual === object, "Value isn't corrent. expected = \(object), actual = \(actual)")
+    // Note: shouldn't assign `let actual = weakDictionary[Constant.key]`, because `acutal` will retain the value!.
+    XCTAssertTrue(
+      weakDictionary[Constant.key] === object,
+      "Value isn't corrent. expected = \(object), actual = \(weakDictionary[Constant.key])")
   
     // Release `object`: expect `object` in `weakArray` is also released.
     object = nil
@@ -45,15 +46,14 @@ class WeakDictionaryTests: XCTestCase {
     var object: TestClass? = TestClass()
     weakDictionary[Constant.key] = object
     
-    let actual = weakDictionary[Constant.key]
-    XCTAssertTrue(actual === object, "Value isn't corrent. expected = \(object), actual = \(actual)")
+    // Note: shouldn't assign `let actual = weakDictionary[Constant.key]`, because `acutal` will retain the value!.
+    XCTAssertTrue(weakDictionary[Constant.key] === object, "Value isn't corrent. expected = \(object), actual = \(weakDictionary[Constant.key])")
 
     // Delay to verify the value is released.
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-      let expected: AnyObject? = nil
       let actual = self.weakDictionary[Constant.key]
       print("actual = \(actual), object = \(object), weakDictionary.count = \(self.weakDictionary.count)")
-      XCTAssertTrue(actual === expected, "Value isn't corrent. expected = \(expected), actual = \(actual)")
+      XCTAssertTrue(actual === nil, "Value isn't corrent. expected = nil, actual = \(actual)")
       expectation.fulfill()
     }
     
