@@ -22,20 +22,6 @@ class WeakDictionaryTests: XCTestCase {
     XCTAssertTrue(actual === object, "Value isn't corrent. expected = \(object), actual = \(actual)")
   }
   
-  func testWeakReference() {
-    var object: TestClass? = TestClass()
-    weakDictionary[Constant.key] = object
-    
-    // Note: shouldn't assign `let actual = weakDictionary[Constant.key]`, because `acutal` will retain the value!.
-    XCTAssertTrue(
-      weakDictionary[Constant.key] === object,
-      "Value isn't corrent. expected = \(object), actual = \(weakDictionary[Constant.key])")
-  
-    // Release `object`: expect `object` in `weakArray` is also released.
-    object = nil
-    XCTAssertEqual(weakDictionary.count, 0)
-  }
-  
   /**
    The object being set should be weak reference.
    */
@@ -61,6 +47,20 @@ class WeakDictionaryTests: XCTestCase {
     
     // Wait for expectatation.
     waitForExpectatation()
+  }
+    
+  func testWeakReference() {
+    var object: TestClass? = TestClass()
+    weakDictionary[Constant.key] = object
+    
+    // Note: shouldn't assign `let actual = weakDictionary[Constant.key]`, because `acutal` will retain the value!.
+    XCTAssertTrue(
+      weakDictionary[Constant.key] === object,
+      "Value isn't corrent. expected = \(object), actual = \(weakDictionary[Constant.key])")
+  
+    // Release `object`: expect `object` in `weakArray` is also released.
+    object = nil
+    XCTAssertEqual(weakDictionary.count, 0)
   }
 }
 
