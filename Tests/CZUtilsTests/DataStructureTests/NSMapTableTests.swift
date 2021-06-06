@@ -23,8 +23,25 @@ class NSMapTableTests: XCTestCase {
   }
   
 //  /**
+//   - Warning:the value isn't released immediately after its scope.
+//   */
+//  func testWeakReference() {
+//    var object: TestClass? = TestClass()
+//    mapTable.setObject(object, forKey: Constant.key)
+//
+//    // Note: shouldn't assign `let actual = weakDictionary[Constant.key]`, because `acutal` will retain the value!.
+//    XCTAssertTrue(
+//      mapTable.object(forKey:  Constant.key) === object,
+//      "Value isn't corrent. expected = \(object), actual = \(mapTable.object(forKey:  Constant.key))")
+//
+//    // Release `object`: expect `object` in `weakArray` is also released.
+//    object = nil
+//    XCTAssertTrue(mapTable.object(forKey:  Constant.key) === nil)
+//  }
+  
+//  /**
 //   The object set to NSMapTable should be weak reference.
-//   
+//
 //   - Warning:the value isn't released immediately after its scope.
 //   */
 //  func testSetObjectWithWeakReference() {
@@ -39,37 +56,20 @@ class NSMapTableTests: XCTestCase {
 //      mapTable.object(forKey:  Constant.key) === object,
 //      "Value isn't corrent. expected = \(object), actual = \(mapTable.object(forKey:  Constant.key))")
 //
+//    // Release object.
+//    object = nil
+//
 //    // Delay to verify the value is released.
 //    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//      let actual = self.mapTable.object(forKey:  Constant.key)
-//      XCTAssertTrue(actual === nil, "Value isn't corrent. expected = nil, actual = \(actual)")
+//      XCTAssertTrue(
+//        self.mapTable.object(forKey:  Constant.key) === nil, "Weak value should have been released. expected = nil.")
 //      expectation.fulfill()
 //    }
 //
-//    // Release object.
-//    object = nil
-//    
 //    // Wait for expectatation.
 //    waitForExpectatation()
 //  }
-//  
-//  /**
-//   - Warning:the value isn't released immediately after its scope.
-//   */
-//  func testWeakReference() {
-//    var object: TestClass? = TestClass()
-//    mapTable.setObject(object, forKey: Constant.key)
-//    
-//    // Note: shouldn't assign `let actual = weakDictionary[Constant.key]`, because `acutal` will retain the value!.
-//    XCTAssertTrue(
-//      mapTable.object(forKey:  Constant.key) === object,
-//      "Value isn't corrent. expected = \(object), actual = \(mapTable.object(forKey:  Constant.key))")
-//  
-//    // Release `object`: expect `object` in `weakArray` is also released.
-//    object = nil
-//    XCTAssertTrue(mapTable.object(forKey:  Constant.key) == nil)
-//  }
-//  
+  
 }
 
 private class TestClass: NSObject {}
