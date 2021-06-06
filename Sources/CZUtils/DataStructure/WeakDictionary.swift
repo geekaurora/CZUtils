@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- Dictionary that only holds weak reference to the values.
+ Dictionary that  holds weak reference to the values.
  
  - Note: value with weak rerefence in`NSMapTable`  isn't released immediately after its scope.
  */
