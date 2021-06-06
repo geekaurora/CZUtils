@@ -48,7 +48,8 @@ class ThreadSafeWeakArrayTests: XCTestCase {
     var object: TestClass? = TestClass()
     weakArray.append(object!)
     XCTAssert(weakArray.contains(object!))
-
+    XCTAssertEqual(weakArray.count, 1)
+    
     // Release `object`: expect `object` in `weakArray` is also released.
     object = nil
     XCTAssertEqual(weakArray.count, 0)
