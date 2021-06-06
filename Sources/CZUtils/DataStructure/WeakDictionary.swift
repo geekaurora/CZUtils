@@ -11,21 +11,20 @@ public class WeakDictionary<Key: Hashable, Value: AnyObject>: NSObject, Expressi
   private var underlyingDictionary: DictionaryType
   
   public override init() {
-    underlyingDictionary = DictionaryType()
+    self.underlyingDictionary = DictionaryType()
     super.init()
   }
   
   public init(dictionary: DictionaryType) {
-    self.underlyingDictionary = dictionary
+    underlyingDictionary = dictionary
     super.init()
   }
     
   public required init(dictionaryLiteral elements: (Key, Value)...) {
-    var dictionary = DictionaryType()
+    underlyingDictionary = DictionaryType()
     for (key, value) in elements {
-      dictionary[key] = WeakWrapper(value)
+      underlyingDictionary[key] = WeakWrapper(value)
     }
-    underlyingDictionary = dictionary
     super.init()
   }
   
@@ -62,7 +61,7 @@ public class WeakDictionary<Key: Hashable, Value: AnyObject>: NSObject, Expressi
   
   public subscript (key: Key) -> Value? {
     get {
-      return underlyingDictionary[key]?.element
+      underlyingDictionary[key]?.element
     }
     set {
       if let newValue = newValue {
