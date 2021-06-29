@@ -45,6 +45,7 @@ public struct ThreadSafe<T> {
   
   public var wrappedValue: T {
     get {
+      // `get` is protected by thread lock - thread safe when get with self.propertyName.
       return lock.execute { value }
     }
     set {
