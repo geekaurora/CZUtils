@@ -4,33 +4,48 @@ import Foundation
  Property wrapper that ensures variable thread safe.
  
  ### Usage
- 
- - Definition with @ThreadSafe annotation
  ```
   @ThreadSafe var count: Int = 0
- ```
- 
- - Read with mutexLock: (simply refer to `count`)
- ```
   let a = count
- ```
- 
- - Write with mutexLock: (execute with `mutexLock` closure, prefix _ to access wrapper)
- ```
-   _count.threadLock { count in
+  _count.threadLock { count in
     count += 1
-   }
+  }
  ```
  
-Note: Directly assigning value to `count` doesn't guarantee thread safety. e.g.
- ```
- count = 1
- var count2 = count
- count2  += 10
+ ### Note
  
- // It's possible to miss value changing for `count` if the result is based on`count2`.
- count += 1
- count = count2 + 1
+ 1. Directly reading is thread safe.
+ ```
+ let newCount = self.count
+ ```
+ 
+ Equivalent to:
+ ```
+ lock.lock()
+ let newCount = self.count + 1
+ lock.unlock()
+ ```
+ 
+ 2. Directly assigning value to `count` isn't thread safe. e.g.
+ ```
+ @ThreadSafe var count: Int = 0
+ 
+ // Read / write of `self.count` aren't under the same lock session.
+ self.count = self.count + 1
+ 
+ ```
+ 
+ Equivalent to:
+ ```
+ lock.lock()
+ let newCount = self.count + 1
+ lock.unlock()
+ 
+ // .. If other thread changes `self.count` now, the result isn't correct.
+ 
+ lock.lock()
+ self.count = newCount
+ lock.unlock()
  ```
  */
 @propertyWrapper
@@ -59,18 +74,6 @@ public struct ThreadSafe<T> {
   }
   
   /// MutexLock function  with thread safe to execute `execution` closure.
-  ///
-  ///  e.g.
-  ///  - Definition with @ThreadSafe annotation
-  ///   @ThreadSafe var count: Int = 0
-  ///
-  ///  - Read with mutexLock: (simply refer to `count`)
-  ///     let a = count
-  ///
-  ///  - Write with mutexLock: (execute with `mutexLock` closure)
-  ///    _count.mutexLock { count in
-  ///      count += 1
-  ///  }
   ///
   /// - Parameter execution: The closure to execute, with mutable wrappedValue.
   public mutating func threadLock<U>(_ execution: (inout T) -> U) -> U {
