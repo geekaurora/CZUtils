@@ -16,9 +16,20 @@ import Foundation
  ```
  @ThreadSafe var count: Int = 0
  
- // Read / write of `self.count` doesn't use the same lock.
- self.count =  self.count + 1
+ // Read / write of `self.count` aren't under the same lock session.
+ self.count = self.count + 1 // self.count += 1
  
+ ```
+ 
+ Euqivalent to:
+ ```
+ lock.lock()
+ let newCount = self.count + 1
+ lock.unlock()
+ 
+ lock.lock()
+ self.count = newCount
+ lock.unlock()
  ```
  */
 @propertyWrapper
