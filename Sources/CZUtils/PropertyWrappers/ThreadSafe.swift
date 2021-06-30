@@ -16,13 +16,9 @@ import Foundation
  ```
  @ThreadSafe var count: Int = 0
  
- count = 1
- var count2 = count
- count2  += 10
+ // Read / write of `self.count` doesn't use the same lock.
+ self.count =  self.count + 1
  
- // It's possible to miss value changing for `count` if the result is based on`count2`.
- count += 1
- count = count2 + 1
  ```
  */
 @propertyWrapper

@@ -18,6 +18,8 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
     countWithLock = 0
   }
   
+  // MARK: - Read
+    
   func testReadMultiThread() {
     let dispatchGroup = DispatchGroup()
     
@@ -64,6 +66,8 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
     XCTAssertEqual(count, Self.total)
   }
   
+  // MARK: - Write
+  
   func testWriteMultiThread() {
     let dispatchGroup = DispatchGroup()
     
@@ -82,9 +86,27 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
     XCTAssertEqual(count, Self.total)
   }
   
-  private func increaseCount() {
-    // sleep(UInt32.random(in: 0..<5) * UInt32(0.001))
+  /// Directly assign isn't thread safe.
+  func testDirectlyAssignMultiThread() {
+    let dispatchGroup = DispatchGroup()
     
+    // Test increment `count` on multiple threads.
+    let queue = DispatchQueue(label: Self.queueLable, attributes: .concurrent)
+    (0..<Self.total).forEach { _ in
+      dispatchGroup.enter()
+      queue.async {
+        self.count += 1
+        dispatchGroup.leave()
+      }
+    }
+    // Wait till group multi thread tasks complete.
+    dispatchGroup.wait()
+    // Verify `count` with the expected value.
+    XCTAssertEqual(count, Self.total)
+  }
+  
+  private func increaseCount() {
+    // sleep(UInt32.random(in: 0..<5) * UInt32(0.001))    
     
     self._count.threadLock { (_count) -> Void in
       self._count2.threadLock { (_count2) -> Void in
