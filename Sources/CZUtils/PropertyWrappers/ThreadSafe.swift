@@ -4,26 +4,18 @@ import Foundation
  Property wrapper that ensures variable thread safe.
  
  ### Usage
- 
- - Definition with @ThreadSafe annotation
  ```
   @ThreadSafe var count: Int = 0
- ```
- 
- - Read with mutexLock: (simply refer to `count`)
- ```
   let a = count
- ```
- 
- - Write with mutexLock: (execute with `mutexLock` closure, prefix _ to access wrapper)
- ```
    _count.threadLock { count in
     count += 1
    }
  ```
  
-Note: Directly assigning value to `count` doesn't guarantee thread safety. e.g.
+- Note: Directly assigning value to `count` doesn't guarantee thread safety. e.g.
  ```
+ @ThreadSafe var count: Int = 0
+ 
  count = 1
  var count2 = count
  count2  += 10
