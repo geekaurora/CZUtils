@@ -101,12 +101,12 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
     }
     // Wait till group multi thread tasks complete.
     dispatchGroup.wait()
-    // Verify `count` with the expected value.
-    XCTAssertEqual(count, Self.total)
+    // Verify `count` isn't `Self.total`.
+    XCTAssertTrue(count != Self.total)
   }
   
   private func increaseCount() {
-    // sleep(UInt32.random(in: 0..<5) * UInt32(0.001))    
+    // sleep(UInt32.random(in: 0..<5) * UInt32(0.001))
     
     self._count.threadLock { (_count) -> Void in
       self._count2.threadLock { (_count2) -> Void in
