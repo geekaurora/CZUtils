@@ -3,8 +3,8 @@ import XCTest
 
 /// Tests of @ThreadSafe property wrapper.
 class ThreadSafePropertyWrapperTests: XCTestCase {
-//   static let total = 30000
-   static let total = 200
+   static let total = 30000
+//   static let total = 200
   static let queueLable = "com.czutils.tests"
   
   let lock = NSLock()
@@ -42,20 +42,15 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
 //          XCTAssertEqual(_count, self.countWithLock)
 //          self.lock.unlock()
         
-//        self._count.threadLock { (_count) -> Void in
-//          self._count2.threadLock { (_count2) -> Void in
-//            XCTAssertEqual(_count, _count2)
-//          }
-//        }
+        /** Passed. */
+        self._count.threadLock { (_count) -> Void in
+          self._count2.threadLock { (_count2) -> Void in
+            XCTAssertEqual(_count, _count2)
+          }
+        }
         
-//        XCTAssertEqual(self.count, self.count2)
-        
-        /**
-         Read isn't thread safe!
-         
-          
-        */
-        XCTAssertEqual(self.count, self.count)
+        // Different lock session.
+        //XCTAssertEqual(self.count, self.count2)
         
         dispatchGroup.leave()
       }
@@ -87,23 +82,23 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
   }
   
   /// Directly assign isn't thread safe.
-  func testDirectlyAssignMultiThread() {
-    let dispatchGroup = DispatchGroup()
-    
-    // Test increment `count` on multiple threads.
-    let queue = DispatchQueue(label: Self.queueLable, attributes: .concurrent)
-    (0..<Self.total).forEach { _ in
-      dispatchGroup.enter()
-      queue.async {
-        self.count += 1
-        dispatchGroup.leave()
-      }
-    }
-    // Wait till group multi thread tasks complete.
-    dispatchGroup.wait()
-    // Verify `count` isn't `Self.total`.
-    XCTAssertTrue(count != Self.total)
-  }
+//  func testDirectlyAssignMultiThread() {
+//    let dispatchGroup = DispatchGroup()
+//
+//    // Test increment `count` on multiple threads.
+//    let queue = DispatchQueue(label: Self.queueLable, attributes: .concurrent)
+//    (0..<Self.total).forEach { _ in
+//      dispatchGroup.enter()
+//      queue.async {
+//        self.count += 1
+//        dispatchGroup.leave()
+//      }
+//    }
+//    // Wait till group multi thread tasks complete.
+//    dispatchGroup.wait()
+//    // Verify `count` isn't `Self.total`.
+//    XCTAssertTrue(count != Self.total)
+//  }
   
   private func increaseCount() {
     // sleep(UInt32.random(in: 0..<5) * UInt32(0.001))
