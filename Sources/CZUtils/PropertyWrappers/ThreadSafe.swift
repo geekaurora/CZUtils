@@ -14,7 +14,7 @@ import Foundation
  
  ### Note
  
- 1. Directly reading is thread safe.
+ 1. Directly reading is thread safe. (Should be the same lock session)
  ```
  let newCount = self.count
  ```
