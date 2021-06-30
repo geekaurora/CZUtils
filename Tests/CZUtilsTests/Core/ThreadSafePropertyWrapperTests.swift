@@ -17,6 +17,9 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
   
   // MARK: - Read
   
+  /**
+   Verify directly get with `self.count` is thread safe.
+   */
   func testReadMultiThread() {
     let dispatchGroup = DispatchGroup()
     
@@ -47,6 +50,9 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
   
   // MARK: - Write
   
+  /**
+   Verify set with`self._count.threadLock {}` is thread safe. (Directly set isn't thread safe)
+   */
   func testWriteMultiThread() {
     let dispatchGroup = DispatchGroup()
     
