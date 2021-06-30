@@ -1,17 +1,15 @@
 import XCTest
 @testable import CZUtils
 
-/// Tests of @ThreadSafe property wrapper.
-class ThreadSafePropertyWrapperTests: XCTestCase {
-//   static let total = 30000
-   static let total = 200
+class CZMutexLockWithNSLockTests: XCTestCase {
+  static let total = 30000
   static let queueLable = "com.czutils.tests"
   
   let lock = NSLock()
   var countWithLock: Int = 0
   
   @ThreadSafe var count: Int = 0
-  @ThreadSafe var count2: Int = 0
+  // let countLock = CZMutexLockWithNSLock(0)
   
   override func setUp() {
     count = 0
@@ -27,19 +25,10 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
       dispatchGroup.enter()
       queue.async {
         self.increaseCount()
-        
         // Verify read result of `count`.
-//        self.lock.lock()
-//        let countWithLock = self.countWithLock
-//        self.lock.unlock()
-//        XCTAssertEqual(self.count, countWithLock)
-        
-//        self._count.threadLock { (_count) -> Void in
-//          self.lock.lock()
-//          XCTAssertEqual(_count, self.countWithLock)
-//          self.lock.unlock()
-        
-        XCTAssertEqual(self.count, self.count2)        
+        self.lock.lock()
+        XCTAssertEqual(self.count, self.countWithLock)
+        self.lock.unlock()
         
         dispatchGroup.leave()
       }
@@ -71,13 +60,11 @@ class ThreadSafePropertyWrapperTests: XCTestCase {
   private func increaseCount() {
     // sleep(UInt32.random(in: 0..<5) * UInt32(0.001))
     _count.threadLock { (_count) -> Void in
-//      lock.lock()
       _count += 1
-//      self.countWithLock = _count
-//      lock.unlock()
       
-      self.count2 = _count
+      lock.lock()
+      self.countWithLock = _count
+      lock.unlock()
     }
   }
 }
-
