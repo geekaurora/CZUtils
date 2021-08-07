@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- Proxy that forwards method message to underlying `target`, which  holds weak reference to `target`.
+ Proxy that forwards method messages to underlying `target`, which  holds weak reference to `target`.
 
  - warning: If `target` is nil, `forwardingTarget(for: Selector)` will crash because `CZWeakProxy` won't handle the selector.
  - TODO: Add `deallocateBlock` to handle when `targets` gets deallocated.
