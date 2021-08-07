@@ -1,33 +1,6 @@
 import UIKit
 
 /**
- Proxy that forwards method message to underlying `target`, which  holds weak reference to `target`.
- 
- ### Usage
- ```
- displayLink = CADisplayLink(target: CZWeakProxy(target: self),
- selector: #selector(didRefresh(dpLink:)))
- ```
- */
-public class CZWeakProxy: NSObject {
-  private weak var target: NSObjectProtocol?
-  
-  public init(target: NSObjectProtocol) {
-    self.target = target
-    super.init()
-  }
-  
-  public override func responds(to aSelector: Selector!) -> Bool {
-    let res = (target?.responds(to: aSelector) ?? false) || super.responds(to: aSelector)
-    return res
-  }
-  
-  public override func forwardingTarget(for aSelector: Selector!) -> Any? {
-    return target
-  }
-}
-
-/**
  Exposes the helper method to create the displayLink being held weak reference.
  
  Main runloop retains CADisplayLink object before `displayLink.invalidate()` gets called.
