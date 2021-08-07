@@ -14,15 +14,10 @@ public extension CADisplayLink {
   static func displayLinkWithWeakTarget(_ target: NSObjectProtocol,
                                         selector: Selector) -> CADisplayLink {
     // `weakReferenceBox` will be retained by the CADisplayLink instance.
-    
+    let weakReferenceBox = CADisplayLinkWeakReferenceBox(target: target, selector: selector)
     return CADisplayLink(
-      target: CZWeakProxy(target: target),
-      selector: selector)
-    
-//    let weakReferenceBox = CADisplayLinkWeakReferenceBox(target: target, selector: selector)
-//    return CADisplayLink(
-//      target: weakReferenceBox,
-//      selector: #selector(CADisplayLinkWeakReferenceBox.tick(_:)))
+      target: weakReferenceBox,
+      selector: #selector(CADisplayLinkWeakReferenceBox.tick(_:)))
   }
 }
 
