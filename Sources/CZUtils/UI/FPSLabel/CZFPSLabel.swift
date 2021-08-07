@@ -5,7 +5,7 @@ public class CZFPSLabel: UILabel {
     public static let size = CGSize(width: 55, height: 20)
     public static let backgroundColor = UIColor(white: 0.1, alpha: 1)
   }
-  private var displayLinkObserver: CADisplayLinkObserver!
+  private var displayLinkObserver: CADisplayLinkObserver?
   
   public override init(frame theFrame: CGRect) {
     var frame = theFrame
@@ -17,7 +17,7 @@ public class CZFPSLabel: UILabel {
     
     // Initialize CADisplayLinkObserver.
     displayLinkObserver = CADisplayLinkObserver()
-    displayLinkObserver.delegate = self
+    displayLinkObserver?.delegate = self
   }
 
   public required init?(coder: NSCoder) { fatalError() }
