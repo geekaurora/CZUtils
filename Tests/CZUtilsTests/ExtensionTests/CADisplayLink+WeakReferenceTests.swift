@@ -8,21 +8,44 @@ class CADisplayLinkWeakReferenceTests: XCTestCase {
   }
   
   fileprivate var dsplayLinkObserver: TestCADisplayLinkObserver?
+  fileprivate weak var displayLink: CADisplayLink?
   
-  func testWeakReference() {
+  /**
+   Veriy `tick(_:)` callback of CZDisplayLink observer gets callsed.
+   */
+  func testDisplayLinkTick() {
     let expectation = XCTestExpectation(description: Constant.waitExpectationDescription)
-    
     dsplayLinkObserver = TestCADisplayLinkObserver()
-    dsplayLinkObserver = nil
     
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      XCTAssertTrue(self.dsplayLinkObserver?.tickCount ?? 0 > 0, "`tickCount` should be greater than 0.")
+      expectation.fulfill()
+    }
     wait(for: [expectation], timeout: Constant.interval)
-    
-    
   }
+  
+  /**
+   Should wait for 5s before `displayLink` is nil.
+   */
+//  func testWeakReference() {
+//    let expectation = XCTestExpectation(description: Constant.waitExpectationDescription)
+//
+//    dsplayLinkObserver = TestCADisplayLinkObserver()
+//    displayLink = dsplayLinkObserver?.displayLink
+//    dsplayLinkObserver = nil
+//
+//    // Should wait for 5s before `displayLink` is nil.
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//      XCTAssertTrue(self.displayLink == nil, "`displayLink` should have been released.")
+//      expectation.fulfill()
+//    }
+//    wait(for: [expectation], timeout: Constant.interval)
+//  }
 }
 
 fileprivate class TestCADisplayLinkObserver: NSObject {
-  private var displayLink: CADisplayLink?
+  fileprivate(set) var displayLink: CADisplayLink?
+  fileprivate var tickCount = 0
   
   public override init() {
     super.init()
@@ -33,5 +56,7 @@ fileprivate class TestCADisplayLinkObserver: NSObject {
   
   // MARK: - CADisplayLink
   
-  @objc func tick(_ displayLink: CADisplayLink) {}
+  @objc func tick(_ displayLink: CADisplayLink) {
+    tickCount += 1
+  }
 }

@@ -36,6 +36,8 @@ fileprivate class CADisplayLinkWeakReferenceBox {
     if target != nil {
       let _ = target?.perform(selector, with: displayLink)
     } else {
+      // Removing the display link from all run loop modes causes it to be released
+      // by the run loop. The display link also releases the target.
       displayLink.invalidate()
     }
   }
