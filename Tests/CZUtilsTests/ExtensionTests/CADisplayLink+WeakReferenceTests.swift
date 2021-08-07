@@ -28,20 +28,21 @@ class CADisplayLinkWeakReferenceTests: XCTestCase {
    Should wait for 5s before `displayLink` is nil.
    */
   
-  func testWeakReference() {
-    let expectation = XCTestExpectation(description: Constant.waitExpectationDescription)
-
-    dsplayLinkObserver = TestCADisplayLinkObserver()
-    displayLink = dsplayLinkObserver?.displayLink
-    dsplayLinkObserver = nil
-
-    // Should wait for 5s before `displayLink` is nil.
-    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-      XCTAssertTrue(self.displayLink == nil, "`displayLink` should have been released.")
-      expectation.fulfill()
-    }
-    wait(for: [expectation], timeout: Constant.interval)
-  }
+//  func testWeakReference() {
+//    let expectation = XCTestExpectation(description: Constant.waitExpectationDescription)
+//
+//    dsplayLinkObserver = TestCADisplayLinkObserver()
+//    displayLink = dsplayLinkObserver?.displayLink
+//    dsplayLinkObserver = nil
+//
+//    // Should wait for 5s before `displayLink` is nil.
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//      XCTAssertTrue(self.displayLink == nil, "`displayLink` should have been released.")
+//      expectation.fulfill()
+//    }
+//    wait(for: [expectation], timeout: Constant.interval)
+//  }
+  
 }
 
 fileprivate class TestCADisplayLinkObserver: NSObject {
