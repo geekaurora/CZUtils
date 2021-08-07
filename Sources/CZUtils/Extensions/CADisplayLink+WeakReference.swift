@@ -4,6 +4,8 @@ fileprivate var weakReferenceBox: CADisplayLinkWeakReferenceBox?
 
 /**
  Exposes the helper method to create the displayLink being held weak reference.
+ 
+ Main runloop retains CADisplayLink object before `displayLink.invalidate()` gets called.
  */
 public extension CADisplayLink {
   /// Creates displayLink being held weak reference.
@@ -32,7 +34,7 @@ fileprivate class CADisplayLinkWeakReferenceBox {
   
   @objc func tick(_ displayLink: CADisplayLink) {
     if target != nil {
-      let _ = target?.perform(selector)
+      let _ = target?.perform(selector, with: displayLink)
     } else {
       displayLink.invalidate()
     }
