@@ -27,6 +27,7 @@ class CADisplayLinkWeakReferenceTests: XCTestCase {
   /**
    Should wait for 5s before `displayLink` is nil.
    */
+  
 //  func testWeakReference() {
 //    let expectation = XCTestExpectation(description: Constant.waitExpectationDescription)
 //
@@ -41,6 +42,7 @@ class CADisplayLinkWeakReferenceTests: XCTestCase {
 //    }
 //    wait(for: [expectation], timeout: Constant.interval)
 //  }
+  
 }
 
 fileprivate class TestCADisplayLinkObserver: NSObject {
