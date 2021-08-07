@@ -1,6 +1,32 @@
 import UIKit
 
 /**
+ Proxy that forwards method message to underlying `target`, which  holds weak reference to `target`.
+ 
+ ### Usage
+ ```
+ displayLink = CADisplayLink(target: CZWeakProxy(target: self),
+ selector: #selector(didRefresh(dpLink:)))
+ ```
+ */
+public class CZWeakProxy: NSObject {
+  private weak var target: NSObjectProtocol?
+  
+  public init(target: NSObjectProtocol) {
+    self.target = target
+    super.init()
+  }
+  
+  public override func responds(to aSelector: Selector!) -> Bool {
+    return (target?.responds(to: aSelector) ?? false) || super.responds(to: aSelector)
+  }
+  
+  public override func forwardingTarget(for aSelector: Selector!) -> Any? {
+    return target
+  }
+}
+
+/**
  Exposes the helper method to create the displayLink being held weak reference.
  
  Main runloop retains CADisplayLink object before `displayLink.invalidate()` gets called.
@@ -11,21 +37,28 @@ public extension CADisplayLink {
   ///   - target: The target that observes the displayLink, `target` is being held weak reference.
   ///   - selector: The selector to be called when the screen gets updated.
   /// - Returns: The displayLink being created.
-  static func displayLinkWithWeakTarget(_ target: AnyObject,
+  static func displayLinkWithWeakTarget(_ target: NSObjectProtocol,
                                         selector: Selector) -> CADisplayLink {
     // `weakReferenceBox` will be retained by the CADisplayLink instance.
-    let weakReferenceBox = CADisplayLinkWeakReferenceBox(target: target, selector: selector)
-    return CADisplayLink(target: weakReferenceBox, selector: #selector(CADisplayLinkWeakReferenceBox.tick(_:)))
+    
+    return CADisplayLink(
+      target: CZWeakProxy(target: target),
+      selector: selector)
+    
+//    let weakReferenceBox = CADisplayLinkWeakReferenceBox(target: target, selector: selector)
+//    return CADisplayLink(
+//      target: weakReferenceBox,
+//      selector: #selector(CADisplayLinkWeakReferenceBox.tick(_:)))
   }
 }
 
 // MARK: - Helper Class
 
 fileprivate class CADisplayLinkWeakReferenceBox {
-  private weak var target: AnyObject?
+  private weak var target: NSObjectProtocol?
   private let selector: Selector
   
-  init(target: AnyObject, selector: Selector) {
+  init(target: NSObjectProtocol, selector: Selector) {
     self.target = target
     self.selector = selector
   }
