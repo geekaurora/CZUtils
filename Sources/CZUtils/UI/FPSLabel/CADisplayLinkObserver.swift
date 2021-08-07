@@ -11,7 +11,7 @@ public class CADisplayLinkObserver: NSObject {
   /// Delegate that gets notified on display frame update of CADisplayLink.
   public weak var delegate: CADisplayLinkObserverDelegate?
   
-  private var displayLink: CADisplayLink!
+  private var displayLink: CADisplayLink?
   private var lastUpdateTimestamp: TimeInterval = 0
   private var updatedFrames: Int = 0
   private var shouldNotifyEachFrameUpdate: Bool
@@ -26,11 +26,11 @@ public class CADisplayLinkObserver: NSObject {
     
     //self.displayLink = CADisplayLink(target: self, selector: #selector(tick(_:)))
     self.displayLink = CADisplayLink.displayLinkWithWeakTarget(self, selector: #selector(tick(_:)))
-    displayLink.add(to: .main, forMode: .common)
+    displayLink?.add(to: .main, forMode: .common)
   }
 
   deinit {
-    displayLink.invalidate()
+    displayLink?.invalidate()
   }
   
   // MARK: - CADisplayLink
