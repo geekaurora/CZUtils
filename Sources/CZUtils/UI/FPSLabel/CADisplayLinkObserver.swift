@@ -24,7 +24,8 @@ public class CADisplayLinkObserver: NSObject {
     self.shouldNotifyEachFrameUpdate = shouldNotifyEachFrameUpdate
     super.init()
     
-    self.displayLink = CADisplayLink(target: self, selector: #selector(tick(_:)))
+    //self.displayLink = CADisplayLink(target: self, selector: #selector(tick(_:)))
+    self.displayLink = CADisplayLink.displayLinkWithWeakTarget(self, selector: #selector(tick(_:)))
     displayLink.add(to: .main, forMode: .common)
   }
 
