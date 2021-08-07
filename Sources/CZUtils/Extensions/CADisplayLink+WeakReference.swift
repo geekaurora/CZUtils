@@ -1,6 +1,6 @@
 import UIKit
 
-fileprivate var weakReferenceBox: CADisplayLinkWeakReferenceBox?
+// fileprivate var weakReferenceBox: CADisplayLinkWeakReferenceBox?
 
 /**
  Exposes the helper method to create the displayLink being held weak reference.
@@ -16,7 +16,7 @@ public extension CADisplayLink {
   static func displayLinkWithWeakTarget(_ target: AnyObject,
                                         selector: Selector) -> CADisplayLink {
     // `weakReferenceBox` will be retained by the CADisplayLink instance.
-    weakReferenceBox = CADisplayLinkWeakReferenceBox(target: target, selector: selector)
+    let weakReferenceBox = CADisplayLinkWeakReferenceBox(target: target, selector: selector)
     return CADisplayLink(target: weakReferenceBox, selector: #selector(CADisplayLinkWeakReferenceBox.tick(_:)))
   }
 }
