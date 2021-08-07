@@ -1,7 +1,5 @@
 import UIKit
 
-// fileprivate var weakReferenceBox: CADisplayLinkWeakReferenceBox?
-
 /**
  Exposes the helper method to create the displayLink being held weak reference.
  
