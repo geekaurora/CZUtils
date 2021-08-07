@@ -10,7 +10,7 @@ import UIKit
  ```
  */
 public class CZWeakProxy: NSObject {
-  private weak var target: NSObjectProtocol?
+  private var target: NSObjectProtocol?
   
   public init(target: NSObjectProtocol) {
     self.target = target
@@ -18,7 +18,8 @@ public class CZWeakProxy: NSObject {
   }
   
   public override func responds(to aSelector: Selector!) -> Bool {
-    return (target?.responds(to: aSelector) ?? false) || super.responds(to: aSelector)
+    let res = (target?.responds(to: aSelector) ?? false) || super.responds(to: aSelector)
+    return res
   }
   
   public override func forwardingTarget(for aSelector: Selector!) -> Any? {
