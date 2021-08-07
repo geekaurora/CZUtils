@@ -10,7 +10,7 @@ import UIKit
  ```
  */
 public class CZWeakProxy: NSObject {
-  private var target: NSObjectProtocol?
+  private weak var target: NSObjectProtocol?
   
   public init(target: NSObjectProtocol) {
     self.target = target
