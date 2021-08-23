@@ -48,16 +48,8 @@ extension CZFPSLabel: CADisplayLinkObserverProtocol {
           let fps = displayLinkEventData.fps.assertIfNil else {
       return
     }    
-    updateText(fps: fps)
-    
+    updateText(fps: fps)    
   }
-  
-//  public func displayFrameDidUpdate(displayLink: CADisplayLink, fps: Double?) {
-//    guard let fps = fps else {
-//      return
-//    }
-//    updateText(fps: fps)
-//  }
 }
 
 // MARK: - Private methods
