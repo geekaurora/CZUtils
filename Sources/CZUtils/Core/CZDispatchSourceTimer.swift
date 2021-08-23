@@ -57,7 +57,7 @@ public class CZDispatchSourceTimer: NSObject {
     resume()
   }
   
-  private func start() {
+  public func start() {
     assert(tickClosure != nil, "tickClosure shouldn't be nil.")
     
     let interval = Int(timeInterval * 1000000)
