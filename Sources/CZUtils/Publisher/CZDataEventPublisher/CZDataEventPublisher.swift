@@ -1,7 +1,37 @@
-import CZUtils
+import Foundation
 
 /**
  Data event publisher that maintains the listeners and publishes data change events.
+ 
+ ### Usage
+ ```
+  // Initialize publisher.
+  var dataEventPublisher = CZDataEventPublisher()
+ 
+   // Adds listener to `dataEventPublisher`.
+   testCZDataEventListener = TestCZDataEventListener()
+   dataEventPublisher.addListener(testCZDataEventListener)
+ 
+   class TestCZDataEventListener: CZDataEventListener {
+     var data: String?
+     
+     func handleUpdatedData(_ data: CZEventData?) {
+       guard let data = (data as? String).assertIfNil else {
+         return
+       }
+       self.data = data
+     }
+  }
+ 
+ class TestData {
+  var nameEventPublisher: CZDataEventPublisher?
+  var name: String? {
+    didSet {
+      nameEventPublisher!.publishDataChange(name)
+    }
+  }
+ }
+ ```
  */
 public class CZDataEventPublisher {
   private var listeners = ThreadSafeWeakArray<CZDataEventListener>(allowDuplicates: false)

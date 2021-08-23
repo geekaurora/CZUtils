@@ -1,3 +1,3 @@
-import CZUtils
+import Foundation
 
 public protocol CZEventData {}
