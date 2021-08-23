@@ -40,7 +40,7 @@ public class CZFPSLabel: UILabel {
   }
 }
 
-// MARK: - CADisplayLinkObserverDelegate
+// MARK: - CADisplayLinkObserverProtocol
 
 extension CZFPSLabel: CADisplayLinkObserverProtocol {
   public func handleUpdatedData(_ data: CZEventData?) {
