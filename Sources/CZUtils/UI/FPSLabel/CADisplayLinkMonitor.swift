@@ -1,13 +1,12 @@
 import UIKit
 
 /// Observer that gets notified on rendering frame update of CADisplayLink.
-public protocol CADisplayLinkObserverProtocol: CZDataEventListener {
-}
+public protocol CADisplayLinkObserverProtocol: CZDataEventListener {}
 
+/// EventData that contains fps / displayLink.
 public struct DisplayLinkEventData: CZEventData {
   public let displayLink: CADisplayLink?
   public let fps: Double?
-  
   public init(displayLink: CADisplayLink?, fps: Double?) {
     self.displayLink = displayLink
     self.fps = fps
@@ -17,8 +16,10 @@ public struct DisplayLinkEventData: CZEventData {
 /// Monitor that observes each rendering frame update of CADisplayLink.
 @objc
 public class CADisplayLinkMonitor: NSObject {
+  public static let shared = CADisplayLinkMonitor()
+  
   /// Publisher that publishes frame update of CADisplayLink to observers.
-  private var dataEventPublisher = CZDataEventPublisher()
+  private let dataEventPublisher = CZDataEventPublisher()
   
   private var displayLink: CADisplayLink?
   private var lastUpdateTimestamp: TimeInterval = 0
@@ -32,14 +33,30 @@ public class CADisplayLinkMonitor: NSObject {
   public init(shouldNotifyEachFrameUpdate: Bool = false) {
     self.shouldNotifyEachFrameUpdate = shouldNotifyEachFrameUpdate
     super.init()
-    
+    start()
+  }
+
+  deinit {
+    stop()
+  }
+  
+  // MARK: - Start / Stop
+  
+  public func start() {
+    guard displayLink == nil else {
+      return
+    }
     //self.displayLink = CADisplayLink(target: self, selector: #selector(tick(_:)))
     self.displayLink = CADisplayLink.displayLinkWithWeakTarget(self, selector: #selector(tick(_:)))
     displayLink?.add(to: .main, forMode: .common)
   }
-
-  deinit {
+  
+  public func stop() {
+    guard displayLink != nil else {
+      return
+    }
     displayLink?.invalidate()
+    self.displayLink = nil
   }
   
   // MARK: - Publisher
@@ -60,7 +77,6 @@ public class CADisplayLinkMonitor: NSObject {
       if shouldNotifyEachFrameUpdate || fps != nil {
         let displayLinkEventData = DisplayLinkEventData(displayLink: displayLink, fps: fps)
         dataEventPublisher.publishDataChange(displayLinkEventData)
-        
         // delegate?.displayFrameDidUpdate(displayLink: displayLink, fps: fps)
       }
     }

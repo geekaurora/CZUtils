@@ -5,8 +5,7 @@ public class CZFPSLabel: UILabel {
     public static let size = CGSize(width: 55, height: 20)
     public static let backgroundColor = UIColor(white: 0.1, alpha: 1)
   }
-  private var displayLinkObserver: CADisplayLinkObserver?
-  
+
   public override init(frame theFrame: CGRect) {
     var frame = theFrame
     if theFrame.size == .zero {
@@ -15,9 +14,8 @@ public class CZFPSLabel: UILabel {
     super.init(frame: frame)
     setupViews()
     
-    // Initialize CADisplayLinkObserver.
-    displayLinkObserver = CADisplayLinkObserver()
-    displayLinkObserver?.delegate = self
+    // Starts listening to CADisplayLinkMonitor.
+    CADisplayLinkMonitor.shared.addListener(self)
   }
 
   public required init?(coder: NSCoder) { fatalError() }
@@ -44,13 +42,22 @@ public class CZFPSLabel: UILabel {
 
 // MARK: - CADisplayLinkObserverDelegate
 
-extension CZFPSLabel: CADisplayLinkObserverDelegate {
-  public func displayFrameDidUpdate(displayLink: CADisplayLink, fps: Double?) {
-    guard let fps = fps else {
+extension CZFPSLabel: CADisplayLinkObserverProtocol {
+  public func handleUpdatedData(_ data: CZEventData?) {
+    guard let displayLinkEventData = (data as? DisplayLinkEventData).assertIfNil,
+          let fps = displayLinkEventData.fps.assertIfNil else {
       return
-    }
+    }    
     updateText(fps: fps)
+    
   }
+  
+//  public func displayFrameDidUpdate(displayLink: CADisplayLink, fps: Double?) {
+//    guard let fps = fps else {
+//      return
+//    }
+//    updateText(fps: fps)
+//  }
 }
 
 // MARK: - Private methods
