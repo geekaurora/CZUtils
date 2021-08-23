@@ -77,7 +77,6 @@ public class CADisplayLinkMonitor: NSObject {
       if shouldNotifyEachFrameUpdate || fps != nil {
         let displayLinkEventData = DisplayLinkEventData(displayLink: displayLink, fps: fps)
         dataEventPublisher.publishDataChange(displayLinkEventData)
-        // delegate?.displayFrameDidUpdate(displayLink: displayLink, fps: fps)
       }
     }
     
