@@ -7,6 +7,10 @@ public class CZFPSTestObserverResult: Codable {
   public let fpsValues: [Double]
   public let badFPSs: [Double]
   
+  private var filePath: String {
+    return CZFileHelper.documentDirectory + "date" + ".txt"
+  }
+  
   public init(fpsValues: [Double], badFPSs: [Double]) {
     self.fpsValues = fpsValues
     self.badFPSs = badFPSs
@@ -17,6 +21,11 @@ public class CZFPSTestObserverResult: Codable {
   }
   
   public func saveToFile() {
+    guard let data = CZHTTPJsonSerializer.jsonData(with: dictionaryVersion).assertIfNil else {
+      return
+    }
+    (data as NSData).write(toFile: filePath, atomically: true)
+    dbgPrintWithFunc(self, "Successfully write the file - \(filePath).")
     
   }
 }
@@ -53,6 +62,7 @@ public class CZFPSTestObserver {
     preprocessFPSValues()
     
     let result = CZFPSTestObserverResult(fpsValues: fpsValues, badFPSs: badFPSs())
+    result.saveToFile()
     return result
   }
   
