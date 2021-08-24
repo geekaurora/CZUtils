@@ -7,6 +7,7 @@ public class CZFPSTestObserverResult: Codable, CustomStringConvertible {
   public let fpsValues: [Double]
   public let badFPSs: [Double]
   public let averageFPS: Double
+  public let date: Date
 
   private var filePath: String {
     let dateString = Date().simpleFileString
@@ -17,6 +18,7 @@ public class CZFPSTestObserverResult: Codable, CustomStringConvertible {
     self.fpsValues = fpsValues
     self.badFPSs = badFPSs
     self.averageFPS = fpsValues.average.rounded()
+    self.date = Date()
   }
   
   public func hasBadFPS() -> Bool {
