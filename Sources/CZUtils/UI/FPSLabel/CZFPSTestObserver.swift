@@ -8,7 +8,8 @@ public class CZFPSTestObserverResult: Codable {
   public let badFPSs: [Double]
   
   private var filePath: String {
-    return CZFileHelper.documentDirectory + "date" + ".txt"
+    let dateString = Date().simpleFileString
+    return CZFileHelper.documentDirectory + dateString + ".txt"
   }
   
   public init(fpsValues: [Double], badFPSs: [Double]) {
@@ -25,7 +26,7 @@ public class CZFPSTestObserverResult: Codable {
       return
     }
     (data as NSData).write(toFile: filePath, atomically: true)
-    dbgPrintWithFunc(self, "Successfully write the file - \(filePath).")
+    dbgPrintWithFunc(self, "Successfully write the file - \(filePath)")
     
   }
 }
@@ -61,7 +62,8 @@ public class CZFPSTestObserver {
   public func outputResults() -> CZFPSTestObserverResult {
     preprocessFPSValues()
     
-    let result = CZFPSTestObserverResult(fpsValues: fpsValues, badFPSs: badFPSs())
+    let badFPSs = self.badFPSs()
+    let result = CZFPSTestObserverResult(fpsValues: fpsValues, badFPSs: badFPSs)
     result.saveToFile()
     return result
   }
@@ -82,7 +84,7 @@ private extension CZFPSTestObserver {
       return
     }
     assert(index == 0, "The first FPS should be greater than `Constant.initFPSThreshold`.")
-    fpsValues = Array(fpsValues[index...])
+    fpsValues = Array(fpsValues[index...]).map { $0.rounded() }
   }
 }
 
