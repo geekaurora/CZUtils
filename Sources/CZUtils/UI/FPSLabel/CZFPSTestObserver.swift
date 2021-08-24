@@ -3,10 +3,11 @@ import Foundation
 /**
  The result of CZFPSTestObserver.
  */
-public class CZFPSTestObserverResult: Codable {
+public class CZFPSTestObserverResult: Codable, CustomStringConvertible {
   public let fpsValues: [Double]
   public let badFPSs: [Double]
-  
+  public let averageFPS: Double
+
   private var filePath: String {
     let dateString = Date().simpleFileString
     return CZFileHelper.documentDirectory + dateString + ".txt"
@@ -15,6 +16,7 @@ public class CZFPSTestObserverResult: Codable {
   public init(fpsValues: [Double], badFPSs: [Double]) {
     self.fpsValues = fpsValues
     self.badFPSs = badFPSs
+    self.averageFPS = fpsValues.average
   }
   
   public func hasBadFPS() -> Bool {
@@ -26,8 +28,7 @@ public class CZFPSTestObserverResult: Codable {
       return
     }
     (data as NSData).write(toFile: filePath, atomically: true)
-    dbgPrintWithFunc(self, "Successfully write the file - \(filePath)")
-    
+    dbgPrintWithFunc(self, "\nSuccessfully write the file - \(filePath)\n")
   }
 }
 
@@ -41,7 +42,7 @@ public class CZFPSTestObserver {
     /// Threshold that determines whether the FPS value isn't performance.
     public static var fpsThreshold: Double = 50
     /// Threshold that determines to filter out the FPS value during the initialization.
-    public static var initFPSThreshold: Double = 59
+    public static var initFPSThreshold: Double = 50
   }
   public private(set) var fpsValues = [Double]()
   
@@ -79,12 +80,14 @@ private extension CZFPSTestObserver {
   
   /// Remove the slow FPS values during the initialization.
   func preprocessFPSValues() {
+    fpsValues = fpsValues.map { $0.rounded() }
+    
     guard fpsValues.count > 0,
-          let index = fpsValues.firstIndex(where: { $0 >= Self.Constant.initFPSThreshold }).assertIfNil else {
+          let index = fpsValues.firstIndex(where: { $0 >= Self.Constant.initFPSThreshold }) else {
       return
     }
-    assert(index == 0, "The first FPS should be greater than `Constant.initFPSThreshold`.")
-    fpsValues = Array(fpsValues[index...]).map { $0.rounded() }
+    // assert(index == 0, "The first FPS should be greater than `Constant.initFPSThreshold`.")
+    fpsValues = Array(fpsValues[index...])
   }
 }
 
