@@ -72,6 +72,20 @@ open class CZHTTPJsonSerializer {
     return nil
   }
   
+  /// Returns data with  the `pathUrl`.
+  public static func data(withPathUrl pathUrl: URL?)-> Data? {
+    guard let pathUrl = pathUrl.assertIfNil else {
+      return nil
+    }
+    do {
+      let data = try Data(contentsOf: pathUrl)
+      return data
+    } catch {
+      assertionFailure("Failed to load data with url - \(pathUrl). Error - \(error.localizedDescription)")
+      return nil
+    }
+  }
+  
   /// Returns string value with input Diciontary/Array.
   public static func stringify(_ object: Any?, encoding: String.Encoding = .utf8) -> String? {
     guard let data = jsonData(with: object).assertIfNil else { return nil }
