@@ -16,7 +16,7 @@ public class CZFPSTestObserverResult: Codable, CustomStringConvertible {
   public init(fpsValues: [Double], badFPSs: [Double]) {
     self.fpsValues = fpsValues
     self.badFPSs = badFPSs
-    self.averageFPS = fpsValues.average
+    self.averageFPS = fpsValues.average.rounded()
   }
   
   public func hasBadFPS() -> Bool {
