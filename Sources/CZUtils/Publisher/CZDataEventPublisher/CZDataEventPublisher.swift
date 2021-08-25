@@ -33,15 +33,17 @@ import Foundation
  }
  ```
  */
-public class CZDataEventPublisher {
+public class CZDataEventPublisher<EventData: CZEventData> {
   private var listeners = ThreadSafeWeakArray<CZDataEventListener>(allowDuplicates: false)
   
   public init() {}
   
   // MARK: - Event
   
-  public func publishDataChange(_ data: CZEventData?) {
-    listeners.allObjects.forEach { $0.handleUpdatedData(data) }
+  public func publishDataChange(_ data: EventData?) {
+    listeners.allObjects.forEach {
+      $0.handleUpdatedData(data)      
+    }
   }
   
   // MARK: - Listener

@@ -9,17 +9,21 @@
 import Foundation
 
 public extension Date {
-    var simpleString: String {
-        return string(withFormat: "yyyy-MM-dd hh:mm")
-    }
-    
-    var complexString: String {
-        return string(withFormat: "EEE, dd MMM yyyy hh:mm:ss +zzzz")
-    }
+  var simpleString: String {
+    return string(withFormat: "yyyy-MM-dd hh:mm")
+  }
   
-    func string(withFormat formatterStr: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = formatterStr
-        return dateFormatter.string(from: self)
-    }
+  var simpleFileString: String {
+    return string(withFormat: "yyyy-MM-dd hh_mm_ss")
+  }
+  
+  var complexString: String {
+    return string(withFormat: "EEE, dd MMM yyyy hh:mm:ss +zzzz")
+  }
+  
+  func string(withFormat formatterStr: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = formatterStr
+    return dateFormatter.string(from: self)
+  }
 }

@@ -19,7 +19,7 @@ public class CADisplayLinkMonitor: NSObject {
   public static let shared = CADisplayLinkMonitor()
   
   /// Publisher that publishes frame update of CADisplayLink to observers.
-  private let dataEventPublisher = CZDataEventPublisher()
+  private let dataEventPublisher = CZDataEventPublisher<DisplayLinkEventData>()
   
   private var displayLink: CADisplayLink?
   private var lastUpdateTimestamp: TimeInterval = 0

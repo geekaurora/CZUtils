@@ -42,6 +42,8 @@ open class CZHTTPJsonSerializer {
     return res
   }
   
+  // MARK: - Serialized / Deserialize
+  
   /// Returns JSONData with input Diciontary/Array
   public static func jsonData(with object: Any?) -> Data? {
     guard let object = object else { return nil }
@@ -71,6 +73,36 @@ open class CZHTTPJsonSerializer {
     }
     return nil
   }
+  
+  /// Returns data with  the `pathUrl`.
+  public static func data(withPathUrl pathUrl: URL?)-> Data? {
+    guard let pathUrl = pathUrl.assertIfNil else {
+      return nil
+    }
+    do {
+      let data = try Data(contentsOf: pathUrl)
+      return data
+    } catch {
+      assertionFailure("Failed to load data with url - \(pathUrl). Error - \(error.localizedDescription)")
+      return nil
+    }
+  }
+  
+  /// Saves the JSON object to `filePath`.
+  ///
+  /// - Params:
+  ///   - object                :   The JSON object. e.g. Dictionary, Array etc.
+  ///   - FilePath            :   The file path to be saved to.
+  /// - Returns              : True if succeed, false otherwise.
+  public static func saveJSONObject(_ object: Any?, toFilePath filePath: String)-> Bool {
+    guard let data = Self.jsonData(with: object).assertIfNil else {
+      return false
+    }
+    (data as NSData).write(toFile: filePath, atomically: true)
+    return true
+  }
+  
+  // MARK: - String
   
   /// Returns string value with input Diciontary/Array.
   public static func stringify(_ object: Any?, encoding: String.Encoding = .utf8) -> String? {
