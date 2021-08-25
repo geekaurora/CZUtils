@@ -30,11 +30,8 @@ public class CZFPSTestObserverResult: Codable, CustomStringConvertible {
   }
   
   public func saveToFile() {
-    guard let data = CZHTTPJsonSerializer.jsonData(with: dictionaryVersion).assertIfNil else {
-      return
-    }
-    (data as NSData).write(toFile: filePath, atomically: true)
-    dbgPrintWithFunc(self, "\nSuccessfully write the file - \(filePath)\n")
+    let saveFileResult = self.saveToFilePath(filePath)
+    dbgPrintWithFunc(self, "\nResult = \(saveFileResult). Write the file - \(filePath)\n")
   }
 }
 

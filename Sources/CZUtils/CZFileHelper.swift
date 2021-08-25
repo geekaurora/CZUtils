@@ -84,7 +84,7 @@ import Foundation
   }
   
   /**
-   Create the directory if needed.
+   Create the directory if it doesn't exist.
    */
   public static func createDirectoryIfNeeded(at path: String) {
     if !FileManager.default.fileExists(atPath: path) {

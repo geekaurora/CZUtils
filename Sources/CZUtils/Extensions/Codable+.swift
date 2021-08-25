@@ -148,13 +148,31 @@ public extension Encodable {
   func value<T>(forDotedKey dotedKey: String) -> T? {
     return dictionaryVersion.value(forDotedKey: dotedKey) as? T
   }
+  
+  // MARK: File
+  
+  /// Saves the object to `filePath`.
+  ///
+  /// - Params:
+  ///   - object                :   The JSON object. e.g. Dictionary, Array etc.
+  ///   - FilePath            :   The file path to be saved to.
+  /// - Returns              : True if succeed, false otherwise.
+  func saveToFilePath(_ filePath: String, atomically: Bool = true)-> Bool {
+    guard let data = CZHTTPJsonSerializer.jsonData(with: dictionaryVersion).assertIfNil else {
+      return false
+    }
+    (data as NSData).write(toFile: filePath, atomically: atomically)
+    return true
+  }
 }
+
 
 // MARK: - Codable
 
-// MARK: NSCopying
-
 public extension Encodable where Self: Decodable {
+  
+  // MARK: NSCopying
+  
   func copy(with zone: NSZone?) -> Any  {
     return codableCopy(with: zone)
   }
@@ -169,5 +187,6 @@ public extension Encodable where Self: Decodable {
       return self
     }
   }
+  
 }
 

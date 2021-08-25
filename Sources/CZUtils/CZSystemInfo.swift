@@ -5,7 +5,7 @@ import UIKit
 @objc
 public class CZSystemInfo: NSObject {
   
-  // MARK: - CPU
+  // MARK: - Device Info
   
   public static func getDeviceType() -> String {
     return UIDevice().type
@@ -49,8 +49,7 @@ public extension UIDevice {
     }
     
     switch identifier {
-    case "iPod5,1":                                 return "iPod Touch 5"
-    case "iPod7,1":                                 return "iPod Touch 6"
+    // iPhone.
     case "iPhone3,1", "iPhone3,2", "iPhone3,3":     return "iPhone 4"
     case "iPhone4,1":                               return "iPhone 4s"
     case "iPhone5,1", "iPhone5,2":                  return "iPhone 5"
@@ -63,8 +62,6 @@ public extension UIDevice {
     case "iPhone9,1", "iPhone9,3":                  return "iPhone 7"
     case "iPhone9,2", "iPhone9,4":                  return "iPhone 7 Plus"
     case "iPhone8,4":                               return "iPhone SE"
-      
-      
     case "iPhone10,1", "iPhone10,4":                return "iPhone8"
     case "iPhone10,2", "iPhone10,5":                return "iPhone8Plus"
     case "iPhone10,3", "iPhone10,6":                return "iPhoneX"
@@ -74,7 +71,7 @@ public extension UIDevice {
     case "iPhone12,1":                              return "iPhone11"
     case "iPhone12,3":                              return "iPhone11Pro"
     case "iPhone12,5":                              return "iPhone11ProMax"
-      
+    // iPad.
     case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":return "iPad 2"
     case "iPad3,1", "iPad3,2", "iPad3,3":           return "iPad 3"
     case "iPad3,4", "iPad3,5", "iPad3,6":           return "iPad 4"
