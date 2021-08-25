@@ -44,7 +44,7 @@ public class CZFPSTestObserver {
   public enum Constant {
     /// Threshold that determines whether the FPS value isn't performance.
     public static var fpsThreshold: Double = 50
-    /// Threshold that determines to filter out the FPS value during the initialization.
+    /// Threshold that determines whether to filter out the FPS value during the initialization.
     public static var initFPSThreshold: Double = 50
   }
   public private(set) var fpsValues = [Double]()
@@ -83,13 +83,14 @@ private extension CZFPSTestObserver {
   
   /// Remove the slow FPS values during the initialization.
   func preprocessFPSValues() {
-    fpsValues = fpsValues.map { $0.rounded() }
+    defer {
+      fpsValues = fpsValues.map { $0.rounded() }
+    }
     
     guard fpsValues.count > 0,
           let index = fpsValues.firstIndex(where: { $0 >= Self.Constant.initFPSThreshold }) else {
       return
     }
-    // assert(index == 0, "The first FPS should be greater than `Constant.initFPSThreshold`.")
     fpsValues = Array(fpsValues[index...])
   }
 }

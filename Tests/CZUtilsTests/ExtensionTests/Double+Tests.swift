@@ -17,8 +17,7 @@ class DoubleExtensionTests: XCTestCase {
 //  }
   
     func testSystemRounded() {
-      let input = 5.4873
-  
+      let input = 5.4873  
       let actual = input.rounded()
       let expected: Double = 5
       XCTAssert(actual == expected, "Incorrect result! actual = \(actual), expected = \(expected)")
