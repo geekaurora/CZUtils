@@ -26,4 +26,8 @@ public extension Date {
     dateFormatter.dateFormat = formatterStr
     return dateFormatter.string(from: self)
   }
+  
+  var timestamp: Int {
+    return Int(Date().timeIntervalSince1970.rounded())
+  }
 }

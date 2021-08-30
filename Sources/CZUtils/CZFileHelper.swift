@@ -1,16 +1,36 @@
-//
-//  CZFileHelper.swift
-//
-//  Created by Cheng Zhang on 1/13/16.
-//  Copyright © 2016 Cheng Zhang. All rights reserved.
-//
-
 import Foundation
 
 /// Helper class for file related methods 
 @objc open class CZFileHelper: NSObject {
   @objc public static var documentDirectory: String {
     return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/"
+  }
+  
+  /**
+   Returns the shared writable folder URL of the simulator. It can be used for sharing data between app and UITest.
+  
+   - Note: It only works for Simulator.
+   
+   ### Sample
+    /Users/<userName>/Library/Developer/CoreSimulator/Devices/<GroupId>/data/Library/Shared
+   */
+  public static func sharedGroupFolderURL() -> URL? {
+    guard let simulatorSharedDir = ProcessInfo().environment["SIMULATOR_SHARED_RESOURCES_DIRECTORY"] else {
+      assertionFailure("Failed to get SIMULATOR_SHARED_RESOURCES_DIRECTORY from ProcessInfo.")
+      return nil
+    }
+    let simulatorHomeDirURL = URL(fileURLWithPath: simulatorSharedDir)
+    let cachesDirURL = simulatorHomeDirURL.appendingPathComponent("Library/Caches")
+    assert(FileManager.default.isWritableFile(atPath: cachesDirURL.path), "Cannot write to simulator Caches directory - \(cachesDirURL)")
+    
+    let sharedFolderURL = cachesDirURL.appendingPathComponent("Shared")
+    createDirectoryIfNeeded(at: sharedFolderURL)
+//    do {
+//      try FileManager.default.createDirectory(at: sharedFolderURL, withIntermediateDirectories: true, attributes: nil)
+//    } catch {
+//      assertionFailure("Failed to create shared folder \(sharedFolderURL). error - \(error)")
+//    }
+    return sharedFolderURL
   }
   
   public static func getFileSize(_ filePath: String?) -> Int? {
@@ -92,6 +112,19 @@ import Foundation
         try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
       } catch {
         assertionFailure("Failed to create the directory! Error - \(error.localizedDescription); path - \(path)")
+      }
+    }
+  }
+  
+  public static func createDirectoryIfNeeded(at url: URL?) {
+    guard let url = url else {
+      return
+    }
+    if !FileManager.default.fileExists(atPath: url.absoluteString) {
+      do {
+        try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+      } catch {
+        assertionFailure("Failed to create the directory! Error - \(error.localizedDescription); url - \(url)")
       }
     }
   }
