@@ -10,11 +10,13 @@ import Foundation
    Returns the shared writable folder URL of the simulator. It can be used for sharing data between app and UITest.
   
    - Note: It only works for Simulator.
+  
+   ### Output
+   file:///Users/<userName>/Library/Developer/CoreSimulator/Devices/<GroupId>/data/Library/Shared
    
-   ### Sample
-    /Users/<userName>/Library/Developer/CoreSimulator/Devices/<GroupId>/data/Library/Shared
+   - Parameter fileName: file name to be added to the folder.
    */
-  public static func sharedGroupFolderURL() -> URL? {
+  public static func sharedGroupFolderURL(fileName: String? = nil) -> URL? {
     guard let simulatorSharedDir = ProcessInfo().environment["SIMULATOR_SHARED_RESOURCES_DIRECTORY"] else {
       assertionFailure("Failed to get SIMULATOR_SHARED_RESOURCES_DIRECTORY from ProcessInfo.")
       return nil
@@ -25,11 +27,10 @@ import Foundation
     
     let sharedFolderURL = cachesDirURL.appendingPathComponent("Shared")
     createDirectoryIfNeeded(at: sharedFolderURL)
-//    do {
-//      try FileManager.default.createDirectory(at: sharedFolderURL, withIntermediateDirectories: true, attributes: nil)
-//    } catch {
-//      assertionFailure("Failed to create shared folder \(sharedFolderURL). error - \(error)")
-//    }
+    
+    if let fileName = fileName {
+      return sharedFolderURL.appendingPathComponent(fileName)
+    }
     return sharedFolderURL
   }
   

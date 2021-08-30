@@ -74,6 +74,13 @@ open class CZHTTPJsonSerializer {
     return nil
   }
   
+  public static func deserializedObject<T>(withPathUrl pathUrl: URL?, removeNull: Bool = true) -> T? {
+    guard let data = Self.data(withPathUrl: pathUrl) else {
+      return nil
+    }
+    return Self.deserializedObject(with: data, removeNull: removeNull)
+  }
+  
   /// Returns data with  the `pathUrl`.
   public static func data(withPathUrl pathUrl: URL?)-> Data? {
     guard let pathUrl = pathUrl.assertIfNil else {
@@ -99,6 +106,21 @@ open class CZHTTPJsonSerializer {
       return false
     }
     (data as NSData).write(toFile: filePath, atomically: true)
+    return true
+  }
+  
+  /// Saves the JSON object to `url`.
+  ///
+  /// - Params:
+  ///   - object                :   The JSON object. e.g. Dictionary, Array etc.
+  ///   - url                      :   The file url to be saved to.
+  /// - Returns              : True if succeed, false otherwise.
+  public static func saveJSONObject(_ object: Any?, to url: URL?)-> Bool {
+    guard let url = url,
+          let data = Self.jsonData(with: object).assertIfNil else {
+      return false
+    }
+    (data as NSData).write(to: url, atomically: true)
     return true
   }
   
