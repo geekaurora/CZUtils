@@ -11,8 +11,8 @@ public class CZUItestSharedData {
   /**
   Returns the object from the shared file if any, otherwise nil.
    */
-  public func getObject() -> [String: Any]? {
-    let res:  [String: Any]? = CZHTTPJsonSerializer.deserializedObject(withPathUrl: sharedDataFileUrl)
+  public func getObject<T>() -> T? {
+    let res: T? = CZHTTPJsonSerializer.deserializedObject(withPathUrl: sharedDataFileUrl)
     return res
   }
   
