@@ -28,6 +28,6 @@ public extension Date {
   }
   
   var timestamp: Int {
-    return Int(Date().timeIntervalSince1970.rounded())
+    return Int(Date().timeIntervalSince1970)
   }
 }

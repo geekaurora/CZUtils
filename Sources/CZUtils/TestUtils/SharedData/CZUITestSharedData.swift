@@ -17,7 +17,7 @@ public class CZUITestSharedData {
   }
   
   /**
-  Saves object to the shared file.
+  Saves `object` to the shared file.
    
    - Note: `object` should be JSONSerializable.
    */

@@ -40,7 +40,7 @@ open class MainQueueScheduler: NSObject {
     }
   }
   
-  /// Executes `work` closure asynchronously after `interval`.
+  /// Executes `execute` closure asynchronously after `interval`.
   public class func asyncAfter(_ interval: TimeInterval,
                          qos: DispatchQoS = .unspecified,
                          flags: DispatchWorkItemFlags = [],
