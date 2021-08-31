@@ -15,21 +15,33 @@ import Foundation
    file:///Users/<userName>/Library/Developer/CoreSimulator/Devices/<GroupId>/data/Library/Shared
    
    - Parameter fileName: file name to be added to the folder.
+   - Parameter appGroupName: App group name to group app and UITest bundle on device.
    */
-  public static func sharedGroupFolderURL(fileName: String? = nil) -> URL? {
-    guard let simulatorSharedDir = ProcessInfo().environment["SIMULATOR_SHARED_RESOURCES_DIRECTORY"] else {
-      // assertionFailure("Failed to get SIMULATOR_SHARED_RESOURCES_DIRECTORY from ProcessInfo.")
-      return nil
-    }
-    let simulatorHomeDirURL = URL(fileURLWithPath: simulatorSharedDir)
-    let cachesDirURL = simulatorHomeDirURL.appendingPathComponent("Library/Caches")
-    assert(FileManager.default.isWritableFile(atPath: cachesDirURL.path), "Cannot write to simulator Caches directory - \(cachesDirURL)")
+  public static func sharedGroupFolderURL(fileName: String? = nil, appGroupName: String? = nil) -> URL? {
+    var sharedFolderURL: URL? = nil
     
-    let sharedFolderURL = cachesDirURL.appendingPathComponent("Shared")
-    createDirectoryIfNeeded(at: sharedFolderURL)
+    #if !targetEnvironment(simulator)
+      // Device - AppGroup folder.
+      guard let appGroupName = appGroupName,
+            let appGroupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupName) else {
+        return nil
+      }
+      sharedFolderURL = appGroupURL
+    #else
+      // Simulator - /Users/<username>/Library/Caches/.
+      guard let simulatorSharedDir = ProcessInfo().environment["SIMULATOR_SHARED_RESOURCES_DIRECTORY"] else {
+        return nil
+      }
+      let simulatorHomeDirURL = URL(fileURLWithPath: simulatorSharedDir)
+      let cachesDirURL = simulatorHomeDirURL.appendingPathComponent("Library/Caches")
+      assert(FileManager.default.isWritableFile(atPath: cachesDirURL.path), "Cannot write to simulator Caches directory - \(cachesDirURL)")
+      
+      sharedFolderURL = cachesDirURL.appendingPathComponent("Shared")
+      createDirectoryIfNeeded(at: sharedFolderURL)
+    #endif
     
     if let fileName = fileName {
-      return sharedFolderURL.appendingPathComponent(fileName)
+      return sharedFolderURL?.appendingPathComponent(fileName)
     }
     return sharedFolderURL
   }
