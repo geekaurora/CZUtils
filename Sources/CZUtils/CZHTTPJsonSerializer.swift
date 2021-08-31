@@ -83,7 +83,7 @@ open class CZHTTPJsonSerializer {
   
   /// Returns data with  the `pathUrl`.
   public static func data(withPathUrl pathUrl: URL?)-> Data? {
-    guard let pathUrl = pathUrl.assertIfNil else {
+    guard let pathUrl = pathUrl else {
       return nil
     }
     do {

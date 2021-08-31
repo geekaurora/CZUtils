@@ -18,7 +18,7 @@ import Foundation
    */
   public static func sharedGroupFolderURL(fileName: String? = nil) -> URL? {
     guard let simulatorSharedDir = ProcessInfo().environment["SIMULATOR_SHARED_RESOURCES_DIRECTORY"] else {
-      assertionFailure("Failed to get SIMULATOR_SHARED_RESOURCES_DIRECTORY from ProcessInfo.")
+      // assertionFailure("Failed to get SIMULATOR_SHARED_RESOURCES_DIRECTORY from ProcessInfo.")
       return nil
     }
     let simulatorHomeDirURL = URL(fileURLWithPath: simulatorSharedDir)
