@@ -115,6 +115,7 @@ open class CZHTTPJsonSerializer {
   ///   - object                :   The JSON object. e.g. Dictionary, Array etc.
   ///   - url                      :   The file url to be saved to.
   /// - Returns              : True if succeed, false otherwise.
+  @discardableResult
   public static func saveJSONObject(_ object: Any?, to url: URL?)-> Bool {
     guard let url = url,
           let data = Self.jsonData(with: object).assertIfNil else {

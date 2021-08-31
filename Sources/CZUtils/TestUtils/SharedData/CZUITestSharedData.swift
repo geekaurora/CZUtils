@@ -3,8 +3,8 @@ import Foundation
 /**
  Shared data between app and UITest.
  */
-public class CZUItestSharedData {
-  public static let shared = CZUItestSharedData()
+public class CZUITestSharedData {
+  public static let shared = CZUITestSharedData()
   
   let sharedDataFileUrl = CZFileHelper.sharedGroupFolderURL(fileName: "sharedData.plist")
   
@@ -21,7 +21,8 @@ public class CZUItestSharedData {
    
    - Note: `object` should be JSONSerializable.
    */
-  public func saveObject(_ object: Any) {
-    CZHTTPJsonSerializer.saveJSONObject(object, to: sharedDataFileUrl)
+  @discardableResult
+  public func saveObject(_ object: Any) -> Bool {
+    return CZHTTPJsonSerializer.saveJSONObject(object, to: sharedDataFileUrl)
   }
 }
