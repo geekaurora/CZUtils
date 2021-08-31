@@ -11,6 +11,14 @@ public class CZSystemInfo: NSObject {
     return UIDevice().type
   }
   
+  public static func isSimulator() -> Bool {
+    #if targetEnvironment(simulator)
+    return true
+    #else
+    return false
+    #endif
+  }
+  
   // MARK: - Disk
   
   public static var availableSystemStorage: Int {
