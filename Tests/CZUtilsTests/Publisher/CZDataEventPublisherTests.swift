@@ -5,12 +5,12 @@ final class CZDataEventPublisherTests: XCTestCase {
   enum Constant {
     static let testName = "testName"
   }
-  fileprivate var dataEventPublisher: CZDataEventPublisher!
+  fileprivate var dataEventPublisher: CZDataEventPublisher<String>!
   fileprivate var testCZDataEventListener: TestCZDataEventListener!
   fileprivate var testDataObject: TestData!
   
   override func setUp() {
-    dataEventPublisher = CZDataEventPublisher()
+    dataEventPublisher = CZDataEventPublisher<String>()
     
     testDataObject = TestData()
     testDataObject.nameEventPublisher = dataEventPublisher
@@ -32,7 +32,7 @@ final class CZDataEventPublisherTests: XCTestCase {
 extension String: CZEventData { }
 
 fileprivate class TestData {
-  var nameEventPublisher: CZDataEventPublisher?
+  var nameEventPublisher: CZDataEventPublisher<String>?
   
   var name: String? {
     didSet {

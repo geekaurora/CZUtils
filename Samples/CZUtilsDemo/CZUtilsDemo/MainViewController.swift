@@ -2,14 +2,38 @@ import UIKit
 import CZUtils
 
 class MainViewController: UIViewController {
+  var timer: Timer?
   
-  let timer = CZDispatchSourceTimer(timeInterval: 1) {
-    print("CZDispatchSourceTimer - ticking .. Thread.current = \(Thread.current)")
-  }
+//  let timer = CZDispatchSourceTimer(timeInterval: 1) {
+//    print("CZDispatchSourceTimer - ticking .. Thread.current = \(Thread.current)")
+//  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    timer.start()
+    // timer.start()
+    
+//    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+//      dbgPrint("tick ..")
+//    }
+    
+//    timer = CZWeakTimer.scheduledTimer(
+//      timeInterval: 1,
+//      target: self,
+//      selector: #selector(tick(_:)),
+//      userInfo: nil,
+//      repeats: true)
+    
+    timer = Timer.scheduledTimer(
+      timeInterval: 1,
+      target: self,
+      selector: #selector(tick(_:)),
+      userInfo: nil,
+      repeats: true)
+  }
+  
+  @objc
+  func tick(_ timer: Timer) {
+    dbgPrint("tick2 ..")
   }
   
   override func viewDidAppear(_ animated: Bool) {
