@@ -5,7 +5,7 @@ import Foundation
  */
 public class CZWeakTimer: NSObject {
   private var underlyingTimer: Timer?
-  private weak var weakTarget: AnyObject?
+  private var weakTarget: AnyObject?
   private var selector: Selector
   
   public override init() {
@@ -23,7 +23,7 @@ public class CZWeakTimer: NSObject {
       selector: selector,
       userInfo: userInfo,
       repeats: repeats)
-    weakTimer.underlyingTimer?.fire()
+    // weakTimer.underlyingTimer?.fire()
     // return weakTimer.underlyingTimer
     return weakTimer
   }
@@ -37,12 +37,19 @@ public class CZWeakTimer: NSObject {
     self.selector = selector
     super.init()
     
-    underlyingTimer = Timer(
-      timeInterval: timeInterval,
+    underlyingTimer = Timer.scheduledTimer(
+      timeInterval: 1,
       target: self,
       selector: #selector(timerTick(_:)),
-      userInfo: userInfo,
-      repeats: repeats)
+      userInfo: nil,
+      repeats: true)
+    //
+    //    underlyingTimer = Timer(
+    //      timeInterval: timeInterval,
+    //      target: self,
+    //      selector: #selector(timerTick(_:)),
+    //      userInfo: userInfo,
+    //      repeats: repeats)
   }
   
   @objc
