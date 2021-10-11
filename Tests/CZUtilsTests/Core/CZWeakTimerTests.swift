@@ -50,7 +50,7 @@ class CZWeakTimerTests: XCTestCase {
     // 1. Fire the timer.
     weakTimer = CZWeakTimer.scheduledTimer(
       timeInterval: 1,
-      target: testObject,
+      target: testObject as Any,
       selector: #selector(TestClass.tick(_:)),
       userInfo: nil,
       repeats: true)
