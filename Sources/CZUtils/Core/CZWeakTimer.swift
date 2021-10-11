@@ -4,8 +4,8 @@ import Foundation
  Timer class that only holds the weak reference to its parent target.
  */
 public class CZWeakTimer: NSObject {
-  private var underlyingTimer: Timer?
-  private var weakTarget: AnyObject?
+  internal private(set) var underlyingTimer: Timer?
+  private weak var weakTarget: AnyObject?
   private var selector: Selector
   
   public override init() {
@@ -56,6 +56,7 @@ public class CZWeakTimer: NSObject {
   func timerTick(_ timer: Timer) {
     guard weakTarget != nil else {
       // If the timer's parent `target` is released, invalidate and release the timer.
+      dbgPrint("weakTarget is released, invalidatign the timer.")
       timer.invalidate()
       underlyingTimer = nil
       return
