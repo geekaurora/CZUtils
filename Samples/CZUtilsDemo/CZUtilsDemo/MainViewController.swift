@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
   
   @objc
   func tick(_ timer: Timer) {
-    dbgPrint("tick2 ..")
+    dbgPrint("tick ..")
   }
   
   override func viewDidAppear(_ animated: Bool) {
