@@ -3,6 +3,7 @@ import CZUtils
 
 class MainViewController: UIViewController {
   var timer: Timer?
+  var weakTimer: CZWeakTimer?
   
 //  let timer = CZDispatchSourceTimer(timeInterval: 1) {
 //    print("CZDispatchSourceTimer - ticking .. Thread.current = \(Thread.current)")
@@ -16,19 +17,19 @@ class MainViewController: UIViewController {
 //      dbgPrint("tick ..")
 //    }
     
-//    timer = CZWeakTimer.scheduledTimer(
-//      timeInterval: 1,
-//      target: self,
-//      selector: #selector(tick(_:)),
-//      userInfo: nil,
-//      repeats: true)
-    
-    timer = Timer.scheduledTimer(
+    weakTimer = CZWeakTimer.scheduledTimer(
       timeInterval: 1,
       target: self,
       selector: #selector(tick(_:)),
       userInfo: nil,
       repeats: true)
+    
+//    timer = Timer.scheduledTimer(
+//      timeInterval: 1,
+//      target: self,
+//      selector: #selector(tick(_:)),
+//      userInfo: nil,
+//      repeats: true)
   }
   
   @objc

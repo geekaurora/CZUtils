@@ -16,7 +16,7 @@ public class CZWeakTimer: NSObject {
                                    target: Any,
                                    selector: Selector,
                                    userInfo: Any?,
-                                   repeats: Bool) -> Timer? {
+                                   repeats: Bool) -> CZWeakTimer? {
     let weakTimer = CZWeakTimer(
       timeInterval: timeInterval,
       target: target,
@@ -24,7 +24,8 @@ public class CZWeakTimer: NSObject {
       userInfo: userInfo,
       repeats: repeats)
     weakTimer.underlyingTimer?.fire()
-    return weakTimer.underlyingTimer
+    // return weakTimer.underlyingTimer
+    return weakTimer
   }
   
   public init(timeInterval: TimeInterval,
