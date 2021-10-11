@@ -38,10 +38,10 @@ public class CZWeakTimer: NSObject {
     super.init()
     
     underlyingTimer = Timer.scheduledTimer(
-      timeInterval: 1,
+      timeInterval: timeInterval,
       target: self,
       selector: #selector(timerTick(_:)),
-      userInfo: nil,
+      userInfo: userInfo,
       repeats: true)
     //
     //    underlyingTimer = Timer(
