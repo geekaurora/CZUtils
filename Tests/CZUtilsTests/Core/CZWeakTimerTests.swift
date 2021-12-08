@@ -3,6 +3,17 @@ import CZTestUtils
 
 @testable import CZUtils
 
+/// A type that is can be stored in a `UserDefaults` instance.
+public protocol StorableInUserDefaults {
+
+  /// Stores the receiver in the given `UserDefaults` instance using the given key.
+  func store(in defaults: UserDefaults, withKey key: String)
+
+  /// The representation of the receiver to use when registring a default value with a
+  /// `UserDefaults` instance via tha `register(defaults:)` method.
+  var registrationValue: Any { get }
+}
+
 /**
  - Note: Disable time consuming tests - 10s.
  */

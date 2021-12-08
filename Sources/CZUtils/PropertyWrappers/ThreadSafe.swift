@@ -57,7 +57,10 @@ public struct ThreadSafe<T> {
   public init(wrappedValue: T) {
     value = wrappedValue
   }
-  
+
+  /**
+    Access the wrapped value with custom getter / setter.
+   */
   public var wrappedValue: T {
     get {
       // `get` is protected by thread lock - thread safe when get with self.propertyName.
@@ -67,7 +70,20 @@ public struct ThreadSafe<T> {
       lock.execute { value = newValue }
     }
   }
-  
+
+  /**
+   Access the original value without custom getter / setter.
+
+   - Note You may access it by prefixing "_" to the variable. e.g.
+
+   ```
+   @ThreadSafe
+   private var array = [Int]()
+
+   _array.threadLock { value in
+   }
+   ```
+   */
   public var projectedValue: T {
     get { return value }
     set { value = newValue }
