@@ -3,7 +3,10 @@ import Foundation
 /**
  Timer implemented with DispatchSourceTimer, which executes tick closure on a serial DispatchQueue.
  
- - Note: Should call `timer.resume()` to start the timer.
+ ### Note
+ 
+ - Should call `timer.resume()` to start the timer.
+ - It starts the timer immediately on `timer.resume()` - executes once first.
  
  ### Usage
  
@@ -42,7 +45,8 @@ public class CZDispatchSourceTimer: NSObject {
     queue = DispatchQueue(label: "com.CZDispatchSourceTimer")
     
     timer = DispatchSource.makeTimerSource(
-      flags: DispatchSource.TimerFlags(rawValue: UInt(0)),
+      //flags: DispatchSource.TimerFlags(rawValue: UInt(0)),
+      flags: DispatchSource.TimerFlags.strict,
       queue: queue)
     
     super.init()
@@ -61,7 +65,8 @@ public class CZDispatchSourceTimer: NSObject {
     assert(tickClosure != nil, "tickClosure shouldn't be nil.")
     
     let interval = Int(timeInterval * 1000000)
-    let leeway = Int(Double(interval) * 0.1)
+    //let leeway = Int(Double(interval) * 0.00001)
+    let leeway = 0
     timer.schedule(
       deadline: DispatchTime.now(),
       repeating: .microseconds(interval),
