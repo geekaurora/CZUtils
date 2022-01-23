@@ -1,24 +1,24 @@
 import Foundation
 
 /**
- Scheduler that merges the same tasks with `gap` and only executes the last task.
+ Scheduler that executes the task every `interval` time.
  
- - Note: Task will execute on a background serial DispatchQueue.
+ - Note: Task will execute on `CZDispatchSourceTimer` which is built upon `DispatchSource`.
  */
 public class DebounceTaskScheduler {
   public typealias Task = () -> Void
   
-  private let gap: TimeInterval
+  private let interval: TimeInterval
   /// Utilize DispatchSourceTimer as NSTime requires runloop associated with the same thread.
   private let timer: CZDispatchSourceTimer
   
   @ThreadSafe
   private var task: Task?
   
-  public init(gap: TimeInterval) {
-    self.gap = gap
+  public init(interval: TimeInterval) {
+    self.interval = interval
     
-    self.timer = CZDispatchSourceTimer(timeInterval: gap)
+    self.timer = CZDispatchSourceTimer(timeInterval: interval)
     self.timer.tickClosure = { [weak self] in
       self?.tick()
     }
