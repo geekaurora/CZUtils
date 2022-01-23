@@ -3,10 +3,10 @@ import XCTest
 
 class CZDispatchSourceTimerTests: XCTestCase {
   fileprivate enum Constant {
-    static let interval = 0.1
-    static let allowedLeeway = interval * 0.01
+    static let interval = 0.01
+    static let allowedLeeway = interval * 0.1
     
-    static let testTimes = 3
+    static let testTimes = 50
     static let expectationTimeout: TimeInterval = 10
   }
   
@@ -22,8 +22,8 @@ class CZDispatchSourceTimerTests: XCTestCase {
   func testTicks() {
     let expectation = XCTestExpectation(description: "waitForInterval")
     
-    let startDate = Date()
     // Start czDispatchSourceTimer with tickClosure.
+    let startDate = Date()
     czDispatchSourceTimer = CZDispatchSourceTimer(timeInterval: Constant.interval, tickClosure: {
       self.count += 1
       dbgPrint("CZDispatchSourceTimer tick: count = \(self.count)")
