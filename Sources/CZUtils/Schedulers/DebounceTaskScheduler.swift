@@ -3,7 +3,7 @@ import Foundation
 /**
  Scheduler that executes the task every `interval` time.
  
- - Note: Task will execute on `CZDispatchSourceTimer` which is built upon `DispatchSource`.
+ - Note: Task will execute on `CZDispatchSourceTimer` which is built upon `DispatchSourceTimer` and a serial background DispatchQueue.
  */
 public class DebounceTaskScheduler {
   public typealias Task = () -> Void
