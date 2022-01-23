@@ -4,8 +4,7 @@ import XCTest
 class CZDispatchSourceTimerTests: XCTestCase {
   fileprivate enum Constant {
     static let interval = 0.1
-    static let waitIntervalDelay = 0.1
-    static let timeOffset: TimeInterval = 0
+    static let allowedLeeway = interval * 0.01
     
     static let testTimes = 3
     static let expectationTimeout: TimeInterval = 10
@@ -31,7 +30,11 @@ class CZDispatchSourceTimerTests: XCTestCase {
       
       // Verify tickClosure is fired every `Constant.interval`.
       let timeElapsed = Date().timeIntervalSince(startDate)
-      XCTAssertEqual(timeElapsed, TimeInterval(self.count) * Constant.interval)
+      let timeElapsedByTimer = TimeInterval(self.count - 1) * Constant.interval
+      let actualLeeway = abs(timeElapsed - timeElapsedByTimer)
+      XCTAssert(
+        actualLeeway <= Constant.allowedLeeway,
+        "actualLeeway doesn't match exptectedLeeway. actualLeeway = \(actualLeeway), exptectedLeeway = \(Constant.allowedLeeway)")
       
       if self.count >= Constant.testTimes {
         expectation.fulfill()
@@ -41,28 +44,5 @@ class CZDispatchSourceTimerTests: XCTestCase {
     
     wait(for: [expectation], timeout: Constant.expectationTimeout)
   }
-    
+  
 }
-
-
-//// MARK: - Helper methods
-//
-//fileprivate extension CZDispatchSourceTimerTests {
-//  /**
-//   Convenient func for aysnc unit tests
-//   */
-//  func waitForInterval(_ interval: TimeInterval) {
-//    let expectation = XCTestExpectation(description: "waitForInterval")
-//    testQueue.asyncAfter(deadline: DispatchTime.now() + interval) {
-//      expectation.fulfill()
-//    }
-//    wait(for: [expectation], timeout: interval + Constant.waitIntervalDelay)
-//  }
-//
-//  /**
-//   Async task on mainQueue after desired time
-//   */
-//  func asyncOnMainQueue(after interval: TimeInterval, execute: @escaping () -> Void) {
-//    testQueue.asyncAfter(deadline: DispatchTime.now() + interval, execute: execute)
-//  }
-//}
