@@ -69,16 +69,17 @@ import Foundation
   /**
     Remove local file at `url`.       
    */
-  public static func removeFile(_ url: URL?) {
-    guard let url = url,
+  public static func removeFile(_ urlIn: URL?) {
+    guard let url = urlIn,
           fileExists(url:url) else {
+      dbgPrintWithFunc(self, "File doesn't exist - \(String(describing: urlIn)).")
       return
     }
     
     do {
       try FileManager.default.removeItem(at: url)
     } catch let error as NSError {
-      dbgPrint("Failed to remove file - \(url). Error - \(error.localizedDescription)")
+      assertionFailure("Failed to remove file - \(url). Error - \(error.localizedDescription)")
     }
   }
   
@@ -93,14 +94,19 @@ import Foundation
   /**
     Remove the directory at `path`.
    
+   - Note: SHOULD use url.path instead of url.absoluteString if get local path from url.
+   
    - Parameter createDirectoryAfterDeletion: Indicates whether to create the directory after the deletion.
    */
   public static func removeDirectory(path: String, createDirectoryAfterDeletion: Bool = false) {
-    let url = URL(fileURLWithPath: path)
+    removeDirectory(url: URL(fileURLWithPath: path))
+  }
+  
+  public static func removeDirectory(url: URL?, createDirectoryAfterDeletion: Bool = false) {
     removeFile(url)
     
     if createDirectoryAfterDeletion {
-      createDirectoryIfNeeded(at: path)
+      createDirectoryIfNeeded(at: url)
     }
   }
   
@@ -130,16 +136,10 @@ import Foundation
   }
   
   public static func createDirectoryIfNeeded(at url: URL?) {
-    guard let url = url else {
+    guard let url = url.assertIfNil else {
       return
     }
-    if !FileManager.default.fileExists(atPath: url.absoluteString) {
-      do {
-        try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-      } catch {
-        assertionFailure("Failed to create the directory! Error - \(error.localizedDescription); url - \(url)")
-      }
-    }
+    createDirectoryIfNeeded(at: url.path)
   }
   
   /**
