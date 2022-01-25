@@ -10,9 +10,11 @@ final class CZFileHelperTests: XCTestCase {
       "d": 189298723,
     ]
   }
+  
   private enum Constant {
     static let timeOut: TimeInterval = 30
   }
+  static let testFileUrl = URL(fileURLWithPath: CZFileHelper.documentDirectory + "testFile.plist")
   
   override class func setUp() {
     removeTestFile()
@@ -22,11 +24,8 @@ final class CZFileHelperTests: XCTestCase {
     removeTestFile()
   }
   
-  static var testFileUrl: URL {
-    let string = CZFileHelper.documentDirectory + "testFile.plist"
-    return URL(fileURLWithPath: string)
-  }
-  
+  // MARK: - Basics
+    
   func testFileExists() {
    Self.writeTestFile()
     let isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
@@ -44,6 +43,18 @@ final class CZFileHelperTests: XCTestCase {
   }
   
   func testRemoveFile() {
+   Self.writeTestFile()
+    var isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
+    XCTAssertTrue(isExisting, "File should exist on disk - \(Self.testFileUrl).")
+    
+    CZFileHelper.removeFile(Self.testFileUrl)
+    isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
+    XCTAssertTrue(!isExisting, "File shouldn't exist on disk - \(Self.testFileUrl).")
+  }
+  
+  // MARK: - Directory
+
+  func testRemoveDirectory() {
    Self.writeTestFile()
     var isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
     XCTAssertTrue(isExisting, "File should exist on disk - \(Self.testFileUrl).")
