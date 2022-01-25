@@ -60,6 +60,19 @@ final class CZFileHelperTests: XCTestCase {
   
   // MARK: - Directory
   
+  func testCreateDirectory() {
+    // Call removeDirectory() without createDirectoryAfterDeletion.
+    CZFileHelper.removeDirectory(path: testFolderPath)
+    
+    var isExisting = CZFileHelper.fileExists(url: URL(fileURLWithPath: testFolderPath))
+    XCTAssertTrue(!isExisting, "After removeDirectory() - \(testFolderPath), directory shouldn't exist on disk.")
+    
+    // Call createDirectoryIfNeeded() to create directory.
+    CZFileHelper.createDirectoryIfNeeded(at: testFolderPath)
+    isExisting = CZFileHelper.fileExists(url: URL(fileURLWithPath: testFolderPath))
+    XCTAssertTrue(isExisting, "After createDirectoryIfNeeded() - \(testFolderPath), directory should exist on disk.")
+  }
+  
   func testRemoveDirectoryWithoutCreateDirectoryAfterDeletion() {
     writeTestFile()
     var isExisting = CZFileHelper.fileExists(url: testFileUrl)
