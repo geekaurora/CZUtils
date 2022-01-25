@@ -10,58 +10,64 @@ final class CZFileHelperTests: XCTestCase {
       "d": 189298723,
     ]
   }
-  
   private enum Constant {
     static let timeOut: TimeInterval = 30
   }
-  static let testFileUrl = URL(fileURLWithPath: CZFileHelper.documentDirectory + "testFile.plist")
   
-  override class func setUp() {
+  private(set) lazy var folder: String = {
+    let folder = CZFileHelper.documentDirectory + "TestFolder/"
+    CZFileHelper.createDirectoryIfNeeded(at: folder)
+    return folder
+  }()
+  
+  lazy var testFileUrl = URL(fileURLWithPath: folder + "testFile.plist")
+  
+  override func setUp() {
     removeTestFile()
   }
   
-  override class func tearDown() {
+  override func tearDown() {
     removeTestFile()
   }
   
   // MARK: - Basics
     
   func testFileExists() {
-   Self.writeTestFile()
-    let isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
-    XCTAssertTrue(isExisting, "File should exist on disk - \(Self.testFileUrl).")
+   writeTestFile()
+    let isExisting = CZFileHelper.fileExists(url: testFileUrl)
+    XCTAssertTrue(isExisting, "File should exist on disk - \(testFileUrl).")
   }
   
   func testFileNotExists() {
-   Self.writeTestFile()
-    var isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
-    XCTAssertTrue(isExisting, "File should exist on disk - \(Self.testFileUrl).")
+   writeTestFile()
+    var isExisting = CZFileHelper.fileExists(url: testFileUrl)
+    XCTAssertTrue(isExisting, "File should exist on disk - \(testFileUrl).")
     
-    CZFileHelper.removeFile(Self.testFileUrl)
-    isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
-    XCTAssertTrue(!isExisting, "File shouldn't exist on disk - \(Self.testFileUrl).")
+    CZFileHelper.removeFile(testFileUrl)
+    isExisting = CZFileHelper.fileExists(url: testFileUrl)
+    XCTAssertTrue(!isExisting, "File shouldn't exist on disk - \(testFileUrl).")
   }
   
   func testRemoveFile() {
-   Self.writeTestFile()
-    var isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
-    XCTAssertTrue(isExisting, "File should exist on disk - \(Self.testFileUrl).")
+   writeTestFile()
+    var isExisting = CZFileHelper.fileExists(url: testFileUrl)
+    XCTAssertTrue(isExisting, "File should exist on disk - \(testFileUrl).")
     
-    CZFileHelper.removeFile(Self.testFileUrl)
-    isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
-    XCTAssertTrue(!isExisting, "File shouldn't exist on disk - \(Self.testFileUrl).")
+    CZFileHelper.removeFile(testFileUrl)
+    isExisting = CZFileHelper.fileExists(url: testFileUrl)
+    XCTAssertTrue(!isExisting, "File shouldn't exist on disk - \(testFileUrl).")
   }
   
   // MARK: - Directory
 
   func testRemoveDirectory() {
-   Self.writeTestFile()
-    var isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
-    XCTAssertTrue(isExisting, "File should exist on disk - \(Self.testFileUrl).")
+   writeTestFile()
+    var isExisting = CZFileHelper.fileExists(url: testFileUrl)
+    XCTAssertTrue(isExisting, "File should exist on disk - \(testFileUrl).")
     
-    CZFileHelper.removeFile(Self.testFileUrl)
-    isExisting = CZFileHelper.fileExists(url: Self.testFileUrl)
-    XCTAssertTrue(!isExisting, "File shouldn't exist on disk - \(Self.testFileUrl).")
+    CZFileHelper.removeFile(testFileUrl)
+    isExisting = CZFileHelper.fileExists(url: testFileUrl)
+    XCTAssertTrue(!isExisting, "File shouldn't exist on disk - \(testFileUrl).")
   }
   
 }
@@ -69,7 +75,7 @@ final class CZFileHelperTests: XCTestCase {
 // MARK: - Helper methods
 
 private extension CZFileHelperTests {
-  static func writeTestFile() {
+  func writeTestFile() {
     let mockData = CZHTTPJsonSerializer.jsonData(with: MockData.dict)!
     do {
       try mockData.write(to: testFileUrl)
@@ -78,7 +84,7 @@ private extension CZFileHelperTests {
     }
   }
   
-  static func removeTestFile() {
+  func removeTestFile() {
     CZFileHelper.removeFile(testFileUrl)
   }
 }
