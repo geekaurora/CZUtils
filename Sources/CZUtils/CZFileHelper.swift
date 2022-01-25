@@ -99,7 +99,7 @@ import Foundation
    - Parameter createDirectoryAfterDeletion: Indicates whether to create the directory after the deletion.
    */
   public static func removeDirectory(path: String, createDirectoryAfterDeletion: Bool = false) {
-    removeDirectory(url: URL(fileURLWithPath: path))
+    removeDirectory(url: URL(fileURLWithPath: path), createDirectoryAfterDeletion: createDirectoryAfterDeletion)
   }
   
   public static func removeDirectory(url: URL?, createDirectoryAfterDeletion: Bool = false) {
