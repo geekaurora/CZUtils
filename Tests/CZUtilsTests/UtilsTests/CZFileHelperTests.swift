@@ -14,13 +14,13 @@ final class CZFileHelperTests: XCTestCase {
     static let timeOut: TimeInterval = 30
   }
   
-  private(set) lazy var testFolderPath: String = {
+  private lazy var testFolderPath: String = {
     let testFolderPath = CZFileHelper.documentDirectory + "TestFolder/"
     CZFileHelper.createDirectoryIfNeeded(at: testFolderPath)
     return testFolderPath
   }()
   
-  lazy var testFileUrl = URL(fileURLWithPath: testFolderPath + "testFile.plist")
+  private lazy var testFileUrl = URL(fileURLWithPath: testFolderPath + "testFile.plist")
   
   override func setUp() {
     removeTestFile()
