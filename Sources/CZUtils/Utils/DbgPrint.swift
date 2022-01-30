@@ -22,6 +22,29 @@ public func dbgPrintWithFunc(_ object: Any,
   #endif
 }
 
+/**
+ Print the `text` with  dividers above and beneath it.
+ */
+public func dbgPrintWithDividers(_ text: String,
+                                 dividerChar: String = "=",
+                                 dividerLength: Int = 72,
+                                 prefix: String = "\n",
+                                 surfix: String? = "\n") {
+  // Print the prefix.
+  dbgPrint(prefix)
+  
+  // Print the text with dividers.
+  let divider = (0..<dividerLength).reduce("") { (res, _) in res + dividerChar }
+  dbgPrint(divider)
+  dbgPrint(text)
+  dbgPrint(divider)
+  
+  // Print the surfix if presents.
+  if let surfix = surfix {
+    dbgPrint(surfix)
+  }
+}
+
 public enum DbgPrintType {
   case `default`
   case warning
