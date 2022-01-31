@@ -21,12 +21,19 @@ import Foundation
     var sharedFolderURL: URL? = nil
     
     #if !targetEnvironment(simulator)
-      // Device - AppGroup folder.
+      // - Note: Doesn't work any more! Got cacheFolderURL correctly, but can’t read / write the folder.
+      // Device - AppGroup folder. (needs to config securityApplicationGroupIdentifier)
+      // https://developer.apple.com/forums/thread/23418
       guard let appGroupName = appGroupName,
             let appGroupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupName) else {
         return nil
       }
-      sharedFolderURL = appGroupURL
+    var cacheFolderURL = appGroupURL.appendingPathComponent("Library", isDirectory: true)
+    cacheFolderURL = cacheFolderURL.appendingPathComponent("Caches", isDirectory: true)
+    let doesCacheFolderExist = CZFileHelper.fileExists(url: cacheFolderURL)
+    assert(doesCacheFolderExist, "cacheFolderURL doesn't exist. cacheFolderURL = \(cacheFolderURL)")
+    
+      sharedFolderURL = cacheFolderURL
     #else
       // Simulator - /Users/<username>/Library/Caches/.
       guard let simulatorSharedDir = ProcessInfo().environment["SIMULATOR_SHARED_RESOURCES_DIRECTORY"] else {

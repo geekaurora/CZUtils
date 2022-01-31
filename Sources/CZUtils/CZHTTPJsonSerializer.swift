@@ -121,8 +121,9 @@ open class CZHTTPJsonSerializer {
           let data = Self.jsonData(with: object).assertIfNil else {
       return false
     }
-    (data as NSData).write(to: url, atomically: true)
-    return true
+    let success = (data as NSData).write(to: url, atomically: true)
+    assert(success, "Failed to save JSON file. url = \(url)")
+    return success
   }
   
   // MARK: - String
