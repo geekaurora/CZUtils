@@ -7,7 +7,7 @@ import Foundation
   }
   
   /**
-   Returns the shared writable folder URL of the simulator. It can be used for sharing data between app and UITest.
+   [Deprecated] Returns the shared writable folder URL of the simulator. It can be used for sharing data between app and UITest.
   
    - Note: It only works for Simulator.
   
