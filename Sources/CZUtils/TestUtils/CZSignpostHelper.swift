@@ -18,6 +18,8 @@ public class CZSignpostHelper {
   public enum Constant {
     public static let subsystem = "com.cz.app"
     public static let category = "CZSignpostEvents"
+    public static let eventName: StaticString = "CZLoadFileEvent"
+    public static let subeventName: StaticString = "CZLoadFileEvent"
   }
   
   private let log: OSLog
@@ -29,24 +31,28 @@ public class CZSignpostHelper {
   }
   
   // TODO: Add dynamic support for `eventName` - Xcode compiler requires eventName to be static string.
-  public func start() {
+  
+  /// Start the event with params.
+  ///
+  /// - Note: `eventName` / `subeventName` should be `StaticString` - immutable and decided during compile time.
+  public func start(eventName: StaticString = Constant.eventName,
+                    subeventName: StaticString = Constant.subeventName) {
     os_signpost(
       .begin,
       log: log,
-      name: "CZLoadFileEvent",
+      name: eventName,
       signpostID: signpostID,
-      "CZLoadFileSubEvent"
-    )
+      subeventName)
   }
   
-  public func end()  {
+  public func end(eventName: StaticString = Constant.eventName,
+                  subeventName: StaticString = Constant.subeventName)  {
     os_signpost(
       .end,
       log: log,
-      name: "CZLoadFileEvent",
+      name: eventName,
       signpostID: signpostID,
-      "CZLoadFileSubEvent"
-    )
+      subeventName)
   }
   
 }
