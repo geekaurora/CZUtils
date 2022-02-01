@@ -29,10 +29,8 @@ public class CZSignpostHelper {
     log = OSLog(subsystem: Constant.subsystem, category: Constant.category)
     signpostID = OSSignpostID(log: log)
   }
-  
-  // TODO: Add dynamic support for `eventName` - Xcode compiler requires eventName to be static string.
-  
-  /// Start the event with params.
+    
+  /// Starts the event with the params.
   ///
   /// - Note: `eventName` / `subeventName` should be `StaticString` - immutable and decided during compile time.
   public func start(eventName: StaticString = Constant.eventName,
@@ -45,6 +43,9 @@ public class CZSignpostHelper {
       subeventName)
   }
   
+  /// Ends the event with the params.
+  ///
+  /// - Note: `eventName` / `subeventName` should be `StaticString` - immutable and decided during compile time.
   public func end(eventName: StaticString = Constant.eventName,
                   subeventName: StaticString = Constant.subeventName)  {
     os_signpost(
