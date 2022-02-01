@@ -20,8 +20,9 @@ public class CZUITestSharedData {
    */
   public func getObject<T>() -> T? {
     // Read data from ProcessInfo of the current process .
-    guard let personInfo = ProcessInfo.processInfo.environment[Self.key].assertIfNil,
+    guard let personInfo = ProcessInfo.processInfo.environment[Self.key],
           let data = personInfo.data(using: .utf8).assertIfNil else {
+            dbgPrintWithFunc(self, type: .warning, "ProcessInfo.processInfo.environment[\(Self.key)] is nil!")
             return nil
           }
     return CZHTTPJsonSerializer.deserializedObject(with: data)

@@ -11,21 +11,29 @@ public func dbgPrint(type: DbgPrintType = .`default`,
 /**
  Automatically print the current object type and function name.
  Usage: `dbgPrintWithFunc(self, "someString")`
+ 
+ - Parameters:
+    - withDividers: Indicates whether to show dividers above and below the text.
  */
 public func dbgPrintWithFunc(_ object: Any,
+                             type: DbgPrintType = .`default`,
                              function: String = #function,
+                             withDividers: Bool = false,
                              _ item: CustomStringConvertible) {
-  let objectAndFunction = "\(type(of: object)).\(function) - "
+  let objectAndFunction = "\(Swift.type(of: object)).\(function)) - "
   let text = objectAndFunction + item.description
-  #if DEBUG
-  print(text)
-  #endif
+  if withDividers {
+    dbgPrintWithDividers(type: type, text)
+  } else {
+    dbgPrint(type: type, text)
+  }
 }
 
 /**
  Print the `text` with  dividers above and beneath it.
  */
-public func dbgPrintWithDividers(_ text: String,
+public func dbgPrintWithDividers(type: DbgPrintType = .default,
+                                 _ text: String,
                                  dividerChar: String = "=",
                                  dividerLength: Int = 72,
                                  prefix: String = "\n",
@@ -36,7 +44,7 @@ public func dbgPrintWithDividers(_ text: String,
   // Print the text with dividers.
   let divider = (0..<dividerLength).reduce("") { (res, _) in res + dividerChar }
   dbgPrint(divider)
-  dbgPrint(text)
+  dbgPrint(type: type, text)
   dbgPrint(divider)
   
   // Print the surfix if presents.
