@@ -3,6 +3,8 @@ import os.signpost
 /**
  Helper of os_signpost() method.
  
+ - Note: Should select signpost profiling template when starting instrument.
+ 
  ### Usage
  ```
  CZSignpostHelper.shared.start()
@@ -10,13 +12,12 @@ import os.signpost
  ```
  */
 public class CZSignpostHelper {
+  
   public static let shared = CZSignpostHelper()
   
   public enum Constant {
     public static let subsystem = "com.cz.app"
-    public static let category = "RecordLoading"
-    public static let eventName = "CZ Read File"
-    public static let eventDescription = "File2"
+    public static let category = "CZSignpostEvents"
   }
   
   private let log: OSLog
@@ -27,25 +28,24 @@ public class CZSignpostHelper {
     signpostID = OSSignpostID(log: log)
   }
   
-  public func start(eventName: String = Constant.eventName,
-                    eventDescription: String = Constant.eventDescription) {
+  // TODO: Add dynamic support for `eventName` - Xcode compiler requires eventName to be static string.
+  public func start() {
     os_signpost(
       .begin,
       log: log,
-      name: "CZ Read File",
+      name: "CZLoadFileEvent",
       signpostID: signpostID,
-      "File2"
+      "CZLoadFileSubEvent"
     )
   }
   
-  public func end(eventName: String = Constant.eventName,
-                  eventDescription: String = Constant.eventDescription)  {
+  public func end()  {
     os_signpost(
       .end,
       log: log,
-      name: "CZ Read File",
+      name: "CZLoadFileEvent",
       signpostID: signpostID,
-      "File2"
+      "CZLoadFileSubEvent"
     )
   }
   
