@@ -2,6 +2,11 @@ import Foundation
 
 public func dbgPrint(type: DbgPrintType = .`default`,
                      _ item: CustomStringConvertible) {
+  _dbgPrint(type: type, item)
+}
+
+public func _dbgPrint(type: DbgPrintType = .`default`,
+                     _ item: CustomStringConvertible) {
   let text = type.prefix + item.description
   #if DEBUG
   print(text)
