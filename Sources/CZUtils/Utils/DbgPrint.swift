@@ -1,16 +1,13 @@
 import Foundation
 
 public func dbgPrint(type: DbgPrintType = .`default`,
+                     withDividers: Bool = false,
                      _ item: CustomStringConvertible) {
-  _dbgPrint(type: type, item)
-}
-
-public func _dbgPrint(type: DbgPrintType = .`default`,
-                     _ item: CustomStringConvertible) {
-  let text = type.prefix + item.description
-  #if DEBUG
-  print(text)
-  #endif
+  if withDividers {
+    _dbgPrintWithDividers(type: type, item)
+  } else {
+    _dbgPrint(type: type, item)
+  }
 }
 
 /**
@@ -22,39 +19,43 @@ public func _dbgPrint(type: DbgPrintType = .`default`,
  */
 public func dbgPrintWithFunc(_ object: Any,
                              type: DbgPrintType = .`default`,
-                             function: String = #function,
                              withDividers: Bool = false,
+                             function: String = #function,
                              _ item: CustomStringConvertible) {
   let objectAndFunction = "\(Swift.type(of: object)).\(function)) - "
   let text = objectAndFunction + item.description
-  if withDividers {
-    dbgPrintWithDividers(type: type, text)
-  } else {
-    dbgPrint(type: type, text)
-  }
+  dbgPrint(type: type, withDividers: withDividers, text)
+}
+
+public func _dbgPrint(type: DbgPrintType = .`default`,
+                     _ item: CustomStringConvertible) {
+  let text = type.prefix + item.description
+  #if DEBUG
+  print(text)
+  #endif
 }
 
 /**
  Print the `text` with  dividers above and beneath it.
  */
-public func dbgPrintWithDividers(type: DbgPrintType = .default,
-                                 _ text: String,
-                                 dividerChar: String = "=",
-                                 dividerLength: Int = 72,
-                                 prefix: String = "\n",
-                                 surfix: String? = "\n") {
+func _dbgPrintWithDividers(type: DbgPrintType = .default,
+                           _ text: CustomStringConvertible,
+                           dividerChar: String = "=",
+                           dividerLength: Int = 72,
+                           prefix: String = "\n",
+                           surfix: String? = "\n") {
   // Print the prefix.
-  dbgPrint(prefix)
+  _dbgPrint(prefix)
   
   // Print the text with dividers.
   let divider = (0..<dividerLength).reduce("") { (res, _) in res + dividerChar }
-  dbgPrint(divider)
-  dbgPrint(type: type, text)
-  dbgPrint(divider)
+  _dbgPrint(divider)
+  _dbgPrint(type: type, text)
+  _dbgPrint(divider)
   
   // Print the surfix if presents.
   if let surfix = surfix {
-    dbgPrint(surfix)
+    _dbgPrint(surfix)
   }
 }
 
