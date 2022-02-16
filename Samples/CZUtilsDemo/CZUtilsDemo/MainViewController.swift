@@ -19,22 +19,27 @@ class MainViewController: UIViewController {
     queue.async {
       switch assetStatus {
       case .available:
-        completion(true)
+        asyncOnMainThread(true, completion)
 
       case .unavailable:
-        completion(false)
+        asyncOnMainThread(false, completion)
 
       case .unknown:
         guard let path = animationJSONPath else {
-          completion(false)
+          asyncOnMainThread(false, completion)
           return
         }
         let result = FileManager.default.isReadableFile(atPath: path)
-        queue.sync {
-          assetStatus = result ? .available : .unavailable
-        }
-        completion(result)
+        assetStatus = result ? .available : .unavailable
+        asyncOnMainThread(result, completion)
       }
+    }
+  }
+
+  /// Call `completion` on the main thread asynchronously with the `result`.
+  private static func asyncOnMainThread(_ result: Bool, _ completion: @escaping (Bool) -> Void) {
+    DispatchQueue.main.async {
+      completion(result)
     }
   }
 
