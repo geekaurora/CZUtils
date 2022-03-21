@@ -1,34 +1,39 @@
 import Foundation
 
 /**
- Elegant performance tracker that records the duration of the specific execution.
-
+ Elegant performance tracker that records the durations for the specified events.
+ 
  ### Usage
  ```
-   CZPerfTracker.shared.reset()
-
-   CZPerfTracker.shared.end("EventName")
+ CZPerfTracker.shared.beginTracking(event: "YourEvent")
+ 
+ CZPerfTracker.shared.endTracking(event: "YourEvent")
  ```
  */
 public class CZPerfTracker {
   public static let shared = CZPerfTracker()
-  private var startTime: CFAbsoluteTime?
-
+  
+  public enum Constant {
+    public static let event = "defaultEvent"
+  }
+  private lazy var startDateMap = [String: Date]()
+  
   public init() {}
   
-  /// Starts tracking.
-  public func reset() {
-    self.startTime = CFAbsoluteTimeGetCurrent()
+  /// Records start date for `event`.
+  /// - Note: The existing start date will be overriden if has the same `event` as the current call.
+  public func beginTracking(event: String = Constant.event) {
+    startDateMap[event] = Date()
   }
-
+  
   /// Ends and outputs the duration of the execution.
   @discardableResult
-  public func end(_ label: String = "default") -> CFAbsoluteTime {
-    guard let startTime = startTime.assertIfNil else {
+  public func endTracking(event: String = Constant.event) -> CFAbsoluteTime {
+    guard let startDate = startDateMap[event] else {
       return 0
     }
-    let duration = CFAbsoluteTimeGetCurrent() - startTime
-    dbgPrint("[Perf Tracker] \(label) - duration = \(duration)")
+    let duration = Date().timeIntervalSince(startDate)
+    dbgPrint("[Perf Tracker] \(event) - duration = \(duration)")
     return duration
   }
 }
