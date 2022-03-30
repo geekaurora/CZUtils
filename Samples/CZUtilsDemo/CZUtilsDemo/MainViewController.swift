@@ -2,8 +2,7 @@ import UIKit
 import CZUtils
 
 class MainViewController: UIViewController {
-  private static let queue = DispatchQueue(
-      label: "LensDiscoveryAssetsProvider", attributes: [])
+  private static let queue = DispatchQueue(label: "LensDiscoveryAssetsProvider")
 
   @objc public static var animationJSONPath: String? = ""
 
@@ -17,29 +16,26 @@ class MainViewController: UIViewController {
 
   @objc public static func checkAssetAvailability(completion: @escaping (Bool) -> Void) {
     queue.async {
-      switch assetStatus {
-      case .available:
-        asyncOnMainThread(true, completion)
-
-      case .unavailable:
-        asyncOnMainThread(false, completion)
-
-      case .unknown:
-        guard let path = animationJSONPath else {
-          asyncOnMainThread(false, completion)
-          return
-        }
-        let result = FileManager.default.isReadableFile(atPath: path)
-        assetStatus = result ? .available : .unavailable
-        asyncOnMainThread(result, completion)
+      let isAssetAvailable = Self.isAssetAvailable
+      DispatchQueue.main.async {
+        completion(isAssetAvailable)
       }
     }
   }
 
-  /// Call `completion` on the main thread asynchronously with the `result`.
-  private static func asyncOnMainThread(_ result: Bool, _ completion: @escaping (Bool) -> Void) {
-    DispatchQueue.main.async {
-      completion(result)
+  private static var isAssetAvailable: Bool {
+    switch assetStatus {
+    case .available:
+      return true
+    case .unavailable:
+      return false
+    case .unknown:
+      guard let path = animationJSONPath else {
+        return false
+      }
+      let result = FileManager.default.isReadableFile(atPath: path)
+      assetStatus = result ? .available : .unavailable
+      return result
     }
   }
 
