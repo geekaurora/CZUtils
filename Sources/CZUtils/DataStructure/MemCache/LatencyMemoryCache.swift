@@ -1,7 +1,7 @@
 import Foundation
 
 /// Generic thread safe memory cache for the latency improvements.
-public class LatencyMemoryCache<Key: Hashable, Value>: NSObject {
+internal class LatencyMemoryCache<Key: Hashable, Value>: NSObject {
   private let mutexLock = MutexThreadLock()
 
   private(set) var dictionary = [Key: Value]()
