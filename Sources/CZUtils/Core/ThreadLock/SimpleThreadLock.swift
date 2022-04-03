@@ -4,10 +4,15 @@ import Foundation
 open class SimpleThreadLock: NSLock {
   public func execute<T>(_ execution: () -> T)  -> T {
     lock()
-    defer {
-      unlock()
-    }
-    return execution()
+    let result = execution()
+    unlock()
+    return result
+    
+    //    lock()
+    //    defer {
+    //      unlock()
+    //    }
+    //    return execution()
   }
 }
 
