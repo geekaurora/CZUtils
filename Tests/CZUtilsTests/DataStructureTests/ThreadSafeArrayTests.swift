@@ -5,6 +5,7 @@ class ThreadSafeArrayTests: XCTestCase {
   static let total = 30000
   static let queueLable = "com.czutils.tests"
   private var testArray: ThreadSafeArray<TestClass>!
+  private var queue: DispatchQueue!
   
   override func setUp() {
     testArray = ThreadSafeArray<TestClass>()
@@ -45,7 +46,7 @@ class ThreadSafeArrayTests: XCTestCase {
   
   func testMultiThread() {
     let dispatchGroup = DispatchGroup()
-    let queue = DispatchQueue(label: Self.queueLable, attributes: .concurrent)
+    queue = DispatchQueue(label: Self.queueLable, attributes: .concurrent)
     
     // Test adding objects on multiple threads.
     let items = (0..<Self.total).map { _ in TestClass() }
