@@ -6,7 +6,7 @@ class ThreadSafeDictionaryTests: XCTestCase {
   
   private var originalDict: [Int: Int] = {
     var originalDict = [Int: Int]()
-    for (i, value) in (0 ..< 10).enumerated() {
+    for (i, value) in (0..<100).enumerated() {
       originalDict[i] = value
     }
     return originalDict
@@ -25,11 +25,11 @@ class ThreadSafeDictionaryTests: XCTestCase {
     XCTAssert(threadSafeDict.isEqual(toDictionary: originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
   }
   
-//  func testMultiThreadSetValueManyTimes() {
-//    (0..<300).forEach { _ in
-//      self.testMultiThreadSetValue()
-//    }
-//  }
+  func testMultiThreadSetValueManyTimes() {
+    (0..<300).forEach { _ in
+      self.testMultiThreadSetValue()
+    }
+  }
   
   func testMultiThreadSetValue() {
     // 1. Initialize ThreadSafeDictionary
@@ -47,8 +47,8 @@ class ThreadSafeDictionaryTests: XCTestCase {
       dispatchGroup.enter()
       queue.async {
         // Sleep to simulate operation delay in multiple thread mode
-        let sleepInternal = TimeInterval((arc4random() % 10)) * 0.00001
-        Thread.sleep(forTimeInterval: sleepInternal)
+        // let sleepInternal = TimeInterval((arc4random() % 10)) * 0.00001
+        // Thread.sleep(forTimeInterval: sleepInternal)
         threadSafeDict[key] = value
         dispatchGroup.leave()
       }
