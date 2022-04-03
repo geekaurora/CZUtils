@@ -9,7 +9,9 @@ class ThreadSafeDictionaryTests: XCTestCase {
   
   private let expectedDict: [Int: Int] = {
     var expectedDict = [Int: Int]()
-    (0..<Constant.count).forEach { expectedDict[$0] = $0 }
+    (0..<Constant.count).forEach { i in
+      expectedDict[i] = i
+    }
     return expectedDict
   }()
   
