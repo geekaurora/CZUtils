@@ -4,8 +4,10 @@ import XCTest
 class ThreadSafeArrayTests: XCTestCase {
   static let total = 30000
   static let queueLable = "com.czutils.tests"
+
+  private var queue: DispatchQueue!
   private var testArray: ThreadSafeArray<TestClass>!
-  
+
   override func setUp() {
     testArray = ThreadSafeArray<TestClass>()
   }
@@ -44,9 +46,9 @@ class ThreadSafeArrayTests: XCTestCase {
   }
   
   func testMultiThread() {
+    queue = DispatchQueue(label: Self.queueLable, attributes: .concurrent)
     let dispatchGroup = DispatchGroup()
-    let queue = DispatchQueue(label: Self.queueLable, attributes: .concurrent)
-    
+
     // Test adding objects on multiple threads.
     let items = (0..<Self.total).map { _ in TestClass() }
     items.forEach { item in

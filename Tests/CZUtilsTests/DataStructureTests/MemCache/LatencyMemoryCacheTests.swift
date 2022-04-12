@@ -9,13 +9,17 @@ final class LatencyMemoryCacheTests: XCTestCase {
     static let testKey = 12
     static let testValue = 54
   }
+  private var queue: DispatchQueue!
   private var latencyMemoryCache: LatencyMemoryCache<Int, Int>!
-  
+
   private static let expectedDict: [Int: Int] = (0..<Constant.count).reduce(into: [:]) { dict, i in
     dict[i] = i
   }
   
   override func setUp() {
+    // Create a queue to write concurrently on multi threads.
+    queue = DispatchQueue(label: Constant.queueLabel, attributes: .concurrent)
+
     latencyMemoryCache = LatencyMemoryCache<Int, Int>()
   }
 
@@ -46,9 +50,6 @@ final class LatencyMemoryCacheTests: XCTestCase {
   }
   
   func testSetObjectOnMultiThreads() {
-    // Create a queue to write concurrently on multi threads.
-    let queue = DispatchQueue(label: Constant.queueLabel, attributes: .concurrent)
-    
     // Set keys/values to latencyMemoryCache with `expectedDict` on multi threads.
     let dispatchGroup = DispatchGroup()
     for (key, value) in Self.expectedDict {
