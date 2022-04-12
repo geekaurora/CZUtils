@@ -3,7 +3,8 @@ import XCTest
 
 class ThreadSafeDictionaryTests: XCTestCase {
   private static let queueLabel = "com.tony.test.threadSafeDictionary"
-  
+  private var queue: DispatchQueue!
+
   private var originalDict: [Int: Int] = {
     var originalDict = [Int: Int]()
     for (i, value) in (0 ..< 10).enumerated() {
@@ -11,7 +12,7 @@ class ThreadSafeDictionaryTests: XCTestCase {
     }
     return originalDict
   }()
-  
+
   func testSingleThreadInitializ() {
     let threadSafeDict = ThreadSafeDictionary<Int, Int>(dictionary: originalDict)
     XCTAssert(threadSafeDict.isEqual(toDictionary: originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
@@ -25,21 +26,22 @@ class ThreadSafeDictionaryTests: XCTestCase {
     XCTAssert(threadSafeDict.isEqual(toDictionary: originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
   }
   
-//  func testMultiThreadSetValueManyTimes() {
-//    (0..<300).forEach { _ in
-//      self.testMultiThreadSetValue()
-//    }
-//  }
+  //  func testMultiThreadSetValueManyTimes() {
+  //    (0..<300).forEach { _ in
+  //      self.testMultiThreadSetValue()
+  //    }
+  //  }
   
   func testMultiThreadSetValue() {
+    // Concurrent DispatchQueue to simulate multiple-thread read/write executions
+    queue = DispatchQueue(
+      label: Self.queueLabel,
+      qos: .userInitiated,
+      attributes: .concurrent)
+    
     // 1. Initialize ThreadSafeDictionary
     let threadSafeDict = ThreadSafeDictionary<Int, Int>()
-    
-    // Concurrent DispatchQueue to simulate multiple-thread read/write executions
-    let queue = DispatchQueue(label: Self.queueLabel,
-                              qos: .userInitiated,
-                              attributes: .concurrent)
-    
+
     // 2. Copy keys/values from `originalDict` to `threadSafeDict` on multi threads.
     // Group asynchonous write operations by DispatchGroup
     let dispatchGroup = DispatchGroup()
@@ -56,6 +58,8 @@ class ThreadSafeDictionaryTests: XCTestCase {
     
     // 3. DispatchGroup: Wait for completion signal of all operations
     dispatchGroup.wait()
-    XCTAssert(threadSafeDict.isEqual(toDictionary: self.originalDict), "Result of ThreadSafeDictionary should same as the original dictionary.")
+    XCTAssert(
+      threadSafeDict.isEqual(toDictionary: self.originalDict),
+      "Result of ThreadSafeDictionary should same as the original dictionary.")
   }
 }
