@@ -11,7 +11,7 @@ import Foundation
 public class CZMutexLock<Item>: NSObject {
   /// `lock` should be initialized immediately to avoid crash if `lazy` load.
   ///
-  /// Ticket: https://github.com/geekaurora/CZUtils/issues/13
+  /// Ticket: https://github.com/geekaurora/CZUtils/issues/36
   /// Note: The issue wasn't casued by DispatchQueue.async(flags: .barrier)
   private let lock = DispatchReadWriteLock()
   
