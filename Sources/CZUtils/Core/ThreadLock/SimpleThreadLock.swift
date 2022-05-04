@@ -10,4 +10,3 @@ open class SimpleThreadLock: NSLock {
     return execution()
   }
 }
-
