@@ -1,13 +1,15 @@
 import Foundation
 
 /**
- Porperty wrapper that automatically set `value` with `key` to `UserDefaults`.
+ Porperty wrapper that  sets `value` for `key` to UserDefaults.
  
- e.g.
+ ### Usage
+ ```
  struct UserDefaultsConfig {
-     @UserDefault("has_seen_app_introduction", defaultValue: false)
-     static var hasSeenAppIntroduction: Bool
+   @UserDefault("has_seen_app_introduction", defaultValue: false)
+   static var hasSeenAppIntroduction: Bool
  }
+ ```
  */
 @propertyWrapper
 public struct UserDefault<T> {
