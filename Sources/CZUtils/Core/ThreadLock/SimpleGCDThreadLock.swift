@@ -11,9 +11,15 @@ public class SimpleGCDThreadLock {
     }
   }
   
-  public func write( block: @escaping () -> Void) {
-    queue.async {
-      block()
+  @discardableResult
+  public func write<T>(isAsync: Bool = true, block: @escaping () -> T?) -> T? {
+    if isAsync {
+      queue.async { _ = block() }
+      return nil
+    } else {
+      return queue.sync(flags: .barrier) {() -> T? in
+        return block()
+      }
     }
   }
 }
