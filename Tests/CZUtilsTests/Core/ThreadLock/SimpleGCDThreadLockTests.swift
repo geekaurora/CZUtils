@@ -2,8 +2,10 @@ import XCTest
 @testable import CZUtils
 
 class SimpleGCDThreadLockTests: XCTestCase {
-  static let total = 1000
-  static let queueLable = "com.czutils.tests"
+  private enum Constant {
+    static let count = 1000
+    static let queueLable = "com.czutils.tests"
+  }
   
   private var queue: DispatchQueue!
   private var threadLock: SimpleGCDThreadLock!
@@ -15,11 +17,11 @@ class SimpleGCDThreadLockTests: XCTestCase {
   }
   
   func testMultiThread() {
-    queue = DispatchQueue(label: Self.queueLable, attributes: .concurrent)
+    queue = DispatchQueue(label: Constant.queueLable, attributes: .concurrent)
     let dispatchGroup = DispatchGroup()
     
     // Test adding objects on multiple threads.
-    (0..<Self.total).forEach { i in
+    (0..<Constant.count).forEach { i in
       dispatchGroup.enter()
       
       queue.async {
@@ -39,6 +41,6 @@ class SimpleGCDThreadLockTests: XCTestCase {
     // Wait till group multi thread tasks complete.
     dispatchGroup.wait()
     // 3. Verify `count` of testArray with the expected value.
-    XCTAssertEqual(testArray.count, Self.total)
+    XCTAssertEqual(testArray.count, Constant.count)
   }
 }
