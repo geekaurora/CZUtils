@@ -17,7 +17,7 @@ public class SimpleGCDThreadLock {
       queue.async { _ = block() }
       return nil
     } else {
-      return queue.sync(flags: .barrier) {() -> T? in
+      return queue.sync {() -> T? in
         return block()
       }
     }

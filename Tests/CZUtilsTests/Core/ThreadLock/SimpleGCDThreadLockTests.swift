@@ -2,7 +2,7 @@ import XCTest
 @testable import CZUtils
 
 class SimpleGCDThreadLockTests: XCTestCase {
-  static let total = 300
+  static let total = 1000
   static let queueLable = "com.czutils.tests"
   
   private var queue: DispatchQueue!
@@ -21,25 +21,24 @@ class SimpleGCDThreadLockTests: XCTestCase {
     // Test adding objects on multiple threads.
     (0..<Self.total).forEach { i in
       dispatchGroup.enter()
+      
       queue.async {
-        self.threadLock.write(isAsync: false) {
+        // 1. Write: append i to testArray.
+        self.threadLock.write(isAsync: true) {
           self.testArray.append(i)
         }
+        
+        // 2. Read: verify i is written correctly.
         self.threadLock.read {
-          let expected = i + 1
-          XCTAssertTrue(
-            self.testArray.count == expected,
-            "Incorrect testArray.count. expected = \(expected), actual = \(self.testArray.count)"
-          )
+          XCTAssertTrue(self.testArray.contains(i), "testArray should contain i = \(i).")
         }
         dispatchGroup.leave()
       }
     }
+    
     // Wait till group multi thread tasks complete.
     dispatchGroup.wait()
-    // Verify `count` of testArray with the expected value.
+    // 3. Verify `count` of testArray with the expected value.
     XCTAssertEqual(testArray.count, Self.total)
   }
 }
-
-private class TestClass {}
