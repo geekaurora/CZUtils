@@ -8,8 +8,8 @@ class SimpleGCDThreadLockTests: XCTestCase {
   }
   
   private var queue: DispatchQueue!
-  private var threadLock: SimpleGCDThreadLock!
   private var testArray: [Int]!
+  private var threadLock: SimpleGCDThreadLock!
   
   override func setUp() {
     threadLock = SimpleGCDThreadLock()
