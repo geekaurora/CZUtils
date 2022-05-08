@@ -5,7 +5,7 @@ import XCTest
 final class LatencyMemoryCacheTests: XCTestCase {
   private enum Constant {
     static let queueLabel = "com.iga.cache"
-    static let count = 100
+    static let count = CZUnitTestConstants.concurrentCount
     static let testKey = 12
     static let testValue = 54
   }
