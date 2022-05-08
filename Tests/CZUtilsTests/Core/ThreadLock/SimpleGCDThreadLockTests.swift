@@ -3,7 +3,7 @@ import XCTest
 
 class SimpleGCDThreadLockTests: XCTestCase {
   private enum Constant {
-    static let count = 1000
+    static let count = CZUnitTestConstants.concurrentCount
     static let queueLable = "com.czutils.tests"
   }
   

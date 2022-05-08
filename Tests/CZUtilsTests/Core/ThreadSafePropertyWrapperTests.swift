@@ -3,7 +3,7 @@ import XCTest
 
 /// Tests of @ThreadSafe property wrapper.
 class ThreadSafePropertyWrapperTests: XCTestCase {
-  static let total = 30000
+  static let total = CZUnitTestConstants.concurrentCount
   static let queueLable = "com.czutils.tests"
   
   let lock = NSLock()

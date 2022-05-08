@@ -2,7 +2,7 @@ import XCTest
 @testable import CZUtils
 
 class SimpleThreadLockTests: XCTestCase {
-  static let total = 30000
+  static let total = CZUnitTestConstants.concurrentCount
   static let queueLable = "com.czutils.tests"
   
   var count: Int = 0

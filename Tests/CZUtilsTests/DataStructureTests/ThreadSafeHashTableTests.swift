@@ -2,7 +2,7 @@ import XCTest
 @testable import CZUtils
 
 class ThreadSafeHashTableTests: XCTestCase {
-  static let total = 30000
+  static let total = CZUnitTestConstants.concurrentCount
   static let queueLable = "com.czutils.tests"
 
   let lock = SimpleThreadLock()
