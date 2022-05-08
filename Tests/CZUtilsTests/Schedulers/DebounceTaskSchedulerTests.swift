@@ -103,8 +103,7 @@ fileprivate extension DebounceTaskSchedulerTests {
       }
     }
   }
-  
-  
+    
 }
 
 // MARK: - Helper methods
