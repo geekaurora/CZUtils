@@ -1,5 +1,7 @@
 import Foundation
 
 enum CZUnitTestConstants {
-  static let concurrentCount = 100
+  /// The default concurrent count for multiple threading unit tests.
+  /// - Note: Should avoid overloading the OS thread pool.
+  static let concurrentCount = 50
 }
