@@ -2,7 +2,8 @@ import XCTest
 @testable import CZUtils
 
 /**
- Correct when run separately, but incorrect with other tests - okay for now.
+ Correct when run itself separately, but incorrect with other tests.
+ Ok - results are correct.
  */
 class CZDispatchSourceTimerTests: XCTestCase {
   fileprivate enum Constant {
