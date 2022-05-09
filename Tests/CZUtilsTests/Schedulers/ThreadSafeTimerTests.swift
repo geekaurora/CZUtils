@@ -3,9 +3,9 @@ import XCTest
 
 class ThreadSafeTimerTests: XCTestCase {
   fileprivate enum Constant {
-    static let interval = 0.1
+    static let interval = 0.01
     /// - Note: Normally the leeway <= internal * 2.
-    static let allowedLeeway = interval
+    static let allowedLeeway = interval * 3
     
     static let testTimes = 50
     static let expectationTimeout: TimeInterval = 10
@@ -28,7 +28,7 @@ class ThreadSafeTimerTests: XCTestCase {
     // Start threadSafeTimer with tickClosure.
     lastTickDate = Date()
     
-    threadSafeTimer = ThreadSafeTimer.scheduledTimer(withTimeInterval: Constant.interval) { timer in
+    threadSafeTimer = ThreadSafeTimer.scheduledTimer(interval: Constant.interval) { timer in
       self.count += 1
       // dbgPrint("ThreadSafeTimer tick: count = \(self.count)")
       

@@ -5,24 +5,23 @@ import Foundation
  
  - Note: Task will execute on `CZDispatchSourceTimer` which is built upon `DispatchSourceTimer` and a serial background DispatchQueue.
  */
-public class DebounceTaskScheduler {
+public class DebounceTaskScheduler: NSObject {
   public typealias Task = () -> Void
   
   private let interval: TimeInterval
   /// Utilize DispatchSourceTimer as NSTime requires runloop associated with the same thread.
-  private let timer: CZDispatchSourceTimer
+  private var timer: ThreadSafeTimer!
   
   @ThreadSafe
   private var task: Task?
   
   public init(interval: TimeInterval) {
     self.interval = interval
+    super.init()
     
-    self.timer = CZDispatchSourceTimer(timeInterval: interval)
-    self.timer.tickClosure = { [weak self] in
+    self.timer = ThreadSafeTimer.scheduledTimer(interval: interval) { [weak self] _ in
       self?.tick()
     }
-    self.timer.resume()
   }
   
   public func schedule(task: @escaping Task) {

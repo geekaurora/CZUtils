@@ -7,7 +7,7 @@ public class ThreadSafeTimer: NSObject {
   public typealias Tick = (ThreadSafeTimer) -> Void
   
   @ThreadSafe
-  private var isStopped = false
+  private var isRunning = false
   @ThreadSafe
   private var repeats: Bool
   
@@ -16,8 +16,10 @@ public class ThreadSafeTimer: NSObject {
   let interval: TimeInterval
   let tick: Tick
   
-  private init(interval: TimeInterval,
-               repeats: Bool,
+  /// Designated initializer.
+  /// - Note: You should start the timer by calling `start()`.
+  public init(interval: TimeInterval,
+               repeats: Bool = true,
                tick: @escaping Tick) {
     self.interval = interval
     self.tick = tick
@@ -27,17 +29,13 @@ public class ThreadSafeTimer: NSObject {
     super.init()
   }
   
-  deinit {
-    stop()
-  }
-  
   /// Returns and starts a ThreadSafeTimer to execute `block` with the input params.
   ///
   /// - Note:
   /// 1. You should retain the timer otherwise it will be deallocated.
   /// 2. You should always capture [weak self] in `tick` closure to avoid the retain cycle.
   public class func scheduledTimer(
-    withTimeInterval interval: TimeInterval,
+    interval: TimeInterval,
     repeats: Bool = true,
     tick: @escaping (ThreadSafeTimer) -> Void) -> ThreadSafeTimer {
       let timer = ThreadSafeTimer(interval: interval, repeats: repeats, tick: tick)
@@ -46,12 +44,11 @@ public class ThreadSafeTimer: NSObject {
     }
   
   public func start() {
-    isStopped = false
+    guard !isRunning else {
+      return
+    }
+    isRunning = true
     serialQueue.asyncAfter(deadline: .now() + interval, execute: _tick)
-  }
-  
-  public func stop() {
-    isStopped = true
   }
 }
 
@@ -59,10 +56,6 @@ public class ThreadSafeTimer: NSObject {
 
 private extension ThreadSafeTimer {
   private func _tick() {
-    guard !isStopped else {
-      return
-    }
-    
     let delayTime: DispatchTime = .now() + interval
     
     let execute: () -> Void = { [weak self] in
