@@ -4,8 +4,8 @@ import XCTest
 class ThreadSafeTimerTests: XCTestCase {
   fileprivate enum Constant {
     static let interval = 0.01
-    /// - Note: Normally the leeway <= internal * 2.
-    static let allowedLeeway = interval * 3
+    /// - Note: Normally the leeway <= internal * 0.3 (0.5, 2).
+    static let allowedLeeway = interval * 0.3
     
     static let testTimes = 50
     static let expectationTimeout: TimeInterval = 10
@@ -36,7 +36,7 @@ class ThreadSafeTimerTests: XCTestCase {
       let actualLeeway = abs(Date().timeIntervalSince(self.lastTickDate) - Constant.interval)
       XCTAssert(
         actualLeeway <= Constant.allowedLeeway,
-        "actualLeeway doesn't match exptectedLeeway. actualLeeway = \(actualLeeway), exptectedLeeway = \(Constant.allowedLeeway)")
+        "actualLeeway doesn't match exptectedLeeway. actualLeeway = \(actualLeeway), exptectedLeeway = \(Constant.allowedLeeway). count = \(self.count)")
       self.lastTickDate = Date()
       
       if self.count >= Constant.testTimes {

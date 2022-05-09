@@ -38,7 +38,10 @@ public class ThreadSafeTimer: NSObject {
     interval: TimeInterval,
     repeats: Bool = true,
     tick: @escaping (ThreadSafeTimer) -> Void) -> ThreadSafeTimer {
-      let timer = ThreadSafeTimer(interval: interval, repeats: repeats, tick: tick)
+      let timer = ThreadSafeTimer(
+        interval: interval,
+        repeats: repeats,
+        tick: tick)
       timer.start()
       return timer
     }
@@ -48,7 +51,7 @@ public class ThreadSafeTimer: NSObject {
       return
     }
     isRunning = true
-    serialQueue.asyncAfter(deadline: .now() + interval, execute: _tick)
+    _tick()
   }
 }
 
