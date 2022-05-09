@@ -9,16 +9,16 @@ public class ThreadSafeTimer: NSObject {
   @ThreadSafe
   private var isStopped = false
   @ThreadSafe
-  private var repeats: Bool  
+  private var repeats: Bool
   
   /// The serial queue that executes `tick` closure with thread safety.
   let serialQueue: DispatchQueue
   let interval: TimeInterval
   let tick: Tick
-
+  
   private init(interval: TimeInterval,
-              repeats: Bool,
-              tick: @escaping Tick) {
+               repeats: Bool,
+               tick: @escaping Tick) {
     self.interval = interval
     self.tick = tick
     self.repeats = repeats
@@ -33,12 +33,14 @@ public class ThreadSafeTimer: NSObject {
   
   /// Returns and starts a ThreadSafeTimer to execute `block` with the input params.
   ///
-  /// - Note: You should retain the timer otherwise it will be deallocated.
+  /// - Note:
+  /// 1. You should retain the timer otherwise it will be deallocated.
+  /// 2. You should always capture [weak self] in `tick` closure to avoid the retain cycle.
   public class func scheduledTimer(
     withTimeInterval interval: TimeInterval,
-    repeats: Bool,
-    block: @escaping (ThreadSafeTimer) -> Void) -> ThreadSafeTimer {
-      let timer = ThreadSafeTimer(interval: interval, repeats: repeats, tick: block)
+    repeats: Bool = true,
+    tick: @escaping (ThreadSafeTimer) -> Void) -> ThreadSafeTimer {
+      let timer = ThreadSafeTimer(interval: interval, repeats: repeats, tick: tick)
       timer.start()
       return timer
     }
@@ -67,6 +69,7 @@ private extension ThreadSafeTimer {
       guard let `self` = self else { return }
       self.tick(self)
       if self.repeats {
+        // Cal the next `_tick()`.
         self._tick()
       }
     }
