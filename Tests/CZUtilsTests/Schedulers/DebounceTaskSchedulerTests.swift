@@ -1,11 +1,17 @@
 import XCTest
 @testable import CZUtils
 
+/**
+ Test failure reason:
+ Normally the timer leeway <= internal * 2.
+ */
 class DebounceTaskSchedulerTests: XCTestCase {
   fileprivate enum Constant {
     static let interval = 0.1
     static let waitIntervalDelay = 0.1
-    static let timeOffset: TimeInterval = 0
+    /// Normally the timer leeway <= internal * 2.
+    // static let timeOffset: TimeInterval = 0
+    static let timeOffset: TimeInterval = interval * 3
   }
   
   //private let testQueue = DispatchQueue.main
@@ -74,7 +80,9 @@ fileprivate extension DebounceTaskSchedulerTests {
     }
   }
   
-  func assertCount(equalsTo count: Int, after delayTime: TimeInterval? = nil, adjustTimeOffset: TimeInterval = Constant.timeOffset) {
+  func assertCount(equalsTo count: Int,
+                   after delayTime: TimeInterval? = nil,
+                   adjustTimeOffset: TimeInterval = Constant.timeOffset) {
     // Sync execution
     guard let inputDelayTime = delayTime else {
       XCTAssertTrue(count == self.count, "\(Date()) Error - actualCount = \(self.count); expectedCount = \(count)")
