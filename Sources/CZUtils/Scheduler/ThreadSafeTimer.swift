@@ -56,17 +56,13 @@ public class ThreadSafeTimer: NSObject {
 
 private extension ThreadSafeTimer {
   private func _tick() {
-    let delayTime: DispatchTime = .now() + interval
-    
-    let execute: () -> Void = { [weak self] in
+    serialQueue.asyncAfter(deadline: .now() + interval) { [weak self] in
       guard let `self` = self else { return }
       self.tick(self)
+      
       if self.repeats {
-        // Cal the next `_tick()`.
         self._tick()
       }
     }
-    
-    serialQueue.asyncAfter(deadline: delayTime, execute: execute)
   }
 }
