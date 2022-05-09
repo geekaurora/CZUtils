@@ -1,9 +1,9 @@
 import Foundation
 
 /**
- Scheduler that executes the task every `interval` time.
+ Thread safe scheduler that executes the task once every `interval` time.
  
- - Note: Task will execute on `CZDispatchSourceTimer` which is built upon `DispatchSourceTimer` and a serial background DispatchQueue.
+ - Note: The extra tasks withine the `interval` time window will be merged into one.
  */
 public class DebounceTaskScheduler: NSObject {
   public typealias Task = () -> Void

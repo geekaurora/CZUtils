@@ -2,19 +2,17 @@ import XCTest
 @testable import CZUtils
 
 /**
- Correct if only test itself.
+ - Note: Correct if only test itself.
  
- Test failure reason:
- Normally the timer leeway <= internal * 2.
+ Test failure reason: normally the timer leeway <= internal * 2.
  */
 class DebounceTaskSchedulerTests: XCTestCase {
   fileprivate enum Constant {
     static let interval = 0.1
     static let waitIntervalDelay = 0.1
     
-    /// Normally the timer leeway <= internal * 2.
+    /// Normally the timer leeway <= internal * 0.3.
     static let timeOffset: TimeInterval = 0
-    // static let timeOffset: TimeInterval = interval * 5
   }
   
   //private let testQueue = DispatchQueue.main
