@@ -1,6 +1,8 @@
 import Foundation
 
 /**
+ [Deprecated] Leeway isn't very stable.
+ 
  Timer implemented with DispatchSourceTimer, which executes tick closure on a serial DispatchQueue.
  
  ### Note
