@@ -1,6 +1,9 @@
 import Foundation
 
 /**
+ [Deprecated] Leeway isn't very stable.
+ - Note: It's actually normal as the leeway of NSTimer <= internal * 2.
+ 
  Timer implemented with DispatchSourceTimer, which executes tick closure on a serial DispatchQueue.
  
  ### Note
