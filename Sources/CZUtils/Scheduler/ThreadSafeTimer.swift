@@ -9,15 +9,14 @@ public class ThreadSafeTimer: NSObject {
   @ThreadSafe
   private var isStopped = false
   @ThreadSafe
-  private var repeats: Bool
-  
+  private var repeats: Bool  
   
   /// The serial queue that executes `tick` closure with thread safety.
   let serialQueue: DispatchQueue
   let interval: TimeInterval
   let tick: Tick
 
-  public init(interval: TimeInterval,
+  private init(interval: TimeInterval,
               repeats: Bool,
               tick: @escaping Tick) {
     self.interval = interval
@@ -63,15 +62,15 @@ private extension ThreadSafeTimer {
     }
     
     let delayTime: DispatchTime = .now() + interval
-    if repeats {
-      serialQueue.asyncAfter(deadline: delayTime, execute: {
-        self.tick(self)
+    
+    let execute: () -> Void = { [weak self] in
+      guard let `self` = self else { return }
+      self.tick(self)
+      if self.repeats {
         self._tick()
-      })
-    } else {
-      serialQueue.asyncAfter(deadline: delayTime) {
-        self.tick(self)
       }
     }
+    
+    serialQueue.asyncAfter(deadline: delayTime, execute: execute)
   }
 }
