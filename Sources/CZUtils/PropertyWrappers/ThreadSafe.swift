@@ -14,7 +14,7 @@ import Foundation
  
  ### Note
  
- 1. Directly only read / write is thread safe. (Should be the same lock session)
+ 1. Directly only read / write is thread safe. (Should be in the same lock session)
  ```
  let newCount = self.count
  ```
@@ -27,7 +27,7 @@ import Foundation
  ```
  
  2. Directly read and write at the same time isn't thread safe. e.g.
- (Writing depends on the value from other lock session: value changes between read / write gap)
+ (Writing depends on the value from other lock session: value changes between read / write gap.)
  
  ```
  @ThreadSafe var count: Int = 0
