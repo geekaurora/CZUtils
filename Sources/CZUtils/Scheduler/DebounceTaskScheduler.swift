@@ -1,9 +1,9 @@
 import Foundation
 
 /**
- Thread safe scheduler that executes the task once every `interval` time.
+ Thread safe scheduler that executes the`task` (if exists) once every `interval` time.
  
- - Note: The extra tasks withine the `interval` time window will be merged into one.
+ - Note: The `task` will be reset to nil after the execution.
  */
 public class DebounceTaskScheduler: NSObject {
   public typealias Task = () -> Void

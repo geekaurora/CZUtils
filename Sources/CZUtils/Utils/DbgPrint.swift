@@ -38,7 +38,7 @@ public func _dbgPrint(type: DbgPrintType = .`default`,
 /**
  Print the `text` with  dividers above and beneath it.
  */
-func _dbgPrintWithDividers(type: DbgPrintType = .default,
+public func _dbgPrintWithDividers(type: DbgPrintType = .default,
                            _ text: CustomStringConvertible,
                            dividerChar: String = "=",
                            dividerLength: Int = 72,
