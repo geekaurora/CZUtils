@@ -27,7 +27,7 @@ import Foundation
  ```
  
  2. Directly read and write at the same time isn't thread safe. e.g.
- (Writing depends on the value from other lock session: value changes between read / write gap)
+ (Writing depends on the value from other lock session: value changes between read / write gap.)
  
  ```
  @ThreadSafe var count: Int = 0
