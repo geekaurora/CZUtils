@@ -1,16 +1,9 @@
 import Foundation
 
-// MARK: Constants
-
-extension String {
-  /// Default label for queues.
-  public static let defaultLabel = "com.GCDSynchronized"
-}
-
 /**
  ### Note
 
- 1. Directly only read / write is thread safe. (Should be the same lock session)
+ 1. Directly only read / write is thread safe. (Should be in the same lock session)
  ```
  let newCount = self.count
  ```
@@ -167,3 +160,6 @@ public final class GCDSynchronized<Value> {
   public var projectedValue: GCDSynchronized<Value> { self }
 }
 
+extension String {
+  public static let defaultLabel = "com.GCDSynchronized"
+}
