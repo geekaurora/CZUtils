@@ -25,14 +25,14 @@ public class DebounceTaskScheduler: NSObject {
   }
   
   public func schedule(task: @escaping Task) {
-    _task.threadLock { (_task) -> Void in
+    _task.threadLock { _task in
       _task = task
     }
   }
   
   func tick() {
     // If task isn't nil, execute task() then set it to nil.
-    _task.threadLock { (_task) -> Void in
+    _task.threadLock { _task in
       if _task != nil {
         _task?()
         _task = nil

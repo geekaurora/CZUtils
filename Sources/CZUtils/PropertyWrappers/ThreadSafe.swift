@@ -2,6 +2,7 @@ import Foundation
 
 /**
  Property wrapper that ensures variable thread safe.
+ - Note: You should use the projected value if writing depends on the value from reading.
  
  ### Usage
  ```
@@ -26,9 +27,11 @@ import Foundation
  lock.unlock()
  ```
  
- 2. Directly read and write at the same time isn't thread safe. e.g.
- (Writing depends on the value from other lock session: value changes between read / write gap.)
+ 2. Directly read and write at the same time isn't thread safe. (write depends on read value)
+ Writing depends on the value from other lock session: value changes between the read / write gap.
+ It won't crash as each access is protected by thread lock but the result is possibly incorrect.
  
+ e.g.
  ```
  @ThreadSafe var count: Int = 0
  
