@@ -13,6 +13,7 @@
 		C35DF697260067160063A176 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF696260067160063A176 /* UIView+.swift */; };
 		C35DF69E260067300063A176 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF69D260067300063A176 /* UIViewController+.swift */; };
 		C35DF69F260067300063A176 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF69D260067300063A176 /* UIViewController+.swift */; };
+		C389879A286453D70094D5C0 /* CZSystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3898799286453D70094D5C0 /* CZSystemInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		C35DF696260067160063A176 /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+.swift"; path = "../../../Sources/CZUtils/Extensions/UIView+.swift"; sourceTree = "<group>"; };
 		C35DF69A2600672F0063A176 /* CZUtilsOCBridgingTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CZUtilsOCBridgingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		C35DF69D260067300063A176 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+.swift"; path = "../../../Sources/CZUtils/Extensions/UIViewController+.swift"; sourceTree = "<group>"; };
+		C3898799286453D70094D5C0 /* CZSystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CZSystemInfo.swift; path = ../../Sources/CZUtils/Core/CZSystemInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		C35DF679260066870063A176 /* CZUtilsOCBridging */ = {
 			isa = PBXGroup;
 			children = (
+				C3898799286453D70094D5C0 /* CZSystemInfo.swift */,
 				C35DF695260067070063A176 /* Extensions */,
 				C35DF67A260066870063A176 /* CZUtilsOCBridging.h */,
 				C35DF67B260066870063A176 /* Info.plist */,
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C35DF69E260067300063A176 /* UIViewController+.swift in Sources */,
+				C389879A286453D70094D5C0 /* CZSystemInfo.swift in Sources */,
 				C35DF697260067160063A176 /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
