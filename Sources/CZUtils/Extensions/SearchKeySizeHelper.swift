@@ -3,20 +3,27 @@ import UIKit
 
 @objc
 public class SearchKeySizeHelper: NSObject {
-  static let deviceCodeSets: [Set<String>] = [
+  @objc(sharedInstance)
+  public static let shared = SearchKeySizeHelper()
+
+  private static let deviceCodeSets: [Set<String>] = [
     // @"iPhone 11 Pro", @"iPhone 12 mini", @"iPhone 13 mini"
     Set(["iPhone12,3", "iPhone13,1", "iPhone14,4"]),
   ]
 
-  static let searchKeySizes = [
+  private static let searchKeySizes = [
     CGSize(width: 88, height: 42),
   ]
 
+  private lazy var deviceCode = Self.getDeviceCode()
+
+  /// Returns the search key size for the current device state.
+  /// - Note If the current device isn't supported by this method, returns CGSizeZero.
   @objc
-  public static func searchKeySize(with deviceCode:String) -> CGSize {
-    for (i, deviceCodeSet) in deviceCodeSets.enumerated() where deviceCodeSet.contains(deviceCode) {
-      if i < searchKeySizes.count {
-        return searchKeySizes[i]
+  public func getSearchKeySize() -> CGSize {
+    for (i, deviceCodeSet) in Self.deviceCodeSets.enumerated() where deviceCodeSet.contains(deviceCode) {
+      if i < Self.searchKeySizes.count {
+        return Self.searchKeySizes[i]
       } else {
         assertionFailure("`deviceCodeSets` size should equal `searchKeySizes` size.")
         return .zero
@@ -27,7 +34,7 @@ public class SearchKeySizeHelper: NSObject {
 
   /// Returns the device code of the current device. e.g. "iPhone12,3".
   @objc
-  public static var deviceCode: String {
+  public static func getDeviceCode() -> String {
     var systemInfo = utsname()
     uname(&systemInfo)
 
