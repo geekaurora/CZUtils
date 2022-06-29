@@ -6,7 +6,7 @@ public class SearchKeySizeHelper: NSObject {
   public enum Constant {
     static let searchKeyVerticalOffset: CGFloat = 15
   }
-
+  
   /// Returns the search key size for the current device state.
   /// - Note If the current device isn't supported by this method, returns CGSizeZero.
   @objc
@@ -21,7 +21,7 @@ public class SearchKeySizeHelper: NSObject {
     }
     return .zero
   }
-
+  
   /// Returns the vertical offset of SearchKey for the current device state.
   @objc
   public static func getSearchKeyVerticalOffset() -> CGFloat {
@@ -35,7 +35,7 @@ public class SearchKeySizeHelper: NSObject {
 // MARK: - Private variables / methods
 
 private extension SearchKeySizeHelper {
-
+  
   /// The Sets of grouped deviceCodes.
   static let deviceCodeSets: [Set<String>] = [
     // @"iPhone 11 Pro", @"iPhone 12 mini", @"iPhone 13 mini"
@@ -49,7 +49,7 @@ private extension SearchKeySizeHelper {
     // @"iPhone 6s Plus", @"iPhone 8 Plus"
     Set(["iPhone8,2", "iPhone10,2", "iPhone10,5"]),
   ]
-
+  
   /// The grouped searchKeySizes correspond to the above deviceCode Sets.
   static let searchKeySizes = [
     CGSize(width: 88, height: 42),
@@ -58,20 +58,20 @@ private extension SearchKeySizeHelper {
     CGSize(width: 100, height: 45),
     CGSize(width: 97, height: 45)
   ]
-
+  
   /// The Set of deviceCodes that has zero VerticalOffset.
   static let deviceCodesWithZeroVerticalOffset: Set<String> =
   // @"iPhone 6s Plus", @"iPhone 8 Plus"
   Set(["iPhone8,2", "iPhone10,2", "iPhone10,5"])
-
+  
   /// The device code of the current device.
   static let deviceCode = getDeviceCode()
-
+  
   /// Returns the device code of the current device. e.g. "iPhone12,3".
   static func getDeviceCode() -> String {
     var systemInfo = utsname()
     uname(&systemInfo)
-
+    
     let machineMirror = Mirror(reflecting: systemInfo.machine)
     let deviceCode = machineMirror.children.reduce("") { deviceCode, element in
       guard let value = element.value as? Int8, value != 0 else {
@@ -79,7 +79,7 @@ private extension SearchKeySizeHelper {
       }
       return deviceCode + String(UnicodeScalar(UInt8(value)))
     }
-
+    
 #if DEBUG
     // Simulator.
     if ["i386", "x86_64", "arm64"].contains(deviceCode) {
