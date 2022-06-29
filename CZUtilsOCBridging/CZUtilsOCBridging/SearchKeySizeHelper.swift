@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+/// The helper class for the search key size.
 @objc
 public class SearchKeySizeHelper: NSObject {
   public enum Constant {
