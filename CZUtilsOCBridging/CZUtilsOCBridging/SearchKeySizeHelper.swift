@@ -37,7 +37,7 @@ public class SearchKeySizeHelper: NSObject {
 
 private extension SearchKeySizeHelper {
   
-  /// The Sets of grouped deviceCodes.
+  /// The Sets of the grouped deviceCodes.
   static let deviceCodeSets: [Set<String>] = [
     // @"iPhone 11 Pro", @"iPhone 12 mini", @"iPhone 13 mini"
     Set(["iPhone12,3", "iPhone13,1", "iPhone14,4"]),
