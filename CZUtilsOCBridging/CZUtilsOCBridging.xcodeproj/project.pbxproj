@@ -14,7 +14,7 @@
 		C35DF69E260067300063A176 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF69D260067300063A176 /* UIViewController+.swift */; };
 		C35DF69F260067300063A176 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DF69D260067300063A176 /* UIViewController+.swift */; };
 		C389879A286453D70094D5C0 /* CZSystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3898799286453D70094D5C0 /* CZSystemInfo.swift */; };
-		DF23EE5D286C247700769718 /* SearchKeySizeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF23EE5C286C247700769718 /* SearchKeySizeHelper.swift */; };
+		DF23EE5D286C247700769718 /* SearchKeyPressMonitorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF23EE5C286C247700769718 /* SearchKeyPressMonitorHelper.swift */; };
 		DFBB87F8286A352F003C3984 /* UIDevice+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB87F7286A352F003C3984 /* UIDevice+Additions.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +39,7 @@
 		C35DF69A2600672F0063A176 /* CZUtilsOCBridgingTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CZUtilsOCBridgingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		C35DF69D260067300063A176 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+.swift"; path = "../../../Sources/CZUtils/Extensions/UIViewController+.swift"; sourceTree = "<group>"; };
 		C3898799286453D70094D5C0 /* CZSystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CZSystemInfo.swift; path = ../../Sources/CZUtils/Core/CZSystemInfo.swift; sourceTree = "<group>"; };
-		DF23EE5C286C247700769718 /* SearchKeySizeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchKeySizeHelper.swift; sourceTree = "<group>"; };
+		DF23EE5C286C247700769718 /* SearchKeyPressMonitorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchKeyPressMonitorHelper.swift; sourceTree = "<group>"; };
 		DFBB87F7286A352F003C3984 /* UIDevice+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIDevice+Additions.swift"; path = "../../Sources/CZUtils/Extensions/UIDevice+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,7 +85,7 @@
 			children = (
 				C3898799286453D70094D5C0 /* CZSystemInfo.swift */,
 				DFBB87F7286A352F003C3984 /* UIDevice+Additions.swift */,
-				DF23EE5C286C247700769718 /* SearchKeySizeHelper.swift */,
+				DF23EE5C286C247700769718 /* SearchKeyPressMonitorHelper.swift */,
 				C35DF695260067070063A176 /* Extensions */,
 				C35DF67A260066870063A176 /* CZUtilsOCBridging.h */,
 				C35DF67B260066870063A176 /* Info.plist */,
@@ -221,7 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF23EE5D286C247700769718 /* SearchKeySizeHelper.swift in Sources */,
+				DF23EE5D286C247700769718 /* SearchKeyPressMonitorHelper.swift in Sources */,
 				C35DF69E260067300063A176 /* UIViewController+.swift in Sources */,
 				C389879A286453D70094D5C0 /* CZSystemInfo.swift in Sources */,
 				C35DF697260067160063A176 /* UIView+.swift in Sources */,
