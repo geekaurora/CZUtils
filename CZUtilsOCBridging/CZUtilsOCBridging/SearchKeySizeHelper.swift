@@ -58,6 +58,57 @@ public class SearchKeySizeHelper: NSObject {
     }
     return Constant.searchKeyVerticalOffset
   }
+
+  /// Returns whether the `event` is search key press-down event.
+  @objc(isSearchKeyPressedDownWithEvent:)
+  public static func isSearchKeyPressedDown(with event: UIEvent) -> Bool {
+    guard let allTouches = event.allTouches,
+          let touch = allTouches.first,
+          let keyboardWindow = touch.window,
+          let keyboardView = touch.view else {
+            return false
+          }
+
+    let isKeyboardRTLLayout = (touch.view != nil) && GMOHasRTLLayout(touch.view)
+    if allTouches.count != 1 || isKeyboardRTLLayout || !Self.isDeviceStateSupported() {
+      return false
+    }
+
+    // Check whether the event is keyboard touch and in UITouchPhaseBegan phase.
+    if touch.phase != .began ||
+        NSStringFromClass(type(of: keyboardWindow)) != "UIRemoteKeyboardWindow" ||
+        NSStringFromClass(type(of: keyboardView)) != "UIKeyboardLayoutStar" {
+      return false
+    }
+
+    // Start checking whether the touch point is inside the search key rectangle.
+    let touchPoint = touch.location(in: keyboardView)
+    let keyboardViewSize = keyboardView.frame.size
+
+    // The size of the search key rectangle.
+    let searchKeySize = Self.getSearchKeySize()
+    if searchKeySize.equalTo(.zero) {
+      // If |searchKeySize| equals CGSizeZero, it means the current device isn't supported checking
+      // search key press-down event.
+      return false
+    }
+
+    // Search key padding to the keyboard view.
+    let padding = Constant.searchKeyPadding
+    // Vertical offset for large devices: the microphone icon has a separate row.
+    // On small devices the microphone icon is inside the keyboard.
+    let verticalOffset = Self.getSearchKeyVerticalOffset()
+    // The rectangle of the search key: right bottom corner of the keyboard view.
+    let searchKeyRect = CGRect(
+      x: keyboardViewSize.width - searchKeySize.width - padding,
+      y: keyboardViewSize.height - searchKeySize.height - padding - verticalOffset,
+      width: searchKeySize.width, height: searchKeySize.height)
+
+
+    // Return whether the touch point is inside the search key rectangle.
+    return searchKeyRect.contains(touchPoint)
+  }
+
 }
 
 // MARK: - Private variables / methods
@@ -112,54 +163,6 @@ extension SearchKeySizeHelper {
     }
 #endif
     return deviceCode
-  }
-
-  func isSearchKeyPressedDown(with event: UIEvent) -> Bool {
-    guard let allTouches = event.allTouches,
-          let touch = allTouches.first,
-          let keyboardWindow = touch.window,
-          let keyboardView = touch.view else {
-            return false
-          }
-
-    let isKeyboardRTLLayout = (touch.view != nil) && GMOHasRTLLayout(touch.view)
-    if allTouches.count != 1 || isKeyboardRTLLayout || !Self.isDeviceStateSupported() {
-      return false
-    }
-
-    // Check whether the event is keyboard touch and in UITouchPhaseBegan phase.
-    if touch.phase != .began ||
-        NSStringFromClass(type(of: keyboardWindow)) != "UIRemoteKeyboardWindow" ||
-        NSStringFromClass(type(of: keyboardView)) != "UIKeyboardLayoutStar" {
-      return false
-    }
-
-    // Start checking whether the touch point is inside the search key rectangle.
-    let touchPoint = touch.location(in: keyboardView)
-    let keyboardViewSize = keyboardView.frame.size
-
-    // The size of the search key rectangle.
-    let searchKeySize = Self.getSearchKeySize()
-    if searchKeySize.equalTo(.zero) {
-      // If |searchKeySize| equals CGSizeZero, it means the current device isn't supported checking
-      // search key press-down event.
-      return false
-    }
-
-    // Search key padding to the keyboard view.
-    let padding = Constant.searchKeyPadding
-    // Vertical offset for large devices: the microphone icon has a separate row.
-    // On small devices the microphone icon is inside the keyboard.
-    let verticalOffset = Self.getSearchKeyVerticalOffset()
-    // The rectangle of the search key: right bottom corner of the keyboard view.
-    let searchKeyRect = CGRect(
-      x: keyboardViewSize.width - searchKeySize.width - padding,
-      y: keyboardViewSize.height - searchKeySize.height - padding - verticalOffset,
-      width: searchKeySize.width, height: searchKeySize.height)
-
-
-    // Return whether the touch point is inside the search key rectangle.
-    return searchKeyRect.contains(touchPoint)
   }
 
   static func isDeviceStateSupported() -> Bool {
