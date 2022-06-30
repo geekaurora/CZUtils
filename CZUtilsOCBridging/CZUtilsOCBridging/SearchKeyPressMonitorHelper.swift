@@ -11,7 +11,7 @@ extension SearchKeyPressMonitorHelper {
 }
 
 
-/// The helper class for the search key size.
+/// The helper class for the SearchKeyPressMonitor.
 @objc
 public class SearchKeyPressMonitorHelper: NSObject {
   public enum Constant {
@@ -20,7 +20,7 @@ public class SearchKeyPressMonitorHelper: NSObject {
   }
 
   /// The device code of the current device.
-  fileprivate static let deviceCode = getDeviceCode()
+  fileprivate static let deviceCode = getCurrentDeviceCode()
 
   /// The index of `deviceCodeSets` whose deviceCodeSet contains the current device.
   fileprivate static var deviceCodeSetIndex: Int?
@@ -141,7 +141,7 @@ extension SearchKeyPressMonitorHelper {
   }
 
   /// Returns the device code of the current device. e.g. "iPhone12,3".
-  fileprivate static func getDeviceCode() -> String {
+  fileprivate static func getCurrentDeviceCode() -> String {
     var systemInfo = utsname()
     uname(&systemInfo)
 
