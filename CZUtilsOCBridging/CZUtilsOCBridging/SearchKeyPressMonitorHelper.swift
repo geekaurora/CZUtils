@@ -1,18 +1,19 @@
 import UIKit
 
-func GMOIsPortrait() -> Bool{
-  return true
-}
+extension SearchKeyPressMonitorHelper {
+  static func GMOIsPortrait() -> Bool{
+    return true
+  }
 
-func GMOHasRTLLayout(_ view: UIView?) -> Bool{
-  return false
+  static func GMOHasRTLLayout(_ view: UIView?) -> Bool{
+    return false
+  }
 }
-
 
 
 /// The helper class for the search key size.
 @objc
-public class SearchKeySizeHelper: NSObject {
+public class SearchKeyPressMonitorHelper: NSObject {
   public enum Constant {
     static let searchKeyPadding: CGFloat = 5
     static let searchKeyVerticalOffset: CGFloat = 15
@@ -23,41 +24,6 @@ public class SearchKeySizeHelper: NSObject {
 
   /// The index of `deviceCodeSets` whose deviceCodeSet contains the current device.
   fileprivate static var deviceCodeSetIndex: Int?
-
-  /// Returns the search key size for the current device state.
-  /// - Note If the current device isn't supported by this method, returns CGSizeZero.
-  @objc
-  public static func getSearchKeySize() -> CGSize {
-    if let deviceCodeSetIndex = Self.deviceCodeSetIndex {
-      if deviceCodeSetIndex == -1 {
-        return .zero
-      } else {
-        return searchKeySizes[deviceCodeSetIndex]
-      }
-    }
-
-    for (i, deviceCodeSet) in deviceCodeSets.enumerated() where deviceCodeSet.contains(deviceCode) {
-      if i < searchKeySizes.count {
-        // Cache the index of the deviceCode.
-        Self.deviceCodeSetIndex = i
-        return searchKeySizes[i]
-      } else {
-        assertionFailure("`deviceCodeSets` size should equal `searchKeySizes` size.")
-        break
-      }
-    }
-    Self.deviceCodeSetIndex = -1
-    return .zero
-  }
-
-  /// Returns the vertical offset of SearchKey for the current device state.
-  @objc
-  public static func getSearchKeyVerticalOffset() -> CGFloat {
-    if deviceCodesWithZeroVerticalOffset.contains(deviceCode) {
-      return 0
-    }
-    return Constant.searchKeyVerticalOffset
-  }
 
   /// Returns whether the `event` is search key press-down event.
   @objc(isSearchKeyPressedDownWithEvent:)
@@ -104,16 +70,14 @@ public class SearchKeySizeHelper: NSObject {
       y: keyboardViewSize.height - searchKeySize.height - padding - verticalOffset,
       width: searchKeySize.width, height: searchKeySize.height)
 
-
     // Return whether the touch point is inside the search key rectangle.
     return searchKeyRect.contains(touchPoint)
   }
-
 }
 
 // MARK: - Private variables / methods
 
-extension SearchKeySizeHelper {
+extension SearchKeyPressMonitorHelper {
 
   /// The Sets of the grouped deviceCodes.
   fileprivate static let deviceCodeSets: [Set<String>] = [
@@ -143,6 +107,39 @@ extension SearchKeySizeHelper {
   // iPhone 6s Plus, iPhone 8 Plus
   Set(["iPhone8,2", "iPhone10,2", "iPhone10,5"])
 
+  /// Returns the search key size for the current device state.
+  /// - Note If the current device isn't supported by this method, returns CGSizeZero.
+  fileprivate static func getSearchKeySize() -> CGSize {
+    if let deviceCodeSetIndex = Self.deviceCodeSetIndex {
+      if deviceCodeSetIndex == -1 {
+        return .zero
+      } else {
+        return searchKeySizes[deviceCodeSetIndex]
+      }
+    }
+
+    for (i, deviceCodeSet) in deviceCodeSets.enumerated() where deviceCodeSet.contains(deviceCode) {
+      if i < searchKeySizes.count {
+        // Cache the index of the deviceCode.
+        Self.deviceCodeSetIndex = i
+        return searchKeySizes[i]
+      } else {
+        assertionFailure("`deviceCodeSets` size should equal `searchKeySizes` size.")
+        break
+      }
+    }
+    Self.deviceCodeSetIndex = -1
+    return .zero
+  }
+
+  /// Returns the vertical offset of SearchKey for the current device state.
+  fileprivate static func getSearchKeyVerticalOffset() -> CGFloat {
+    if deviceCodesWithZeroVerticalOffset.contains(deviceCode) {
+      return 0
+    }
+    return Constant.searchKeyVerticalOffset
+  }
+
   /// Returns the device code of the current device. e.g. "iPhone12,3".
   fileprivate static func getDeviceCode() -> String {
     var systemInfo = utsname()
@@ -155,7 +152,7 @@ extension SearchKeySizeHelper {
       }
       return deviceCode + String(UnicodeScalar(UInt8(value)))
     }
-
+    
 #if DEBUG
     // Simulator.
     if ["i386", "x86_64", "arm64"].contains(deviceCode) {
@@ -168,5 +165,4 @@ extension SearchKeySizeHelper {
   static func isDeviceStateSupported() -> Bool {
     return GMOIsPortrait()
   }
-
 }
