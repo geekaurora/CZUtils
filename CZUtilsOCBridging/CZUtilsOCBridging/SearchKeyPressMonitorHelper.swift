@@ -1,18 +1,7 @@
 import UIKit
 
-//extension SearchKeyPressMonitorHelper {
-//  static func GMOIsPortrait() -> Bool{
-//    return UIApplication.shared.statusBarOrientation.isPortrait
-//  }
-//
-//  static func GMOHasRTLLayout(_ view: UIView?) -> Bool{
-//    return false
-//  }
-//}
-
-
 /// The helper class for the SearchKeyPressMonitor.
-@objc
+@objc(GMOSearchKeyPressMonitorHelper)
 public class SearchKeyPressMonitorHelper: NSObject {
   public enum Constant {
     static let searchKeyPadding: CGFloat = 5
@@ -29,11 +18,12 @@ public class SearchKeyPressMonitorHelper: NSObject {
   @objc(isSearchKeyPressedDownWithEvent:)
   public static func isSearchKeyPressedDown(with event: UIEvent) -> Bool {
     guard let allTouches = event.allTouches,
-          let touch = allTouches.first,
-          let keyboardWindow = touch.window,
-          let keyboardView = touch.view else {
-            return false
-          }
+      let touch = allTouches.first,
+      let keyboardWindow = touch.window,
+      let keyboardView = touch.view
+    else {
+      return false
+    }
 
     let isKeyboardRTLLayout = keyboardView.traitCollection.layoutDirection == .rightToLeft
     if allTouches.count != 1 || isKeyboardRTLLayout || !Self.isDeviceStateSupported() {
@@ -41,9 +31,10 @@ public class SearchKeyPressMonitorHelper: NSObject {
     }
 
     // Check whether the event is keyboard touch and in UITouchPhaseBegan phase.
-    if touch.phase != .began ||
-        NSStringFromClass(type(of: keyboardWindow)) != "UIRemoteKeyboardWindow" ||
-        NSStringFromClass(type(of: keyboardView)) != "UIKeyboardLayoutStar" {
+    if touch.phase != .began
+      || NSStringFromClass(type(of: keyboardWindow)) != "UIRemoteKeyboardWindow"
+      || NSStringFromClass(type(of: keyboardView)) != "UIKeyboardLayoutStar"
+    {
       return false
     }
 
@@ -93,7 +84,7 @@ extension SearchKeyPressMonitorHelper {
     Set(["iPhone8,2", "iPhone10,2", "iPhone10,5"]),
   ]
 
-  /// The grouped searchKeySizes correspond to the above deviceCode Sets.
+  /// The grouped searchKeySizes corresponding to the above deviceCode Sets.
   fileprivate static let searchKeySizes = [
     CGSize(width: 88, height: 42),
     CGSize(width: 91, height: 38),
@@ -104,8 +95,8 @@ extension SearchKeyPressMonitorHelper {
 
   /// The Set of deviceCodes that has zero VerticalOffset.
   fileprivate static let deviceCodesWithZeroVerticalOffset: Set<String> =
-  // iPhone 6s Plus, iPhone 8 Plus
-  Set(["iPhone8,2", "iPhone10,2", "iPhone10,5"])
+    // iPhone 6s Plus, iPhone 8 Plus
+    Set(["iPhone8,2", "iPhone10,2", "iPhone10,5"])
 
   fileprivate static func isDeviceStateSupported() -> Bool {
     return UIApplication.shared.statusBarOrientation.isPortrait
@@ -157,12 +148,12 @@ extension SearchKeyPressMonitorHelper {
       return deviceCode + String(UnicodeScalar(UInt8(value)))
     }
 
-#if DEBUG
-    // Simulator.
-    if ["i386", "x86_64", "arm64"].contains(deviceCode) {
-      return ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "Simulator"
-    }
-#endif
+    #if DEBUG
+      // Simulator.
+      if ["i386", "x86_64", "arm64"].contains(deviceCode) {
+        return ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "Simulator"
+      }
+    #endif
     return deviceCode
   }
 }
