@@ -1,14 +1,14 @@
 import UIKit
 
-extension SearchKeyPressMonitorHelper {
-  static func GMOIsPortrait() -> Bool{
-    return UIApplication.shared.statusBarOrientation.isPortrait
-  }
-  
-  static func GMOHasRTLLayout(_ view: UIView?) -> Bool{
-    return false
-  }
-}
+//extension SearchKeyPressMonitorHelper {
+//  static func GMOIsPortrait() -> Bool{
+//    return UIApplication.shared.statusBarOrientation.isPortrait
+//  }
+//  
+//  static func GMOHasRTLLayout(_ view: UIView?) -> Bool{
+//    return false
+//  }
+//}
 
 
 /// The helper class for the SearchKeyPressMonitor.
@@ -34,8 +34,8 @@ public class SearchKeyPressMonitorHelper: NSObject {
           let keyboardView = touch.view else {
             return false
           }
-    
-    let isKeyboardRTLLayout = (touch.view != nil) && GMOHasRTLLayout(touch.view)
+
+    let isKeyboardRTLLayout = keyboardView.traitCollection.layoutDirection == .rightToLeft
     if allTouches.count != 1 || isKeyboardRTLLayout || !Self.isDeviceStateSupported() {
       return false
     }
@@ -108,8 +108,7 @@ extension SearchKeyPressMonitorHelper {
   Set(["iPhone8,2", "iPhone10,2", "iPhone10,5"])
   
   fileprivate static func isDeviceStateSupported() -> Bool {
-    let isPortrait = UIApplication.shared.statusBarOrientation.isPortrait
-    return isPortrait
+    return UIApplication.shared.statusBarOrientation.isPortrait
   }
   
   /// Returns the search key size for the current device state.
