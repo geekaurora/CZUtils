@@ -10,18 +10,32 @@ public class SearchKeySizeHelper: NSObject {
   /// The device code of the current device.
   fileprivate static let deviceCode = getDeviceCode()
 
+  /// The index of `deviceCodeSets` whose deviceCodeSet contains the current device.
+  fileprivate static var deviceCodeSetIndex: Int?
+
   /// Returns the search key size for the current device state.
   /// - Note If the current device isn't supported by this method, returns CGSizeZero.
   @objc
   public static func getSearchKeySize() -> CGSize {
+    if let deviceCodeSetIndex = Self.deviceCodeSetIndex {
+      if deviceCodeSetIndex == -1 {
+        return .zero
+      } else {
+        return searchKeySizes[deviceCodeSetIndex]
+      }
+    }
+
     for (i, deviceCodeSet) in deviceCodeSets.enumerated() where deviceCodeSet.contains(deviceCode) {
       if i < searchKeySizes.count {
+        // Cache the index of the deviceCode.
+        Self.deviceCodeSetIndex = i
         return searchKeySizes[i]
       } else {
         assertionFailure("`deviceCodeSets` size should equal `searchKeySizes` size.")
-        return .zero
+        break
       }
     }
+    Self.deviceCodeSetIndex = -1
     return .zero
   }
 
