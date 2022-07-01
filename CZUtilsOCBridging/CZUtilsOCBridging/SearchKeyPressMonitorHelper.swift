@@ -72,12 +72,12 @@ extension SearchKeyPressMonitorHelper {
 
   /// The Sets of the grouped deviceCodes.
   fileprivate static let deviceCodeSets: [Set<String>] = [
-    // iPhone 11 Pro, iPhone 12 mini, iPhone 13 mini
-    Set(["iPhone12,3", "iPhone13,1", "iPhone14,4"]),
+    // iPhone X, iPhone XS, iPhone 11 Pro, iPhone 12 mini, iPhone 13 mini
+    Set(["iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone12,3", "iPhone13,1", "iPhone14,4"]),
     // iPhone 12, iPhone 12 Pro, iPhone 13, iPhone 13 Pro
     Set(["iPhone13,2", "iPhone13,3", "iPhone14,5", "iPhone14,2"]),
-    // iPhone 11, iPhone 11 Pro Max
-    Set(["iPhone12,1", "iPhone12,5"]),
+    // iPhone XR, iPhone XS Max, iPhone 11, iPhone 11 Pro Max
+    Set(["iPhone11,8", "iPhone11,4", "iPhone11,6", "iPhone12,1", "iPhone12,5"]),
     // iPhone 12 Pro Max, iPhone 13 Pro Max
     Set(["iPhone13,4", "iPhone14,3"]),
     // iPhone 6s Plus, iPhone 8 Plus
