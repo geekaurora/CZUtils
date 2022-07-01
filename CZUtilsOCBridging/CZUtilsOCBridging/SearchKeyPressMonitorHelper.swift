@@ -41,8 +41,6 @@ public class SearchKeyPressMonitorHelper: NSObject {
     // Start checking whether the touch point is inside the search key rectangle.
     let touchPoint = touch.location(in: keyboardView)
     let keyboardViewSize = keyboardView.frame.size
-
-    print("isSearchKeyPressedDown(with:) - touch = \(touch)")
     
     // The size of the search key rectangle.
     let searchKeySize = Self.getSearchKeySize()
