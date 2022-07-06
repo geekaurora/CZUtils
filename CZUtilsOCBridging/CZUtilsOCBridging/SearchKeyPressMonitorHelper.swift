@@ -3,7 +3,7 @@ import UIKit
 /// The helper class for the SearchKeyPressMonitor.
 @objc(GMOSearchKeyPressMonitorHelper)
 public class SearchKeyPressMonitorHelper: NSObject {
-  public enum Constant {
+  fileprivate enum Constant {
     static let searchKeyPadding: CGFloat = 5
     static let searchKeyVerticalOffset: CGFloat = 15
   }
@@ -45,8 +45,7 @@ public class SearchKeyPressMonitorHelper: NSObject {
     // The size of the search key rectangle.
     let searchKeySize = Self.getSearchKeySize()
     if searchKeySize.equalTo(.zero) {
-      // If |searchKeySize| equals CGSizeZero, it means the current device isn't supported checking
-      // search key press-down event.
+      // The current device doesn't support checking search key press-down event.
       return false
     }
 
@@ -105,6 +104,7 @@ extension SearchKeyPressMonitorHelper {
   /// Returns the search key size for the current device state.
   /// - Note If the current device isn't supported by this method, returns CGSizeZero.
   fileprivate static func getSearchKeySize() -> CGSize {
+    // Use cached index of the deviceCode if exists.
     if let deviceCodeSetIndex = Self.deviceCodeSetIndex {
       if deviceCodeSetIndex == -1 {
         return .zero
@@ -113,13 +113,14 @@ extension SearchKeyPressMonitorHelper {
       }
     }
 
+    // Loop through `deviceCodeSets` to find the set that contains `deviceCode`.
     for (i, deviceCodeSet) in deviceCodeSets.enumerated() where deviceCodeSet.contains(deviceCode) {
       if i < searchKeySizes.count {
         // Cache the index of the deviceCode.
         Self.deviceCodeSetIndex = i
         return searchKeySizes[i]
       } else {
-        assertionFailure("`deviceCodeSets` size should equal `searchKeySizes` size.")
+        gmoFail("`deviceCodeSets` size should equal `searchKeySizes` size.")
         break
       }
     }

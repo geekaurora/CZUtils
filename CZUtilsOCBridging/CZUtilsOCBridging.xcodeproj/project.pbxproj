@@ -16,6 +16,7 @@
 		C389879A286453D70094D5C0 /* CZSystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3898799286453D70094D5C0 /* CZSystemInfo.swift */; };
 		DF23EE5D286C247700769718 /* SearchKeyPressMonitorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF23EE5C286C247700769718 /* SearchKeyPressMonitorHelper.swift */; };
 		DFBB87F8286A352F003C3984 /* UIDevice+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB87F7286A352F003C3984 /* UIDevice+Additions.swift */; };
+		DFDA955828756BBB007DFDA8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDA955728756BBB007DFDA8 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		C3898799286453D70094D5C0 /* CZSystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CZSystemInfo.swift; path = ../../Sources/CZUtils/Core/CZSystemInfo.swift; sourceTree = "<group>"; };
 		DF23EE5C286C247700769718 /* SearchKeyPressMonitorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchKeyPressMonitorHelper.swift; sourceTree = "<group>"; };
 		DFBB87F7286A352F003C3984 /* UIDevice+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIDevice+Additions.swift"; path = "../../Sources/CZUtils/Extensions/UIDevice+Additions.swift"; sourceTree = "<group>"; };
+		DFDA955728756BBB007DFDA8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				C3898799286453D70094D5C0 /* CZSystemInfo.swift */,
 				DFBB87F7286A352F003C3984 /* UIDevice+Additions.swift */,
 				DF23EE5C286C247700769718 /* SearchKeyPressMonitorHelper.swift */,
+				DFDA955728756BBB007DFDA8 /* Utils.swift */,
 				C35DF695260067070063A176 /* Extensions */,
 				C35DF67A260066870063A176 /* CZUtilsOCBridging.h */,
 				C35DF67B260066870063A176 /* Info.plist */,
@@ -226,6 +229,7 @@
 				C389879A286453D70094D5C0 /* CZSystemInfo.swift in Sources */,
 				C35DF697260067160063A176 /* UIView+.swift in Sources */,
 				DFBB87F8286A352F003C3984 /* UIDevice+Additions.swift in Sources */,
+				DFDA955828756BBB007DFDA8 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
