@@ -20,6 +20,7 @@ extension UIDevice {
   }
 
   /// Returns the device type with the `deviceCode`.
+  /// https://gist.github.com/adamawolf/3048717
   private static func deviceType(with deviceCode: String) -> String {
     switch deviceCode {
     // iPhone / iPod.
