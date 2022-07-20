@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- Generic base publisher that supports subclassing to customize notifying subscribers.
+ Generic base publisher that supports customization of notifying subscribers.
  You should override notifySubscribers() in your subclass.
  
  ### Usage
@@ -36,7 +36,7 @@ open class CZBasePublisher<SubscriberType> {
 
   // MARK: - Subscriber
   
-  /// Notify `subscribers.allObjects` that the observed event occurs.
+  /// Notify `subscribers.allObjects` that observed event occurs.
   open func notifySubscribers() {
     assertionFailure("You should override notifySubscribers() in your subclass.")
   }
