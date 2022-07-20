@@ -45,6 +45,12 @@ public class ThreadSafeWeakArray<Element> {
     }
   }
   
+  public func removeAll() {
+    _weakArray.threadLock { value in
+      value.removeAll()
+    }
+  }
+  
   public func contains(_ element: Element) -> Bool {
     return _weakArray.threadLock { value in
       value.contains(element as AnyObject)
@@ -87,6 +93,12 @@ private class AnyThreadSafeWeakArray<Element: AnyObject> {
   public func remove(_ element: Element) {
     _weakElementWrappers.threadLock { value in
       value = value.filter { $0.element !== element }
+    }
+  }
+  
+  public func removeAll() {
+    _weakElementWrappers.threadLock { value in
+      value.removeAll()
     }
   }
   

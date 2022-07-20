@@ -55,4 +55,8 @@ public class CZDataEventPublisher<EventData: CZEventData> {
   public func removeListener(_ listener: CZDataEventListener) {
     listeners.remove(listener)
   }
+  
+  public func removeAllListeners() {
+    listeners.removeAll()
+  }
 }
