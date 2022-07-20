@@ -1,8 +1,33 @@
 import Foundation
 
 /**
- Generic base bublisher that can be subclassed to customize how to notify subscribers.
- You should implement notifySubscribers() in your subclass.
+ Generic base publisher that supports subclassing to customize notifying subscribers.
+ You should override notifySubscribers() in your subclass.
+ 
+ ### Usage
+ 1. Subclass Publisher:
+ class TextChangePublisher: CZBasePublisher<TextChangeObserverProtocol> {
+   static let shared = TextChangePublisher()
+   
+   func notifyTextDidChange(text: String?) {
+     subscribers.allObjects.forEach {
+       $0.textDidChange(text: text)
+     }
+   }
+ }
+
+ 2. Define ObserverProtocol :
+ public protocol TextChangeObserverProtocol {
+   func textDidChange(text: String?)
+ }
+ 
+ 3. Conform to ObserverProtocol
+ 
+ 4. Add observer:
+ `TextChangePublisher.shared.addObserver()`
+ 
+ 5. Notify observers:
+ `TextChangePublisher.shared.notifyTextDidChange(text:)`
  */
 open class CZBasePublisher<SubscriberType> {
   public private(set) var subscribers = ThreadSafeWeakArray<SubscriberType>(allowDuplicates: false)
@@ -11,9 +36,9 @@ open class CZBasePublisher<SubscriberType> {
 
   // MARK: - Subscriber
   
-  /// Notify all subscribers that the observed event occurs.
+  /// Notify `subscribers.allObjects` that the observed event occurs.
   open func notifySubscribers() {
-    assertionFailure("You should implement notifySubscribers() in your subclass.")
+    assertionFailure("You should override notifySubscribers() in your subclass.")
   }
   
   open func addSubscriber(_ subscriber: SubscriberType) {
