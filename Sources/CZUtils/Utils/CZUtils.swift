@@ -8,11 +8,21 @@
 
 import Foundation
 
-public class CZUtils {
+@objc
+public class CZUtils: NSObject {
   /// Returns the raw memory pointer of the `object`.
   ///
   /// - Note: the returned value isn't type safe nor automatically managed with ARC.
+  @objc
   public static func rawPointer(of object: AnyObject) -> UnsafeMutableRawPointer {
     return Unmanaged.passUnretained(object).toOpaque()
+  }
+
+  /// Returns whether the mode is running unit tests.
+  @objc
+  public static func isUnitTesting() -> Bool {
+    let environment = ProcessInfo.processInfo.environment
+    let testConfigPath = environment["XCTestConfigurationFilePath" ]
+    return testConfigPath != nil;
   }
 }
