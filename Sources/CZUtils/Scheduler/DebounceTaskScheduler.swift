@@ -11,9 +11,11 @@ public class DebounceTaskScheduler: NSObject {
   private let interval: TimeInterval
   /// Utilize DispatchSourceTimer as NSTime requires runloop associated with the same thread.
   private var timer: ThreadSafeTimer!
-
-  @ThreadSafe
+  
+  /// A task to be executed in the next timer tick. It will be cleared after the execution.
   private var task: Task?
+  
+  private let threadLock = SimpleThreadLock()
 
   public init(interval: TimeInterval) {
     self.interval = interval
@@ -25,19 +27,16 @@ public class DebounceTaskScheduler: NSObject {
   }
 
   public func schedule(task: @escaping Task) {
-    _task.threadLock { _task in
-      _task = task
+    threadLock.execute { [weak self] in
+      self?.task = task
     }
   }
 
   func tick() {
     // If task isn't nil, execute task() then set it to nil.
-    _task.threadLock { _task2 in
-//      if _task2 != nil {
-        _task2?()
-        _task2 = nil
-//      }
+    threadLock.execute { [weak self] in
+      self?.task?()
+      self?.task = nil
     }
   }
-
 }
