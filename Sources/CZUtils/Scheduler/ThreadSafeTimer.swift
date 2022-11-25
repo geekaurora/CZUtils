@@ -64,6 +64,7 @@ private extension ThreadSafeTimer {
       self.tick(self)
       
       if self.repeats {
+        // Note: calling `self._tick()` asynchronously won't cause recursion.
         self._tick()
       }
     }
