@@ -52,7 +52,7 @@ internal class LatencyMemoryCache<Key: Hashable, Value>: NSObject {
 ///   // Add your code here which is thread safe.
 /// }
 /// ```
-private class MutexThreadLock: NSLock {
+private class MutexThreadLock: NSRecursiveLock {
   func execute<T>(_ execution: () -> T) -> T {
     lock()
     defer {
