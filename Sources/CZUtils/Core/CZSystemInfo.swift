@@ -7,11 +7,18 @@ public class CZSystemInfo: NSObject {
   
   // MARK: - Device Info
   
+  /// Returns the device model.
   @objc
   public static func getDeviceType() -> String {
     return UIDevice.type
   }
   
+  /// Returns the iOS version.
+  @objc
+  public static func systemVersion() -> String {
+    return UIDevice.current.systemVersion
+  }
+    
   public static func isSimulator() -> Bool {
     #if targetEnvironment(simulator)
     return true
