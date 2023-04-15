@@ -6,7 +6,7 @@ class GCDSynchronizedTests: XCTestCase {
   static let total = CZUnitTestConstants.concurrentCount
   static let queueLable = "com.czutils.tests"
   
-  let lock = NSLock()
+  let lock = NSRecursiveLock()
   var countWithLock: Int = 0
 
   @GCDSynchronized
