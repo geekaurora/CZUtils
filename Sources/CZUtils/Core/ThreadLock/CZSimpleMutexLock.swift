@@ -3,7 +3,7 @@ import Foundation
 /// Generic multi-thread mutex lock on top of NSRecursiveLock.
 ///
 /// - Note: It's mainly for migrating CZMutexLock to NSRecursiveLock with the same interface, and it doesn't support async write.
-public class CZMutexLockWithNSRecursiveLock<Item>: NSObject {
+public class CZSimpleMutexLock<Item>: NSObject {
   /// The underlying data item.
   @ThreadSafe
   private var item: Item
