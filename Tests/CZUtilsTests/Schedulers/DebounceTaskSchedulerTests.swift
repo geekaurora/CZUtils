@@ -4,7 +4,10 @@
 ///**
 // - Note: Correct if only test itself.
 // 
-// Test failure reason: normally the timer leeway <= internal * 0.3.
+// ### Failures
+//  - Test failure reason: normally the timer leeway <= internal * 0.3.
+//  - Cause other tests to fail
+//    - WeakDictionaryTests.testSetObjectWithWeakReference()
 // */
 //class DebounceTaskSchedulerTests: XCTestCase {
 //  fileprivate enum Constant {
@@ -100,7 +103,7 @@
 //  }
 //  
 //  func scheduleCounterTask(after delayTime: TimeInterval = 0) {
-//    if delayTime == 0 {
+//    guard delayTime != 0 else {
 //      debounceTaskScheduler.schedule {
 //        self.incrementCount()
 //      }
