@@ -63,6 +63,19 @@ public extension Array {
     }
     return true
   }
+
+  /**
+   Returns a flattened array of the non-nil elements.
+   */
+  func cz_flatMap<SegmentOfResult>(_ transform: (Self.Element) -> SegmentOfResult?) -> [SegmentOfResult.Element] where SegmentOfResult : Sequence {
+    var res = [SegmentOfResult.Element]()
+    for element in self {
+      if let segment = transform(element) {
+        res.append(contentsOf: segment)
+      }
+    }
+    return res
+  }
 }
 
 public extension Array where Element: NSCopying {
