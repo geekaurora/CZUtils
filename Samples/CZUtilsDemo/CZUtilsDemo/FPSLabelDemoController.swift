@@ -13,7 +13,7 @@ class FPSLabelDemoController: UIViewController {
     view.backgroundColor = .white
     
     initSubviews()
-    // testMainThreadDelay()
+    testMainThreadDelay()
   }
   
   func initSubviews() {
@@ -21,8 +21,9 @@ class FPSLabelDemoController: UIViewController {
   }
   
   func testMainThreadDelay() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-      sleep(200)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+      // Sleep 200 ms.
+      usleep(200 * 1000)
       self?.testMainThreadDelay()
     }
   }
