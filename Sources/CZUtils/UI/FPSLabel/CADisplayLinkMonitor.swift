@@ -94,6 +94,9 @@ public class CADisplayLinkMonitor: NSObject {
     if timeDelta > 0.17 {
       print("[CZLog] timeDelta = \(timeDelta)")
     }
+    
+    // print("[CZLog] timeDelta = \(timeDelta)")
+    
     lastUpdateTimestamp = displayLink.timestamp
     fps = Double(updatedFrames) / Double(timeDelta)
     updatedFrames = 0

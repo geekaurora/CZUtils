@@ -21,11 +21,19 @@ class FPSLabelDemoController: UIViewController {
   }
   
   func testMainThreadDelay() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-      // Sleep 200 ms.
-      usleep(200 * 1000)
-      self?.testMainThreadDelay()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {      
+      for _ in 0..<10 {
+        DispatchQueue.main.async {
+          usleep(200 * 1000)
+        }
+      }
     }
+    
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+//      // Sleep 200 ms.
+//      usleep(200 * 1000)
+//      self?.testMainThreadDelay()
+//    }
   }
 }
 
