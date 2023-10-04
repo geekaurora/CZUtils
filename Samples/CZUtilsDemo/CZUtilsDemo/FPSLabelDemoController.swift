@@ -15,7 +15,7 @@ class FPSLabelDemoController: UIViewController {
     
     initSubviews()
     
-    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.testMainThreadDelay()
     }
   }
@@ -35,7 +35,7 @@ class FPSLabelDemoController: UIViewController {
 //      count += 1
 //      // Sleep 200 ms.
 //      usleep(200 * 1000)
-//      
+//
 //      DispatchQueue.main.async {
 //        self.testMainThreadDelay()
 //      }
