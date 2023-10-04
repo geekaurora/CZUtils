@@ -72,33 +72,15 @@ public class CADisplayLinkMonitor: NSObject {
   // MARK: - CADisplayLink
   
   @objc func tick(_ displayLink: CADisplayLink) {
-    var fps: Double?
-    defer {
-//      if shouldNotifyEachFrameUpdate || fps != nil {
-//        let displayLinkEventData = DisplayLinkEventData(displayLink: displayLink, fps: fps)
-//        dataEventPublisher.publishDataChange(displayLinkEventData)
-//      }
-    }
-    
     guard lastUpdateTimestamp != 0 else {
       lastUpdateTimestamp = displayLink.timestamp
       return
     }
-    
-    updatedFrames += 1
+
     let timeDelta = displayLink.timestamp - lastUpdateTimestamp
-//    if timeDelta < 1 {
-//      return
-//    }
-    
     if timeDelta > 0.17 {
       print("[CZLog] timeDelta = \(timeDelta)")
     }
-    
-    // print("[CZLog] timeDelta = \(timeDelta)")
-    
     lastUpdateTimestamp = displayLink.timestamp
-    fps = Double(updatedFrames) / Double(timeDelta)
-    updatedFrames = 0
   }
 }
