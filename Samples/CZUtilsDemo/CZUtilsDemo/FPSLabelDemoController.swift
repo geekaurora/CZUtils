@@ -4,25 +4,15 @@ import CZUtils
 class FPSLabelDemoController: UIViewController {
   var count = 0
   
-  private lazy var fpsLabel: CZFPSLabel = {
-    let fpsLabel = CZFPSLabel()
-    return fpsLabel
-  }()
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
-    
-    initSubviews()
-    
+   // view.backgroundColor = .white
+
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.testMainThreadDelay()
     }
   }
-  
-  func initSubviews() {
-    fpsLabel.display(on: view)
-  }
+
   
   func testMainThreadDelay() {
     for _ in 0..<10 {
