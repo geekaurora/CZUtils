@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
   }
 
   func testDispatchAsync() {
-#if true
+#if false
     // 1. Call dispatch_async sequentially: will all be executed in the next runloop cycle.
     for _ in 0..<10 {
       DispatchQueue.main.async {

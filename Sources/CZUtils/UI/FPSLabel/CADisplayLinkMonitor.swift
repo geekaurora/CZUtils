@@ -78,7 +78,7 @@ public class CADisplayLinkMonitor: NSObject {
     }
 
     let timeDelta = displayLink.timestamp - lastUpdateTimestamp
-    if timeDelta > 0.17 {
+    if timeDelta > 0.2 {
       print("[CZLog] timeDelta = \(timeDelta)")
     }
     lastUpdateTimestamp = displayLink.timestamp
