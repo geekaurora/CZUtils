@@ -15,12 +15,16 @@ class MainViewController: UIViewController {
   }
 
   func testDispatchAsync() {
-#if false
+#if true
     // 1. Call dispatch_async sequentially: will all be executed in the next runloop cycle.
     for _ in 0..<10 {
-      DispatchQueue.main.async {
+      OperationQueue.main.addOperation {
         usleep(200 * 1000)
       }
+
+//      DispatchQueue.main.async {
+//        usleep(200 * 1000)
+//      }
     }
 #else
     // 2. Call dispatch_async nestedly: correct - will be executed in separate runloop cycles.
