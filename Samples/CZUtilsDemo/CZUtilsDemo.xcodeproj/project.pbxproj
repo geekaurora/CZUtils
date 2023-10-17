@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C3F00691262AF12500B072A0 /* FPSLabelDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F00690262AF12500B072A0 /* FPSLabelDemoController.swift */; };
 		DF6F864D24978986007260F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F864C24978986007260F6 /* AppDelegate.swift */; };
 		DF6F864F24978986007260F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F864E24978986007260F6 /* SceneDelegate.swift */; };
 		DF6F865124978986007260F6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F865024978986007260F6 /* MainViewController.swift */; };
@@ -52,7 +51,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C3F00690262AF12500B072A0 /* FPSLabelDemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSLabelDemoController.swift; sourceTree = "<group>"; };
 		DF6F864924978986007260F6 /* CZUtilsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZUtilsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6F864C24978986007260F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF6F864E24978986007260F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				DF6F865024978986007260F6 /* MainViewController.swift */,
-				C3F00690262AF12500B072A0 /* FPSLabelDemoController.swift */,
 				DF6F865A24978989007260F6 /* Info.plist */,
 				DF6F867C24978A51007260F6 /* Supported_Files */,
 			);
@@ -303,7 +300,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF6F865124978986007260F6 /* MainViewController.swift in Sources */,
-				C3F00691262AF12500B072A0 /* FPSLabelDemoController.swift in Sources */,
 				DF6F864D24978986007260F6 /* AppDelegate.swift in Sources */,
 				DF6F864F24978986007260F6 /* SceneDelegate.swift in Sources */,
 			);
