@@ -24,13 +24,13 @@ class MainViewController: UIViewController {
     }
 #else
     // 2. Call dispatch_async nestedly: correct - will be executed in separate runloop cycles.
-    if count < 10 {
-      count += 1
+    guard count < 10 else {
+      return
+    }
+    DispatchQueue.main.async {
+      self.count += 1
       usleep(200 * 1000)
-
-      DispatchQueue.main.async {
-        self.testDispatchAsync()
-      }
+      self.testDispatchAsync()
     }
 #endif
   }
