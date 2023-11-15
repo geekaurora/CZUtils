@@ -9,7 +9,7 @@ public class CZSystemInfo: NSObject {
   
   /// Returns the device model.
   @objc
-  public static func getDeviceType() -> String {
+  public static dynamic func getDeviceType() -> String {
     return UIDevice.type
   }
   
