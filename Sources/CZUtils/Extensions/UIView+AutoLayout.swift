@@ -308,9 +308,9 @@ public protocol GMOAutoLayoutObject: NSObjectProtocol {}
 extension UIView: GMOAutoLayoutObject {}
 extension UILayoutGuide: GMOAutoLayoutObject {}
 
-// MARK: - GMOConstraintProtocol
+// MARK: - CZConstraintProtocol
 
 /// Protocol that marks Class capable of being activated as item by activate(:), including NSLayoutConstraint, [NSLayoutConstraint].
-public protocol GMOConstraintProtocol {}
-extension NSLayoutConstraint: GMOConstraintProtocol {}
-extension Array: GMOConstraintProtocol where Element: NSLayoutConstraint {}
+public protocol CZConstraintProtocol {}
+extension NSLayoutConstraint: CZConstraintProtocol {}
+extension Array: CZConstraintProtocol where Element: NSLayoutConstraint {}
