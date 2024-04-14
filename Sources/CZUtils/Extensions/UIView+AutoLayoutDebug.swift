@@ -8,15 +8,13 @@ extension UIView {
   /// Prints the layout reports for view and its subviews.
   @objc
   public func cz_printLayoutReports() {
-    print(self.cz_viewLayoutDescription)
+    print(cz_viewLayoutDescription)
 
-    for clazz in UIView.skippableClasses() {
-      if self.isKind(of: clazz) {
-        return
-      }
+    for clazz in UIView.skippableClasses where self.isKind(of: clazz) {
+      return
     }
 
-    for view in self.subviews {
+    for view in subviews {
       view.cz_printLayoutReports()
     }
   }
@@ -26,65 +24,53 @@ extension UIView {
   public var cz_viewLayoutDescription: String {
     var description = "<\(Unmanaged.passUnretained(self).toOpaque())> \(type(of: self)) : \(type(of: self).superclass()!)"
 
-    if self.translatesAutoresizingMaskIntoConstraints {
+    if translatesAutoresizingMaskIntoConstraints {
       description += " [Autosizes]"
     }
 
-    if self.hasAmbiguousLayout {
+    // Check whether the view has ambiguous layouts.
+    if hasAmbiguousLayout {
       description += "\n\n----\n[Caution!] FOUND Ambiguous Layouts!"
     }
 
-    description += "\nContent size...\(sizeString(self.intrinsicContentSize))"
+    description += "\nContent size...\(sizeString(intrinsicContentSize))"
 
-    if self.intrinsicContentSize.width > 0 || self.intrinsicContentSize.height > 0 {
-      description += " [Content Mode: \(UIView.nameForContentMode(self.contentMode))]"
+    if intrinsicContentSize.width > 0 || intrinsicContentSize.height > 0 {
+      description += " [Content Mode: \(UIView.nameForContentMode(contentMode))]"
     }
 
     description += "\nHugging........[H \(hugValueH)] [V \(hugValueV)]\n"
     description += "Resistance.....[H \(resistValueH)] [V \(resistValueV))]\n"
-    description += "Constraints....\(self.constraints.count)\n"
+    description += "Constraints....\(constraints.count)\n"
 
-    var i = 1
-    for constraint in self.constraints {
+    for i in 0..<constraints.count {
+      let constraint = constraints[i]
       description += String(format: "%2d. ", i)
-      description += "@\(constraint.priority) "
-
-      description += "\(constraint)"
-      description += "\n"
-      i += 1
+      description += "@\(constraint.priority) \(constraint) \n"
     }
 
     return description
   }
 
   /// Returns all constraints that refer to the view.
-  func cz_referencingConstraints() -> Set<NSLayoutConstraint> {
-    var results = self.referencingConstraintsInSuperviews()
-
-    for constraint in self.constraints {
-      if constraint.refersToView(self) {
-        results.insert(constraint)
-      }
-    }
-
-    return results
+  @objc
+  public var cz_referencingConstraints: Set<NSLayoutConstraint> {
+    let referencingConstraints = Set(constraints.filter { $0.refersToView(self) })
+    return referencingConstraints.union(referencingConstraintsInSuperviews)
   }
 
   // MARK: - Helper methods
 
-  fileprivate func referencingConstraintsInSuperviews() -> Set<NSLayoutConstraint> {
+  fileprivate var referencingConstraintsInSuperviews: Set<NSLayoutConstraint> {
     var results = Set<NSLayoutConstraint>()
 
     var currentView: UIView? = self
     while let view = currentView?.superview {
-      for constraint in view.constraints {
-        if constraint.refersToView(self) {
-          results.insert(constraint)
-        }
-      }
+      let referencingConstraints = Set(view.constraints.filter { $0.refersToView(self) })
+      results = results.union(referencingConstraints)
+
       currentView = view
     }
-
     return results
   }
 
@@ -138,7 +124,7 @@ extension UIView {
     }
   }
 
-  fileprivate static func skippableClasses() -> [UIView.Type] {
+  fileprivate static var skippableClasses: [UIView.Type] {
     return [UIButton.self, UILabel.self, UISwitch.self, UIStepper.self, UITextField.self, UIScrollView.self, UIActivityIndicatorView.self, UIAlertView.self, UIPickerView.self, UIProgressView.self, UIToolbar.self, UINavigationBar.self, UISearchBar.self, UITabBar.self]
   }
 }
