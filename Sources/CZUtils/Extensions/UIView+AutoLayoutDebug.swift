@@ -8,14 +8,23 @@ extension UIView {
   /// Prints the layout reports for the view and its subviews.
   @objc
   public func cz_printLayoutReports() {
+    print("\n=============================\n\(#function)\n=============================")
+    cz_printLayoutReports(allowRecursion: true)
+  }
+
+  /// Prints the layout reports for the view and its subviews with `allowRecursion`.
+  /// - Note: The method doesn't support ObjC.
+  public func cz_printLayoutReports(allowRecursion: Bool) {
     print(cz_layoutDescription)
+
+    guard allowRecursion else { return }
 
     for clazz in UIView.skippableClasses where self.isKind(of: clazz) {
       return
     }
 
     for view in subviews {
-      view.cz_printLayoutReports()
+      view.cz_printLayoutReports(allowRecursion: allowRecursion)
     }
   }
 
