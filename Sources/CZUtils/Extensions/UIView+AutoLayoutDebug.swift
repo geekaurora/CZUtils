@@ -5,10 +5,10 @@ import UIKit
 /// Helper methods for debugging Auto Layout.
 @objc
 extension UIView {
-  /// Prints the layout reports for view and its subviews.
+  /// Prints the layout reports for the view and its subviews.
   @objc
   public func cz_printLayoutReports() {
-    print(cz_viewLayoutDescription)
+    print(cz_layoutDescription)
 
     for clazz in UIView.skippableClasses where self.isKind(of: clazz) {
       return
@@ -19,9 +19,9 @@ extension UIView {
     }
   }
 
-  /// Returns details for the view's layout constraints.
+  /// Returns the layout report for the view.
   @objc
-  public var cz_viewLayoutDescription: String {
+  public var cz_layoutDescription: String {
     var description = "<\(Unmanaged.passUnretained(self).toOpaque())> \(type(of: self)) : \(type(of: self).superclass()!)"
 
     if translatesAutoresizingMaskIntoConstraints {
@@ -59,7 +59,7 @@ extension UIView {
     return referencingConstraints.union(referencingConstraintsInSuperviews)
   }
 
-  // MARK: - Helper methods
+  // MARK: - Private methods
 
   fileprivate var referencingConstraintsInSuperviews: Set<NSLayoutConstraint> {
     var results = Set<NSLayoutConstraint>()
