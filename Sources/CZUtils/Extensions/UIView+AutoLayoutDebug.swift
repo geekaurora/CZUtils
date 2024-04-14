@@ -29,6 +29,8 @@ extension UIView {
     }
 
     // Check whether the view has ambiguous layouts.
+    // Note: If `hasAmbiguousLayout` is true, UIKit will display an warning of
+    // "View has an ambiguous layout" automatically.
     if hasAmbiguousLayout {
       description += "\n\n----\n[Caution!] FOUND Ambiguous Layouts!"
     }
@@ -135,8 +137,14 @@ fileprivate extension NSLayoutConstraint {
   }
 }
 
+fileprivate extension CGFloat {
+  var truncatingDecimals: String {
+    return String(format: "%.0f", self)
+  }
+}
+
 fileprivate func sizeString(_ size: CGSize) -> String {
-  return "(\(size.width), \(size.height))"
+  return "(\(size.width.truncatingDecimals), \(size.height.truncatingDecimals))"
 }
 
 #endif
