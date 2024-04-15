@@ -6,32 +6,47 @@ import UIKit
 @objc
 extension UIView {
   /// Prints the layout reports for the view and its subviews.
+  ///
+  /// - Note: If a view's `hasAmbiguousLayout` is true, you may:
+  /// 1) In the cosole, set a breakpoint and `po [view _autolayoutTrace]` to get  more details.
+  /// 2) In your code, call `view.exerciseAmbiguityInLayout()` to toggle between different UI solutions.
+  ///
+  /// ### Usage
+  ///
+  /// If your app supports multiple scenes,
+  /// ```
+  /// UIApplication.shared.windows.last?.rootViewController?.view.cz_printLayoutReports()
+  /// ```
+  ///
+  /// Otherwise,
+  /// ```
+  /// UIApplication.shared.keyWindow?.rootViewController?.view.cz_printLayoutReports()
+  /// ```
   @objc
   public func cz_printLayoutReports() {
     print("\n=============================\n\(#function)\n=============================")
-    cz_printLayoutReports(allowRecursion: true)
+
+    cz_printLayoutReports(level: 0)
   }
 
   /// Prints the layout reports for the view and its subviews with `allowRecursion`.
   /// - Note: The method doesn't support ObjC.
-  public func cz_printLayoutReports(allowRecursion: Bool) {
-    print(cz_layoutDescription)
-
-    guard allowRecursion else { return }
+  public func cz_printLayoutReports(level: Int) {
+    print(cz_layoutDescription(level: level).prefixingIndents(count: level) + "\n")
 
     for clazz in UIView.skippableClasses where self.isKind(of: clazz) {
       return
     }
 
     for view in subviews {
-      view.cz_printLayoutReports(allowRecursion: allowRecursion)
+      view.cz_printLayoutReports(level: level + 1)
     }
   }
 
   /// Returns the layout report for the view.
   @objc
-  public var cz_layoutDescription: String {
-    var description = "<\(Unmanaged.passUnretained(self).toOpaque())> \(type(of: self)) : \(type(of: self).superclass()!)"
+  public func cz_layoutDescription(level: Int) -> String {
+    var description = "[L\(level)] <\(Unmanaged.passUnretained(self).toOpaque())> \(type(of: self)) : \(type(of: self).superclass()!)"
 
     if translatesAutoresizingMaskIntoConstraints {
       description += " [Autosizes]"
@@ -41,7 +56,7 @@ extension UIView {
     // Note: If `hasAmbiguousLayout` is true, UIKit will display an warning of
     // "View has an ambiguous layout" automatically.
     if hasAmbiguousLayout {
-      description += "\n\n----\n[Caution!] FOUND Ambiguous Layouts!"
+      description += "  <<<<<<<<<<<<<<<< [AMBIGUOUS LAYOUT!]"
     }
 
     description += "\nContent size...\(sizeString(intrinsicContentSize))"
@@ -52,10 +67,10 @@ extension UIView {
 
     description += "\nHugging........[H \(hugValueH)] [V \(hugValueV)]\n"
     description += "Resistance.....[H \(resistValueH)] [V \(resistValueV))]\n"
-    description += "Constraints....\(constraints.count)\n"
+    description += "Constraints....\(cz_groupedConstraints.count)\n"
 
-    for i in 0..<constraints.count {
-      let constraint = constraints[i]
+    for i in 0..<cz_groupedConstraints.count {
+      let constraint = cz_groupedConstraints[i]
       description += String(format: "%2d. ", i)
       description += "@\(constraint.priority) \(constraint) \n"
     }
@@ -66,18 +81,27 @@ extension UIView {
   /// Returns all constraints that refer to the view.
   @objc
   public var cz_referencingConstraints: Set<NSLayoutConstraint> {
-    let referencingConstraints = Set(constraints.filter { $0.refersToView(self) })
+    let referencingConstraints = Set(cz_groupedConstraints.filter { $0.refersToView(self) })
     return referencingConstraints.union(referencingConstraintsInSuperviews)
   }
 
   // MARK: - Private methods
+
+  /// Returns the grouped constraints on: 1) horizontal and 2) vertical directions.
+  fileprivate var cz_groupedConstraints: [NSLayoutConstraint] {
+    let groupedConstraints = constraintsAffectingLayout(for: .horizontal) + constraintsAffectingLayout(for: .vertical)
+    let remainingConstraints = constraints.filter { !groupedConstraints.contains($0) }
+
+    assert(remainingConstraints.isEmpty, "remainingConstraints should be empty.")
+    return groupedConstraints + remainingConstraints
+  }
 
   fileprivate var referencingConstraintsInSuperviews: Set<NSLayoutConstraint> {
     var results = Set<NSLayoutConstraint>()
 
     var currentView: UIView? = self
     while let view = currentView?.superview {
-      let referencingConstraints = Set(view.constraints.filter { $0.refersToView(self) })
+      let referencingConstraints = Set(view.cz_groupedConstraints.filter { $0.refersToView(self) })
       results = results.union(referencingConstraints)
 
       currentView = view
@@ -149,6 +173,19 @@ fileprivate extension NSLayoutConstraint {
 fileprivate extension CGFloat {
   var truncatingDecimals: String {
     return String(format: "%.0f", self)
+  }
+}
+
+extension String {
+  /// Prefixes `count` white spaces to the string on each line.
+  fileprivate func prefixingIndents(count: Int) -> String {
+    let leadingWhitespaces = (0..<count).reduce("", { (str, _) in
+      str + " "
+    })
+    return self
+      .split(separator: "\n")
+      .map { leadingWhitespaces + $0 }
+      .joined(separator: "\n")
   }
 }
 
