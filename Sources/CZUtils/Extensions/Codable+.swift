@@ -163,7 +163,7 @@ public extension Encodable {
   /// - Returns              : True if succeed, false otherwise.
   @discardableResult
   func saveToFilePath(_ filePath: String, atomically: Bool = true)-> Bool {
-    guard let data = CZHTTPJsonSerializer.jsonData(with: dictionaryVersion).assertIfNil else {
+    guard let data = CodableHelper.encode(self).assertIfNil else {
       return false
     }
     (data as NSData).write(toFile: filePath, atomically: atomically)
