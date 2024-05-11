@@ -12,9 +12,9 @@ public class CodableHelper {
   
   // MARK: File - Read
 
-  /// Decode model from specified file.
+  /// Decode model from specified file with `pathUrl`.
   ///
-  /// - Parameter pathUrl: pathUrl of file
+  /// - Parameter pathUrl: pathUrl of file. NOTE: `pathUrl` should be initialized with `URL(fileURLWithPath:)`.
   /// - Returns: the decoded model
   public static func decode<T: Decodable>(_ pathUrl: URL, ignoreAssertion: Bool = false) -> T? {
     do {
@@ -28,7 +28,16 @@ public class CodableHelper {
       return nil
     }
   }
-  
+
+  /// Decode model from specified file with `pathString`.
+  ///
+  /// - Parameter pathString: pathString of file.
+  /// - Returns: the decoded model
+  public static func decode<T: Decodable>(_ pathString: String, ignoreAssertion: Bool = false) -> T? {
+    let pathUrl = URL(fileURLWithPath: pathString)
+    return decode(pathUrl, ignoreAssertion: ignoreAssertion)
+  }
+
   /// Decode model from input Data.
   ///
   /// - Parameter data: serialized data
