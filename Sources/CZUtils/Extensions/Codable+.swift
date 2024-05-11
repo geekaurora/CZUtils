@@ -190,3 +190,18 @@ public extension Encodable where Self: Decodable {
   
 }
 
+// MARK: - KeyedDecodingContainer
+
+public extension KeyedDecodingContainer {
+  /// Decodes a value of the given type for the given `key`.
+  /// e.g. `name = try values.cz_decode(key: .name)`
+  func cz_decode<T>(key: K) throws -> T where T : Decodable {
+    return try decode(T.self, forKey: key)
+  }
+  
+  /// Decodes a value of the given type for the given `key`, if present. Otherwise, return `defaultValue`.
+  /// e.g. `diffId = try values.cz_decodeIfPresent(key: .diffId, defaultValue: UUID())`
+  func cz_decodeIfPresent<T>(key: K, defaultValue: T) throws -> T where T : Decodable {
+    return try decodeIfPresent(T.self, forKey: key) ?? defaultValue
+  }
+}
