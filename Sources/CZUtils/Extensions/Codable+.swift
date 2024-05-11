@@ -10,17 +10,21 @@ import Foundation
 
 public class CodableHelper {
   
+  // MARK: File - Read
+
   /// Decode model from specified file.
   ///
   /// - Parameter pathUrl: pathUrl of file
   /// - Returns: the decoded model
-  public static func decode<T: Decodable>(_ pathUrl: URL) -> T? {
+  public static func decode<T: Decodable>(_ pathUrl: URL, ignoreAssertion: Bool = false) -> T? {
     do {
       let jsonData = try Data(contentsOf: pathUrl)
       let model = try JSONDecoder().decode(T.self, from: jsonData)
       return model
     } catch {
-      assertionFailure("Failed to decode JSON file \(pathUrl) of \(T.self). Error - \(error.localizedDescription)")
+      if !ignoreAssertion {
+        assertionFailure("Failed to decode JSON file \(pathUrl) of \(T.self). Error - \(error.localizedDescription)")
+      }
       return nil
     }
   }
@@ -149,14 +153,15 @@ public extension Encodable {
     return dictionaryVersion.value(forDotedKey: dotedKey) as? T
   }
   
-  // MARK: File
-  
+  // MARK: File - Write
+
   /// Saves the object to `filePath`.
   ///
   /// - Params:
   ///   - object                :   The JSON object. e.g. Dictionary, Array etc.
   ///   - FilePath            :   The file path to be saved to.
   /// - Returns              : True if succeed, false otherwise.
+  @discardableResult
   func saveToFilePath(_ filePath: String, atomically: Bool = true)-> Bool {
     guard let data = CZHTTPJsonSerializer.jsonData(with: dictionaryVersion).assertIfNil else {
       return false
@@ -187,7 +192,6 @@ public extension Encodable where Self: Decodable {
       return self
     }
   }
-  
 }
 
 // MARK: - KeyedDecodingContainer
