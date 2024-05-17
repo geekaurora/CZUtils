@@ -10,35 +10,8 @@ import CommonCrypto
 
 public extension String {
   /**
-   Search substrings that matches regex pattern
-
-   - parameter regex: the regex pattern
-   - parameter excludeRegEx: indicates whether returned substrings exclude regex pattern iteself
-
-   - returns: all matched substrings
-   */
-  func search(regex: String, excludeRegEx: Bool = true) -> [String] {
-    guard let regex = try? NSRegularExpression(pattern: regex, options: []) else {
-      return []
-    }
-    let string = self as NSString
-    let results  = regex.matches(in: self, options: [], range: NSMakeRange(0, string.length))
-    return results.compactMap { result in
-      guard result.numberOfRanges > 0 else {
-        return nil
-      }
-      let i = excludeRegEx ? (result.numberOfRanges - 1) : 0
-      return result.range(at: i).location != NSNotFound ? string.substring(with: result.range(at: i)) : nil
-    }
-  }
-
-  func isEqualCaseInsensitively(to string: String) -> Bool {
-    return self.lowercased() == string.lowercased()
-  }
-  
-  /**
    Encodes String for URL by converting illegal characters.
-   
+
    URLHostAllowedCharacterSet      "#%/<>?@\^`{|}
    URLQueryAllowedCharacterSet     "#%<>[\]^`{|}
    URLFragmentAllowedCharacterSet  "#%<>[\]^`{|}
@@ -70,6 +43,72 @@ public extension String {
     return Int(self)
   }
 
+  /// MD5 HashValue: Should #import <CommonCrypto/CommonCrypto.h> in your Bridging-Header file
+  var MD5: String {
+    let length = Int(CC_MD5_DIGEST_LENGTH)
+    var digest = [UInt8](repeating: 0, count: length)
+
+    if let d = self.data(using: String.Encoding.utf8) {
+      _ = d.withUnsafeBytes { (body: UnsafePointer<UInt8>) in
+        CC_MD5(body, CC_LONG(d.count), &digest)
+      }
+    }
+
+    return (0..<length).reduce("") {
+      $0 + String(format: "%02x", digest[$1])
+    }
+  }
+
+  /**
+   Search substrings that matches regex pattern
+
+   - parameter regex: the regex pattern
+   - parameter excludeRegEx: indicates whether returned substrings exclude regex pattern iteself
+
+   - returns: all matched substrings
+   */
+  func search(regex: String, excludeRegEx: Bool = true) -> [String] {
+    guard let regex = try? NSRegularExpression(pattern: regex, options: []) else {
+      return []
+    }
+    let string = self as NSString
+    let results  = regex.matches(in: self, options: [], range: NSMakeRange(0, string.length))
+    return results.compactMap { result in
+      guard result.numberOfRanges > 0 else {
+        return nil
+      }
+      let i = excludeRegEx ? (result.numberOfRanges - 1) : 0
+      return result.range(at: i).location != NSNotFound ? string.substring(with: result.range(at: i)) : nil
+    }
+  }
+
+  func isEqualCaseInsensitively(to string: String) -> Bool {
+    return self.lowercased() == string.lowercased()
+  }
+
+  /// Removes the `prefix` from the string.
+  func removePrefix(_ prefix: String) -> String {
+    guard hasPrefix(prefix) else { return self }
+    return String(dropFirst(prefix.count))
+  }
+
+  /// Removes the `suffix` from the string.
+  func removeSuffix(_ suffix: String) -> String {
+    guard hasSuffix(suffix) else { return self }
+    return String(dropLast(suffix.count))
+  }
+
+  /// Returns a substring enclosed within a pair of brackets: `startChar`, `endChar`.
+  func bracketedString(startChar: Character = "[",
+                       endChar: Character = "]") -> String {
+    guard let startIndex = firstIndex(of: startChar),
+          let endIndex = lastIndex(of: endChar),
+          startIndex <= endIndex else {
+      return self
+    }
+    return String(self[startIndex...endIndex])
+  }
+
   /**
    Returns splitted Strings with input `separator`, `maxSplits`, `omittingEmptySubsequences`.
    */
@@ -80,28 +119,12 @@ public extension String {
       separator: separator,
       maxSplits: maxSplits,
       omittingEmptySubsequences: omittingEmptySubsequences)
-      .map { String($0) }
+    .map { String($0) }
   }
 
-  /// MD5 HashValue: Should #import <CommonCrypto/CommonCrypto.h> in your Bridging-Header file
-  var MD5: String {
-      let length = Int(CC_MD5_DIGEST_LENGTH)
-      var digest = [UInt8](repeating: 0, count: length)
-      
-      if let d = self.data(using: String.Encoding.utf8) {
-          _ = d.withUnsafeBytes { (body: UnsafePointer<UInt8>) in
-              CC_MD5(body, CC_LONG(d.count), &digest)
-          }
-      }
-      
-      return (0..<length).reduce("") {
-          $0 + String(format: "%02x", digest[$1])
-      }
-  }
-  
   /**
    Returns file type of the current string if applicable.
-   
+
    e.g. return "mp3" for "file:///user/some/path/file.mp3"
    */
   func fileType(includingDot: Bool = false) -> String {
