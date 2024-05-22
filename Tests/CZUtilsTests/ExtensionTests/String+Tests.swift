@@ -84,4 +84,94 @@ class StringExtensionTests: XCTestCase {
     expected = testString
     XCTAssertEqual(actual, "")
   }
+
+  func testExtractEnclosedString_experimental() {
+    let startChar: Character = "["
+    let endChar: Character = "]"
+
+    // Test "[123]".
+    var testString = "[123]"
+    var actual = testString.extractEnclosedString_experiment(
+      startChar: startChar, endChar: endChar, shouldIncludeBoundaries: true)
+    var expected = testString
+    XCTAssertEqual(actual, expected)
+
+    actual = testString.extractEnclosedString_experiment(
+      startChar: startChar, endChar: endChar, shouldIncludeBoundaries: false)
+    expected = testString
+    XCTAssertEqual(actual, "123")
+
+    // Test "[]".
+    testString = "[]"
+    actual = testString.extractEnclosedString_experiment(
+      startChar: startChar, endChar: endChar, shouldIncludeBoundaries: true)
+    expected = testString
+    XCTAssertEqual(actual, expected)
+
+    actual = testString.extractEnclosedString_experiment(
+      startChar: startChar, endChar: endChar, shouldIncludeBoundaries: false)
+    expected = testString
+    XCTAssertEqual(actual, "")
+
+    // Test "123".
+    testString = "123"
+    actual = testString.extractEnclosedString_experiment(
+      startChar: startChar, endChar: endChar, shouldIncludeBoundaries: true)
+    expected = testString
+    XCTAssertEqual(actual, expected)
+
+    actual = testString.extractEnclosedString_experiment(
+      startChar: startChar, endChar: endChar, shouldIncludeBoundaries: false)
+    expected = testString
+    XCTAssertEqual(actual, "123")
+
+    // Test "".
+    testString = ""
+    actual = testString.extractEnclosedString_experiment(
+      startChar: startChar, endChar: endChar, shouldIncludeBoundaries: true)
+    expected = testString
+    XCTAssertEqual(actual, expected)
+
+    actual = testString.extractEnclosedString_experiment(
+      startChar: startChar, endChar: endChar, shouldIncludeBoundaries: false)
+    expected = testString
+    XCTAssertEqual(actual, "")
+  }
+}
+
+// MARK: - Experiment
+
+extension String {
+  /// Extracts the enclosed string between `startChar` and `endChar`.
+  func extractEnclosedString_experiment(startChar: Character,
+                                        endChar: Character,
+                                        shouldIncludeBoundaries: Bool = true) -> String {
+    var result = ""
+    var foundStartChar = false
+    var foundEndChar = false
+
+    for char in self {
+      if foundStartChar {
+
+        if char == endChar {
+          foundEndChar = true
+
+          if shouldIncludeBoundaries {
+            result += String(char)
+          }
+          break
+        }
+
+        result += String(char)
+      }
+
+      if char == startChar {
+        foundStartChar = true
+        if shouldIncludeBoundaries {
+          result += String(char)
+        }
+      }
+    }
+    return (foundStartChar && foundEndChar) ? result : self
+  }
 }
