@@ -60,6 +60,35 @@ class StringExtensionTests: XCTestCase {
     expected = testString
     XCTAssertEqual(actual, "")
 
+    /** Test same startChar / endChar: "\"". */
+
+    // Multiple chars.
+
+    testString = "\"123\""
+    actual = testString.extractEnclosedString(
+      startChar: "\"", endChar: "\"", shouldIncludeBoundaries: true)
+    expected = testString
+    XCTAssertEqual(actual, expected)
+
+    testString = "\"123\""
+    actual = testString.extractEnclosedString(
+      startChar: "\"", endChar: "\"", shouldIncludeBoundaries: false)
+    expected = testString
+    XCTAssertEqual(actual, "123")
+
+    // Single char.
+    testString = "\""
+    actual = testString.extractEnclosedString(
+      startChar: "\"", endChar: "\"", shouldIncludeBoundaries: true)
+    expected = testString
+    XCTAssertEqual(actual, expected)
+
+    testString = "\""
+    actual = testString.extractEnclosedString(
+      startChar: "\"", endChar: "\"", shouldIncludeBoundaries: false)
+    expected = testString
+    XCTAssertEqual(actual, expected)
+
     // Test "123".
     testString = "123"
     actual = testString.extractEnclosedString(
