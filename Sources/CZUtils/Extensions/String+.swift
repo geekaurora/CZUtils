@@ -98,17 +98,23 @@ public extension String {
     return String(dropLast(suffix.count))
   }
 
-  /// Returns a substring enclosed within a pair of brackets: `startChar`, `endChar`.
-  func bracketedString(startChar: Character = "[",
-                       endChar: Character = "]") -> String {
-    guard let startIndex = firstIndex(of: startChar),
-          let endIndex = lastIndex(of: endChar),
-          startIndex <= endIndex else {
+  /// Extracts the enclosed string between `startChar` and `endChar`.
+  func extractEnclosedString(startChar: Character,
+                             endChar: Character,
+                             shouldIncludeBoundaries: Bool = true) -> String {
+    guard var startIndex = firstIndex(of: startChar),
+          var endIndex = lastIndex(of: endChar),
+          startIndex < endIndex
+    else {
       return self
     }
-    return String(self[startIndex...endIndex])
+    if !shouldIncludeBoundaries {
+      startIndex = self.index(after: startIndex)
+      endIndex = self.index(before: endIndex)
+    }
+    return String(self[startIndex..<self.index(after: endIndex)])
   }
-
+  
   /**
    Returns splitted Strings with input `separator`, `maxSplits`, `omittingEmptySubsequences`.
    */
