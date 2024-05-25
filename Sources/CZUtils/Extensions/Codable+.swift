@@ -11,7 +11,7 @@ import Foundation
 public class CodableHelper {
   
   // MARK: File - Read
-
+  
   /// Decode model from specified file with `pathUrl`.
   ///
   /// - Parameter pathUrl: pathUrl of file. NOTE: `pathUrl` should be initialized with `URL(fileURLWithPath:)`.
@@ -28,7 +28,7 @@ public class CodableHelper {
       return nil
     }
   }
-
+  
   /// Decode model from specified file with `pathString`.
   ///
   /// - Parameter pathString: pathString of file.
@@ -37,7 +37,7 @@ public class CodableHelper {
     let pathUrl = URL(fileURLWithPath: pathString)
     return decode(pathUrl, ignoreAssertion: ignoreAssertion)
   }
-
+  
   /// Decode model from input Data.
   ///
   /// - Parameter data: serialized data
@@ -74,8 +74,8 @@ public class CodableHelper {
     // Decode each individual model with its corresponding data.
     let result: [T] = dicts.compactMap { dict in
       guard let modelData = CZHTTPJsonSerializer.jsonData(with: dict).assertIfNil,
-        let model: T = Self.decode(modelData) else {
-          return nil
+            let model: T = Self.decode(modelData) else {
+        return nil
       }
       return model
     }
@@ -118,16 +118,26 @@ public class CodableHelper {
 // MARK: - Encodable
 
 public extension Encodable {
-  /// Transform current obj to dictionary.
-  var dictionaryVersion: [AnyHashable : Any] {
+  /// Encodes an encodable object as a JSON object.
+  var asObject: Any? {
     do {
-      let jsonData = try JSONEncoder().encode(self)
-      let dictionaryVersion = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [AnyHashable : Any]
-      return dictionaryVersion ?? [:]
+      let data = try JSONEncoder().encode(self)
+      let result = try JSONSerialization.jsonObject(with: data)
+      return result
     } catch {
-      assertionFailure("Failed to encode model to Data. Error - \(error.localizedDescription)")
-      return [:]
+      assertionFailure("Failed to decode the model. Error - \(error.localizedDescription)")
+      return nil
     }
+  }
+  
+  /// Encodes an encodable object as a JSON object array.
+  var asArray: [Any]? {
+    return self.asObject as? [Any]
+  }
+  
+  /// Transform the current object to a dictionary.
+  var dictionaryVersion: [AnyHashable : Any] {
+    return (self.asObject as? [AnyHashable: Any]).assertIfNil ?? [:]
   }
   
   /// Verify whether current obj equals to other obj.
@@ -163,7 +173,7 @@ public extension Encodable {
   }
   
   // MARK: File - Write
-
+  
   /// Saves the object to `filePath`.
   ///
   /// - Params:
@@ -180,6 +190,19 @@ public extension Encodable {
   }
 }
 
+// MARK: - Decodable
+
+public extension Decodable {
+  // MARK: JSON
+
+  static func decode(fromJSONObject jsonObject: Any) -> Self? {
+    guard let data = try? JSONSerialization.data(withJSONObject: jsonObject),
+          let result = try? JSONDecoder().decode(Self.self, from: data) else {
+      return nil
+    }
+    return result
+  }
+}
 
 // MARK: - Codable
 
