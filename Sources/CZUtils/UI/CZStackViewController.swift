@@ -34,6 +34,9 @@ open class CZStackViewController: UIViewController {
     stackView = UIStackView()
     stackView.axis = .vertical
     view.addSubview(stackView)
-    NSLayoutConstraint.activate(stackView.align(to: view.safeAreaLayoutGuide))
-  }  
+    NSLayoutConstraint.activate([
+      stackView.alignTop(to: view.safeAreaLayoutGuide),
+      stackView.alignHorizontally(to: view.safeAreaLayoutGuide)
+    ])
+  }
 }

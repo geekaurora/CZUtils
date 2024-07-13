@@ -5,8 +5,10 @@ import Foundation
  
  ### Usage
  ```
+ CZPerfTracker.shared.beginTracking(event: #function)
+ CZPerfTracker.shared.endTracking(event: #function)
+
  CZPerfTracker.shared.beginTracking(event: "YourEvent")
- 
  CZPerfTracker.shared.endTracking(event: "YourEvent")
  ```
  */
