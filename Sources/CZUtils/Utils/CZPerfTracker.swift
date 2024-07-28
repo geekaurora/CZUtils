@@ -18,7 +18,8 @@ public class CZPerfTracker {
   public enum Constant {
     public static let event = "defaultEvent"
   }
-  private lazy var startDateMap = [String: Date]()
+  @ThreadSafe
+  private var startDateMap = [String: Date]()
   
   public init() {}
   
