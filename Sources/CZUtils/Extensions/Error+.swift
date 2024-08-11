@@ -16,6 +16,7 @@ public extension Error {
   }
 
   /// Detailed description including the `userInfo` variable.
+  /// - Note: You might check the debug console for more details.
   var cz_description: String {
     (self as NSError).cz_description
   }
@@ -25,6 +26,7 @@ public extension Error {
 
 public extension NSError {
   /// Detailed description including the `userInfo` variable.
+  /// - Note: You might check the debug console for more details.
   var cz_description: String {
     var description = "\(self)"
 
