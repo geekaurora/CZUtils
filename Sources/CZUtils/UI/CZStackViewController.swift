@@ -19,10 +19,6 @@ open class CZStackViewController: UIViewController {
     super.init(coder: coder)
   }
   
-  open override func loadView() {
-    self.view = UIView()
-  }
-  
   open override func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
@@ -30,13 +26,16 @@ open class CZStackViewController: UIViewController {
 
   /// Set up subviews - you may override it for customization.
   open func setupViews() {
+    view.translatesAutoresizingMaskIntoConstraints = false
+
     // Set up stackView.
     stackView = UIStackView()
+    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .vertical
     view.addSubview(stackView)
     NSLayoutConstraint.activate([
-      stackView.alignTop(to: view.safeAreaLayoutGuide),
-      stackView.alignHorizontally(to: view.safeAreaLayoutGuide)
+      // Ensure the heights of arrangedViews are correct in case any intrinsic height of them is 0.
+      stackView.align(to: view.safeAreaLayoutGuide)
     ])
   }
 }
