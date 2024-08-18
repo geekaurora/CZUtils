@@ -11,6 +11,19 @@ import UIKit
 private var controlHandlerKey: Int8 = 0
 public extension UIButton {
   /**
+   Makes a button with the desired params
+   */
+  static func makeButton(title: String,
+                         handler: @escaping (UIButton) -> ()) -> UIButton {
+    let button = UIButton(frame: .zero)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle(title, for: .normal)
+    button.setTitleColor(.black, for: .normal)
+    button.addHandler(handler: handler)
+    return button
+  }
+
+  /**
    Add self-contained action handler for button
    */
   func addHandler(for controlEvents: UIControl.Event = .touchUpInside, handler: @escaping (UIButton) -> ()) {
