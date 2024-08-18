@@ -9,6 +9,9 @@ public extension UIApplication {
   func topMostViewController(on inputController: UIViewController? = nil) -> UIViewController? {
     let controller = inputController ?? self.keyWindow?.rootViewController
     
+    if let topChildController = controller?.children.last {
+      return topMostViewController(on: topChildController)
+    }
     if let navigationController = controller as? UINavigationController {
       return topMostViewController(on: navigationController.visibleViewController)
     }
