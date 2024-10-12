@@ -99,7 +99,7 @@ public extension String {
   }
 
   /// Extracts the enclosed string between `startChar` and `endChar`.
-  func extractEnclosedString(startChar: Character,
+  func cz_extractEnclosedString(startChar: Character,
                              endChar: Character,
                              shouldIncludeBoundaries: Bool = true) -> String {
     guard var startIndex = firstIndex(of: startChar),
