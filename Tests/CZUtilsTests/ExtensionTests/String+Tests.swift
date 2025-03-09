@@ -30,7 +30,7 @@ class StringExtensionTests: XCTestCase {
     XCTAssert(actual == expected, "fileType() failed! actual = \(actual), expected = \(expected)")
   }
 
-  // MARK: - Test - extractEnclosedString()
+  // MARK: - Test - cz_extractEnclosedString()
 
   func testExtractEnclosedString() {
     let startChar: Character = "["
@@ -38,24 +38,24 @@ class StringExtensionTests: XCTestCase {
 
     // Test "[123]".
     var testString = "[123]"
-    var actual = testString.extractEnclosedString(
+    var actual = testString.cz_extractEnclosedString(
       startChar: startChar, endChar: endChar, shouldIncludeBoundaries: true)
     var expected = testString
     XCTAssertEqual(actual, expected)
 
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: startChar, endChar: endChar, shouldIncludeBoundaries: false)
     expected = testString
     XCTAssertEqual(actual, "123")
 
     // Test "[]".
     testString = "[]"
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: startChar, endChar: endChar, shouldIncludeBoundaries: true)
     expected = testString
     XCTAssertEqual(actual, expected)
 
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: startChar, endChar: endChar, shouldIncludeBoundaries: false)
     expected = testString
     XCTAssertEqual(actual, "")
@@ -65,50 +65,50 @@ class StringExtensionTests: XCTestCase {
     // Multiple chars.
 
     testString = "\"123\""
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: "\"", endChar: "\"", shouldIncludeBoundaries: true)
     expected = testString
     XCTAssertEqual(actual, expected)
 
     testString = "\"123\""
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: "\"", endChar: "\"", shouldIncludeBoundaries: false)
     expected = testString
     XCTAssertEqual(actual, "123")
 
     // Single char.
     testString = "\""
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: "\"", endChar: "\"", shouldIncludeBoundaries: true)
     expected = testString
     XCTAssertEqual(actual, expected)
 
     testString = "\""
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: "\"", endChar: "\"", shouldIncludeBoundaries: false)
     expected = testString
     XCTAssertEqual(actual, expected)
 
     // Test "123".
     testString = "123"
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: startChar, endChar: endChar, shouldIncludeBoundaries: true)
     expected = testString
     XCTAssertEqual(actual, expected)
 
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: startChar, endChar: endChar, shouldIncludeBoundaries: false)
     expected = testString
     XCTAssertEqual(actual, "123")
 
     // Test "".
     testString = ""
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: startChar, endChar: endChar, shouldIncludeBoundaries: true)
     expected = testString
     XCTAssertEqual(actual, expected)
 
-    actual = testString.extractEnclosedString(
+    actual = testString.cz_extractEnclosedString(
       startChar: startChar, endChar: endChar, shouldIncludeBoundaries: false)
     expected = testString
     XCTAssertEqual(actual, "")
