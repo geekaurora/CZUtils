@@ -1,7 +1,4 @@
-import SearchGuides
 import Foundation
-import CZUtils
-import GMOSwiftUtils
 
 /// Helper class to make async stream for concurrent tasks.
 public class TaskGroupAsyncStreamHelper {
@@ -31,6 +28,9 @@ public class TaskGroupAsyncStreamHelper {
         for await result in group {
           continuation.yield(result)
         }
+
+        // End the stream after all tasks complete.
+        continuation.finish()
       }
     }
 
